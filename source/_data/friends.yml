@@ -1,0 +1,72 @@
+#- group: 技术大佬
+#  description: 下面都是站长在建设博客中提供了很大的帮助的人，感谢大佬们！
+#  items:
+#    - title: 黑石博客
+#      avatar: https://cdn.jsdelivr.net/gh/heson525/pic@master/pic/avatar03.png
+#      url: https://www.heson10.com
+#      screenshot: https://7.dusays.com/2020/10/02/3835c34bd8b64.png
+#      keywords: 人生在勤，不索何获。
+#      description: 人生在勤，不索何获。
+#    - title: 张小菜苔
+#      avatar: https://cdn.jsdelivr.net/gh/small-rose/small-rose.github.io/medias/avatar.jpg
+#      url: https://zhangxiaocai.cn/
+#      screenshot: https://cdn.jsdelivr.net/gh/small-rose/love-images@main/jietu.png
+#      keywords: 道虽迩，不行不至；事虽小，不为不成。
+#      description: 道虽迩，不行不至；事虽小，不为不成。
+#    - title: Geniucker's Blog
+#      avatar: https://cdn.jsdelivr.net/gh/geniucker/source/avatar.jpg
+#      url: https://geniucker.js.org
+#      screenshot: https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/friends/geniucker.png
+#      keywords: 崇尚技术
+#      description: 崇尚技术
+#    - title: 幻凡ss
+#      avatar: https://hfanss.com/img/author.jpg
+#      url: https://hfanss.com/
+#      screenshot: https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/friends/hfan.png
+#      keywords: IT小青年
+#      description: IT小青年
+
+#- group: 朋友们
+#  description: 欢迎交换友链！
+#  items:
+#    - title: 阳光派Plus’Blog
+#      avatar: https://cdn.jsdelivr.net/gh/zyoushuo/Blog/images/photo.jpg
+#      url: https://www.zyoushuo.cn/
+#      screenshot: https://cdn.jsdelivr.net/gh/zyoushuo/Blog/images/BG_10.jpg
+#      keywords:
+#      description: 聪明的妖怪已经录下了唐僧的紧箍咒
+#    - title: DIYsay
+#      avatar: https://cdn.jsdelivr.net/gh/diysay/Blog_CDN_2/diysay.png
+#      url: https://www.iaia.cc/
+#      screenshot: https://7.dusays.com/2020/10/17/a93dec74d799a.png
+#      keywords:
+#      description: DIYsay的个人博客
+
+#- group: 我的友链信息
+#  description: 名称：木子の博客
+#
+#    链接：https://www.mz-zone.cn
+#
+#    头像：https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/head1.png
+#
+#    网站截图：https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/index.png
+#
+#    描述：积水成河，积土成山！
+
+
+
+
+#  items:
+#    - title: # 名称
+#      avatar: # 头像
+#      url: # 链接
+#      screenshot: # 截图
+#      keywords: # 关键词
+#      description: # 描述
+#    - title: # 名称
+#      avatar: # 头像
+#      url: # 链接
+#      screenshot: # 截图
+#      keywords: # 关键词
+#      description: # 描述
+
