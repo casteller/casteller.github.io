@@ -98,7 +98,7 @@ var VNode = function () {
 
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
-        ctx.font = 'bold 90px "Bebas Neue", monospace';
+        ctx.font = 'bold 85px "Bebas Neue", monospace';
         ctx.fillStyle = '#000';
         ctx.fillText(this.letter, 0, this.w * .25 + 4);
 
