@@ -105,7 +105,7 @@
         
         <a class="title flat-box" target="_self" href='/'>
           
-            <img no-lazy class='logo' src='https://7.dusays.com/2021/03/15/31d077df2c2c1.png'/>
+            <img no-lazy class='logo' src='https://cdn.jsdelivr.net/gh/casteller/berrychenpic/31d077df2c2c1.png'/>
           
           
           
@@ -669,7 +669,7 @@
           <!-- 代码雨
            <canvas id="code_rain_canvas" width="1440" height="900"></canvas>
            -->
-          <canvas id="canvas" style='z-index:999' width="900" height="500"></canvas>
+          <canvas id="canvas" style='z-index:999' width="900" height="400"></canvas>
           
             <div class='cover-backstretch'></div>
           
@@ -872,6 +872,7 @@
 	margin-bottom: 1em;
 	max-width: 100%;
 	height: auto;
+	margin-top: -10px
 /* 	background:#000; */
 }
 </style>
@@ -939,7 +940,7 @@
     
       
         <a class='avatar flat-box circle' href='https://www.mz-zone.cn'>
-          <img no-lazy src='https://7.dusays.com/2021/03/19/f1694baf589b5.gif'/>
+          <img no-lazy src='https://cdn.jsdelivr.net/gh/casteller/berrychenpic/f1694baf589b5.gif'/>
         </a>
       
     
@@ -1191,8 +1192,8 @@
         <div class="webinfo-item">
           <div>最后活动时间：</div>
           
-            <div id="last-update" style="display: none;">Fri Mar 19 2021 11:37:46 GMT+0800 (中国标准时间)</div>
-            <div id="last-update-show">2021-03-19 日</div>
+            <div id="last-update" style="display: none;">Fri Apr 02 2021 11:28:24 GMT+0800 (中国标准时间)</div>
+            <div id="last-update-show">2021-04-02 日</div>
           
         </div>
         
@@ -1242,7 +1243,7 @@
           try {
             document.getElementById('last-update-show').innerHTML = timeago(new Date(lastUpDate));
           } catch (error) {
-            document.getElementById('last-update-show').innerHTML = '2021-03-19 日';
+            document.getElementById('last-update-show').innerHTML = '2021-04-02 日';
           }
         </script>
         
@@ -1266,7 +1267,7 @@
   
     <div class='headimg-div'>
       <a class='headimg-a'>
-        <img class='headimg' src='https://s1.ax1x.com/2020/11/09/B7CFiT.jpg'/>
+        <img class='headimg' src='https://cdn.jsdelivr.net/gh/casteller/berrychenpic/B7CFiT.jpg'/>
       </a>
     </div>
   
@@ -1283,7 +1284,7 @@
             
 <div class='new-meta-item author'>
   <a class='author' href="/" rel="nofollow">
-    <img no-lazy src="https://7.dusays.com/2021/03/15/62b5ad21d656e.png">
+    <img no-lazy src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/62b5ad21d656e.png">
     <p>mz-zone</p>
   </a>
 </div>
@@ -1370,7 +1371,7 @@
 <a id="more"></a>
 <p><code>接下来我们就来看一下如何实现jmeter的分布式并发：</code><br><strong>一、需要在负载机上配置jdk环境和jmeter环境</strong><br>首先我们需要准备一个负载机，本次演示的负载机是博主在虚拟机上搭建的一个Linux服务器，Linux系统需要安装jdk（不知道如何配置jdk的请自行百度）然后配置Linux环境下的jmeter环境：</p>
 <p>1、官网下载jmeter的版本，<a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/apache//jmeter/binaries/%EF%BC%8C%E6%88%91%E4%B8%8B%E8%BD%BD%E7%9A%84%E6%98%AFapache-jmeter-5.1.1.tgz">https://mirrors.tuna.tsinghua.edu.cn/apache//jmeter/binaries/，我下载的是apache-jmeter-5.1.1.tgz</a></p>
-<p>将下载的包放到/usr/local目录下（此目录可自行设置，一般安装包我都安装在这个目录下），进入此目录解压文件<br><img src="https://7.dusays.com/2020/11/06/9d9562bf1cbb0.png" class="lazyload placeholder" data-srcset="https://7.dusays.com/2020/11/06/9d9562bf1cbb0.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image.png"><br>2、配置环境变量，进入根目录输入命令vim etc/profile,配置一下环境变量<br>export JMETER_HOME=/usr/local/apache-jmeter-5.1.1 (不要照搬，改为你自己的路径）<br>export PATH=$JMETER_HOME/bin:$PATH<br><img src="https://7.dusays.com/2020/11/06/820ebbd7823e6.png" class="lazyload placeholder" data-srcset="https://7.dusays.com/2020/11/06/820ebbd7823e6.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image.png"><br>3、然后输入jmeter -v验证，如果出现以下界面，那么恭喜你Linux环境下jmeter就配置成功了<br><img src="https://7.dusays.com/2020/11/06/4844ef37b22a0.png" class="lazyload placeholder" data-srcset="https://7.dusays.com/2020/11/06/4844ef37b22a0.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image.png"><br>4、接着进入jmeter的bin目录启动jmeter，命令：./jmeter.sh，可以看到成功启动<br><img src="https://7.dusays.com/2020/11/06/2615c0e84225c.png" class="lazyload placeholder" data-srcset="https://7.dusays.com/2020/11/06/2615c0e84225c.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image.png"><br><strong>二、master（主压力机）在jmeter.properties中添加remote_hosts</strong><br>配置路径：…\apache-jmeter-5.0\bin 路径下的jmeter.properties；<br>remote_hosts=127.0.0.1 后面增加远程负载机的ip和端口号，如果需要添加多个，用逗号分隔就可以；<br><img src="https://7.dusays.com/2020/11/06/e16912e0d6b4b.png" class="lazyload placeholder" data-srcset="https://7.dusays.com/2020/11/06/e16912e0d6b4b.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image.png"><br><strong>三、Slave（远程负载机）在jmeter.properties中添加server_port</strong><br>server_port=1099<br>server.rmi.localport=1099<br>备注：这里的端口号可以自定义，只要与主压力机里面配置的一致即可<br>进入负载机的usr/local/apache-jmeter-5.1.1/bin目录，编辑jmeter.properties文件<br><img src="https://7.dusays.com/2020/11/06/1ded601e8ade6.png" class="lazyload placeholder" data-srcset="https://7.dusays.com/2020/11/06/1ded601e8ade6.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image.png"><br><img src="https://7.dusays.com/2020/11/06/1b7d25d0ffbd2.png" class="lazyload placeholder" data-srcset="https://7.dusays.com/2020/11/06/1b7d25d0ffbd2.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image.png"><br><strong>四、Slave（远程负载机）启动Jmeter-server</strong><br>命令：./jmeter-server -Djava.rmi.server.hostname=192.168.3.130（启动时必须加上后面的-Djava.rmi.server.hostname=192.168.3.130，ip为负载机ip，不然会报错）启动成功后如下图所示：<br><img src="https://7.dusays.com/2020/11/06/36d9a6fe47d16.png" class="lazyload placeholder" data-srcset="https://7.dusays.com/2020/11/06/36d9a6fe47d16.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image.png"><br><strong>五、配置完成后重启主压力机，查看远程启动，可查看到配置的远程负载机IP</strong><br>如下图：(主压力机最好，也加上1099端口，启动程序时必须先启动，jmeter.sever文件）<br><img src="https://7.dusays.com/2020/11/06/54a3a1430ec21.png" class="lazyload placeholder" data-srcset="https://7.dusays.com/2020/11/06/54a3a1430ec21.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image.png"><br><strong>六、添加一个线程组，添加取样器-http请求，以访问百度为例，添加监听器-察看结果树</strong><br><img src="https://7.dusays.com/2020/11/06/1b4ddeb0a1b7b.png" class="lazyload placeholder" data-srcset="https://7.dusays.com/2020/11/06/1b4ddeb0a1b7b.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image.png"><br><img src="https://7.dusays.com/2020/11/06/5f65fecee03bd.png" class="lazyload placeholder" data-srcset="https://7.dusays.com/2020/11/06/5f65fecee03bd.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image.png"><br>至此，分布式并发的配置已经完成！<br><strong>七、遇到的问题</strong><br>任何事都不是一帆风顺的，配置过程中也可能遇到这样那样的问题，以下是我在配置过程中遇到的问题以及解决办法<br>1、启动jmeter-server服务时报下图的错误：<br><img src="https://7.dusays.com/2020/11/06/00933b9a544dc.png" class="lazyload placeholder" data-srcset="https://7.dusays.com/2020/11/06/00933b9a544dc.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image.png"><br>解决办法：进入负载机的usr/local/apache-jmeter-5.1.1/bin目录，编辑vim jmeter.properties文件，有一行是这样的server.rmi.ssl.disable=false这行说明什么呢，就是让我们决定是不是要启动SSL。很明显，我的电脑上并没有这个，所以就不能启动。把这个改成server.rmi.ssl.disable=true，并取消注释就ok了<br><img src="https://7.dusays.com/2020/11/06/f0612c5f651ea.png" class="lazyload placeholder" data-srcset="https://7.dusays.com/2020/11/06/f0612c5f651ea.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image.png"><br>2、远程启动时一直连接不上负载机<br><img src="https://7.dusays.com/2020/11/06/9cfc70df27fd4.png" class="lazyload placeholder" data-srcset="https://7.dusays.com/2020/11/06/9cfc70df27fd4.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image.png"><br>解决办法：遇到这种情况时，可能存在多种因素，可以参考以下步骤逐一排查<br>（1）远程负载机的Jmeter-server是否启动成功；<br>（2）远程负载机是否处于联网状态；<br>（3）防火墙是否处于关闭状态：</p>
+<p>将下载的包放到/usr/local目录下（此目录可自行设置，一般安装包我都安装在这个目录下），进入此目录解压文件<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/9d9562bf1cbb0.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/9d9562bf1cbb0.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br>2、配置环境变量，进入根目录输入命令vim etc/profile,配置一下环境变量<br>export JMETER_HOME=/usr/local/apache-jmeter-5.1.1 (不要照搬，改为你自己的路径）<br>export PATH=$JMETER_HOME/bin:$PATH<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/820ebbd7823e6.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/820ebbd7823e6.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br>3、然后输入jmeter -v验证，如果出现以下界面，那么恭喜你Linux环境下jmeter就配置成功了<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/4844ef37b22a0.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/4844ef37b22a0.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br>4、接着进入jmeter的bin目录启动jmeter，命令：./jmeter.sh，可以看到成功启动<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/2615c0e84225c.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/2615c0e84225c.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br><strong>二、master（主压力机）在jmeter.properties中添加remote_hosts</strong><br>配置路径：…\apache-jmeter-5.0\bin 路径下的jmeter.properties；<br>remote_hosts=127.0.0.1 后面增加远程负载机的ip和端口号，如果需要添加多个，用逗号分隔就可以；<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/e16912e0d6b4b.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/e16912e0d6b4b.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br><strong>三、Slave（远程负载机）在jmeter.properties中添加server_port</strong><br>server_port=1099<br>server.rmi.localport=1099<br>备注：这里的端口号可以自定义，只要与主压力机里面配置的一致即可<br>进入负载机的usr/local/apache-jmeter-5.1.1/bin目录，编辑jmeter.properties文件<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/1ded601e8ade6.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/1ded601e8ade6.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/1b7d25d0ffbd2.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/1b7d25d0ffbd2.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br><strong>四、Slave（远程负载机）启动Jmeter-server</strong><br>命令：./jmeter-server -Djava.rmi.server.hostname=192.168.3.130（启动时必须加上后面的-Djava.rmi.server.hostname=192.168.3.130，ip为负载机ip，不然会报错）启动成功后如下图所示：<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/36d9a6fe47d16.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/36d9a6fe47d16.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br><strong>五、配置完成后重启主压力机，查看远程启动，可查看到配置的远程负载机IP</strong><br>如下图：(主压力机最好，也加上1099端口，启动程序时必须先启动，jmeter.sever文件）<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/54a3a1430ec21.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/54a3a1430ec21.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br><strong>六、添加一个线程组，添加取样器-http请求，以访问百度为例，添加监听器-察看结果树</strong><br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/1b4ddeb0a1b7b.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/1b4ddeb0a1b7b.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/5f65fecee03bd.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/5f65fecee03bd.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br>至此，分布式并发的配置已经完成！<br><strong>七、遇到的问题</strong><br>任何事都不是一帆风顺的，配置过程中也可能遇到这样那样的问题，以下是我在配置过程中遇到的问题以及解决办法<br>1、启动jmeter-server服务时报下图的错误：<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/00933b9a544dc.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/00933b9a544dc.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br>解决办法：进入负载机的usr/local/apache-jmeter-5.1.1/bin目录，编辑vim jmeter.properties文件，有一行是这样的server.rmi.ssl.disable=false这行说明什么呢，就是让我们决定是不是要启动SSL。很明显，我的电脑上并没有这个，所以就不能启动。把这个改成server.rmi.ssl.disable=true，并取消注释就ok了<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/f0612c5f651ea.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/f0612c5f651ea.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br>2、远程启动时一直连接不上负载机<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/9cfc70df27fd4.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/9cfc70df27fd4.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br>解决办法：遇到这种情况时，可能存在多种因素，可以参考以下步骤逐一排查<br>（1）远程负载机的Jmeter-server是否启动成功；<br>（2）远程负载机是否处于联网状态；<br>（3）防火墙是否处于关闭状态：</p>
 <p>centos5/6开启和关闭防火墙命令：</p>
 <p>开启：service iptables start</p>
 <p>关闭：service iptables stop</p>
@@ -1415,10 +1416,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-02-01T15:41:30+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-04-01T17:18:59+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：2021年2月1日</p>
+    <p>更新于：2021年4月1日</p>
   </a>
 </div>
 
@@ -1553,7 +1554,7 @@ pip install pypiwin32
     
       
         <a class='avatar flat-box circle' href='https://www.mz-zone.cn'>
-          <img no-lazy src='https://7.dusays.com/2021/03/19/f1694baf589b5.gif'/>
+          <img no-lazy src='https://cdn.jsdelivr.net/gh/casteller/berrychenpic/f1694baf589b5.gif'/>
         </a>
       
     
@@ -1805,8 +1806,8 @@ pip install pypiwin32
         <div class="webinfo-item">
           <div>最后活动时间：</div>
           
-            <div id="last-update" style="display: none;">Fri Mar 19 2021 11:37:46 GMT+0800 (中国标准时间)</div>
-            <div id="last-update-show">2021-03-19 日</div>
+            <div id="last-update" style="display: none;">Fri Apr 02 2021 11:28:24 GMT+0800 (中国标准时间)</div>
+            <div id="last-update-show">2021-04-02 日</div>
           
         </div>
         
@@ -1856,7 +1857,7 @@ pip install pypiwin32
           try {
             document.getElementById('last-update-show').innerHTML = timeago(new Date(lastUpDate));
           } catch (error) {
-            document.getElementById('last-update-show').innerHTML = '2021-03-19 日';
+            document.getElementById('last-update-show').innerHTML = '2021-04-02 日';
           }
         </script>
         
