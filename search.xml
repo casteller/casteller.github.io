@@ -5438,6 +5438,308 @@ public class ArrayListTest &#123;
       </tags>
   </entry>
   <entry>
+    <title>Linux测试必备</title>
+    <url>/2021/10/21/20211021001/</url>
+    <content><![CDATA[<div class="note idea"><p>软件测试必须掌握的常用linux命令总结，熟练的掌握和使用这些命令可以提高工作效率，并且结合这些命令对测试过程中遇到的问题进行一些初步的定位。</p></div>
+<a id="more"></a>
+<p>Linux有三种网络方式：Bridged桥接模式，nat，Host-Only仅主机模式</p>
+<p>修改了网络方式需要重启</p>
+<p>远程登录工具：xshell，secureCRT，putty</p>
+<p><strong>logout</strong> – 退出</p>
+<p><strong>reboot</strong>  – 重启</p>
+<p><strong>halt</strong>    – 关机</p>
+<p><strong>ifconfig</strong>  – 查看ip</p>
+<p><strong>文件上传下载：</strong></p>
+<p>工具：Xftp、Filezilla</p>
+<p>安装命令：yum install lrzsz -y</p>
+<p>命令：<strong>rz、sz</strong></p>
+<p><strong>uname -r</strong>  –查看内核版本，Linux内核版本由3个数字组成:r.x.yr:目前发布的Kernel主版本x:偶数是稳定版本,奇数是开发中的版本 y:错误修补次数   3.10.0</p>
+<p>目录结构说明：  /为根目录</p>
+<p><strong>/bin</strong>  —- bin是Binary的缩写。这个目录存放着最经常使用的命令，例如cp、mv、ls等</p>
+<p><strong>/boot</strong>  这里存放的是启动Linux时使用的一些核心文件，包括一些链接文件以及镜像文件。</p>
+<p><strong>/dev</strong>   dev是Device(设备)的缩写。该目录下存放的是Linux的外部设备，在Linux中访问设备的方式和访问文件的方式是相同的。</p>
+<p><strong>/etc</strong>   是 Etcetera(等等) 的缩写，这个目录用来存放所有的系统管理所需要的配置文件和子目录</p>
+<p><strong>/home</strong>   用户的主目录，在Linux中，每个用户都有一个自己的目录，一般该目录名是以用户的账号命名的。</p>
+<p><strong>/lib</strong>   这个目录里存放着系统最基本的动态链接共享库，其作用类似于Windows里的DLL文件。几乎所有的应用程序都需要用到这些共享库。</p>
+<p><strong>/opt</strong>   opt 是 optional(可选) 的缩写，这是给主机额外软件安装目录</p>
+<p><strong>/proc</strong>  proc 是 Processes(进程) 的缩写，/proc 是一种伪文件系统（也即虚拟文件系统），存储的是当前内核运行状态的一系列特殊文件，这个目录是一个虚拟的目录，它是系统内存的映射，我们可以通过直接访问这个目录来获取系统信息  这个目录的内容不在硬盘上而是在内存里  less /proc/cpuinfo</p>
+<p><strong>/root</strong>   该目录为系统管理员，也称作超级权限者的用家目录</p>
+<p><strong>/sbin</strong>  s 就是 Super User 的意思，是 Superuser Binaries (超级用户root的二进制文件) 的缩写，这里存放的是系统管理员使用的系统管理程序。</p>
+<p><strong>/tmp</strong>  tmp 是 temporary(临时) 的缩写这个目录是用来存放一些临时文件的</p>
+<p><strong>/usr</strong>    usr 是 unix shared resources(共享资源) 的缩写，这是一个非常重要的目录，用户的很多应用程序和文件都放在这个目录下，类似于 windows 下的 program files 目录</p>
+<ul>
+<li>/usr/local   这是提供给一般用户的/usr目录，在这里安装一般的应用软件</li>
+<li>/usr/lib   存放一些常用的动态链接共享库和静态档案库</li>
+<li>/usr/include  用来存放Linux下开发和编译应用程序所需要的头文件</li>
+<li>/usr/sbin   超级用户使用的比较高级的管理程序和系统守护程序    /sbin, /usr/sbin 则是给 root 使用的指令</li>
+<li>/usr/bin   系统用户使用的应用程序（指令）   /bin, /usr/bin 是给系统用户使用的指令（除root外的通用户）</li>
+<li>/usr/src   内核源代码默认的放置目录</li>
+</ul>
+<p><strong>/var</strong>   var 是 variable(变量) 的缩写，存放经常改动的数据文件，包括各种日志文件    如果你想做一个网站，你也会用到/var/www这个目录</p>
+<p><strong>用户相关：</strong></p>
+<p>#表示root，$表示普通用户</p>
+<p><strong>useradd</strong></p>
+<p><strong>usermod</strong>   usermod -l 新用户名 -d 新家目录 旧用户名</p>
+<p><strong>userdel</strong>   userdel -r 用户名    -r用于删除家目录及其所有文件 </p>
+<p><strong>su</strong>    切换用户su root 或者 su - root</p>
+<p><strong>sudo</strong>  获取超级用户权限    有一些命令是普通用户没有权限操作的，所以要用sudo来获取超级用户权限</p>
+<p><strong>组：</strong></p>
+<p><strong>groupadd</strong>   </p>
+<p><strong>groupmod</strong>   groupmod –g 组新id –n 组新名 组旧名</p>
+<p><strong>groupdel</strong>    groupdel 组名</p>
+<p><strong>vi/vim文本编辑器</strong></p>
+<p>安装命令  yum install vim -y     -y代表安装过程中所有的询问都选择yes</p>
+<p><strong>命令模式：</strong></p>
+<p><strong>set nu</strong>    显示行号</p>
+<p><strong>set nonu</strong>  不显示行号</p>
+<p>光标定位：</p>
+<p>方向键上下左右或者</p>
+<p>左：h   backspace</p>
+<p>右：l  空格</p>
+<p>上： k</p>
+<p>下： j</p>
+<p>上一行行首： -</p>
+<p>本行行首： 0</p>
+<p>本行末尾：shift+4=$</p>
+<p>指定行： nG</p>
+<p>向上：  n-</p>
+<p>向下 ： n+</p>
+<p>向后半屏：ctrl + d</p>
+<p>向后全屏：ctrl + f</p>
+<p>向前半屏：ctrl + u</p>
+<p>向前全屏：ctrl + b</p>
+<p>文件末尾：  G   shift+g</p>
+<p><strong>搜索：</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/image-20211021153615109.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/image-20211021153615109.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image-20211021153615109"></p>
+<p><strong>替换：</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/image-20211021153552247.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/image-20211021153552247.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image-20211021153552247"></p>
+<p><strong>复制：</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/image-20211021153534344.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/image-20211021153534344.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image-20211021153534344"></p>
+<p><strong>粘贴：</strong>   小p和大P</p>
+<p><strong>删除：</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/image-20211021153435626.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/image-20211021153435626.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image-20211021153435626"></p>
+<p><strong>撤销：</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/image-20211021153410568.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/image-20211021153410568.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image-20211021153410568"></p>
+<p><strong>退出：</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/image-20211021153357499.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/image-20211021153357499.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image-20211021153357499"></p>
+<p><strong>编辑模式：</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/image-20211021153330023.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/image-20211021153330023.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image-20211021153330023"></p>
+<p><strong>help</strong>   – 帮助   示例：ls –help</p>
+<p><strong>man</strong>   – 命令说明文件 ，比help更加详细的文档，  示例：man  ls</p>
+<p><strong>文件操作：</strong></p>
+<p><strong>pwd</strong>  ：显示当前路径</p>
+<p><strong>ls</strong>  ：列举指定目录下的子目录和文件</p>
+<p><strong>ls -a 或ls –all</strong>  ： 不隐藏任何以“.” 字符开始的项目</p>
+<p><strong>ls -l</strong> :用列表（长格式）的方式列出文件信息</p>
+<p>示例：</p>
+<p>drwxr-xr-x 3 root root       52 Feb 16 13:21 dockertest</p>
+<p>1、其中第一个字段的第一个字符是文件类型：“-”表示普通文件、“d”代表目录、“l”代表连接文件</p>
+<p>“b”代表设备文件。</p>
+<p>第一个字段剩下的 9 个字符是模式（这三组分别表示文件所属的用户权限、文件所属的组权限以及其他用户的权限），其实就是权限位（access permission bits）。3 个一组，每一组 rwx 表示“读（read）”“写（write）”“执行（execute）”。如果是字母，就说明有这个权限；如果是横线，就是没有这个权限</p>
+<p>2、第二个字段是硬链接（hard link）数目，这个比较复杂</p>
+<p>3、第三个字段是所属用户</p>
+<p>4、第四个字段是所属组</p>
+<p>5、第五个字段是文件的大小（字节）</p>
+<p>6、第六个字段是文件被修改的日期</p>
+<p>7、第七个字段是最后是文件/文件夹名</p>
+<p><strong>ls -t</strong> :  以时间排序,时间由近及远</p>
+<p><strong>ls -r, –reverse</strong> ：以相反次序排列，如果是-rt，表示时间由远及近</p>
+<p><strong>ls -R, –recursive</strong>：同时列出所有子目录层</p>
+<p><strong>ls -S</strong> ：按大小排序，单位是字节</p>
+<p><strong>ls -h</strong>：易读方式，根据文件大小，转换为M、K</p>
+<p><strong>切换目录</strong></p>
+<p><strong>cd+ 回车</strong> ：退到当前用户个人目录，同cd ~</p>
+<p><strong>cd /</strong> ：进入根目录</p>
+<p><strong>cd ..</strong> ：返回上级目录</p>
+<p><strong>cd ../xx</strong> ：退到上级目录的xx目录</p>
+<p><strong>cd –</strong> ： 回到上一次操作的目录</p>
+<p><strong>复制</strong></p>
+<p><strong>cp -a</strong> ：尽可能的将文件的属性、权限的内容都照原状复制</p>
+<p><strong>cp -b</strong>： 如果目的文件存在,就创造一个备份</p>
+<p><strong>cp -r</strong>：若源中有子目录,则将子目录下的文件及目录亦全部复制至目的目录</p>
+<p><strong>cp -i</strong>：若目的地有重复的文件,询问是否覆盖 </p>
+<p><strong>cp -f</strong>：若目的地有重复的文件,则覆盖原有文件 </p>
+<p><strong>cp -L</strong>：复制符号链接,自动修改链接以保证链接有效</p>
+<p>移动文件夹/文件/改名</p>
+<p><strong>mv</strong> ：如果目标目录存在，则是复制到该目录下</p>
+<p>​         如果目标目录不存在，则是改名</p>
+<p><strong>mv -i</strong> ：交互方式操作。如果mv操作将导致对已存在的目标文件的覆 盖,此时系统询问是否重写,要求用户回答“y”或“n”,这样可 以避免误覆盖文件</p>
+<p><strong>mv -f</strong> ：禁止交互操作。mv操作要覆盖某个已有的目标文件时不给任何指示,指定此参数后i参数将不再起作用</p>
+<p><strong>删除文件、文件夹</strong></p>
+<p><strong>rm -r</strong> ：删除目录及子目录,目录下如果有子目录及文件也会被删除</p>
+<p><strong>rm -f</strong> ：不询问直接删除</p>
+<p><strong>rm -i</strong> ：删除前逐一询问确认</p>
+<p>示例：rm -rf test/*   删除test目录下的所有内容</p>
+<p>   rm -rf test/    删除test目录</p>
+<p>   rm -rf test    删除test目录</p>
+<p><strong>mkdir</strong> ：创建文件夹</p>
+<p>示例：mkdir -p /mysql/{data,redo,binlog,tmp,logs}</p>
+<p><strong>rmdir</strong> ： 删除一个空文件夹（rmdir不能删除非空目录）</p>
+<p><strong>rmdir -p</strong> ：删除指定目录后,若该目录的上层目录已变成空目录,则将其一并删除</p>
+<p>示例：rmdir -p test1/test2    -p表示连同子目录一起删除</p>
+<p><strong>touch</strong> ：创建一个空文件</p>
+<p><strong>cat</strong> ：查看小文件内容，否则内存撑爆了</p>
+<p>  -n:由第一行开始对所有输出的行数编号</p>
+<p>  -b:和-n相似,只不过对于空白行不编号</p>
+<p>示例：</p>
+<p>1、将几个文件处理成一个文件,并将这种处理的结果保存到一个单独的输出文件   cat a.txt                 b.txt &gt; c.txt</p>
+<p>2、对行进行编号（显示行号）   cat -b test.txt     cat -n test.txt</p>
+<p>3、往文件中添加内容（如果文件不存在，会创建文件）：cat 1.txt &gt; test.txt</p>
+<p><strong>tac</strong>  反向显示文档内容，由最后一行到第一行反向在屏幕上显示出来，cat和tac相反</p>
+<p><strong>more</strong>  more 是分页后只能往后翻页，翻到最后一页自动结束返回命令行,</p>
+<p>用法：more [参数] 文件 </p>
+<p>下一行：回车</p>
+<p>下一页：空格</p>
+<p><strong>less</strong>  less 是往前往后都能翻页</p>
+<p>用法：less [参数] 文件</p>
+<p>下一行 ：回车、j、方向键↓</p>
+<p>上一行 ：k、方向键↑</p>
+<p>下一页 ：空格</p>
+<p>展示第一行 ：g</p>
+<p>展示最后一行 ：G</p>
+<p><strong>head</strong>  显示文件的开头至标准输出中</p>
+<p>参数 ：-n&lt;行数&gt; 显示的行数</p>
+<p>示例 ：head -2 /etc/passwd    head -n2 /etc/passwd</p>
+<p><strong>tail·</strong>    动态查看文件内容</p>
+<p>查看文件末尾内容</p>
+<p>参数 ：-f 动态读取</p>
+<p>示例 ：查看passwd的后2行：tail -2 /etc/passwd</p>
+<p><strong>du</strong>    文件和目录的磁盘使用空间</p>
+<p>用法  ：du -sh</p>
+<p>参数 ：-s或–summarize 仅显示总计,只列出最后加总的值</p>
+<p>​    -h或–human-readable 以K,M,G为单位,提高信息的 可读性</p>
+<p>​    -m或–megabytes 以MB为单位输出</p>
+<p><strong>lsof</strong>    列出当前系统打开文件的工具</p>
+<p>参数 ：lsof filename 显示打开指定文件的所有进程</p>
+<p>​     lsof -i :80 查询指定端口打开的文件</p>
+<p>​     lsof -p pid 查询指定的pid打开的文件</p>
+<p><strong>chmod</strong>  用来给文件或者文件赋权限</p>
+<p>两种方式 ：数字  r=4 w=2 x=1   、文本</p>
+<p>示例 ： chmod 755 test.txt</p>
+<p><strong>chown</strong>  改变文件所有者和所属组</p>
+<p>​     参数 ：-R 递归式地改变指定目录及其所有子目录、文件的文件主</p>
+<p><strong>chgrp</strong>  改变文件所属组</p>
+<p>​    参数 ：-R 递归</p>
+<p><strong>wc</strong>       参数：-c 统计字节数。</p>
+<p>-l 统计行数。</p>
+<p>-m 统计字符数。这个标志不能与 -c 标志一起使用。</p>
+<p>-w 统计字数。一个字被定义为由空白、跳格或换行字符分隔的字符串。</p>
+<p>​     示例 ：cat access.log |wc -l</p>
+<p><strong>clear</strong>  清屏</p>
+<p><strong>history</strong>   查看历史命令</p>
+<p>命令记录个数   echo $HISTSIZE</p>
+<p>修改    export HISTSIZE=1000</p>
+<p>清除历史命令    history -c</p>
+<p><strong>搜索</strong></p>
+<p><strong>grep</strong>    显示文件中的匹配行</p>
+<p>​    参数：-c:显示匹配行数</p>
+<p>-e 字符串:匹配特殊字符串,如-开头 </p>
+<p>-i:忽略大小写</p>
+<p>-v:输出不匹配行</p>
+<p>-w:匹配指定字符串</p>
+<p>可以和别的命令通过”|”管道符连接使用</p>
+<p>​     示例 ：ps -ef|grep httpd |grep -v grep</p>
+<p>  grep ren /etc/passwd</p>
+<p>  grep -c ren /etc/passwd</p>
+<p><strong>find</strong>    查找目录下的文件</p>
+<p>用法：find 目标目录 搜索参数 操作参数</p>
+<p>参数 ：-name 文件名:可以跟通配符</p>
+<p>​    -amin 分钟数:文件最后访问时间为指定分钟之前,负数表示之后 </p>
+<p>​    -atime 天数:文件最后访问时间为指定天数之前,负数表示之后 </p>
+<p>​    -cmin 分钟数:文件最后修改时间为指定分钟之前,负数表示之后</p>
+<p>​    -ctime 天数:文件最后修改时间为指定天数之前,负数表示之后  </p>
+<p>​    -user 用户名:属于用户的目录和文件</p>
+<p>​    -type 文件类型</p>
+<p>示例 ：find / -name lampp</p>
+<p>定位文件位置：whereis   whereis mysql</p>
+<p>​    which    which mysql</p>
+<p>   区别：whereis是搜索程序名，如果是一个普通的文件是找不到的</p>
+<p>which命令只查找环境变量中path里面的路径</p>
+<p><strong>进程</strong></p>
+<p><strong>ps</strong>    显示瞬间进程 (process) 的动态，使用权限是所有使用者</p>
+<p>参数 ：ps -aux</p>
+<p>​     ps -ef</p>
+<p>​    可以用管道符连接其他命令使用</p>
+<p>示例 ：ps -ef|grep tomcat</p>
+<p><strong>kill</strong>    用来终止指定的进程</p>
+<p>参数 ：-9 强制终止进程</p>
+<p>示例 ：kill -9 pid</p>
+<p>​     杀所有java进程   ps -ef | grep java|grep -v grep | awk ‘{print $2}’ | xargs kill -9</p>
+<p><strong>nohup 命令 &amp;</strong>   </p>
+<p>nohup   当前交互命令行退出的时候，程序还要在</p>
+<p>​       &amp;       表示后台运行，程序不能霸占交互命令行</p>
+<p>示例 ：nohup java -jar qzcsbj.jar &amp;</p>
+<p><strong>crontab定时任务</strong></p>
+<p>使用crontab命令可以修改crontab配置文件，然后该配置由cron公用程序在适当的时间执行，该命令使用权限是所有用户</p>
+<p><strong>归档压缩</strong></p>
+<p><strong>zip/unzip</strong>  压缩zip包和解压缩以.zip结尾压缩文件</p>
+<p><strong>zip</strong>  命令格式：zip [选项] 压缩文件名 需要压缩的文档列表</p>
+<p>参数 ： -r 递归压缩，将指定目录下的所有文件以及子目录全部压缩</p>
+<p>​      -x “文件列表” 压缩时排除文件列表中指定的文件</p>
+<p>​      -m 将文件加入压缩文件压缩后，删除原始文件，即把文件移到压缩文件中</p>
+<p><strong>unzip</strong>  -x “文件列表” 解压文件，但不包含文件列表中指定的文件</p>
+<p>   -t 测试压缩文件有无损坏，并不解压</p>
+<p>   -v 查看压缩文件的详细信息，具体包括压缩文件中包含的文件大小、文件名和压缩比等，并不解压</p>
+<p>   -n 解压时不覆盖已经存在的文件</p>
+<p>   -o 解压时覆盖已经存在的文件，并且不要求用户确认</p>
+<p>   -d 目录名 把压缩文件解压到指定目录下</p>
+<p><strong>tar</strong>    文件打包</p>
+<p>参数 ：  -c:创建新文档</p>
+<p>-x:解压缩归档文件</p>
+<p>-f 文件名:使用归档文件</p>
+<p>-z:使用gzip解压缩</p>
+<p>-v:详细输出模式</p>
+<p>示例 ：压缩  tar -zcvf 1.tar.gz 1.txt 2.txt 3.txt，命令可以将1.txt，2.txt，3.txt 打包并压缩成1.tar.gz</p>
+<p>​    解压缩  tar zxvf 1.tar.gz，可以解压</p>
+<p><strong>软件安装</strong></p>
+<p><strong>rpm</strong> 安装包  </p>
+<p>参数： -i    安装    -U    更新（升级）       -e    卸载     -v    显示安装信息       -h    显示安装进度</p>
+<p>安装 ： rpm -ivh xxx.rpm 如果提示有依赖关系，我们忽略依赖关系强制安装</p>
+<p>查询 ：rpm -qa|grep xxx</p>
+<p>卸载 ：rpm -e xxx –nodeps  如果卸载的时候提示有软件依赖它，卸载时需要加上 –nodeps</p>
+<p><strong>yum</strong>        yum install -y xxx</p>
+<p><strong>其他命令</strong></p>
+<p>防火墙：</p>
+<p>查看防火墙状态：<strong>systemctl status firewalld</strong></p>
+<p>关闭防火墙：<strong>systemctl stop firewalld</strong></p>
+<p>开机不启动防火墙：<strong>systemctl disable firewalld</strong></p>
+<p>查看防火墙是否开机启动：<strong>systemctl is-enabled firewalld</strong></p>
+<p><strong>date</strong> ：显示当前系统时间，后面可以跟日期格式</p>
+<p>示例 ：date +”%Y-%m-%d %H:%M:%S 星期%w”</p>
+<p><strong>cal</strong> ：查看日历，后面可以跟年份查看指定年份的日历</p>
+<p><strong>whoami</strong>    查看当前登录用户</p>
+<p><strong>id</strong>    查看当前用户</p>
+<p><strong>who</strong>   查看当前有多少用户在使用系统</p>
+<p><strong>type</strong>     type可以知道某个指令是来自于外部指令(指的是其他非 bash 所提供的指令)或是内建在bash当中的指令</p>
+<p>示例：type cd       cd is a shell builtin</p>
+<p>​    type ls        ls is aliased to `ls –color=auto’</p>
+<p>​    type jmeter    jmeter is /usr/local/apache-jmeter-5.1.1/bin/jmeter</p>
+<p><strong>wget</strong>  下载文件</p>
+<p>   wget -c 是断点续传</p>
+<p>   -o 是下载并以不同的文件名保存 ，用法：wget -o 文件名 下载地址</p>
+<p>   -b 是后台下载，用法：wget -b 下载地址</p>
+<p><strong>curl</strong>      curl  127.0.0.1:8080/test2</p>
+<p>​    curl  -i 127.0.0.1:8080/test2</p>
+<p>​    curl -v 127.0.0.1:8080/test2</p>
+<p><strong>常见环境问题排查方法</strong></p>
+<p>服务无法启动：查看端口占用</p>
+<p>lsof -i:80</p>
+<p>netstat -lntp |grep 80</p>
+<p>无法访问：查看服务        ps -ef |grep xxx         jps -ml      java    </p>
+<p>​    ping服务器     ping ip</p>
+<p>​    telnet端口    telnet 虚拟机ip 80</p>
+<p>​    检查防火墙</p>
+<p>​    selinux</p>
+<p>​    </p>
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hexo之volantis主题标签插件合集</title>
     <url>/2020/10/23/volantis-article/</url>
     <content><![CDATA[<div class="note idea"><p>此文主要记录volantis主题内置标签插件的用法，以及常用的md语法，方便写文章时查阅</p></div>
