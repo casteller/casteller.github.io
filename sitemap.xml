@@ -578,14 +578,14 @@
   </url>
   
   <url>
-    <loc>https://www.mz-zone.cn/tags/redis/</loc>
+    <loc>https://www.mz-zone.cn/tags/charles/</loc>
     <lastmod>2021-10-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://www.mz-zone.cn/tags/charles/</loc>
+    <loc>https://www.mz-zone.cn/tags/redis/</loc>
     <lastmod>2021-10-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -692,14 +692,14 @@
   </url>
   
   <url>
-    <loc>https://www.mz-zone.cn/categories/redis/</loc>
+    <loc>https://www.mz-zone.cn/categories/charles/</loc>
     <lastmod>2021-10-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://www.mz-zone.cn/categories/charles/</loc>
+    <loc>https://www.mz-zone.cn/categories/redis/</loc>
     <lastmod>2021-10-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
