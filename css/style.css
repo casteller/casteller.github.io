@@ -35,7 +35,7 @@
   --color-card: rgba(255,255,255,0.8);
   --color-text: #444;
   --color-block: #f6f6f6;
-  --color-inlinecode: #c74f00;
+  --color-inlinecode: #f34343;
   --color-codeblock: #fff7ea;
   --color-h1: #3a3a3a;
   --color-h2: #3a3a3a;
@@ -47,6 +47,9 @@
   --color-list: #666;
   --color-list-hl: #36ac91;
   --color-meta: #888;
+  --lhong: #feecf0;
+  --mhong: #f14668;
+  --yj: 4px;
 }
 * {
   box-sizing: border-box;
@@ -473,7 +476,7 @@ th {
 .md div.btns p,
 .article div.btns a,
 .md div.btns a {
-  font-size: 0.8125rem;
+  font-size: 0.9625rem;
   color: var(--color-p);
 }
 .article div.btns b,
@@ -1255,7 +1258,7 @@ img.inline {
 .md .link-card p.url {
   flex-shrink: 0;
   color: var(--color-meta);
-  font-size: 0.8125rem;
+  font-size: 0.9625rem;
 }
 audio,
 video {
@@ -2080,7 +2083,7 @@ pre {
   margin: 1em 0;
   display: block;
   background: var(--color-block);
-  font-size: 0.8125rem;
+  font-size: 0.9625rem;
   font-family: Menlo, UbuntuMono, Monaco, monospace, courier, sans-serif;
   border-radius: 4px;
   line-height: 1.5;
@@ -2570,7 +2573,7 @@ div.fancybox .gallery {
   overflow: hidden;
 }
 div.fancybox .image-caption {
-  font-size: 0.8125rem;
+  font-size: 0.9625rem;
   padding-top: 0.5em;
   padding-bottom: 1em;
   color: var(--color-meta);
@@ -3505,25 +3508,25 @@ article#tag .all-tags ul li span:before {
   font-weight: bold;
   text-align: left;
   color: #3a3a3a;
-  margin-top: 48px;
+  margin-top: 0px;
 }
 .article h2 {
   font-weight: bold;
   text-align: left;
   color: #3a3a3a;
-  margin-top: 48px;
+  margin-top: 0px;
 }
 .article h3 {
   font-weight: bold;
   text-align: left;
   color: #333;
-  margin-top: 24px;
+  margin-top: 0px;
 }
 .article h4 {
   font-weight: bold;
   text-align: left;
   color: #444;
-  margin-top: 16px;
+  margin-top: 0px;
 }
 .article h5 {
   font-weight: bold;
@@ -3664,7 +3667,7 @@ article#tag .all-tags ul li span:before {
   margin-bottom: 1em;
   overflow: auto;
   background: var(--color-codeblock);
-  font-size: 0.8125rem;
+  font-size: 0.9625rem;
   font-family: Menlo, UbuntuMono, Monaco, monospace, courier, sans-serif;
   border: 1px solid #ffebcb;
   padding: 16px;
@@ -3686,7 +3689,7 @@ article#tag .all-tags ul li span:before {
   font-family: Menlo, UbuntuMono, Monaco, monospace, courier, sans-serif;
 }
 .article code:not([class]) {
-  font-size: 0.8125rem;
+  font-size: 0.9625rem;
   color: var(--color-inlinecode);
   border-radius: 2px;
 }
@@ -4416,7 +4419,7 @@ footer.footer {
 }
 footer.footer,
 footer.footer p {
-  font-size: 0.8125rem;
+  font-size: 0.9625rem;
 }
 footer.footer .licenses {
   color: fade(, 50%);
@@ -4554,7 +4557,7 @@ footer.footer .copyright p {
   margin: 0;
 }
 .article.l_friends .friends-group .friend-content .friend-card .friend-right p.friend-name {
-  font-size: 0.8125rem;
+  font-size: 0.9625rem;
   padding-top: 4px;
   font-weight: bold;
 }
@@ -4605,7 +4608,7 @@ footer.footer .copyright p {
 .md .img-wrap .image-caption {
   display: block;
   margin: 0.75rem auto;
-  font-size: 0.8125rem;
+  font-size: 0.9625rem;
   color: var(--color-meta);
 }
 .md .img-wrap .image-caption:empty {
@@ -4841,7 +4844,7 @@ footer.footer .copyright p {
 .l_main .post .article-meta .new-meta-box,
 .l_main .post .article-meta .new-meta-box p,
 .l_main .post .article-meta .new-meta-box i {
-  font-size: 0.8125rem;
+  font-size: 0.9625rem;
 }
 .l_main .post .article-meta .new-meta-box .new-meta-item {
   color: var(--color-meta);
@@ -5231,7 +5234,7 @@ code {
   position: relative;
   pointer-events: none;
   margin-top: 0;
-  font-weight: 500;
+  font-weight: 520;
 }
 .md h1 >a,
 .md h2 >a,
@@ -5265,11 +5268,11 @@ code {
 }
 .md h1:before,
 .md h2:before {
-  margin-top: -32px;
+  margin-top: -80px;
 }
 .md .article-meta+h1,
 .md .article-meta+h2 {
-  margin-top: -80px;
+  margin-top: -128px;
 }
 .md h3,
 .md h4,
@@ -5278,16 +5281,16 @@ code {
   margin-bottom: 1em;
 }
 .md h3:before {
-  margin-top: -56px;
+  margin-top: -80px;
 }
 .md h4:before {
-  margin-top: -64px;
+  margin-top: -80px;
 }
 .md h5 {
   font-weight: bold;
 }
 .md h2+h3:before {
-  margin-top: -80px;
+  margin-top: -128px;
 }
 .md ul,
 .md ol {
@@ -6005,7 +6008,7 @@ ul.list-v >li>a:hover {
   text-align: right;
 }
 .article-title {
-  font-weight: 500;
+  font-weight: 700;
   margin-bottom: 12px;
   line-height: 1.4;
 }
@@ -6428,7 +6431,7 @@ ul.list-v >li>a:hover {
   overflow: hidden;
   word-break: break-all;
   text-overflow: ellipsis;
-  font-size: 0.8125rem;
+  font-size: 0.9625rem;
   color: var(--color-meta);
 }
 #u-search .modal-body .modal-results .result .icon {

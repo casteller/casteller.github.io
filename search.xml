@@ -364,7 +364,6 @@ System.out.println(num); // 输出10.0</code></pre>
 <pre><code class="java">double num1 = 5.5;
 int num2 = (int) num1; // 将double类型的num1强制转换为int类型
 System.out.println(num2); // 输出5（小数位直接舍弃）</code></pre>
-<p><img src="images%5C%E5%9B%BE%E7%89%871.png" class="lazyload placeholder" data-srcset="images%5C%E5%9B%BE%E7%89%871.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="1543196882672"></p>
 <p>说明：</p>
 <ol>
 <li>char类型的数据转换为int类型是按照码表中对应的int值进行计算的。比如在ASCII码表中，’a’对应97。</li>
@@ -1209,7 +1208,7 @@ public class PhoneDemo &#123;
 </li>
 <li>示例代码：</li>
 </ul>
-<pre><code class="java">![1](C:\TeachRes\Java2019\JavaSe01\day07\4-笔记\笔记图片资源包\1.png)class Student &#123;
+<pre><code class="java">class Student &#123;
     //成员变量
     String name;
     int age;
@@ -1244,28 +1243,23 @@ public class StudentDemo &#123;
     &#125;
 &#125;</code></pre>
 <h2 id="2-对象内存图"><a href="#2-对象内存图" class="headerlink" title="2. 对象内存图"></a>2. 对象内存图</h2><h3 id="2-1-单个对象内存图"><a href="#2-1-单个对象内存图" class="headerlink" title="2.1 单个对象内存图"></a>2.1 单个对象内存图</h3><ul>
-<li>成员变量使用过程</li>
+<li><p>成员变量使用过程</p>
+</li>
+<li><p>成员方法调用过程</p>
+</li>
 </ul>
-<p><img src="images%5C1.png" class="lazyload placeholder" data-srcset="images%5C1.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="1"></p>
-<ul>
-<li>成员方法调用过程</li>
-</ul>
-<p><img src="images%5C2.png" class="lazyload placeholder" data-srcset="images%5C2.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="2"></p>
 <h3 id="2-2-多个对象内存图"><a href="#2-2-多个对象内存图" class="headerlink" title="2.2 多个对象内存图"></a>2.2 多个对象内存图</h3><ul>
 <li>成员变量使用过程</li>
 </ul>
-<p><img src="images%5C3.png" class="lazyload placeholder" data-srcset="images%5C3.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="3"></p>
 <ul>
 <li>成员方法调用过程</li>
 </ul>
-<p><img src="images%5C4.png" class="lazyload placeholder" data-srcset="images%5C4.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="4"></p>
 <ul>
 <li><p>总结：</p>
 <p>多个对象在堆内存中，都有不同的内存划分，成员变量存储在各自的内存区域中，成员方法多个对象共用的一份</p>
 </li>
 </ul>
-<h3 id="2-3-多个对象指向相同内存图"><a href="#2-3-多个对象指向相同内存图" class="headerlink" title="2.3 多个对象指向相同内存图"></a>2.3 多个对象指向相同内存图</h3><p><img src="images%5C4.bmp" class="lazyload placeholder" data-srcset="images%5C4.bmp" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="4"></p>
-<ul>
+<h3 id="2-3-多个对象指向相同内存图"><a href="#2-3-多个对象指向相同内存图" class="headerlink" title="2.3 多个对象指向相同内存图"></a>2.3 多个对象指向相同内存图</h3><ul>
 <li><p>总结</p>
 <p>当多个对象的引用指向同一个内存空间（变量所记录的地址值是一样的）</p>
 <p>只要有任何一个对象修改了内存中的数据，随后，无论使用哪一个对象进行数据获取，都是修改后的数据。</p>
@@ -1426,10 +1420,6 @@ public class StudentDemo &#123;
         s2.setName(&quot;张曼玉&quot;);
     &#125;
 &#125;</code></pre>
-</li>
-<li><p>图解：</p>
-<p><img src="images%5C5.png" class="lazyload placeholder" data-srcset="images%5C5.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="5"></p>
-<p><img src="images%5C6.png" class="lazyload placeholder" data-srcset="images%5C6.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="6"></p>
 </li>
 </ul>
 <h3 id="4-5-封装思想"><a href="#4-5-封装思想" class="headerlink" title="4.5 封装思想"></a>4.5 封装思想</h3><ol>
@@ -1884,6 +1874,54 @@ background: transparent !important;
       </tags>
   </entry>
   <entry>
+    <title>(转载)使用 Picgo+Github+jsdelivr 搭建一个免费图床</title>
+    <url>/2021/10/27/20211027001/</url>
+    <content><![CDATA[<div class="note idea"><p>软件测试必须掌握的常用linux命令总结，熟练的掌握和使用这些命令可以提高工作效率，并且结合这些命令对测试过程中遇到的问题进行一些初步的定位。</p></div>
+<a id="more"></a>
+
+<p>偶然的一次机会，我接触到了 <strong><code>Markdown</code></strong> 语法，随后便喜欢上了这种标记语言。</p>
+<p>目前，我使用 <strong><code>Typora</code></strong> 编辑器。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703161150.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703161150.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"></p>
+<p><strong>Typora</strong> 里面有个非常好用的功能，就是通过 <strong>Picgo</strong> 将图片上传到图床。</p>
+<p>下面就讲一下如何搭建一个免费的图床。</p>
+<h1 id="Picgo-介绍"><a href="#Picgo-介绍" class="headerlink" title="Picgo 介绍"></a>Picgo 介绍</h1><div class="note "><p>Picgo 是一款开源的图片上传工具，项目地址:<a href="https://github.com/Molunerfinn/PicGo">Picgo</a></p></div>
+
+<p>Picgo 支持<code>七牛图床</code>,<code>腾讯云</code>, <code>又拍云</code>,<code>Github</code> 等。</p>
+<p>在众多的图床中我选择<code>Github</code> , 因为他免费.</p>
+<h1 id="搭建图床"><a href="#搭建图床" class="headerlink" title="搭建图床"></a>搭建图床</h1><h2 id="1-注册-登录-Github"><a href="#1-注册-登录-Github" class="headerlink" title="1. 注册 / 登录 Github"></a>1. 注册 / 登录 Github</h2>   <div class="note "><p>这个就不演示了</p></div>
+
+<h2 id="2-创建-Repo"><a href="#2-创建-Repo" class="headerlink" title="2. 创建 Repo"></a>2. 创建 Repo</h2><p>   <img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703161850.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703161850.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703161942.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703161942.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"></p>
+<p>然后点击 <strong><code>Create Repository</code></strong> 就可以了</p>
+<h2 id="3-生成-Taken"><a href="#3-生成-Taken" class="headerlink" title="3.生成 Taken"></a>3.生成 Taken</h2><p><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703162058.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703162058.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703162152.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703162152.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703162322.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703162322.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703162416.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703162416.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"></p>
+<div class="note "><p>创建之后，会生成一串 token</p></div>
+
+<h2 id="4-配置-Picgo"><a href="#4-配置-Picgo" class="headerlink" title="4.配置 Picgo"></a>4.配置 Picgo</h2><div class="note "><p><code>Picgo </code>请到 <a href="https://github.com/Molunerfinn/PicGo">Picgo</a> 下载</p></div>
+
+<p><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703163011.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703163011.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"></p>
+<ul>
+<li>设定仓库名的时候，是按照 “账户名 / 仓库名的格式填写”</li>
+<li>分支名统一填写 “master”</li>
+<li>将之前的 Token 黏贴在这里</li>
+<li>存储的路径可以按照我这样子写，就会在 repository 下创建一个 “img” 文件夹</li>
+<li>自定义域名的作用是，在上传图片后成功后，PicGo 会将 “自定义域名 + 上传的图片名” 生成的访问链接，放到剪切板上</li>
+<li><code>https://raw.githubusercontent.com/用户名/RepositoryName/分支名</code>，自定义域名需要按照这样去填写</li>
+<li>但是由于 Github 在国内的访问速度太慢，所以我们使用 <a href="https://www.jsdelivr.com/">jsdelivr</a> 加速，只需要把自定义域名修改一下就可以了:<code>https://cdn.jsdelivr.net/gh/</code>用户名/RepositoryName</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>将上面的步骤设置好之后，就可以愉快地写 Markdown 了。上传图片有快捷键，默认的是 <code>Ctrl+Shift+P</code>, 可以将剪切板上的图片快捷上传。</p>
+<p>原文链接：<a href="https://howiehye.top/">https://howiehye.top/</a></p>
+]]></content>
+      <categories>
+        <category>Picgo</category>
+      </categories>
+      <tags>
+        <tag>Picgo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Jenkins拉取github仓库代码执行构建并自动发邮件通知</title>
     <url>/2020/08/23/Jenkinsgithub/</url>
     <content><![CDATA[<p>Jenkins 常用的就是项目构建，一般构建都需要从版本控制平台上面拉取项目代码到 Jenkins 服务器上构建。我主要使用的版本控制平台是 GitHub，所以这里就分享一下 Jenkins + GitHub 的基本构建配置过程。</p>
@@ -2194,6 +2232,82 @@ title: 我的朋友们 # 可选，这是友链页的标题
       </tags>
   </entry>
   <entry>
+    <title>Linux基础</title>
+    <url>/2020/08/23/linuxfoundation01/</url>
+    <content><![CDATA[<h1 id="linux简介"><a href="#linux简介" class="headerlink" title="linux简介"></a>linux简介</h1><h2 id="1、基础命令"><a href="#1、基础命令" class="headerlink" title="1、基础命令"></a>1、基础命令</h2><h3 id="1-1、系统命令"><a href="#1-1、系统命令" class="headerlink" title="1.1、系统命令"></a>1.1、系统命令</h3><p>init 0  – 关机<br>init 6  – 重启，也可以用reboot命令</p>
+<p>pwd     – 查看当前用户所在的位置（某个路径下），当前的操作路径<br>clear   – 清空当前屏幕的内容<br>cal     – 查看当月日历<br>date    – 查看当前系统时间<br>ifconfig– 查看网络配置信息<br>ping    – 检测网络连通性，如ping 192.168.1.1是检测虚拟机是否与路由器相通<br>service [servername] restart  – 重启xx服务，如network、mysqld、firewall，start启动，stop停用</p>
+<p>cd      – 路径跳转，如cd /usr/local是将操作路径切换到/usr/local下（绝对路径跳转）<br>        – cd local/是将操作路径跳转到当前路径的下级路径（local/）下<br>        – cd ./bin是将操作路径跳转到悠闲匹配到的bin目录（从根目录开始找，相对路径跳转）<br>cd ..   – 返回上一级目录<br>ls      – 查看当前路径下的文件（不含隐藏文件）<br>ls  -a  – 查看当前路径下的所有文件（含隐藏文件）<br>ll      – 查看当前路径下的文件属性（权限、所有者等信息）<br>ll  -a  – 类似于ls -a</p>
+<h3 id="1-2、常用快捷键"><a href="#1-2、常用快捷键" class="headerlink" title="1.2、常用快捷键"></a>1.2、常用快捷键</h3><p>Tab键    – 补齐键，可以补齐命令、目录名。多次敲击此键还可以匹配相关文件或目录名<br>ESC键    – 在vi编辑器中从编辑模式回到命令模式<br>Ctrl+C  – 取消当前输入或中断当前操作<br>Ctrl+R  – 查询最近使用过的命令</p>
+<h3 id="1-3、用户操作"><a href="#1-3、用户操作" class="headerlink" title="1.3、用户操作"></a>1.3、用户操作</h3><p>useradd – 添加普通用户，useradd [username]<br>passwd  – 为指定用户设置密码，password [username]<br>su      – 切换用户。高权限切换到低权限的用户，无需验证密码，反之需要验证密码</p>
+<h3 id="1-4、文件-文件夹操作"><a href="#1-4、文件-文件夹操作" class="headerlink" title="1.4、文件/文件夹操作"></a>1.4、文件/文件夹操作</h3><p>mkdir   – 创建文件夹<br>        – mkdir abc是在当前路径下创建一个叫abc的文件夹<br>        – mkdir aa\ bb 创建一个名为’aa bb’的文件夹（有空格）<br>        – mkdir aa bb 创建名字分别为aa和bb的两个文件夹<br>rmdir   – 删除空文件夹<br>rm      – 删除文件（有提示是否要删除），无法删除目录<br>rm -r   – 删除非空目录（与提示，输入y/n），删除文件<br>rm -rf  – 强制删除指定文件或目录（无提示）<br>cp      – 复制并粘贴<br>cp -r /a/b . – 将/a路径下的文件b复制到当前路径下，cp -r /a/b  /c/d是将/a路径下的b文件复制到/c/d目录下<br>mv      – 剪切（移动）文件或路径，类似于cp的用法<br>mv a b  – 将a文件命名为b（更名）</p>
+<p>touch   – 创建文件（文件要带扩展名），如touch abc.txt<br>vi      – 创建并打开一个文件，进入默认的命令模式</p>
+<h3 id="1-5、vi编辑器"><a href="#1-5、vi编辑器" class="headerlink" title="1.5、vi编辑器"></a>1.5、vi编辑器</h3><p>三大模式：</p>
+<ul>
+<li><p>命令模式：通过命令进行文件内容操作（操作的命令无法显示），</p>
+<ul>
+<li>G     光标跳转到末行首</li>
+<li>gg    光标跳转到首行首</li>
+<li>dd    删除光标所在的行</li>
+<li>u     撤销上一步操作</li>
+<li>yy    复制光标所在的行</li>
+<li>p     粘贴复制的内容</li>
+<li>i     进入编辑模式</li>
+<li>:     进入末行模式</li>
+<li></li>
+</ul>
+</li>
+<li><p>编辑模式：对内容进行编辑，可以通过ESC键返回命令模式</p>
+</li>
+<li><p>末行模式：执行文件的保存和退出等操作，可以通过ESC键返回命令模式</p>
+<ul>
+<li>w     保存当前编辑的内容（write）</li>
+<li>q     在没有修改文件内容的情况下退出（关闭文件）（quit）</li>
+<li>wq    保存后退出（write before quit）</li>
+<li>q!    强制退出（不保存退出）</li>
+<li>set number    显示文件内容的行号</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-6、文件查看"><a href="#1-6、文件查看" class="headerlink" title="1.6、文件查看"></a>1.6、文件查看</h3><p>cat      —— 一次性查看文件的内容（从头到尾）<br>tac      —— 反过来一次性显示文件内容（末行开始到首行）<br>more     —— 分页（按百分比）查看文件内容，查看时q键退出，vi进入编辑器，空格键翻页<br>less     —— 与more类似（没有百分比显示）,可以在查看过程中输入vi启用vi编辑器</p>
+<p>tail a  – 查看文件a最新的10行内容<br>tail -f – 持续输出文件的最新内容（如linux有一些.out格式日志文件的内容是可以持续更新的）<br>tail -100f  – 输出文件的最新100行内容，并持续输出后续更新的内容</p>
+<h3 id="1-7、文件压缩与解压"><a href="#1-7、文件压缩与解压" class="headerlink" title="1.7、文件压缩与解压"></a>1.7、文件压缩与解压</h3><p>tar     – 文件（或文件夹）压缩与解压，通过压缩参数或解压参数实现<br>tar -xvf – 将压缩文件解压（tar/rar/war/zip）<br>tar -zvcf – 对指定文件（或文件夹）进行压缩，如tar -zvcf a.tar a是将a文件（或文件夹）压缩为a.tar</p>
+<h3 id="1-8、件的安装和卸载"><a href="#1-8、件的安装和卸载" class="headerlink" title="1.8、件的安装和卸载"></a>1.8、件的安装和卸载</h3><p>手动安装：（离线安装）<br>wget url            – 下载指定地址的文件，如wget <a href="https://dldir1.qq.com/qqfile/qq/">https://dldir1.qq.com/qqfile/qq/</a><br>                    TIM2.2.5/20871/TIM2.2.5.exe 是下载TIM的安装包，通常wget命令都需<br>                    要先安装才行，只有ubutu是自带的<br>rpm -ivh package    – 安装软件（手动安装），如rpm -ivh jdk1.7-linux-i586.rpm<br>rpm -e –nodeps     – 卸载软件<br>rpm -qa|grep xx     – 查询是否已安装xx软件，如rpm -qa|grep jdk</p>
+<p>自动安装：<br>yum install package     – 自动安装指定程序<br>yum update package      – 更新，升级<br>yum remove package      – 卸载程序</p>
+<h3 id="1-9、进程的查杀"><a href="#1-9、进程的查杀" class="headerlink" title="1.9、进程的查杀"></a>1.9、进程的查杀</h3><p>查进程：<br>ps      – 查询系统主进程<br>ps -ef  –查询系统运行的所有进程<br>ps -ef|grep xx  – 查询与xx相关的进程</p>
+<p>杀进程：就是关闭相关应用程序<br>kill -9 xx  – 强制杀死（终止）xx进程，xx指的是PID（进程编号，是一串数字）</p>
+<h3 id="1-10、shell脚本执行"><a href="#1-10、shell脚本执行" class="headerlink" title="1.10、shell脚本执行"></a>1.10、shell脚本执行</h3><p>shell脚本，指的是linux编写的程序脚本，一般保存下来的文件是.sh格式，如java的文件是.java，python的文件是.py<br>./脚本名.sh        – 执行shell脚本，需要进入文件所在目录<br>sh 脚本名.sh       – 也是执行shell脚本，如sh /usr/tomcat/bin/startup.sh是启动tomcat</p>
+<h3 id="1-11、文件权限管理"><a href="#1-11、文件权限管理" class="headerlink" title="1.11、文件权限管理"></a>1.11、文件权限管理</h3><p>使用ll命令查看文件详情时，前面一段类似于-rw-r–r–这种描述，<br>第一个字符如果是‘d’表示这是一个目录，若是‘-’表示这是一个文件（目录以外的任何东西）<br>之后的字符共9个，每3个一组，格式都遵照rwx进行排列的，<br>第一组表示当前登录用户（u）对该文件所有的权限，<br>第二组表示创建这个文件的用户所在用户组（g）的权限，<br>第三组表示文件所有者（创建者，o）的权限。<br>r   – 读取，只读  read      权限值4<br>w   – 写入，编辑  write     权限值2<br>x   – 执行，运行  excute    权限值1<br>所以一个文件权限值是由这3组rwx的权限组合相加，最小为000，最大777</p>
+<p>chmod 权限值 文件名           – 修改文件/目录的权限<br>chmod -u rwx file           – 将当前登录用户对该文件的权限设置为rwx</p>
+<h2 id="2、Linux服务器搭建（java-web-Server）"><a href="#2、Linux服务器搭建（java-web-Server）" class="headerlink" title="2、Linux服务器搭建（java web Server）"></a>2、Linux服务器搭建（java web Server）</h2><h3 id="2-1、配置java环境"><a href="#2-1、配置java环境" class="headerlink" title="2.1、配置java环境"></a>2.1、配置java环境</h3><h4 id="2-1-1、配置Jdk"><a href="#2-1-1、配置Jdk" class="headerlink" title="2.1.1、配置Jdk"></a>2.1.1、配置Jdk</h4><p>1.使用ftp软件（xftp为例）上传jdk的安装文件（jdk_xxx_xxx.rpm）<br>2.安装jdk文件，如rpm -ivh jdk1.7-linux-i586.rpm<br>3.修改环境变量配置<br>找到/etc目录下的profile文件，进行编辑，即vi /etc/profile，加入环境变量代码</p>
+<pre><code>JAVA_HOME=/usr/java/jdk1.8.0_121
+JRE_HOME=/usr/java/jdk1.8.0_121/jre
+PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin
+CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar:$JRE_HOME/lib
+export JAVA_HOME JRE_HOME PATH CLASSPATH</code></pre>
+<p>这段代码加在倒数第四行的done下方<br>4.返回linux命令行输入java -version检测配置结构和jdk版本</p>
+<h4 id="2-1-2、配置tomcat"><a href="#2-1-2、配置tomcat" class="headerlink" title="2.1.2、配置tomcat"></a>2.1.2、配置tomcat</h4><p>1.同样上传Apache-tomcat的压缩包<br>2.解压<br>3.修改防火墙文件，即vi /etc/sysconfig/iptables<br>4.在文件中的COMMIT前面加入以下代码<br>    -A RH-Firewall-1-INPUT -m state –state NEW -m tcp -p tcp –dport 8080 -j ACCEPT<br>5.重启防火墙相关服务，service iptables restart，使tomcat配置生效</p>
+<p>如何启动tomcat？<br>    进入tomcat的bin目录<br>    执行./startup.sh 或sh startup.sh命令启动tomcat</p>
+<h4 id="2-1-3、安装MySQL"><a href="#2-1-3、安装MySQL" class="headerlink" title="2.1.3、安装MySQL"></a>2.1.3、安装MySQL</h4><p>自动安装<br>使用命令yum install mysql-server</p>
+<p>手动安装<br>1.将mysql的server、client、devel三个安装包上传到linux服务器中<br>2.逐一对server、client、devel三个安装包进行依次安装<br>    如：rpm -ivh MySQL-server-5.5.55-1.el6.i686.rpm –nodeps –force<br>3.启动mysql服务<br>    service mysql start<br>4.修改mysql的root密码<br>    进入mysql（直接在命令行输入mysql，回车即可）<br>    切换到mysql数据库（use mysql;）<br>    修改user表中的root帐户密码（update user set host=’%’,password=’123456’ where user=’root’;）<br>    删除host未修改为%的root帐户（delete from user where not password=’123456’;）<br>5.配置远程访问权限<br>    GRANT ALL PRIVILEGES ON <em>.</em> TO ‘root’@’%’ IDENTIFIED BY ‘123456’ WITH GRANT OPTION;<br>    刷新权限<br>    FLUSH PRIVILEGES;</p>
+<h2 id="3、linux服务器代码部署"><a href="#3、linux服务器代码部署" class="headerlink" title="3、linux服务器代码部署"></a>3、linux服务器代码部署</h2><p>1.查杀tomcat进程<br>2.将代码的war包上传到tomcat下的webapps目录下<br>    如果开发人员没有编译成war包，一般都需要备份原来的代码包，也就是要返回到webapps目录，使用tar命令对原项目代码进行备份<br>3.重新启动tomcat（到bin目录下执行./startup.sh）<br>4.检查新代码中是否有需要修改的配置文件，如jdbc，系统相关位置配置等，若需要改项目内容，在修改后，还需要重启tomcat（即查杀tomcat后再次启动）</p>
+<p><a href="http://192.168.3.130:8080/">http://192.168.3.130:8080/</a><br>安装jdk<br>rpm -ivh jdk1.8u121-linux-i586.rpm<br>卸载jdk<br>rpm -e –nodeps jdk1.8.0_121-1.8.0_121-fcs.i586</p>
+<p>进入tomcat的bin目录下<br>cd /usr/local/apache-tomcat-7.0.70/bin<br>启动Tomcat<br>sh startup.sh<br>关闭Tomcat<br>sh shutdown.sh<br>查看安装的jdk：<br>rpm -qa|grep jdk </p>
+<p>可能看到如下类似的信息： </p>
+<p>jdk-1.6.0_22-fcs </p>
+<p>卸载： </p>
+<p>rpm -e –nodeps jdk-1.6.0_22-fcs </p>
+<p>rpm -e –nodeps java-1.8.0-openjdk-headless-1.8.0.222.b10-0.el6_10.x86_64</p>
+<p>rpm -e –nodeps java-1.8.0-openjdk-devel-1.8.0.222.b10-0.el6_10.x86_64</p>
+<p>rpm -e –nodeps java-1.8.0-openjdk-1.8.0.222.b10-0.el6_10.x86_64</p>
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Python使用openpyxl读写excel文件</title>
     <url>/2020/08/23/openpyxl/</url>
     <content><![CDATA[<p>这是一个第三方库，可以处理xlsx格式的Excel文件。pip install openpyxl安装。如果使用Aanconda，应该自带了。</p>
@@ -2434,82 +2548,6 @@ connection.close()</code></pre>
       </tags>
   </entry>
   <entry>
-    <title>Linux基础</title>
-    <url>/2020/08/23/linuxfoundation01/</url>
-    <content><![CDATA[<h1 id="linux简介"><a href="#linux简介" class="headerlink" title="linux简介"></a>linux简介</h1><h2 id="1、基础命令"><a href="#1、基础命令" class="headerlink" title="1、基础命令"></a>1、基础命令</h2><h3 id="1-1、系统命令"><a href="#1-1、系统命令" class="headerlink" title="1.1、系统命令"></a>1.1、系统命令</h3><p>init 0  – 关机<br>init 6  – 重启，也可以用reboot命令</p>
-<p>pwd     – 查看当前用户所在的位置（某个路径下），当前的操作路径<br>clear   – 清空当前屏幕的内容<br>cal     – 查看当月日历<br>date    – 查看当前系统时间<br>ifconfig– 查看网络配置信息<br>ping    – 检测网络连通性，如ping 192.168.1.1是检测虚拟机是否与路由器相通<br>service [servername] restart  – 重启xx服务，如network、mysqld、firewall，start启动，stop停用</p>
-<p>cd      – 路径跳转，如cd /usr/local是将操作路径切换到/usr/local下（绝对路径跳转）<br>        – cd local/是将操作路径跳转到当前路径的下级路径（local/）下<br>        – cd ./bin是将操作路径跳转到悠闲匹配到的bin目录（从根目录开始找，相对路径跳转）<br>cd ..   – 返回上一级目录<br>ls      – 查看当前路径下的文件（不含隐藏文件）<br>ls  -a  – 查看当前路径下的所有文件（含隐藏文件）<br>ll      – 查看当前路径下的文件属性（权限、所有者等信息）<br>ll  -a  – 类似于ls -a</p>
-<h3 id="1-2、常用快捷键"><a href="#1-2、常用快捷键" class="headerlink" title="1.2、常用快捷键"></a>1.2、常用快捷键</h3><p>Tab键    – 补齐键，可以补齐命令、目录名。多次敲击此键还可以匹配相关文件或目录名<br>ESC键    – 在vi编辑器中从编辑模式回到命令模式<br>Ctrl+C  – 取消当前输入或中断当前操作<br>Ctrl+R  – 查询最近使用过的命令</p>
-<h3 id="1-3、用户操作"><a href="#1-3、用户操作" class="headerlink" title="1.3、用户操作"></a>1.3、用户操作</h3><p>useradd – 添加普通用户，useradd [username]<br>passwd  – 为指定用户设置密码，password [username]<br>su      – 切换用户。高权限切换到低权限的用户，无需验证密码，反之需要验证密码</p>
-<h3 id="1-4、文件-文件夹操作"><a href="#1-4、文件-文件夹操作" class="headerlink" title="1.4、文件/文件夹操作"></a>1.4、文件/文件夹操作</h3><p>mkdir   – 创建文件夹<br>        – mkdir abc是在当前路径下创建一个叫abc的文件夹<br>        – mkdir aa\ bb 创建一个名为’aa bb’的文件夹（有空格）<br>        – mkdir aa bb 创建名字分别为aa和bb的两个文件夹<br>rmdir   – 删除空文件夹<br>rm      – 删除文件（有提示是否要删除），无法删除目录<br>rm -r   – 删除非空目录（与提示，输入y/n），删除文件<br>rm -rf  – 强制删除指定文件或目录（无提示）<br>cp      – 复制并粘贴<br>cp -r /a/b . – 将/a路径下的文件b复制到当前路径下，cp -r /a/b  /c/d是将/a路径下的b文件复制到/c/d目录下<br>mv      – 剪切（移动）文件或路径，类似于cp的用法<br>mv a b  – 将a文件命名为b（更名）</p>
-<p>touch   – 创建文件（文件要带扩展名），如touch abc.txt<br>vi      – 创建并打开一个文件，进入默认的命令模式</p>
-<h3 id="1-5、vi编辑器"><a href="#1-5、vi编辑器" class="headerlink" title="1.5、vi编辑器"></a>1.5、vi编辑器</h3><p>三大模式：</p>
-<ul>
-<li><p>命令模式：通过命令进行文件内容操作（操作的命令无法显示），</p>
-<ul>
-<li>G     光标跳转到末行首</li>
-<li>gg    光标跳转到首行首</li>
-<li>dd    删除光标所在的行</li>
-<li>u     撤销上一步操作</li>
-<li>yy    复制光标所在的行</li>
-<li>p     粘贴复制的内容</li>
-<li>i     进入编辑模式</li>
-<li>:     进入末行模式</li>
-<li></li>
-</ul>
-</li>
-<li><p>编辑模式：对内容进行编辑，可以通过ESC键返回命令模式</p>
-</li>
-<li><p>末行模式：执行文件的保存和退出等操作，可以通过ESC键返回命令模式</p>
-<ul>
-<li>w     保存当前编辑的内容（write）</li>
-<li>q     在没有修改文件内容的情况下退出（关闭文件）（quit）</li>
-<li>wq    保存后退出（write before quit）</li>
-<li>q!    强制退出（不保存退出）</li>
-<li>set number    显示文件内容的行号</li>
-</ul>
-</li>
-</ul>
-<h3 id="1-6、文件查看"><a href="#1-6、文件查看" class="headerlink" title="1.6、文件查看"></a>1.6、文件查看</h3><p>cat      —— 一次性查看文件的内容（从头到尾）<br>tac      —— 反过来一次性显示文件内容（末行开始到首行）<br>more     —— 分页（按百分比）查看文件内容，查看时q键退出，vi进入编辑器，空格键翻页<br>less     —— 与more类似（没有百分比显示）,可以在查看过程中输入vi启用vi编辑器</p>
-<p>tail a  – 查看文件a最新的10行内容<br>tail -f – 持续输出文件的最新内容（如linux有一些.out格式日志文件的内容是可以持续更新的）<br>tail -100f  – 输出文件的最新100行内容，并持续输出后续更新的内容</p>
-<h3 id="1-7、文件压缩与解压"><a href="#1-7、文件压缩与解压" class="headerlink" title="1.7、文件压缩与解压"></a>1.7、文件压缩与解压</h3><p>tar     – 文件（或文件夹）压缩与解压，通过压缩参数或解压参数实现<br>tar -xvf – 将压缩文件解压（tar/rar/war/zip）<br>tar -zvcf – 对指定文件（或文件夹）进行压缩，如tar -zvcf a.tar a是将a文件（或文件夹）压缩为a.tar</p>
-<h3 id="1-8、件的安装和卸载"><a href="#1-8、件的安装和卸载" class="headerlink" title="1.8、件的安装和卸载"></a>1.8、件的安装和卸载</h3><p>手动安装：（离线安装）<br>wget url            – 下载指定地址的文件，如wget <a href="https://dldir1.qq.com/qqfile/qq/">https://dldir1.qq.com/qqfile/qq/</a><br>                    TIM2.2.5/20871/TIM2.2.5.exe 是下载TIM的安装包，通常wget命令都需<br>                    要先安装才行，只有ubutu是自带的<br>rpm -ivh package    – 安装软件（手动安装），如rpm -ivh jdk1.7-linux-i586.rpm<br>rpm -e –nodeps     – 卸载软件<br>rpm -qa|grep xx     – 查询是否已安装xx软件，如rpm -qa|grep jdk</p>
-<p>自动安装：<br>yum install package     – 自动安装指定程序<br>yum update package      – 更新，升级<br>yum remove package      – 卸载程序</p>
-<h3 id="1-9、进程的查杀"><a href="#1-9、进程的查杀" class="headerlink" title="1.9、进程的查杀"></a>1.9、进程的查杀</h3><p>查进程：<br>ps      – 查询系统主进程<br>ps -ef  –查询系统运行的所有进程<br>ps -ef|grep xx  – 查询与xx相关的进程</p>
-<p>杀进程：就是关闭相关应用程序<br>kill -9 xx  – 强制杀死（终止）xx进程，xx指的是PID（进程编号，是一串数字）</p>
-<h3 id="1-10、shell脚本执行"><a href="#1-10、shell脚本执行" class="headerlink" title="1.10、shell脚本执行"></a>1.10、shell脚本执行</h3><p>shell脚本，指的是linux编写的程序脚本，一般保存下来的文件是.sh格式，如java的文件是.java，python的文件是.py<br>./脚本名.sh        – 执行shell脚本，需要进入文件所在目录<br>sh 脚本名.sh       – 也是执行shell脚本，如sh /usr/tomcat/bin/startup.sh是启动tomcat</p>
-<h3 id="1-11、文件权限管理"><a href="#1-11、文件权限管理" class="headerlink" title="1.11、文件权限管理"></a>1.11、文件权限管理</h3><p>使用ll命令查看文件详情时，前面一段类似于-rw-r–r–这种描述，<br>第一个字符如果是‘d’表示这是一个目录，若是‘-’表示这是一个文件（目录以外的任何东西）<br>之后的字符共9个，每3个一组，格式都遵照rwx进行排列的，<br>第一组表示当前登录用户（u）对该文件所有的权限，<br>第二组表示创建这个文件的用户所在用户组（g）的权限，<br>第三组表示文件所有者（创建者，o）的权限。<br>r   – 读取，只读  read      权限值4<br>w   – 写入，编辑  write     权限值2<br>x   – 执行，运行  excute    权限值1<br>所以一个文件权限值是由这3组rwx的权限组合相加，最小为000，最大777</p>
-<p>chmod 权限值 文件名           – 修改文件/目录的权限<br>chmod -u rwx file           – 将当前登录用户对该文件的权限设置为rwx</p>
-<h2 id="2、Linux服务器搭建（java-web-Server）"><a href="#2、Linux服务器搭建（java-web-Server）" class="headerlink" title="2、Linux服务器搭建（java web Server）"></a>2、Linux服务器搭建（java web Server）</h2><h3 id="2-1、配置java环境"><a href="#2-1、配置java环境" class="headerlink" title="2.1、配置java环境"></a>2.1、配置java环境</h3><h4 id="2-1-1、配置Jdk"><a href="#2-1-1、配置Jdk" class="headerlink" title="2.1.1、配置Jdk"></a>2.1.1、配置Jdk</h4><p>1.使用ftp软件（xftp为例）上传jdk的安装文件（jdk_xxx_xxx.rpm）<br>2.安装jdk文件，如rpm -ivh jdk1.7-linux-i586.rpm<br>3.修改环境变量配置<br>找到/etc目录下的profile文件，进行编辑，即vi /etc/profile，加入环境变量代码</p>
-<pre><code>JAVA_HOME=/usr/java/jdk1.8.0_121
-JRE_HOME=/usr/java/jdk1.8.0_121/jre
-PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin
-CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar:$JRE_HOME/lib
-export JAVA_HOME JRE_HOME PATH CLASSPATH</code></pre>
-<p>这段代码加在倒数第四行的done下方<br>4.返回linux命令行输入java -version检测配置结构和jdk版本</p>
-<h4 id="2-1-2、配置tomcat"><a href="#2-1-2、配置tomcat" class="headerlink" title="2.1.2、配置tomcat"></a>2.1.2、配置tomcat</h4><p>1.同样上传Apache-tomcat的压缩包<br>2.解压<br>3.修改防火墙文件，即vi /etc/sysconfig/iptables<br>4.在文件中的COMMIT前面加入以下代码<br>    -A RH-Firewall-1-INPUT -m state –state NEW -m tcp -p tcp –dport 8080 -j ACCEPT<br>5.重启防火墙相关服务，service iptables restart，使tomcat配置生效</p>
-<p>如何启动tomcat？<br>    进入tomcat的bin目录<br>    执行./startup.sh 或sh startup.sh命令启动tomcat</p>
-<h4 id="2-1-3、安装MySQL"><a href="#2-1-3、安装MySQL" class="headerlink" title="2.1.3、安装MySQL"></a>2.1.3、安装MySQL</h4><p>自动安装<br>使用命令yum install mysql-server</p>
-<p>手动安装<br>1.将mysql的server、client、devel三个安装包上传到linux服务器中<br>2.逐一对server、client、devel三个安装包进行依次安装<br>    如：rpm -ivh MySQL-server-5.5.55-1.el6.i686.rpm –nodeps –force<br>3.启动mysql服务<br>    service mysql start<br>4.修改mysql的root密码<br>    进入mysql（直接在命令行输入mysql，回车即可）<br>    切换到mysql数据库（use mysql;）<br>    修改user表中的root帐户密码（update user set host=’%’,password=’123456’ where user=’root’;）<br>    删除host未修改为%的root帐户（delete from user where not password=’123456’;）<br>5.配置远程访问权限<br>    GRANT ALL PRIVILEGES ON <em>.</em> TO ‘root’@’%’ IDENTIFIED BY ‘123456’ WITH GRANT OPTION;<br>    刷新权限<br>    FLUSH PRIVILEGES;</p>
-<h2 id="3、linux服务器代码部署"><a href="#3、linux服务器代码部署" class="headerlink" title="3、linux服务器代码部署"></a>3、linux服务器代码部署</h2><p>1.查杀tomcat进程<br>2.将代码的war包上传到tomcat下的webapps目录下<br>    如果开发人员没有编译成war包，一般都需要备份原来的代码包，也就是要返回到webapps目录，使用tar命令对原项目代码进行备份<br>3.重新启动tomcat（到bin目录下执行./startup.sh）<br>4.检查新代码中是否有需要修改的配置文件，如jdbc，系统相关位置配置等，若需要改项目内容，在修改后，还需要重启tomcat（即查杀tomcat后再次启动）</p>
-<p><a href="http://192.168.3.130:8080/">http://192.168.3.130:8080/</a><br>安装jdk<br>rpm -ivh jdk1.8u121-linux-i586.rpm<br>卸载jdk<br>rpm -e –nodeps jdk1.8.0_121-1.8.0_121-fcs.i586</p>
-<p>进入tomcat的bin目录下<br>cd /usr/local/apache-tomcat-7.0.70/bin<br>启动Tomcat<br>sh startup.sh<br>关闭Tomcat<br>sh shutdown.sh<br>查看安装的jdk：<br>rpm -qa|grep jdk </p>
-<p>可能看到如下类似的信息： </p>
-<p>jdk-1.6.0_22-fcs </p>
-<p>卸载： </p>
-<p>rpm -e –nodeps jdk-1.6.0_22-fcs </p>
-<p>rpm -e –nodeps java-1.8.0-openjdk-headless-1.8.0.222.b10-0.el6_10.x86_64</p>
-<p>rpm -e –nodeps java-1.8.0-openjdk-devel-1.8.0.222.b10-0.el6_10.x86_64</p>
-<p>rpm -e –nodeps java-1.8.0-openjdk-1.8.0.222.b10-0.el6_10.x86_64</p>
-]]></content>
-      <categories>
-        <category>Linux</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Python生成双色球号码</title>
     <url>/2020/08/23/pythonssq/</url>
     <content><![CDATA[<pre><code class="python">import random,time
@@ -2550,6 +2588,19 @@ if __name__ ==&#39;__main__&#39;:
       </tags>
   </entry>
   <entry>
+    <title>Redis基础</title>
+    <url>/2020/08/24/redisjichu/</url>
+    <content><![CDATA[<p>String<br>set，设置键<br>set name jack<br>get，获取键的值<br>get name<br>exists，判断该键是否存在，存在返回1，不存在返回0<br>exists name<br>append，如果该键不存在，则创建，返回当前value的长度；如果该键已经存在，则追加，返回追加后value的长度<br>append city beijing<br>如果值有空格，需要加引号<br>append city “ of china”<br>strlen，获取key的长度<br>strlen name<br>可以看到提示，有很多选项<br>EX和PX表示失效时间，单位为秒和毫秒，两者不能同时使用；<br>NX表示数据库中不存在时才能设置，XX表示存在时才能设置<br>ttl查看过期剩余时间，如果为-2表示已经过期<br>flushdb，清空数据库<br>keys * 查看所有键<br>incr，递增1<br>decr，递减1<br>del，删除键<br>删除后，get不到值，但是可以进行incr和decr操作，是基于默认值为0进行操作<br>incrby，递增，可以设置步长,不加步长会报错<br>incrby age 5<br>decrby，递减，可以设置步长<br>getset，获取的同时并设置新的值<br>getset age 20<br>setex，设置过期时间，等同于set name jack ex 10<br>setex name 10 jack<br>setnx，当key不存在时才能设置，等同于set name jack nx；如果key存在，就不能设置<br>setrange，设置指定索引位置的字符，索引从0开始</p>
+<p>超过的长度使用0代替<br>getrange，获取指定索引位置的字符，索引从0开始<br>ep:获取索引为[1,7]之间的内容，闭区间<br>getrange name 1 7<br>setbit/getbit，设置/获取指定位的BIT值，应用场景：考勤打卡<br>设置从0开始计算的第七位BIT值为1，返回原有BIT值0<br>获取设置的结果，二进制的0000 0001的十六进制值为0x01<br>设置从0开始计算的第六位BIT值为1，返回原有BIT值0<br>获取设置的结果，二进制的0000 0011的十六进制值为0x03<br>mset，批量设置key<br>mset key1 “aaa” key2 “bbb”<br>mget，批量获取<br>mget key1 key2<br>msetnx，批量设置key，如果key都不存在，执行成功并返回1；如果有一个key存在，执行失败并返回0。<br>List<br>是按照插入顺序排序的字符串链表<br>lpush<br>创建键test及与其关联的List，然后将参数中的values从左到右依次插入【看着从左往右放的栈】<br>lrange<br>获取从位置0开始到位置2结束的3个元素<br>lrange test 0 2<br>获取链表中的全部元素，其中0表示第一个元素，­-1表示最后一个元素<br>lrange test 0 -1<br>获取从倒数第3个到倒数第2个的元素<br>lrange -3 -2<br>lpushx，表示键存在时才能插入<br>如果键不存在，命令将不会进行任何操作，其返回值为0<br>获取该键的List中的第一个元素<br>lrange test 0 0<br>lpop，取出链表头部的元素，该元素在链表中就已经不存在了<br>llen，列表长度<br>lrem，从头部(left)向尾部(right)操作链表，删除2个值等于a的元素，返回值为实际删除的数量<br>lrem test 2 a<br>lindex，根据索引获取值<br>获取索引值为1(头部的第二个元素)的元素值<br>lindex test 1<br>lset<br>将索引值为1(头部的第二个元素)的元素值设置为新值w<br>lset test 1 w<br>ltrim<br>仅保留索引值0到2之间的3个元素，注意第0个和第2个元素均被保留<br>ltrim test 0 2<br>linsert<br>在a的前面插入新元素a0<br>linsert test before a a0<br>在e的后面插入新元素e2，从返回结果看已经插入成功<br>linsert test after e e2<br>在不存在的元素之前或之后插入新元素，该命令操作失败，并返回­1<br>为不存在的Key插入新元素，该命令操作失败，返回0<br>rpush<br>从链表的尾部插入参数中给出的values，插入顺序是从右到左依次插入【看作是从右到左的栈】<br>rpush test a b c d e<br>rpushx<br>键已经存在并且包含5个元素，rpushx命令将执行成功，并将元素e插入到链表的尾部<br>rpush test e<br>rpop<br>从尾部(right)弹出元素，即取出元素<br>rpop test<br>rpoplpush<br>将test的尾部元素弹出，然后插入到test2的头部(原子性的完成这两步操作)<br>rpoplpush test test2<br>将source和destination设为同一键，将test中的尾部元素移到其头部<br>set<br>没有排序的字符集合，Set集合中不允许出现重复的元素，和List类型相比，Sets之间可以聚合计算操作，如unions并、intersections交和differences差。<br>sadd<br>由于该键test之前并不存在，因此参数中的三个成员都被正常插入<br>sadd test a b c<br>smembers<br>查看集合中的元素，从结果可以，输出的顺序和插入顺序无关(无序的)<br>由于参数中的a在test中已经存在，因此本次操作仅仅插入了d和e两个新成员（不允许重复）<br>sismember<br>判断a是否已经存在，返回值为1表示存在<br>判断w是否已经存在，返回值为0表示不存在<br>sismember test w<br>scard<br>获取集合中元素的数量<br>srandmember<br>随机返回一个成员，成员还在集合中<br>spop<br>取出一个成员，成员会从集合中删除<br>srem<br>从Set中移出b、d和w三个成员，其中f并不存在，因此只有b和d两个成员被移出，返回为2<br>smove<br>将a从test移到test2，从结果可以看出移动成功<br>smove test test2 a<br>sdiff<br>获取多个集合之间的不同成员，要注意匹配的规则<br>先将test和test2进行比较，a、b和d三个成员是两者之间的差异成员，然后再用这个结果继续和<br>test3进行差异比较，b和d是test3不存在的成员<br>sdiffstore<br>将3个集合的差异成员存储到与diffkey关联的Set中，并返回插入的成员数量<br>sdiffstore difftest test test1 test2<br>sinter<br>获取多个集合之间的交集，这三个Set的成员交集只有c<br>sinter test test1 test2<br>sinterstore<br>将3个集合中的交集成员存储到与intertest关联的Set中，并返回交集成员的数量<br>sinterstore intertest test1 test2 test3<br>sunion<br>获取多个集合之间的并集<br>sunion test1 test2 test3<br>sunionstore<br>将3个集合中成员的并集存储到uniontest关联的set中，并返回并集成员的数量<br>sunionstore uniontest test1 test2 test3<br>Sorted-Sets<br>也称为Zset，每一个成员都会有一个分数(score)与之关联，Redis正是通过分数来为集合中的成员进行从小到大的排序（默认）。尽管Sorted­Sets中的成员必须是唯一的，但是分数(score)却是可以重复的。<br>zadd<br>添加一个分数为10的成员<br>zadd test 10 aaa<br>添加两个分数分别是20和30的两个成员<br>zadd test 20 bbb 30 ccc<br>zrange<br>通过索引获取元素，0表示第一个成员，­1表示最后一个成员。WITHSCORES选项表示返回的结果中包含每个成员及其分数，否则只返回成员<br>zrange test 0 -1 withscores<br>zcard<br>获取test键中成员的数量<br>zcard test<br>zrank<br>获取成员在集合中的索引，索引从0开始<br>zcount<br>获取符合指定条件的成员数量，分数满足表达式10 &lt;= score &lt;= 20的成员的数量<br>zcount test 10 20<br>zrem<br>删除成员aaa和bbb，返回实际删除成员的数量<br>zrem test aaa bbb<br>zscore<br>获取成员ccc的分数。返回值是字符串形式<br>zscore test ccc<br>zincrby<br>将成员ccc的分数增加10，并返回该成员更新后的分数<br>zincreby test 10 ccc<br>zrangebyscore<br>通过分数获取元素，获取分数满足表达式10 &lt;= score &lt;= 20的成员<br>zrangebyscore test 10 20<br>inf表示第一个成员，+inf表示最后一个成员，limit后面的参数用于限制返回成员的数量，<br>limit 2 3，2表示从位置索引(0­-based)等于2的成员开始，取后面3个成员，成员不足就有多少显示多少，类似于MySQL中的limit<br>zrangebyscore  test -inf +inf limit  2 2<br>zremrangebyscore<br>根据分数删除成员，删除分数满足表达式10 &lt;= score &lt;= 20的成员，并返回实际删除的数量<br>zremrangebyscore test 10 20<br>zremrangebyrank<br>根据索引删除成员，删除索引满足表达式0 &lt;= rank &lt;= 1的成员<br>zremrangebyrank test 0 1<br>zrevrange<br>按索引从高到低的方式获取成员（获取top10：zrevrange test 0 9）<br>zrevrange test 0 -1 withscores<br>zrevrangebyscore<br>按索引从高到低的方式根据分数获取成员，分数满足表达式30 &gt;= score &gt;= 10的成员<br>zrevrangebyscore test 30 10<br>limit选项的含义等同于zrangebyscore中的该选项，只是在计算位置时按照相反的顺序计算和获取<br>zrevrangebyscore  test 40 10 limit 1 2<br>zrevrank<br>获取成员aaa在集合中的索引，由于是从高到低的排序，所以aaa的位置是3<br>zrevrank test aaa<br>Hash<br>hset<br>给键为test的键设置字段为name，值为jack<br>hset test name jack<br>hget<br>获取键为test，字段为name的值<br>hget test name<br>hlen<br>获取test键的字段数量<br>hlen test<br>hexists<br>判断test键中是否存在字段名为city的字段，由于存在，返回值为1<br>hexists test city<br>hdel<br>删除test键中字段名为age的字段，删除成功返回1<br>hdel test age<br>hsetnx<br>通过hsetnx命令给test添加新字段age，其值为18，因为该字段已经被删除，所以该命令添加成功并返回1<br>hsetnx test age 18<br>hincrby<br>给test的age字段的值加1，返回加后的结果<br>hincrby test age 1<br>hmset<br>为该键test，一次性设置多个字段，分别是：name=jack，age=18<br>hmset test  name jack age 18<br>hmget<br>获取test键的多个字段，其中city并不存在，因为在返回结果中与该字段对应的值为nil<br> hmget test age name city<br>hgetall<br>返回test键的所有字段及其值，从结果中可以看出，他们是逐对列出的<br>hgetall test<br>hkeys<br>仅获取test键中所有字段的名字<br>hkeys test<br>hvals<br>仅获取test键中所有字段的值<br>hvals test<br>Key操作命令<br>keys<br>根据参数中的模式，获取当前数据库中符合该模式的所有key，从输出可以看出，该命令在执行时并不区分与Key关联的Value类型<br>del<br>删除一个或多个key<br>删除了两个Keys<br>批量删除，其余参数：-h redis所在服务器ip<br>exists<br>如果存在，返回整数类型1，否则返回0<br>查看刚刚删除的Key是否还存在，从返回结果看，name确实已经删除了<br>move<br>将当前数据库中的testset键移入到ID为1的数据库中<br>rename<br>修改键的名称，将name改名为username，然后获取值只能通过新的键<br>renamenx<br>当新名称不存在时才会执行。由于mycity已经存在，因此该命令未能成功执行<br>ttl<br>将该键的超时设置为1000秒<br>通过ttl命令查看还剩多少秒<br>persist<br>立刻执行persist命令，该存在超时的键变成持久化的键，即将该Key的超时去掉；-1表示该键已经没有超时了<br>expire<br>设置该键的超时被1000秒；用ttl命令看当前还剩下多少秒，从结果中可以看出还剩下991秒<br>expireat<br>以 UNIX 时间戳(unix timestamp)格式设置 key 的过期时间<br>type 查看数据的类型<br>randomkey<br>返回数据库中的任意键<br>flushdb<br>清空当前打开的数据库，不影响其它数据库<br>dbsize<br>返回当前数据库的key的数量<br>事务<br>Redis事务中如果有某一条命令执行失败，其后的命令仍然会被继续执行。<br>multi，标记事务的开始<br>exec，执行在一个事务内命令队列中的所有命令<br>discard，回滚事务队列中的所有命令，discard只能在exec前执行<br>在当前连接上启动一个新的事务</p>
+]]></content>
+      <categories>
+        <category>redis</category>
+      </categories>
+      <tags>
+        <tag>redis</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Charles的安装与使用说明</title>
     <url>/2020/09/07/r6osj6p4/</url>
     <content><![CDATA[<h2 id="一、安装"><a href="#一、安装" class="headerlink" title="一、安装"></a>一、安装</h2><p>在网上找到的破解安装步骤，直接抄过来<br> <a href="http://charles.iiilab.com/">http://charles.iiilab.com/</a>    #破解注册<br>下载Charles Proxy 4.1.2版本，百度云盘下载 或 去官网下载<br>安装后先打开Charles一次（Windows版可以忽略此步骤）<br>在这个网站(<a href="http://charles.iiilab.com/)%E4%B8%8B%E8%BD%BD%E7%A0%B4%E8%A7%A3%E6%96%87%E4%BB%B6">http://charles.iiilab.com/)下载破解文件</a> charles.jar<br>替换掉原文件夹里的charles.jar<br>Mac: /Applications/Charles.app/Contents/Java/charles.jar<br>Windows: C:\Program Files\Charles\lib\charles.jar<br>      恭喜！破解注册成功！</p>
@@ -2566,19 +2617,6 @@ if __name__ ==&#39;__main__&#39;:
       </categories>
       <tags>
         <tag>charles</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Redis基础</title>
-    <url>/2020/08/24/redisjichu/</url>
-    <content><![CDATA[<p>String<br>set，设置键<br>set name jack<br>get，获取键的值<br>get name<br>exists，判断该键是否存在，存在返回1，不存在返回0<br>exists name<br>append，如果该键不存在，则创建，返回当前value的长度；如果该键已经存在，则追加，返回追加后value的长度<br>append city beijing<br>如果值有空格，需要加引号<br>append city “ of china”<br>strlen，获取key的长度<br>strlen name<br>可以看到提示，有很多选项<br>EX和PX表示失效时间，单位为秒和毫秒，两者不能同时使用；<br>NX表示数据库中不存在时才能设置，XX表示存在时才能设置<br>ttl查看过期剩余时间，如果为-2表示已经过期<br>flushdb，清空数据库<br>keys * 查看所有键<br>incr，递增1<br>decr，递减1<br>del，删除键<br>删除后，get不到值，但是可以进行incr和decr操作，是基于默认值为0进行操作<br>incrby，递增，可以设置步长,不加步长会报错<br>incrby age 5<br>decrby，递减，可以设置步长<br>getset，获取的同时并设置新的值<br>getset age 20<br>setex，设置过期时间，等同于set name jack ex 10<br>setex name 10 jack<br>setnx，当key不存在时才能设置，等同于set name jack nx；如果key存在，就不能设置<br>setrange，设置指定索引位置的字符，索引从0开始</p>
-<p>超过的长度使用0代替<br>getrange，获取指定索引位置的字符，索引从0开始<br>ep:获取索引为[1,7]之间的内容，闭区间<br>getrange name 1 7<br>setbit/getbit，设置/获取指定位的BIT值，应用场景：考勤打卡<br>设置从0开始计算的第七位BIT值为1，返回原有BIT值0<br>获取设置的结果，二进制的0000 0001的十六进制值为0x01<br>设置从0开始计算的第六位BIT值为1，返回原有BIT值0<br>获取设置的结果，二进制的0000 0011的十六进制值为0x03<br>mset，批量设置key<br>mset key1 “aaa” key2 “bbb”<br>mget，批量获取<br>mget key1 key2<br>msetnx，批量设置key，如果key都不存在，执行成功并返回1；如果有一个key存在，执行失败并返回0。<br>List<br>是按照插入顺序排序的字符串链表<br>lpush<br>创建键test及与其关联的List，然后将参数中的values从左到右依次插入【看着从左往右放的栈】<br>lrange<br>获取从位置0开始到位置2结束的3个元素<br>lrange test 0 2<br>获取链表中的全部元素，其中0表示第一个元素，­-1表示最后一个元素<br>lrange test 0 -1<br>获取从倒数第3个到倒数第2个的元素<br>lrange -3 -2<br>lpushx，表示键存在时才能插入<br>如果键不存在，命令将不会进行任何操作，其返回值为0<br>获取该键的List中的第一个元素<br>lrange test 0 0<br>lpop，取出链表头部的元素，该元素在链表中就已经不存在了<br>llen，列表长度<br>lrem，从头部(left)向尾部(right)操作链表，删除2个值等于a的元素，返回值为实际删除的数量<br>lrem test 2 a<br>lindex，根据索引获取值<br>获取索引值为1(头部的第二个元素)的元素值<br>lindex test 1<br>lset<br>将索引值为1(头部的第二个元素)的元素值设置为新值w<br>lset test 1 w<br>ltrim<br>仅保留索引值0到2之间的3个元素，注意第0个和第2个元素均被保留<br>ltrim test 0 2<br>linsert<br>在a的前面插入新元素a0<br>linsert test before a a0<br>在e的后面插入新元素e2，从返回结果看已经插入成功<br>linsert test after e e2<br>在不存在的元素之前或之后插入新元素，该命令操作失败，并返回­1<br>为不存在的Key插入新元素，该命令操作失败，返回0<br>rpush<br>从链表的尾部插入参数中给出的values，插入顺序是从右到左依次插入【看作是从右到左的栈】<br>rpush test a b c d e<br>rpushx<br>键已经存在并且包含5个元素，rpushx命令将执行成功，并将元素e插入到链表的尾部<br>rpush test e<br>rpop<br>从尾部(right)弹出元素，即取出元素<br>rpop test<br>rpoplpush<br>将test的尾部元素弹出，然后插入到test2的头部(原子性的完成这两步操作)<br>rpoplpush test test2<br>将source和destination设为同一键，将test中的尾部元素移到其头部<br>set<br>没有排序的字符集合，Set集合中不允许出现重复的元素，和List类型相比，Sets之间可以聚合计算操作，如unions并、intersections交和differences差。<br>sadd<br>由于该键test之前并不存在，因此参数中的三个成员都被正常插入<br>sadd test a b c<br>smembers<br>查看集合中的元素，从结果可以，输出的顺序和插入顺序无关(无序的)<br>由于参数中的a在test中已经存在，因此本次操作仅仅插入了d和e两个新成员（不允许重复）<br>sismember<br>判断a是否已经存在，返回值为1表示存在<br>判断w是否已经存在，返回值为0表示不存在<br>sismember test w<br>scard<br>获取集合中元素的数量<br>srandmember<br>随机返回一个成员，成员还在集合中<br>spop<br>取出一个成员，成员会从集合中删除<br>srem<br>从Set中移出b、d和w三个成员，其中f并不存在，因此只有b和d两个成员被移出，返回为2<br>smove<br>将a从test移到test2，从结果可以看出移动成功<br>smove test test2 a<br>sdiff<br>获取多个集合之间的不同成员，要注意匹配的规则<br>先将test和test2进行比较，a、b和d三个成员是两者之间的差异成员，然后再用这个结果继续和<br>test3进行差异比较，b和d是test3不存在的成员<br>sdiffstore<br>将3个集合的差异成员存储到与diffkey关联的Set中，并返回插入的成员数量<br>sdiffstore difftest test test1 test2<br>sinter<br>获取多个集合之间的交集，这三个Set的成员交集只有c<br>sinter test test1 test2<br>sinterstore<br>将3个集合中的交集成员存储到与intertest关联的Set中，并返回交集成员的数量<br>sinterstore intertest test1 test2 test3<br>sunion<br>获取多个集合之间的并集<br>sunion test1 test2 test3<br>sunionstore<br>将3个集合中成员的并集存储到uniontest关联的set中，并返回并集成员的数量<br>sunionstore uniontest test1 test2 test3<br>Sorted-Sets<br>也称为Zset，每一个成员都会有一个分数(score)与之关联，Redis正是通过分数来为集合中的成员进行从小到大的排序（默认）。尽管Sorted­Sets中的成员必须是唯一的，但是分数(score)却是可以重复的。<br>zadd<br>添加一个分数为10的成员<br>zadd test 10 aaa<br>添加两个分数分别是20和30的两个成员<br>zadd test 20 bbb 30 ccc<br>zrange<br>通过索引获取元素，0表示第一个成员，­1表示最后一个成员。WITHSCORES选项表示返回的结果中包含每个成员及其分数，否则只返回成员<br>zrange test 0 -1 withscores<br>zcard<br>获取test键中成员的数量<br>zcard test<br>zrank<br>获取成员在集合中的索引，索引从0开始<br>zcount<br>获取符合指定条件的成员数量，分数满足表达式10 &lt;= score &lt;= 20的成员的数量<br>zcount test 10 20<br>zrem<br>删除成员aaa和bbb，返回实际删除成员的数量<br>zrem test aaa bbb<br>zscore<br>获取成员ccc的分数。返回值是字符串形式<br>zscore test ccc<br>zincrby<br>将成员ccc的分数增加10，并返回该成员更新后的分数<br>zincreby test 10 ccc<br>zrangebyscore<br>通过分数获取元素，获取分数满足表达式10 &lt;= score &lt;= 20的成员<br>zrangebyscore test 10 20<br>inf表示第一个成员，+inf表示最后一个成员，limit后面的参数用于限制返回成员的数量，<br>limit 2 3，2表示从位置索引(0­-based)等于2的成员开始，取后面3个成员，成员不足就有多少显示多少，类似于MySQL中的limit<br>zrangebyscore  test -inf +inf limit  2 2<br>zremrangebyscore<br>根据分数删除成员，删除分数满足表达式10 &lt;= score &lt;= 20的成员，并返回实际删除的数量<br>zremrangebyscore test 10 20<br>zremrangebyrank<br>根据索引删除成员，删除索引满足表达式0 &lt;= rank &lt;= 1的成员<br>zremrangebyrank test 0 1<br>zrevrange<br>按索引从高到低的方式获取成员（获取top10：zrevrange test 0 9）<br>zrevrange test 0 -1 withscores<br>zrevrangebyscore<br>按索引从高到低的方式根据分数获取成员，分数满足表达式30 &gt;= score &gt;= 10的成员<br>zrevrangebyscore test 30 10<br>limit选项的含义等同于zrangebyscore中的该选项，只是在计算位置时按照相反的顺序计算和获取<br>zrevrangebyscore  test 40 10 limit 1 2<br>zrevrank<br>获取成员aaa在集合中的索引，由于是从高到低的排序，所以aaa的位置是3<br>zrevrank test aaa<br>Hash<br>hset<br>给键为test的键设置字段为name，值为jack<br>hset test name jack<br>hget<br>获取键为test，字段为name的值<br>hget test name<br>hlen<br>获取test键的字段数量<br>hlen test<br>hexists<br>判断test键中是否存在字段名为city的字段，由于存在，返回值为1<br>hexists test city<br>hdel<br>删除test键中字段名为age的字段，删除成功返回1<br>hdel test age<br>hsetnx<br>通过hsetnx命令给test添加新字段age，其值为18，因为该字段已经被删除，所以该命令添加成功并返回1<br>hsetnx test age 18<br>hincrby<br>给test的age字段的值加1，返回加后的结果<br>hincrby test age 1<br>hmset<br>为该键test，一次性设置多个字段，分别是：name=jack，age=18<br>hmset test  name jack age 18<br>hmget<br>获取test键的多个字段，其中city并不存在，因为在返回结果中与该字段对应的值为nil<br> hmget test age name city<br>hgetall<br>返回test键的所有字段及其值，从结果中可以看出，他们是逐对列出的<br>hgetall test<br>hkeys<br>仅获取test键中所有字段的名字<br>hkeys test<br>hvals<br>仅获取test键中所有字段的值<br>hvals test<br>Key操作命令<br>keys<br>根据参数中的模式，获取当前数据库中符合该模式的所有key，从输出可以看出，该命令在执行时并不区分与Key关联的Value类型<br>del<br>删除一个或多个key<br>删除了两个Keys<br>批量删除，其余参数：-h redis所在服务器ip<br>exists<br>如果存在，返回整数类型1，否则返回0<br>查看刚刚删除的Key是否还存在，从返回结果看，name确实已经删除了<br>move<br>将当前数据库中的testset键移入到ID为1的数据库中<br>rename<br>修改键的名称，将name改名为username，然后获取值只能通过新的键<br>renamenx<br>当新名称不存在时才会执行。由于mycity已经存在，因此该命令未能成功执行<br>ttl<br>将该键的超时设置为1000秒<br>通过ttl命令查看还剩多少秒<br>persist<br>立刻执行persist命令，该存在超时的键变成持久化的键，即将该Key的超时去掉；-1表示该键已经没有超时了<br>expire<br>设置该键的超时被1000秒；用ttl命令看当前还剩下多少秒，从结果中可以看出还剩下991秒<br>expireat<br>以 UNIX 时间戳(unix timestamp)格式设置 key 的过期时间<br>type 查看数据的类型<br>randomkey<br>返回数据库中的任意键<br>flushdb<br>清空当前打开的数据库，不影响其它数据库<br>dbsize<br>返回当前数据库的key的数量<br>事务<br>Redis事务中如果有某一条命令执行失败，其后的命令仍然会被继续执行。<br>multi，标记事务的开始<br>exec，执行在一个事务内命令队列中的所有命令<br>discard，回滚事务队列中的所有命令，discard只能在exec前执行<br>在当前连接上启动一个新的事务</p>
-]]></content>
-      <categories>
-        <category>redis</category>
-      </categories>
-      <tags>
-        <tag>redis</tag>
       </tags>
   </entry>
   <entry>
@@ -3113,8 +3151,6 @@ public class ScannerTest &#123;
 <p>​    分支结构(if, switch)</p>
 <p>​    循环结构(for, while, do…while)</p>
 <h3 id="3-2-顺序结构"><a href="#3-2-顺序结构" class="headerlink" title="3.2 顺序结构"></a>3.2 顺序结构</h3><p>顺序结构是程序中最简单最基本的流程控制，没有特定的语法结构，按照代码的先后顺序，依次执行，程序中大多数的代码都是这样执行的。</p>
-<p>顺序结构执行流程图：</p>
-<p><img src="images/1545615769372.png" class="lazyload placeholder" data-srcset="images/1545615769372.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="1545615769372"></p>
 <h3 id="3-3-分支结构之if语句"><a href="#3-3-分支结构之if语句" class="headerlink" title="3.3 分支结构之if语句"></a>3.3 分支结构之if语句</h3><h4 id="if语句格式1"><a href="#if语句格式1" class="headerlink" title="if语句格式1"></a>if语句格式1</h4><pre><code class="java">格式：
 if (关系表达式) &#123;
     语句体;    
@@ -3124,7 +3160,6 @@ if (关系表达式) &#123;
 <p>②如果关系表达式的值为true就执行语句体</p>
 <p>③如果关系表达式的值为false就不执行语句体</p>
 <p>④继续执行后面的语句内容</p>
-<p><img src="images/1545616039363.png" class="lazyload placeholder" data-srcset="images/1545616039363.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="1545616039363"></p>
 <p>示例：</p>
 <pre><code class="java">public class IfDemo &#123;
     public static void main(String[] args) &#123;
@@ -3155,7 +3190,6 @@ if (关系表达式) &#123;
 <p>②如果关系表达式的值为true就执行语句体1</p>
 <p>③如果关系表达式的值为false就执行语句体2</p>
 <p>④继续执行后面的语句内容</p>
-<p><img src="images/1545616221283.png" class="lazyload placeholder" data-srcset="images/1545616221283.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="1545616221283"></p>
 <p>示例：</p>
 <pre><code class="java">public class IfDemo02 &#123;
     public static void main(String[] args) &#123;
@@ -3213,7 +3247,6 @@ else &#123;
 <p>③如果值为true就执行语句体2；如果值为false就计算关系表达式3的值</p>
 <p>④…</p>
 <p>⑤如果没有任何关系表达式为true，就执行语句体n+1。</p>
-<p><img src="images%5C1545616667104.png" class="lazyload placeholder" data-srcset="images%5C1545616667104.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="1545616667104"></p>
 <p>示例：键盘录入一个星期数(1,2,…7)，输出对应的星期一，星期二，…星期日</p>
 <pre><code class="java">import java.util.Scanner;
 public class IfDemo03 &#123;
@@ -3843,40 +3876,35 @@ public class MethodDemo02 &#123;
 <ul>
 <li>选择要设置断点的代码行，在行号的区域后面单击鼠标左键即可</li>
 </ul>
-<p><img src="img%5C01.png" class="lazyload placeholder" data-srcset="img%5C01.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="01"></p>
 </li>
 <li><p>如何运行加了断点的程序</p>
 <ul>
 <li>在代码区域右键Debug执行</li>
 </ul>
-<p><img src="img%5C02.png" class="lazyload placeholder" data-srcset="img%5C02.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="02"></p>
 </li>
 <li><p>看哪里</p>
 <ul>
-<li>看Debugger窗口</li>
+<li><p>看Debugger窗口</p>
+</li>
+<li><p>看Console窗口</p>
+</li>
 </ul>
-<p><img src="img%5C03.png" class="lazyload placeholder" data-srcset="img%5C03.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="03"></p>
-<ul>
-<li>看Console窗口</li>
-</ul>
-<p><img src="img%5C04.png" class="lazyload placeholder" data-srcset="img%5C04.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="04"></p>
 </li>
 <li><p>点哪里</p>
 <ul>
 <li>点Step Into (F7)这个箭头，也可以直接按F7</li>
 </ul>
-<p><img src="img%5C05.png" class="lazyload placeholder" data-srcset="img%5C05.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="05"></p>
 </li>
+</ul>
+<ul>
 <li><p>如何删除断点</p>
 <ul>
 <li>选择要删除的断点，单击鼠标左键即可</li>
 </ul>
-<p><img src="img%5C06.png" class="lazyload placeholder" data-srcset="img%5C06.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="06"></p>
+</li>
+</ul>
 <ul>
 <li>如果是多个断点，可以每一个再点击一次。也可以一次性全部删除</li>
-</ul>
-<p><img src="img%5C07.png" class="lazyload placeholder" data-srcset="img%5C07.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="07"></p>
-</li>
 </ul>
 <h2 id="2-基础练习"><a href="#2-基础练习" class="headerlink" title="2.基础练习"></a>2.基础练习</h2><h3 id="2-1减肥计划if版本"><a href="#2-1减肥计划if版本" class="headerlink" title="2.1减肥计划if版本"></a>2.1减肥计划if版本</h3><h4 id="2-1-1案例需求"><a href="#2-1-1案例需求" class="headerlink" title="2.1.1案例需求"></a>2.1.1案例需求</h4><p>​    输入星期数，显示今天的减肥活动<br>​          周一：跑步<br>​          周二：游泳<br>​          周三：慢走<br>​          周四：动感单车<br>​          周五：拳击<br>​          周六：爬山<br>​          周日：好好吃一顿</p>
 <h4 id="2-1-2代码实现"><a href="#2-1-2代码实现" class="headerlink" title="2.1.2代码实现"></a>2.1.2代码实现</h4><pre><code class="java">/*
@@ -4343,33 +4371,21 @@ public class Test10 &#123;
 </li>
 </ul>
 <h3 id="1-2如何使用API帮助文档"><a href="#1-2如何使用API帮助文档" class="headerlink" title="1.2如何使用API帮助文档"></a>1.2如何使用API帮助文档</h3><ul>
-<li>打开帮助文档</li>
+<li><p>打开帮助文档</p>
+</li>
+<li><p>找到索引选项卡中的输入框</p>
+</li>
+<li><p>在输入框中输入Random</p>
+</li>
+<li><p>看类在哪个包下</p>
+</li>
+<li><p>看类的描述</p>
+</li>
+<li><p>看构造方法</p>
+</li>
+<li><p>看成员方法</p>
+</li>
 </ul>
-<p><img src="img%5C01.png" class="lazyload placeholder" data-srcset="img%5C01.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="01"></p>
-<ul>
-<li>找到索引选项卡中的输入框</li>
-</ul>
-<p><img src="img%5C02.png" class="lazyload placeholder" data-srcset="img%5C02.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="02"></p>
-<ul>
-<li>在输入框中输入Random</li>
-</ul>
-<p><img src="img%5C03.png" class="lazyload placeholder" data-srcset="img%5C03.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="03"></p>
-<ul>
-<li>看类在哪个包下</li>
-</ul>
-<p><img src="img%5C04.png" class="lazyload placeholder" data-srcset="img%5C04.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="04"></p>
-<ul>
-<li>看类的描述</li>
-</ul>
-<p><img src="img%5C05.png" class="lazyload placeholder" data-srcset="img%5C05.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="05"></p>
-<ul>
-<li>看构造方法</li>
-</ul>
-<p><img src="img%5C06.png" class="lazyload placeholder" data-srcset="img%5C06.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="06"></p>
-<ul>
-<li>看成员方法</li>
-</ul>
-<p><img src="img%5C07.png" class="lazyload placeholder" data-srcset="img%5C07.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="07"></p>
 <h2 id="2-String类"><a href="#2-String类" class="headerlink" title="2.String类"></a>2.String类</h2><h3 id="2-1String类概述"><a href="#2-1String类概述" class="headerlink" title="2.1String类概述"></a>2.1String类概述</h3><p>​    String 类代表字符串，Java 程序中的所有字符串文字（例如“abc”）都被实现为此类的实例。也就是说，Java 程序中所有的双引号字符串，都是 String 类的对象。String 类在 java.lang 包下，所以使用的时候不需要导包！</p>
 <h3 id="2-2String类的特点"><a href="#2-2String类的特点" class="headerlink" title="2.2String类的特点"></a>2.2String类的特点</h3><ul>
 <li>字符串不可变，它们的值在创建后不能被更改</li>
