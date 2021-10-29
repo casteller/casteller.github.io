@@ -43,41 +43,6 @@
       </tags>
   </entry>
   <entry>
-    <title>selenium通过pywin32库上传文件</title>
-    <url>/2020/11/10/2020111001/</url>
-    <content><![CDATA[<div class="note idea"><p>文件上传是所有UI自动化测试都要面对的一个头疼问题，今天博主在这里给大家分享下自己处理文件上传的经验</p></div>
-<a id="more"></a>
-<p><strong>1、安装pywin32库</strong></p>
-<pre><code>pip install pypiwin32</code></pre>
-<p><strong>2、代码</strong><br>以网站<a href="https://tinypng.com/%E4%B8%BA%E4%BE%8B%EF%BC%8C%E4%B8%8B%E9%9D%A2%E7%9B%B4%E6%8E%A5%E9%99%84%E4%B8%8A%E4%BB%A3%E7%A0%81%EF%BC%9A">https://tinypng.com/为例，下面直接附上代码：</a></p>
-<pre><code>from selenium import webdriver
-import win32com.client
-import time
-#获取shell对象
-shell = win32com.client.Dispatch(&quot;WScript.Shell&quot;)
-d = webdriver.Chrome()
-d.maximize_window()
-d.get(&quot;https://tinypng.com/&quot;)
-d.find_element_by_css_selector(&quot;section.upload&quot;).click()
-time.sleep(2)
-#使用shell对象的Sendkeys方法给应用程序发送字符串
-shell.Sendkeys(r&quot;C:\Users\Administrator\Pictures\123.png&quot;+&#39;&#123;ENTER&#125;&#39;+&#39;\n&#39;)
-d.implicitly_wait(2)
-txt = d.find_element_by_css_selector(&quot;li.upload&gt;div&quot;).text
-#验证是否上传成功
-if &quot;123.jpg&quot; in txt:
-    print(&quot;test pass&quot;)
-else:
-    print(&quot;test fail&quot;)</code></pre>
-]]></content>
-      <categories>
-        <category>Selenium</category>
-      </categories>
-      <tags>
-        <tag>pywin32</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>java学习-基础语法(1)</title>
     <url>/2021/01/19/20210119001/</url>
     <content><![CDATA[<h1 id="day01-java基础语法"><a href="#day01-java基础语法" class="headerlink" title="day01 - java基础语法"></a>day01 - java基础语法</h1><h2 id="1-Java概述"><a href="#1-Java概述" class="headerlink" title="1. Java概述"></a>1. Java概述</h2><h3 id="1-1-Java语言发展史（了解）"><a href="#1-1-Java语言发展史（了解）" class="headerlink" title="1.1 Java语言发展史（了解）"></a>1.1 Java语言发展史（了解）</h3><p>语言：人与人交流沟通的表达方式</p>
@@ -390,6 +355,41 @@ byte b3 = (byte) (b1 + b2);</code></pre>
       </categories>
       <tags>
         <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>selenium通过pywin32库上传文件</title>
+    <url>/2020/11/10/2020111001/</url>
+    <content><![CDATA[<div class="note idea"><p>文件上传是所有UI自动化测试都要面对的一个头疼问题，今天博主在这里给大家分享下自己处理文件上传的经验</p></div>
+<a id="more"></a>
+<p><strong>1、安装pywin32库</strong></p>
+<pre><code>pip install pypiwin32</code></pre>
+<p><strong>2、代码</strong><br>以网站<a href="https://tinypng.com/%E4%B8%BA%E4%BE%8B%EF%BC%8C%E4%B8%8B%E9%9D%A2%E7%9B%B4%E6%8E%A5%E9%99%84%E4%B8%8A%E4%BB%A3%E7%A0%81%EF%BC%9A">https://tinypng.com/为例，下面直接附上代码：</a></p>
+<pre><code>from selenium import webdriver
+import win32com.client
+import time
+#获取shell对象
+shell = win32com.client.Dispatch(&quot;WScript.Shell&quot;)
+d = webdriver.Chrome()
+d.maximize_window()
+d.get(&quot;https://tinypng.com/&quot;)
+d.find_element_by_css_selector(&quot;section.upload&quot;).click()
+time.sleep(2)
+#使用shell对象的Sendkeys方法给应用程序发送字符串
+shell.Sendkeys(r&quot;C:\Users\Administrator\Pictures\123.png&quot;+&#39;&#123;ENTER&#125;&#39;+&#39;\n&#39;)
+d.implicitly_wait(2)
+txt = d.find_element_by_css_selector(&quot;li.upload&gt;div&quot;).text
+#验证是否上传成功
+if &quot;123.jpg&quot; in txt:
+    print(&quot;test pass&quot;)
+else:
+    print(&quot;test fail&quot;)</code></pre>
+]]></content>
+      <categories>
+        <category>Selenium</category>
+      </categories>
+      <tags>
+        <tag>pywin32</tag>
       </tags>
   </entry>
   <entry>
@@ -1874,54 +1874,6 @@ background: transparent !important;
       </tags>
   </entry>
   <entry>
-    <title>(转载)使用 Picgo+Github+jsdelivr 搭建一个免费图床</title>
-    <url>/2021/10/27/20211027001/</url>
-    <content><![CDATA[<div class="note idea"><p>jsDelivr提供GitHub，npm，WordPress等项目的镜像，且有国内节点，访问速度很不错，这也是我们选择它的原因。jsDelivr 的优点在于其专注于性能，可靠性和安全性，并且每个人均可免费使用，没有带宽限制。</p></div>
-<a id="more"></a>
-
-<p>偶然的一次机会，我接触到了 <strong><code>Markdown</code></strong> 语法，随后便喜欢上了这种标记语言。</p>
-<p>目前，我使用 <strong><code>Typora</code></strong> 编辑器。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703161150.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703161150.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"></p>
-<p><strong>Typora</strong> 里面有个非常好用的功能，就是通过 <strong>Picgo</strong> 将图片上传到图床。</p>
-<p>下面就讲一下如何搭建一个免费的图床。</p>
-<h1 id="Picgo-介绍"><a href="#Picgo-介绍" class="headerlink" title="Picgo 介绍"></a>Picgo 介绍</h1><div class="note "><p>Picgo 是一款开源的图片上传工具，项目地址:<a href="https://github.com/Molunerfinn/PicGo">Picgo</a></p></div>
-
-<p>Picgo 支持<code>七牛图床</code>,<code>腾讯云</code>, <code>又拍云</code>,<code>Github</code> 等。</p>
-<p>在众多的图床中我选择<code>Github</code> , 因为他免费.</p>
-<h1 id="搭建图床"><a href="#搭建图床" class="headerlink" title="搭建图床"></a>搭建图床</h1><h2 id="1-注册-登录-Github"><a href="#1-注册-登录-Github" class="headerlink" title="1. 注册 / 登录 Github"></a>1. 注册 / 登录 Github</h2>   <div class="note "><p>这个就不演示了</p></div>
-
-<h2 id="2-创建-Repo"><a href="#2-创建-Repo" class="headerlink" title="2. 创建 Repo"></a>2. 创建 Repo</h2><p>   <img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703161850.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703161850.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703161942.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703161942.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"></p>
-<p>然后点击 <strong><code>Create Repository</code></strong> 就可以了</p>
-<h2 id="3-生成-Taken"><a href="#3-生成-Taken" class="headerlink" title="3.生成 Taken"></a>3.生成 Taken</h2><p><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703162058.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703162058.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703162152.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703162152.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703162322.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703162322.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703162416.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703162416.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"></p>
-<div class="note "><p>创建之后，会生成一串 token</p></div>
-
-<h2 id="4-配置-Picgo"><a href="#4-配置-Picgo" class="headerlink" title="4.配置 Picgo"></a>4.配置 Picgo</h2><div class="note "><p><code>Picgo </code>请到 <a href="https://github.com/Molunerfinn/PicGo">Picgo</a> 下载</p></div>
-
-<p><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703163011.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703163011.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"></p>
-<ul>
-<li>设定仓库名的时候，是按照 “账户名 / 仓库名的格式填写”</li>
-<li>分支名统一填写 “master”</li>
-<li>将之前的 Token 黏贴在这里</li>
-<li>存储的路径可以按照我这样子写，就会在 repository 下创建一个 “img” 文件夹</li>
-<li>自定义域名的作用是，在上传图片后成功后，PicGo 会将 “自定义域名 + 上传的图片名” 生成的访问链接，放到剪切板上</li>
-<li><code>https://raw.githubusercontent.com/用户名/RepositoryName/分支名</code>，自定义域名需要按照这样去填写</li>
-<li>但是由于 Github 在国内的访问速度太慢，所以我们使用 <a href="https://www.jsdelivr.com/">jsdelivr</a> 加速，只需要把自定义域名修改一下就可以了:<code>https://cdn.jsdelivr.net/gh/</code>用户名/RepositoryName</li>
-</ul>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>将上面的步骤设置好之后，就可以愉快地写 Markdown 了。上传图片有快捷键，默认的是 <code>Ctrl+Shift+P</code>, 可以将剪切板上的图片快捷上传。</p>
-<p>原文链接：<a href="https://howiehye.top/">https://howiehye.top/</a></p>
-]]></content>
-      <categories>
-        <category>Picgo</category>
-      </categories>
-      <tags>
-        <tag>Picgo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Jenkins拉取github仓库代码执行构建并自动发邮件通知</title>
     <url>/2020/08/23/Jenkinsgithub/</url>
     <content><![CDATA[<p>Jenkins 常用的就是项目构建，一般构建都需要从版本控制平台上面拉取项目代码到 Jenkins 服务器上构建。我主要使用的版本控制平台是 GitHub，所以这里就分享一下 Jenkins + GitHub 的基本构建配置过程。</p>
@@ -1939,6 +1891,25 @@ background: transparent !important;
       </categories>
       <tags>
         <tag>Jenkins</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Django安装教程</title>
+    <url>/2020/08/23/djangoinstall/</url>
+    <content><![CDATA[<p>在安装 Django 前，系统需要已经安装了Python的开发环境。接下来我们来具体看下不同系统下Django的安装。</p>
+<h2 id="Window-下安装-Django"><a href="#Window-下安装-Django" class="headerlink" title="Window 下安装 Django"></a>Window 下安装 Django</h2><p>如果你还未安装Python环境需要先下载Python安装包。<br>1、Python 下载地址：<a href="https://www.python.org/downloads/">https://www.python.org/downloads/</a><br>2、Django 下载地址：<a href="https://www.djangoproject.com/download/">https://www.djangoproject.com/download/</a><br>注意：目前Django 1.6.x以上版本已经完全兼容Python 3.x。</p>
+<h3 id="Python-安装-已安装的可跳过"><a href="#Python-安装-已安装的可跳过" class="headerlink" title="Python 安装(已安装的可跳过)"></a>Python 安装(已安装的可跳过)</h3><p>安装Python你只需要下载python-x.x.x.msi文件，然后一直点击”Next”按钮即可。<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/install1.png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/install1.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>安装完成后你需要设置Python环境变量。 右击计算机-&gt;属性-&gt;高级-&gt;环境变量-&gt;修改系统变量path，添加Python安装地址，本文实例使用的是C:\Python33，你需要根据你实际情况来安装。<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/install2.png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/install2.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"></p>
+<h3 id="Django-安装"><a href="#Django-安装" class="headerlink" title="Django 安装"></a>Django 安装</h3><p>下载 Django 压缩包，解压并和Python安装目录放在同一个根目录，进入 Django 目录，执行python setup.py install，然后开始安装，Django将要被安装到Python的Lib下site-packages。<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/install3.jpeg" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/install3.jpeg" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>然后是配置环境变量，将这几个目录添加到系统环境变量中： C:\Python33\Lib\site-packages\django;C:\Python33\Scripts。 添加完成后就可以使用Django的django-admin.py命令新建工程了。<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/install4.jpeg" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/install4.jpeg" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"></p>
+<h3 id="检查是否安装成功"><a href="#检查是否安装成功" class="headerlink" title="检查是否安装成功"></a>检查是否安装成功</h3><p>输入以下命令进行检查:</p>
+<pre><code>&gt;&gt;&gt; import django
+&gt;&gt;&gt; django.get_version()</code></pre>
+<p><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/install5.jpeg" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/install5.jpeg" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>如果输出了Django的版本号说明安装正确。</p>
+]]></content>
+      <categories>
+        <category>Django</category>
+      </categories>
+      <tags>
+        <tag>Django</tag>
       </tags>
   </entry>
   <entry>
@@ -1988,25 +1959,6 @@ background: transparent !important;
       </categories>
       <tags>
         <tag>Jenkins</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Django安装教程</title>
-    <url>/2020/08/23/djangoinstall/</url>
-    <content><![CDATA[<p>在安装 Django 前，系统需要已经安装了Python的开发环境。接下来我们来具体看下不同系统下Django的安装。</p>
-<h2 id="Window-下安装-Django"><a href="#Window-下安装-Django" class="headerlink" title="Window 下安装 Django"></a>Window 下安装 Django</h2><p>如果你还未安装Python环境需要先下载Python安装包。<br>1、Python 下载地址：<a href="https://www.python.org/downloads/">https://www.python.org/downloads/</a><br>2、Django 下载地址：<a href="https://www.djangoproject.com/download/">https://www.djangoproject.com/download/</a><br>注意：目前Django 1.6.x以上版本已经完全兼容Python 3.x。</p>
-<h3 id="Python-安装-已安装的可跳过"><a href="#Python-安装-已安装的可跳过" class="headerlink" title="Python 安装(已安装的可跳过)"></a>Python 安装(已安装的可跳过)</h3><p>安装Python你只需要下载python-x.x.x.msi文件，然后一直点击”Next”按钮即可。<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/install1.png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/install1.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>安装完成后你需要设置Python环境变量。 右击计算机-&gt;属性-&gt;高级-&gt;环境变量-&gt;修改系统变量path，添加Python安装地址，本文实例使用的是C:\Python33，你需要根据你实际情况来安装。<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/install2.png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/install2.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"></p>
-<h3 id="Django-安装"><a href="#Django-安装" class="headerlink" title="Django 安装"></a>Django 安装</h3><p>下载 Django 压缩包，解压并和Python安装目录放在同一个根目录，进入 Django 目录，执行python setup.py install，然后开始安装，Django将要被安装到Python的Lib下site-packages。<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/install3.jpeg" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/install3.jpeg" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>然后是配置环境变量，将这几个目录添加到系统环境变量中： C:\Python33\Lib\site-packages\django;C:\Python33\Scripts。 添加完成后就可以使用Django的django-admin.py命令新建工程了。<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/install4.jpeg" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/install4.jpeg" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"></p>
-<h3 id="检查是否安装成功"><a href="#检查是否安装成功" class="headerlink" title="检查是否安装成功"></a>检查是否安装成功</h3><p>输入以下命令进行检查:</p>
-<pre><code>&gt;&gt;&gt; import django
-&gt;&gt;&gt; django.get_version()</code></pre>
-<p><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/install5.jpeg" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/install5.jpeg" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>如果输出了Django的版本号说明安装正确。</p>
-]]></content>
-      <categories>
-        <category>Django</category>
-      </categories>
-      <tags>
-        <tag>Django</tag>
       </tags>
   </entry>
   <entry>
@@ -2476,36 +2428,6 @@ sheet.merge_cells(&#39;A1:C3&#39;) # 合并一个矩形区域中的单元格</co
       </tags>
   </entry>
   <entry>
-    <title>Python pip下载速度慢? Windows设置国内源，用阿里云国内镜像加速</title>
-    <url>/2020/08/21/pipup/</url>
-    <content><![CDATA[<p>pip 提供了对 Python 包的查找、下载、安装、卸载的功能，是非常方便的 Python 包管理工具。但是，令人苦恼的是 pip 在国内的下载速度非常慢，速度常常只有每秒几十 K，甚至才几 K，小点的包还好，还能等，更多的时候，则是完全要把人逼疯的节奏。</p>
-<p>这里，咪博士就教大家，如何在 Windows 下，为 pip 设置国内源。设置完成之后，速度可以达到每秒好几 M，快到飞起来。这里我们选用阿里云的国内镜像。毕竟有大金主支持，稳定性有保障。</p>
-<h2 id="一、新建-pip-配置文件夹"><a href="#一、新建-pip-配置文件夹" class="headerlink" title="一、新建 pip 配置文件夹"></a>一、新建 pip 配置文件夹</h2><p>先在 windows “文件资源管理器” 地址栏 输入 %APPDATA% 按回车，打开程序自定义设置文件夹</p>
-<p>然后，创建名为 pip  的文件夹，用于存放 pip 配置文件</p>
-<p><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/4%5DROZ75" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/4%5DROZ75" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif">EYLMP2NQD8%7BQ1E1.png)</p>
-<h2 id="二、新建-pip-配置文件"><a href="#二、新建-pip-配置文件" class="headerlink" title="二、新建 pip 配置文件"></a>二、新建 pip 配置文件</h2><p>在刚才创建好的 pip 文件夹中，新建 名为 pip.ini 的配置文件<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/N0T_3KZ4U~%5BUIBR$DOS6AD2.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/N0T_3KZ4U~%5BUIBR$DOS6AD2.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"></p>
-<h2 id="三、设置-pip-国内源-使用-阿里云-国内镜像"><a href="#三、设置-pip-国内源-使用-阿里云-国内镜像" class="headerlink" title="三、设置 pip 国内源 (使用 阿里云 国内镜像)"></a>三、设置 pip 国内源 (使用 阿里云 国内镜像)</h2><p>在 pip.ini 文件中输入以下内容，然后保存</p>
-<pre><code>[global]
-
-index-url=http://mirrors.aliyun.com/pypi/simple/
-
-[install]
-
-trusted-host=mirrors.aliyun.com</code></pre>
-<p>如果嫌麻烦，也可以直接下载咪博士准备好的配置文件 <a href="https://pan.baidu.com/s/1o8xEWRK">https://pan.baidu.com/s/1o8xEWRK</a></p>
-<h2 id="四、验证设置"><a href="#四、验证设置" class="headerlink" title="四、验证设置"></a>四、验证设置</h2><p>按 windows 徽标+ R，输入 cmd，按回车，调出 windows 命令行窗口<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/_%5DQGL~1Z97YBYP96ZT" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/_%5DQGL~1Z97YBYP96ZT" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif">Z%7DXL.png)<br>尝试用 pip 安装一个比较大一点的包，譬如 kivy.deps.gstreamer (约 120 M)</p>
-<pre><code>python -m pip install kivy.deps.gstreamer</code></pre>
-<p>注意到 pip 从阿里云 (aliyun) 下载，速度达到了每秒 7.5 M，快到飞起来<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/NR%7BEF5%60CGRJ4HWDVL1JL7$U.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/NR%7BEF5%60CGRJ4HWDVL1JL7$U.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br>妈妈再也不用担心 pip 下载速度慢啦。</p>
-]]></content>
-      <categories>
-        <category>python</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-        <tag>pip</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>python连接数据库批量插入数据</title>
     <url>/2020/08/23/pythoninsertdata/</url>
     <content><![CDATA[<pre><code class="python">思路：连接数据库-获取游标-拼好sql-执行sql-提交数据-关闭游标-关闭链接
@@ -2545,6 +2467,36 @@ connection.close()</code></pre>
       <tags>
         <tag>Mysql</tag>
         <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Python pip下载速度慢? Windows设置国内源，用阿里云国内镜像加速</title>
+    <url>/2020/08/21/pipup/</url>
+    <content><![CDATA[<p>pip 提供了对 Python 包的查找、下载、安装、卸载的功能，是非常方便的 Python 包管理工具。但是，令人苦恼的是 pip 在国内的下载速度非常慢，速度常常只有每秒几十 K，甚至才几 K，小点的包还好，还能等，更多的时候，则是完全要把人逼疯的节奏。</p>
+<p>这里，咪博士就教大家，如何在 Windows 下，为 pip 设置国内源。设置完成之后，速度可以达到每秒好几 M，快到飞起来。这里我们选用阿里云的国内镜像。毕竟有大金主支持，稳定性有保障。</p>
+<h2 id="一、新建-pip-配置文件夹"><a href="#一、新建-pip-配置文件夹" class="headerlink" title="一、新建 pip 配置文件夹"></a>一、新建 pip 配置文件夹</h2><p>先在 windows “文件资源管理器” 地址栏 输入 %APPDATA% 按回车，打开程序自定义设置文件夹</p>
+<p>然后，创建名为 pip  的文件夹，用于存放 pip 配置文件</p>
+<p><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/4%5DROZ75" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/4%5DROZ75" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif">EYLMP2NQD8%7BQ1E1.png)</p>
+<h2 id="二、新建-pip-配置文件"><a href="#二、新建-pip-配置文件" class="headerlink" title="二、新建 pip 配置文件"></a>二、新建 pip 配置文件</h2><p>在刚才创建好的 pip 文件夹中，新建 名为 pip.ini 的配置文件<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/N0T_3KZ4U~%5BUIBR$DOS6AD2.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/N0T_3KZ4U~%5BUIBR$DOS6AD2.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"></p>
+<h2 id="三、设置-pip-国内源-使用-阿里云-国内镜像"><a href="#三、设置-pip-国内源-使用-阿里云-国内镜像" class="headerlink" title="三、设置 pip 国内源 (使用 阿里云 国内镜像)"></a>三、设置 pip 国内源 (使用 阿里云 国内镜像)</h2><p>在 pip.ini 文件中输入以下内容，然后保存</p>
+<pre><code>[global]
+
+index-url=http://mirrors.aliyun.com/pypi/simple/
+
+[install]
+
+trusted-host=mirrors.aliyun.com</code></pre>
+<p>如果嫌麻烦，也可以直接下载咪博士准备好的配置文件 <a href="https://pan.baidu.com/s/1o8xEWRK">https://pan.baidu.com/s/1o8xEWRK</a></p>
+<h2 id="四、验证设置"><a href="#四、验证设置" class="headerlink" title="四、验证设置"></a>四、验证设置</h2><p>按 windows 徽标+ R，输入 cmd，按回车，调出 windows 命令行窗口<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/_%5DQGL~1Z97YBYP96ZT" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/_%5DQGL~1Z97YBYP96ZT" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif">Z%7DXL.png)<br>尝试用 pip 安装一个比较大一点的包，譬如 kivy.deps.gstreamer (约 120 M)</p>
+<pre><code>python -m pip install kivy.deps.gstreamer</code></pre>
+<p>注意到 pip 从阿里云 (aliyun) 下载，速度达到了每秒 7.5 M，快到飞起来<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/NR%7BEF5%60CGRJ4HWDVL1JL7$U.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/NR%7BEF5%60CGRJ4HWDVL1JL7$U.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br>妈妈再也不用担心 pip 下载速度慢啦。</p>
+]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>pip</tag>
       </tags>
   </entry>
   <entry>
@@ -3314,6 +3266,498 @@ public class IfTest02 &#123;
       </tags>
   </entry>
   <entry>
+    <title>java学习-Debug&amp;基础练习</title>
+    <url>/2021/01/19/20210119006/</url>
+    <content><![CDATA[<h2 id="1-Debug模式"><a href="#1-Debug模式" class="headerlink" title="1.Debug模式"></a>1.Debug模式</h2><h3 id="1-1什么是Debug模式"><a href="#1-1什么是Debug模式" class="headerlink" title="1.1什么是Debug模式"></a>1.1什么是Debug模式</h3><p>是供程序员使用的程序调试工具，它可以用于查看程序的执行流程，也可以用于追踪程序执行过程来调试程序。</p>
+<h3 id="1-2Debug模式操作流程"><a href="#1-2Debug模式操作流程" class="headerlink" title="1.2Debug模式操作流程"></a>1.2Debug模式操作流程</h3><ul>
+<li><p>如何加断点</p>
+<ul>
+<li>选择要设置断点的代码行，在行号的区域后面单击鼠标左键即可</li>
+</ul>
+</li>
+<li><p>如何运行加了断点的程序</p>
+<ul>
+<li>在代码区域右键Debug执行</li>
+</ul>
+</li>
+<li><p>看哪里</p>
+<ul>
+<li><p>看Debugger窗口</p>
+</li>
+<li><p>看Console窗口</p>
+</li>
+</ul>
+</li>
+<li><p>点哪里</p>
+<ul>
+<li>点Step Into (F7)这个箭头，也可以直接按F7</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>如何删除断点</p>
+<ul>
+<li>选择要删除的断点，单击鼠标左键即可</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>如果是多个断点，可以每一个再点击一次。也可以一次性全部删除</li>
+</ul>
+<h2 id="2-基础练习"><a href="#2-基础练习" class="headerlink" title="2.基础练习"></a>2.基础练习</h2><h3 id="2-1减肥计划if版本"><a href="#2-1减肥计划if版本" class="headerlink" title="2.1减肥计划if版本"></a>2.1减肥计划if版本</h3><h4 id="2-1-1案例需求"><a href="#2-1-1案例需求" class="headerlink" title="2.1.1案例需求"></a>2.1.1案例需求</h4><p>​    输入星期数，显示今天的减肥活动<br>​          周一：跑步<br>​          周二：游泳<br>​          周三：慢走<br>​          周四：动感单车<br>​          周五：拳击<br>​          周六：爬山<br>​          周日：好好吃一顿</p>
+<h4 id="2-1-2代码实现"><a href="#2-1-2代码实现" class="headerlink" title="2.1.2代码实现"></a>2.1.2代码实现</h4><pre><code class="java">/*
+    思路：
+        1:键盘录入一个星期数，用一个变量接收
+        2:对星期数进行判断，这里用 if 语句实现
+        3:在对应的语句控制中输出对应的减肥活动
+ */
+public class Test01 &#123;
+    public static void main(String[] args) &#123;
+        //键盘录入一个星期数，用一个变量接收
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println(&quot;请输入一个星期数：&quot;);
+        int week = sc.nextInt();
+
+        //对星期数进行判断，这里用 if 语句实现
+        if (week &lt; 1 || week &gt; 7) &#123;
+            System.out.println(&quot;你输入的星期数有误&quot;);
+        &#125; else if (week == 1) &#123;
+            System.out.println(&quot;跑步&quot;);
+        &#125; else if (week == 2) &#123;
+            System.out.println(&quot;游泳&quot;);
+        &#125; else if (week == 3) &#123;
+            System.out.println(&quot;慢走&quot;);
+        &#125; else if (week == 4) &#123;
+            System.out.println(&quot;动感单车&quot;);
+        &#125; else if (week == 5) &#123;
+            System.out.println(&quot;拳击&quot;);
+        &#125; else if (week == 6) &#123;
+            System.out.println(&quot;爬山&quot;);
+        &#125; else &#123;
+            System.out.println(&quot;好好吃一顿&quot;);
+        &#125;
+    &#125;
+&#125;</code></pre>
+<h3 id="2-2减肥计划switch版本"><a href="#2-2减肥计划switch版本" class="headerlink" title="2.2减肥计划switch版本"></a>2.2减肥计划switch版本</h3><h4 id="2-2-1案例需求"><a href="#2-2-1案例需求" class="headerlink" title="2.2.1案例需求"></a>2.2.1案例需求</h4><p>​    输入星期数，显示今天的减肥活动<br>​          周一：跑步<br>​          周二：游泳<br>​          周三：慢走<br>​          周四：动感单车<br>​          周五：拳击<br>​          周六：爬山<br>​          周日：好好吃一顿</p>
+<h4 id="2-2-2代码实现"><a href="#2-2-2代码实现" class="headerlink" title="2.2.2代码实现"></a>2.2.2代码实现</h4><pre><code class="java">/*
+    思路：
+        1:键盘录入一个星期数，用一个变量接收
+        2:对星期数进行判断，这里用 switch 语句实现
+        3:在对应的语句控制中输出对应的减肥活动
+
+    导包：
+        1:手动导包  import java.util.Scanner;
+        2:快捷键导包 Alt+Enter
+        3:自动导包
+ */
+public class Test02 &#123;
+    public static void main(String[] args) &#123;
+        //键盘录入一个星期数，用一个变量接收
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println(&quot;请输入一个星期数：&quot;);
+        int week = sc.nextInt();
+
+        //对星期数进行判断，这里用 switch 语句实现
+        switch (week) &#123;
+            case 1:
+                System.out.println(&quot;跑步&quot;);
+                break;
+            case 2:
+                System.out.println(&quot;游泳&quot;);
+                break;
+            case 3:
+                System.out.println(&quot;慢走&quot;);
+                break;
+            case 4:
+                System.out.println(&quot;动感单车&quot;);
+                break;
+            case 5:
+                System.out.println(&quot;拳击&quot;);
+                break;
+            case 6:
+                System.out.println(&quot;爬山&quot;);
+                break;
+            case 7:
+                System.out.println(&quot;好好吃一顿&quot;);
+                break;
+            default:
+                System.out.println(&quot;你输入的星期数有误&quot;);
+        &#125;
+    &#125;
+&#125;</code></pre>
+<h3 id="2-3逢七跳过"><a href="#2-3逢七跳过" class="headerlink" title="2.3逢七跳过"></a>2.3逢七跳过</h3><h4 id="2-3-1案例需求"><a href="#2-3-1案例需求" class="headerlink" title="2.3.1案例需求"></a>2.3.1案例需求</h4><p>​    朋友聚会的时候可能会玩一个游戏：逢七过。<br>​        规则是：从任意一个数字开始报数，当你要报的数字包含7或者是7的倍数时都要说：过。<br>​        为了帮助大家更好的玩这个游戏，这里我们直接在控制台打印出1-100之间的满足逢七必过规则的数据。<br>​        这样，大家将来在玩游戏的时候，就知道哪些数据要说：过。    </p>
+<h4 id="2-3-2代码实现"><a href="#2-3-2代码实现" class="headerlink" title="2.3.2代码实现"></a>2.3.2代码实现</h4><pre><code class="java">/*
+    思路：
+        1:数据在1-100之间，用for循环实现数据的获取
+        2:根据规则，用if语句实现数据的判断：要么个位是7，要么十位是7，要么能够被7整除
+        3:在控制台输出满足规则的数据
+ */
+public class Test03 &#123;
+    public static void main(String[] args) &#123;
+        //数据在1-100之间，用for循环实现数据的获取
+        for(int x=1; x&lt;=100; x++) &#123;
+            //根据规则，用if语句实现数据的判断：要么个位是7，要么十位是7，要么能够被7整除
+            if(x%10==7 || x/10%10==7 || x%7==0) &#123;
+                //在控制台输出满足规则的数据
+                System.out.println(x);
+            &#125;
+        &#125;
+    &#125;
+&#125;</code></pre>
+<h3 id="2-4不死神兔"><a href="#2-4不死神兔" class="headerlink" title="2.4不死神兔"></a>2.4不死神兔</h3><h4 id="2-4-1案例需求"><a href="#2-4-1案例需求" class="headerlink" title="2.4.1案例需求"></a>2.4.1案例需求</h4><p>​    有一对兔子，从出生后第3个月起每个月都生一对兔子，小兔子长到第三个月后每个月又生一对兔子，<br>​        假如兔子都不死，问第二十个月的兔子对数为多少？    </p>
+<h4 id="2-4-2代码实现"><a href="#2-4-2代码实现" class="headerlink" title="2.4.2代码实现"></a>2.4.2代码实现</h4><pre><code class="java">/*
+   思路：
+        1:为了存储多个月的兔子对数，定义一个数组，用动态初始化完成数组元素的初始化，长度为20
+        2:因为第1个月，第2个月兔子的对数是已知的，都是1，所以数组的第1个元素，第2个元素值也都是1
+        3:用循环实现计算每个月的兔子对数
+        4:输出数组中最后一个元素的值，就是第20个月的兔子对数
+ */
+public class Test04 &#123;
+    public static void main(String[] args) &#123;
+        //为了存储多个月的兔子对数，定义一个数组，用动态初始化完成数组元素的初始化，长度为20
+        int[] arr = new int[20];
+
+        //因为第1个月，第2个月兔子的对数是已知的，都是1，所以数组的第1个元素，第2个元素值也都是1
+        arr[0] = 1;
+        arr[1] = 1;
+
+        //用循环实现计算每个月的兔子对数
+        for(int x=2; x&lt;arr.length; x++) &#123;
+            arr[x] = arr[x-2] + arr[x-1];
+        &#125;
+
+        //输出数组中最后一个元素的值，就是第20个月的兔子对数
+        System.out.println(&quot;第二十个月兔子的对数是：&quot; + arr[19]);
+    &#125;
+&#125;</code></pre>
+<h3 id="2-5百钱白鸡"><a href="#2-5百钱白鸡" class="headerlink" title="2.5百钱白鸡"></a>2.5百钱白鸡</h3><h4 id="2-5-1案例需求"><a href="#2-5-1案例需求" class="headerlink" title="2.5.1案例需求"></a>2.5.1案例需求</h4><p>​    我国古代数学家张丘建在《算经》一书中提出的数学问题：鸡翁一值钱五，鸡母一值钱三，鸡雏三值钱一。<br>​        百钱买百鸡，问鸡翁、鸡母、鸡雏各几何？</p>
+<h4 id="2-5-2代码实现"><a href="#2-5-2代码实现" class="headerlink" title="2.5.2代码实现"></a>2.5.2代码实现</h4><pre><code class="java">/*
+    思路：
+        1:第1层循环，用于表示鸡翁的范围，初始化表达式的变量定义为 x=0，判断条件是x&lt;=20
+        2:第2层循环，用于表示鸡母的范围，初始化表达式的变量定义为 y=0，判断条件是y&lt;=33
+        3:这个时候，用于表示鸡雏的变量 z = 100 – x – y
+        4:判断表达式 z%3==0 和表达式 5*x + 3*y + z/3 = 100 是否同时成立，如果成立，输出对应的 x，y，z 的值，就是对应的鸡翁，鸡母，鸡雏的值
+ */
+public class Test05 &#123;
+    public static void main(String[] args) &#123;
+        //第1层循环，用于表示鸡翁的范围，初始化表达式的变量定义为 x=0，判断条件是x&lt;=20
+        for(int x=0; x&lt;=20; x++) &#123;
+            //第2层循环，用于表示鸡母的范围，初始化表达式的变量定义为 y=0，判断条件是y&lt;=33
+            for(int y=0; y&lt;=33; y++) &#123;
+                //这个时候，用于表示鸡雏的变量 z = 100 – x – y
+                int z = 100 - x - y;
+
+                //判断表达式 z%3==0 和表达式 5*x + 3*y + z/3 = 100 是否同时成立
+                if(z%3==0 &amp;&amp; 5*x+3*y+z/3==100) &#123;
+                    System.out.println(x+&quot;,&quot;+y+&quot;,&quot;+z);
+                &#125;
+            &#125;
+        &#125;
+    &#125;
+&#125;</code></pre>
+<h3 id="2-6数组元素求和"><a href="#2-6数组元素求和" class="headerlink" title="2.6数组元素求和"></a>2.6数组元素求和</h3><h4 id="2-6-1案例需求"><a href="#2-6-1案例需求" class="headerlink" title="2.6.1案例需求"></a>2.6.1案例需求</h4><p>​    有这样的一个数组，元素是{68,27,95,88,171,996,51,210}。求出该数组中满足要求的元素和，<br>​        要求是：求和的元素个位和十位都不能是7，并且只能是偶数</p>
+<h4 id="2-6-2代码实现"><a href="#2-6-2代码实现" class="headerlink" title="2.6.2代码实现"></a>2.6.2代码实现</h4><pre><code class="java">/*
+   思路：
+        1:定义一个数组，用静态初始化完成数组元素的初始化
+        2:定义一个求和变量，初始值是0
+        3:遍历数组，获取到数组中的每一个元素
+        4:判断该元素是否满足条件，如果满足条件就累加
+        5:输出求和变量的值
+ */
+public class Test06 &#123;
+    public static void main(String[] args) &#123;
+        //定义一个数组，用静态初始化完成数组元素的初始化
+        int[] arr = &#123;68, 27, 95, 88, 171, 996, 51, 210&#125;;
+
+        //定义一个求和变量，初始值是0
+        int sum = 0;
+
+        //遍历数组，获取到数组中的每一个元素
+        for(int x=0; x&lt;arr.length; x++) &#123;
+            //判断该元素是否满足条件，如果满足条件就累加
+            if(arr[x]%10!=7 &amp;&amp; arr[x]/10%10!=7 &amp;&amp; arr[x]%2==0) &#123;
+                sum += arr[x];
+            &#125;
+        &#125;
+
+        //输出求和变量的值
+        System.out.println(&quot;sum:&quot; + sum);
+    &#125;
+&#125;</code></pre>
+<h3 id="2-7判断两个数组是否相同"><a href="#2-7判断两个数组是否相同" class="headerlink" title="2.7判断两个数组是否相同"></a>2.7判断两个数组是否相同</h3><h4 id="2-7-1案例需求"><a href="#2-7-1案例需求" class="headerlink" title="2.7.1案例需求"></a>2.7.1案例需求</h4><p>​    定义一个方法，用于比较两个数组的内容是否相同</p>
+<h4 id="2-7-2代码实现"><a href="#2-7-2代码实现" class="headerlink" title="2.7.2代码实现"></a>2.7.2代码实现</h4><pre><code class="java">/*
+    思路：
+        1:定义两个数组，分别使用静态初始化完成数组元素的初始化
+        2:定义一个方法，用于比较两个数组的内容是否相同
+        3:比较两个数组的内容是否相同，按照下面的步骤实现就可以了
+            首先比较数组长度，如果长度不相同，数组内容肯定不相同，返回false
+            其次遍历，比较两个数组中的每一个元素，只要有元素不相同，返回false
+            最后循环遍历结束后，返回true
+        4:调用方法，用变量接收
+        5:输出结果
+ */
+public class Test07 &#123;
+    public static void main(String[] args) &#123;
+        //定义两个数组，分别使用静态初始化完成数组元素的初始化
+        int[] arr = &#123;11, 22, 33, 44, 55&#125;;
+        //int[] arr2 = &#123;11, 22, 33, 44, 55&#125;;
+        int[] arr2 = &#123;11, 22, 33, 44, 5&#125;;
+
+
+        //调用方法，用变量接收
+        boolean flag = compare(arr,arr2);
+        //输出结果
+        System.out.println(flag);
+    &#125;
+
+    //定义一个方法，用于比较两个数组的内容是否相同
+    /*
+        两个明确：
+            返回值类型：boolean
+            参数：int[] arr, int[] arr2
+     */
+    public static boolean compare(int[] arr, int[] arr2) &#123;
+        //首先比较数组长度，如果长度不相同，数组内容肯定不相同，返回false
+        if(arr.length != arr2.length) &#123;
+            return false;
+        &#125;
+
+        //其次遍历，比较两个数组中的每一个元素，只要有元素不相同，返回false
+        for(int x=0; x&lt;arr.length; x++) &#123;
+            if(arr[x] != arr2[x]) &#123;
+                return false;
+            &#125;
+        &#125;
+
+        //最后循环遍历结束后，返回true
+        return true;
+    &#125;
+&#125;</code></pre>
+<h3 id="2-8查找元素在数组中出现的索引位置"><a href="#2-8查找元素在数组中出现的索引位置" class="headerlink" title="2.8查找元素在数组中出现的索引位置"></a>2.8查找元素在数组中出现的索引位置</h3><h4 id="2-8-1案例需求"><a href="#2-8-1案例需求" class="headerlink" title="2.8.1案例需求"></a>2.8.1案例需求</h4><p>​    已知一个数组 arr = {19, 28, 37, 46, 50}; 键盘录入一个数据，查找该数据在数组中的索引。</p>
+<p>​    并在控制台输出找到的索引值。如果没有查找到，则输出-1</p>
+<h4 id="2-8-2代码实现"><a href="#2-8-2代码实现" class="headerlink" title="2.8.2代码实现"></a>2.8.2代码实现</h4><pre><code class="java">/*
+    思路：
+        1:定义一个数组，用静态初始化完成数组元素的初始化
+        2:键盘录入要查找的数据，用一个变量接收
+        3:定义一个索引变量，初始值为-1
+        4:遍历数组，获取到数组中的每一个元素
+        5:拿键盘录入的数据和数组中的每一个元素进行比较，如果值相同，就把该值对应的索引赋值给索引变量,并结束循环
+        6:输出索引变量
+ */
+public class Test08 &#123;
+    public static void main(String[] args) &#123;
+        //定义一个数组，用静态初始化完成数组元素的初始化
+        int[] arr = &#123;19, 28, 37, 46, 50&#125;;
+
+        //键盘录入要查找的数据，用一个变量接收
+        Scanner sc = new Scanner(System.in);
+        System.out.println(&quot;请输入要查找的数据：&quot;);
+        int number = sc.nextInt();
+
+        //调用方法
+        int index = getIndex(arr, number);
+
+        //输出索引变量
+        System.out.println(&quot;index: &quot; + index);
+    &#125;
+
+    //查找指定的数据在数组中的索引
+    /*
+        两个明确：
+            返回值类型：int
+            参数：int[] arr, int number
+     */
+    public static int getIndex(int[] arr, int number) &#123;
+        //定义一个索引变量，初始值为-1
+        int index = -1;
+
+        //遍历数组，获取到数组中的每一个元素
+        for(int x=0; x&lt;arr.length; x++) &#123;
+            //拿键盘录入的数据和数组中的每一个元素进行比较，如果值相同，就把该值对应的索引赋值给索引变量,并结束循环
+            if(arr[x] == number) &#123;
+                index = x;
+                break;
+            &#125;
+        &#125;
+
+        //返回索引
+        return index;
+    &#125;
+&#125;</code></pre>
+<h3 id="2-9数组元素反转"><a href="#2-9数组元素反转" class="headerlink" title="2.9数组元素反转"></a>2.9数组元素反转</h3><h4 id="2-9-1案例需求"><a href="#2-9-1案例需求" class="headerlink" title="2.9.1案例需求"></a>2.9.1案例需求</h4><p>​    已知一个数组 arr = {19, 28, 37, 46, 50}; 用程序实现把数组中的元素值交换，<br>​        交换后的数组 arr = {50, 46, 37, 28, 19}; 并在控制台输出交换后的数组元素。</p>
+<h4 id="2-9-2代码实现"><a href="#2-9-2代码实现" class="headerlink" title="2.9.2代码实现"></a>2.9.2代码实现</h4><pre><code class="java">/*
+    思路：
+        1:定义一个数组，用静态初始化完成数组元素的初始化
+        2:循环遍历数组，这一次初始化语句定义两个索引变量，判断条件是开始索引小于等于结束索引
+        3:变量交换
+        4:遍历数组
+ */
+public class Test09 &#123;
+    public static void main(String[] args) &#123;
+        //定义一个数组，用静态初始化完成数组元素的初始化
+        int[] arr = &#123;19, 28, 37, 46, 50&#125;;
+
+        //调用反转的方法
+        reverse(arr);
+
+        //遍历数组
+        printArray(arr);
+    &#125;
+
+    /*
+        两个明确：
+            返回值类型：void
+            参数：int[] arr
+     */
+    public static void reverse(int[] arr) &#123;
+        //循环遍历数组，这一次初始化语句定义两个索引变量，判断条件是开始索引小于等于结束索引
+        for (int start = 0, end = arr.length - 1; start &lt;= end; start++, end--) &#123;
+            //变量交换
+            int temp = arr[start];
+            arr[start] = arr[end];
+            arr[end] = temp;
+        &#125;
+    &#125;
+
+    /*
+        两个明确：
+            返回值类型：void
+            参数：int[] arr
+     */
+    public static void printArray(int[] arr) &#123;
+        System.out.print(&quot;[&quot;);
+
+        for (int x = 0; x &lt; arr.length; x++) &#123;
+            if (x == arr.length - 1) &#123;
+                System.out.print(arr[x]);
+            &#125; else &#123;
+                System.out.print(arr[x] + &quot;, &quot;);
+            &#125;
+        &#125;
+
+        System.out.println(&quot;]&quot;);
+    &#125;
+&#125;</code></pre>
+<h3 id="2-10评委打分"><a href="#2-10评委打分" class="headerlink" title="2.10评委打分"></a>2.10评委打分</h3><h4 id="2-10-1案例需求"><a href="#2-10-1案例需求" class="headerlink" title="2.10.1案例需求"></a>2.10.1案例需求</h4><p>​    在编程竞赛中，有6个评委为参赛的选手打分，分数为0-100的整数分。<br>​        选手的最后得分为：去掉一个最高分和一个最低分后 的4个评委平均值 (不考虑小数部分)。</p>
+<h4 id="2-10-2代码实现"><a href="#2-10-2代码实现" class="headerlink" title="2.10.2代码实现"></a>2.10.2代码实现</h4><pre><code class="java">/*
+    思路：
+        1:定义一个数组，用动态初始化完成数组元素的初始化，长度为6
+        2:键盘录入评委分数
+        3:由于是6个评委打分，所以，接收评委分数的操作，用循环改进
+        4:定义方法实现获取数组中的最高分(数组最大值)，调用方法
+        5:定义方法实现获取数组中的最低分(数组最小值) ，调用方法
+        6:定义方法实现获取数组中的所有元素的和(数组元素求和) ，调用方法
+        7:按照计算规则进行计算得到平均分
+        8:输出平均分
+ */
+public class Test10 &#123;
+    public static void main(String[] args) &#123;
+        //定义一个数组，用动态初始化完成数组元素的初始化，长度为6
+        int[] arr = new int[6];
+
+        //键盘录入评委分数
+        Scanner sc = new Scanner(System.in);
+
+        //由于是6个评委打分，所以，接收评委分数的操作，用循环改进
+        for(int x=0; x&lt;arr.length; x++) &#123;
+            System.out.println(&quot;请输入第&quot; + (x + 1) + &quot;个评委的打分：&quot;);
+            arr[x] = sc.nextInt();
+        &#125;
+
+        //printArray(arr);
+
+        //定义方法实现获取数组中的最高分(数组最大值)，调用方法
+        int max = getMax(arr);
+
+        //定义方法实现获取数组中的最低分(数组最小值) ，调用方法
+        int min = getMin(arr);
+
+        //定义方法实现获取数组中的所有元素的和(数组元素求和) ，调用方法
+        int sum = getSum(arr);
+
+        //按照计算规则进行计算得到平均分
+        int avg = (sum - max - min) / (arr.length - 2);
+
+        //输出平均分
+        System.out.println(&quot;选手的最终得分是：&quot; + avg);
+
+    &#125;
+
+    /*
+        两个明确：
+            返回值类型：int
+            参数：int[] arr
+     */
+    public static int getSum(int[] arr) &#123;
+        int sum = 0;
+
+        for(int x=0; x&lt;arr.length; x++) &#123;
+            sum += arr[x];
+        &#125;
+
+        return sum;
+    &#125;
+
+    /*
+        两个明确：
+            返回值类型：int
+            参数：int[] arr
+     */
+    public static int getMin(int[] arr) &#123;
+        int min = arr[0];
+
+        for(int x=1; x&lt;arr.length; x++) &#123;
+            if(arr[x] &lt; min) &#123;
+                min = arr[x];
+            &#125;
+        &#125;
+
+        return min;
+    &#125;
+
+    /*
+        两个明确：
+            返回值类型：int
+            参数：int[] arr
+     */
+    public static int getMax(int[] arr) &#123;
+        int max = arr[0];
+
+        for(int x=1; x&lt;arr.length; x++) &#123;
+            if(arr[x] &gt; max) &#123;
+                max = arr[x];
+            &#125;
+        &#125;
+
+        return max;
+    &#125;
+
+    //遍历数组
+    public static void printArray(int[] arr) &#123;
+        System.out.print(&quot;[&quot;);
+
+        for (int x = 0; x &lt; arr.length; x++) &#123;
+            if (x == arr.length - 1) &#123;
+                System.out.print(arr[x]);
+            &#125; else &#123;
+                System.out.print(arr[x] + &quot;, &quot;);
+            &#125;
+        &#125;
+
+        System.out.println(&quot;]&quot;);
+    &#125;
+&#125;</code></pre>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>java学习-方法</title>
     <url>/2021/01/19/20210119005/</url>
     <content><![CDATA[<h2 id="1-方法概述"><a href="#1-方法概述" class="headerlink" title="1. 方法概述"></a>1. 方法概述</h2><h3 id="1-1-方法的概念（理解）"><a href="#1-1-方法的概念（理解）" class="headerlink" title="1.1 方法的概念（理解）"></a>1.1 方法的概念（理解）</h3><p>​    方法（method）是将具有独立功能的代码块组织成为一个整体，使其具有特殊功能的代码集</p>
@@ -3859,498 +4303,6 @@ public class MethodDemo02 &#123;
 &#125;</code></pre>
 </li>
 </ul>
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>java学习-Debug&amp;基础练习</title>
-    <url>/2021/01/19/20210119006/</url>
-    <content><![CDATA[<h2 id="1-Debug模式"><a href="#1-Debug模式" class="headerlink" title="1.Debug模式"></a>1.Debug模式</h2><h3 id="1-1什么是Debug模式"><a href="#1-1什么是Debug模式" class="headerlink" title="1.1什么是Debug模式"></a>1.1什么是Debug模式</h3><p>是供程序员使用的程序调试工具，它可以用于查看程序的执行流程，也可以用于追踪程序执行过程来调试程序。</p>
-<h3 id="1-2Debug模式操作流程"><a href="#1-2Debug模式操作流程" class="headerlink" title="1.2Debug模式操作流程"></a>1.2Debug模式操作流程</h3><ul>
-<li><p>如何加断点</p>
-<ul>
-<li>选择要设置断点的代码行，在行号的区域后面单击鼠标左键即可</li>
-</ul>
-</li>
-<li><p>如何运行加了断点的程序</p>
-<ul>
-<li>在代码区域右键Debug执行</li>
-</ul>
-</li>
-<li><p>看哪里</p>
-<ul>
-<li><p>看Debugger窗口</p>
-</li>
-<li><p>看Console窗口</p>
-</li>
-</ul>
-</li>
-<li><p>点哪里</p>
-<ul>
-<li>点Step Into (F7)这个箭头，也可以直接按F7</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li><p>如何删除断点</p>
-<ul>
-<li>选择要删除的断点，单击鼠标左键即可</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li>如果是多个断点，可以每一个再点击一次。也可以一次性全部删除</li>
-</ul>
-<h2 id="2-基础练习"><a href="#2-基础练习" class="headerlink" title="2.基础练习"></a>2.基础练习</h2><h3 id="2-1减肥计划if版本"><a href="#2-1减肥计划if版本" class="headerlink" title="2.1减肥计划if版本"></a>2.1减肥计划if版本</h3><h4 id="2-1-1案例需求"><a href="#2-1-1案例需求" class="headerlink" title="2.1.1案例需求"></a>2.1.1案例需求</h4><p>​    输入星期数，显示今天的减肥活动<br>​          周一：跑步<br>​          周二：游泳<br>​          周三：慢走<br>​          周四：动感单车<br>​          周五：拳击<br>​          周六：爬山<br>​          周日：好好吃一顿</p>
-<h4 id="2-1-2代码实现"><a href="#2-1-2代码实现" class="headerlink" title="2.1.2代码实现"></a>2.1.2代码实现</h4><pre><code class="java">/*
-    思路：
-        1:键盘录入一个星期数，用一个变量接收
-        2:对星期数进行判断，这里用 if 语句实现
-        3:在对应的语句控制中输出对应的减肥活动
- */
-public class Test01 &#123;
-    public static void main(String[] args) &#123;
-        //键盘录入一个星期数，用一个变量接收
-        Scanner sc = new Scanner(System.in);
-
-        System.out.println(&quot;请输入一个星期数：&quot;);
-        int week = sc.nextInt();
-
-        //对星期数进行判断，这里用 if 语句实现
-        if (week &lt; 1 || week &gt; 7) &#123;
-            System.out.println(&quot;你输入的星期数有误&quot;);
-        &#125; else if (week == 1) &#123;
-            System.out.println(&quot;跑步&quot;);
-        &#125; else if (week == 2) &#123;
-            System.out.println(&quot;游泳&quot;);
-        &#125; else if (week == 3) &#123;
-            System.out.println(&quot;慢走&quot;);
-        &#125; else if (week == 4) &#123;
-            System.out.println(&quot;动感单车&quot;);
-        &#125; else if (week == 5) &#123;
-            System.out.println(&quot;拳击&quot;);
-        &#125; else if (week == 6) &#123;
-            System.out.println(&quot;爬山&quot;);
-        &#125; else &#123;
-            System.out.println(&quot;好好吃一顿&quot;);
-        &#125;
-    &#125;
-&#125;</code></pre>
-<h3 id="2-2减肥计划switch版本"><a href="#2-2减肥计划switch版本" class="headerlink" title="2.2减肥计划switch版本"></a>2.2减肥计划switch版本</h3><h4 id="2-2-1案例需求"><a href="#2-2-1案例需求" class="headerlink" title="2.2.1案例需求"></a>2.2.1案例需求</h4><p>​    输入星期数，显示今天的减肥活动<br>​          周一：跑步<br>​          周二：游泳<br>​          周三：慢走<br>​          周四：动感单车<br>​          周五：拳击<br>​          周六：爬山<br>​          周日：好好吃一顿</p>
-<h4 id="2-2-2代码实现"><a href="#2-2-2代码实现" class="headerlink" title="2.2.2代码实现"></a>2.2.2代码实现</h4><pre><code class="java">/*
-    思路：
-        1:键盘录入一个星期数，用一个变量接收
-        2:对星期数进行判断，这里用 switch 语句实现
-        3:在对应的语句控制中输出对应的减肥活动
-
-    导包：
-        1:手动导包  import java.util.Scanner;
-        2:快捷键导包 Alt+Enter
-        3:自动导包
- */
-public class Test02 &#123;
-    public static void main(String[] args) &#123;
-        //键盘录入一个星期数，用一个变量接收
-        Scanner sc = new Scanner(System.in);
-
-        System.out.println(&quot;请输入一个星期数：&quot;);
-        int week = sc.nextInt();
-
-        //对星期数进行判断，这里用 switch 语句实现
-        switch (week) &#123;
-            case 1:
-                System.out.println(&quot;跑步&quot;);
-                break;
-            case 2:
-                System.out.println(&quot;游泳&quot;);
-                break;
-            case 3:
-                System.out.println(&quot;慢走&quot;);
-                break;
-            case 4:
-                System.out.println(&quot;动感单车&quot;);
-                break;
-            case 5:
-                System.out.println(&quot;拳击&quot;);
-                break;
-            case 6:
-                System.out.println(&quot;爬山&quot;);
-                break;
-            case 7:
-                System.out.println(&quot;好好吃一顿&quot;);
-                break;
-            default:
-                System.out.println(&quot;你输入的星期数有误&quot;);
-        &#125;
-    &#125;
-&#125;</code></pre>
-<h3 id="2-3逢七跳过"><a href="#2-3逢七跳过" class="headerlink" title="2.3逢七跳过"></a>2.3逢七跳过</h3><h4 id="2-3-1案例需求"><a href="#2-3-1案例需求" class="headerlink" title="2.3.1案例需求"></a>2.3.1案例需求</h4><p>​    朋友聚会的时候可能会玩一个游戏：逢七过。<br>​        规则是：从任意一个数字开始报数，当你要报的数字包含7或者是7的倍数时都要说：过。<br>​        为了帮助大家更好的玩这个游戏，这里我们直接在控制台打印出1-100之间的满足逢七必过规则的数据。<br>​        这样，大家将来在玩游戏的时候，就知道哪些数据要说：过。    </p>
-<h4 id="2-3-2代码实现"><a href="#2-3-2代码实现" class="headerlink" title="2.3.2代码实现"></a>2.3.2代码实现</h4><pre><code class="java">/*
-    思路：
-        1:数据在1-100之间，用for循环实现数据的获取
-        2:根据规则，用if语句实现数据的判断：要么个位是7，要么十位是7，要么能够被7整除
-        3:在控制台输出满足规则的数据
- */
-public class Test03 &#123;
-    public static void main(String[] args) &#123;
-        //数据在1-100之间，用for循环实现数据的获取
-        for(int x=1; x&lt;=100; x++) &#123;
-            //根据规则，用if语句实现数据的判断：要么个位是7，要么十位是7，要么能够被7整除
-            if(x%10==7 || x/10%10==7 || x%7==0) &#123;
-                //在控制台输出满足规则的数据
-                System.out.println(x);
-            &#125;
-        &#125;
-    &#125;
-&#125;</code></pre>
-<h3 id="2-4不死神兔"><a href="#2-4不死神兔" class="headerlink" title="2.4不死神兔"></a>2.4不死神兔</h3><h4 id="2-4-1案例需求"><a href="#2-4-1案例需求" class="headerlink" title="2.4.1案例需求"></a>2.4.1案例需求</h4><p>​    有一对兔子，从出生后第3个月起每个月都生一对兔子，小兔子长到第三个月后每个月又生一对兔子，<br>​        假如兔子都不死，问第二十个月的兔子对数为多少？    </p>
-<h4 id="2-4-2代码实现"><a href="#2-4-2代码实现" class="headerlink" title="2.4.2代码实现"></a>2.4.2代码实现</h4><pre><code class="java">/*
-   思路：
-        1:为了存储多个月的兔子对数，定义一个数组，用动态初始化完成数组元素的初始化，长度为20
-        2:因为第1个月，第2个月兔子的对数是已知的，都是1，所以数组的第1个元素，第2个元素值也都是1
-        3:用循环实现计算每个月的兔子对数
-        4:输出数组中最后一个元素的值，就是第20个月的兔子对数
- */
-public class Test04 &#123;
-    public static void main(String[] args) &#123;
-        //为了存储多个月的兔子对数，定义一个数组，用动态初始化完成数组元素的初始化，长度为20
-        int[] arr = new int[20];
-
-        //因为第1个月，第2个月兔子的对数是已知的，都是1，所以数组的第1个元素，第2个元素值也都是1
-        arr[0] = 1;
-        arr[1] = 1;
-
-        //用循环实现计算每个月的兔子对数
-        for(int x=2; x&lt;arr.length; x++) &#123;
-            arr[x] = arr[x-2] + arr[x-1];
-        &#125;
-
-        //输出数组中最后一个元素的值，就是第20个月的兔子对数
-        System.out.println(&quot;第二十个月兔子的对数是：&quot; + arr[19]);
-    &#125;
-&#125;</code></pre>
-<h3 id="2-5百钱白鸡"><a href="#2-5百钱白鸡" class="headerlink" title="2.5百钱白鸡"></a>2.5百钱白鸡</h3><h4 id="2-5-1案例需求"><a href="#2-5-1案例需求" class="headerlink" title="2.5.1案例需求"></a>2.5.1案例需求</h4><p>​    我国古代数学家张丘建在《算经》一书中提出的数学问题：鸡翁一值钱五，鸡母一值钱三，鸡雏三值钱一。<br>​        百钱买百鸡，问鸡翁、鸡母、鸡雏各几何？</p>
-<h4 id="2-5-2代码实现"><a href="#2-5-2代码实现" class="headerlink" title="2.5.2代码实现"></a>2.5.2代码实现</h4><pre><code class="java">/*
-    思路：
-        1:第1层循环，用于表示鸡翁的范围，初始化表达式的变量定义为 x=0，判断条件是x&lt;=20
-        2:第2层循环，用于表示鸡母的范围，初始化表达式的变量定义为 y=0，判断条件是y&lt;=33
-        3:这个时候，用于表示鸡雏的变量 z = 100 – x – y
-        4:判断表达式 z%3==0 和表达式 5*x + 3*y + z/3 = 100 是否同时成立，如果成立，输出对应的 x，y，z 的值，就是对应的鸡翁，鸡母，鸡雏的值
- */
-public class Test05 &#123;
-    public static void main(String[] args) &#123;
-        //第1层循环，用于表示鸡翁的范围，初始化表达式的变量定义为 x=0，判断条件是x&lt;=20
-        for(int x=0; x&lt;=20; x++) &#123;
-            //第2层循环，用于表示鸡母的范围，初始化表达式的变量定义为 y=0，判断条件是y&lt;=33
-            for(int y=0; y&lt;=33; y++) &#123;
-                //这个时候，用于表示鸡雏的变量 z = 100 – x – y
-                int z = 100 - x - y;
-
-                //判断表达式 z%3==0 和表达式 5*x + 3*y + z/3 = 100 是否同时成立
-                if(z%3==0 &amp;&amp; 5*x+3*y+z/3==100) &#123;
-                    System.out.println(x+&quot;,&quot;+y+&quot;,&quot;+z);
-                &#125;
-            &#125;
-        &#125;
-    &#125;
-&#125;</code></pre>
-<h3 id="2-6数组元素求和"><a href="#2-6数组元素求和" class="headerlink" title="2.6数组元素求和"></a>2.6数组元素求和</h3><h4 id="2-6-1案例需求"><a href="#2-6-1案例需求" class="headerlink" title="2.6.1案例需求"></a>2.6.1案例需求</h4><p>​    有这样的一个数组，元素是{68,27,95,88,171,996,51,210}。求出该数组中满足要求的元素和，<br>​        要求是：求和的元素个位和十位都不能是7，并且只能是偶数</p>
-<h4 id="2-6-2代码实现"><a href="#2-6-2代码实现" class="headerlink" title="2.6.2代码实现"></a>2.6.2代码实现</h4><pre><code class="java">/*
-   思路：
-        1:定义一个数组，用静态初始化完成数组元素的初始化
-        2:定义一个求和变量，初始值是0
-        3:遍历数组，获取到数组中的每一个元素
-        4:判断该元素是否满足条件，如果满足条件就累加
-        5:输出求和变量的值
- */
-public class Test06 &#123;
-    public static void main(String[] args) &#123;
-        //定义一个数组，用静态初始化完成数组元素的初始化
-        int[] arr = &#123;68, 27, 95, 88, 171, 996, 51, 210&#125;;
-
-        //定义一个求和变量，初始值是0
-        int sum = 0;
-
-        //遍历数组，获取到数组中的每一个元素
-        for(int x=0; x&lt;arr.length; x++) &#123;
-            //判断该元素是否满足条件，如果满足条件就累加
-            if(arr[x]%10!=7 &amp;&amp; arr[x]/10%10!=7 &amp;&amp; arr[x]%2==0) &#123;
-                sum += arr[x];
-            &#125;
-        &#125;
-
-        //输出求和变量的值
-        System.out.println(&quot;sum:&quot; + sum);
-    &#125;
-&#125;</code></pre>
-<h3 id="2-7判断两个数组是否相同"><a href="#2-7判断两个数组是否相同" class="headerlink" title="2.7判断两个数组是否相同"></a>2.7判断两个数组是否相同</h3><h4 id="2-7-1案例需求"><a href="#2-7-1案例需求" class="headerlink" title="2.7.1案例需求"></a>2.7.1案例需求</h4><p>​    定义一个方法，用于比较两个数组的内容是否相同</p>
-<h4 id="2-7-2代码实现"><a href="#2-7-2代码实现" class="headerlink" title="2.7.2代码实现"></a>2.7.2代码实现</h4><pre><code class="java">/*
-    思路：
-        1:定义两个数组，分别使用静态初始化完成数组元素的初始化
-        2:定义一个方法，用于比较两个数组的内容是否相同
-        3:比较两个数组的内容是否相同，按照下面的步骤实现就可以了
-            首先比较数组长度，如果长度不相同，数组内容肯定不相同，返回false
-            其次遍历，比较两个数组中的每一个元素，只要有元素不相同，返回false
-            最后循环遍历结束后，返回true
-        4:调用方法，用变量接收
-        5:输出结果
- */
-public class Test07 &#123;
-    public static void main(String[] args) &#123;
-        //定义两个数组，分别使用静态初始化完成数组元素的初始化
-        int[] arr = &#123;11, 22, 33, 44, 55&#125;;
-        //int[] arr2 = &#123;11, 22, 33, 44, 55&#125;;
-        int[] arr2 = &#123;11, 22, 33, 44, 5&#125;;
-
-
-        //调用方法，用变量接收
-        boolean flag = compare(arr,arr2);
-        //输出结果
-        System.out.println(flag);
-    &#125;
-
-    //定义一个方法，用于比较两个数组的内容是否相同
-    /*
-        两个明确：
-            返回值类型：boolean
-            参数：int[] arr, int[] arr2
-     */
-    public static boolean compare(int[] arr, int[] arr2) &#123;
-        //首先比较数组长度，如果长度不相同，数组内容肯定不相同，返回false
-        if(arr.length != arr2.length) &#123;
-            return false;
-        &#125;
-
-        //其次遍历，比较两个数组中的每一个元素，只要有元素不相同，返回false
-        for(int x=0; x&lt;arr.length; x++) &#123;
-            if(arr[x] != arr2[x]) &#123;
-                return false;
-            &#125;
-        &#125;
-
-        //最后循环遍历结束后，返回true
-        return true;
-    &#125;
-&#125;</code></pre>
-<h3 id="2-8查找元素在数组中出现的索引位置"><a href="#2-8查找元素在数组中出现的索引位置" class="headerlink" title="2.8查找元素在数组中出现的索引位置"></a>2.8查找元素在数组中出现的索引位置</h3><h4 id="2-8-1案例需求"><a href="#2-8-1案例需求" class="headerlink" title="2.8.1案例需求"></a>2.8.1案例需求</h4><p>​    已知一个数组 arr = {19, 28, 37, 46, 50}; 键盘录入一个数据，查找该数据在数组中的索引。</p>
-<p>​    并在控制台输出找到的索引值。如果没有查找到，则输出-1</p>
-<h4 id="2-8-2代码实现"><a href="#2-8-2代码实现" class="headerlink" title="2.8.2代码实现"></a>2.8.2代码实现</h4><pre><code class="java">/*
-    思路：
-        1:定义一个数组，用静态初始化完成数组元素的初始化
-        2:键盘录入要查找的数据，用一个变量接收
-        3:定义一个索引变量，初始值为-1
-        4:遍历数组，获取到数组中的每一个元素
-        5:拿键盘录入的数据和数组中的每一个元素进行比较，如果值相同，就把该值对应的索引赋值给索引变量,并结束循环
-        6:输出索引变量
- */
-public class Test08 &#123;
-    public static void main(String[] args) &#123;
-        //定义一个数组，用静态初始化完成数组元素的初始化
-        int[] arr = &#123;19, 28, 37, 46, 50&#125;;
-
-        //键盘录入要查找的数据，用一个变量接收
-        Scanner sc = new Scanner(System.in);
-        System.out.println(&quot;请输入要查找的数据：&quot;);
-        int number = sc.nextInt();
-
-        //调用方法
-        int index = getIndex(arr, number);
-
-        //输出索引变量
-        System.out.println(&quot;index: &quot; + index);
-    &#125;
-
-    //查找指定的数据在数组中的索引
-    /*
-        两个明确：
-            返回值类型：int
-            参数：int[] arr, int number
-     */
-    public static int getIndex(int[] arr, int number) &#123;
-        //定义一个索引变量，初始值为-1
-        int index = -1;
-
-        //遍历数组，获取到数组中的每一个元素
-        for(int x=0; x&lt;arr.length; x++) &#123;
-            //拿键盘录入的数据和数组中的每一个元素进行比较，如果值相同，就把该值对应的索引赋值给索引变量,并结束循环
-            if(arr[x] == number) &#123;
-                index = x;
-                break;
-            &#125;
-        &#125;
-
-        //返回索引
-        return index;
-    &#125;
-&#125;</code></pre>
-<h3 id="2-9数组元素反转"><a href="#2-9数组元素反转" class="headerlink" title="2.9数组元素反转"></a>2.9数组元素反转</h3><h4 id="2-9-1案例需求"><a href="#2-9-1案例需求" class="headerlink" title="2.9.1案例需求"></a>2.9.1案例需求</h4><p>​    已知一个数组 arr = {19, 28, 37, 46, 50}; 用程序实现把数组中的元素值交换，<br>​        交换后的数组 arr = {50, 46, 37, 28, 19}; 并在控制台输出交换后的数组元素。</p>
-<h4 id="2-9-2代码实现"><a href="#2-9-2代码实现" class="headerlink" title="2.9.2代码实现"></a>2.9.2代码实现</h4><pre><code class="java">/*
-    思路：
-        1:定义一个数组，用静态初始化完成数组元素的初始化
-        2:循环遍历数组，这一次初始化语句定义两个索引变量，判断条件是开始索引小于等于结束索引
-        3:变量交换
-        4:遍历数组
- */
-public class Test09 &#123;
-    public static void main(String[] args) &#123;
-        //定义一个数组，用静态初始化完成数组元素的初始化
-        int[] arr = &#123;19, 28, 37, 46, 50&#125;;
-
-        //调用反转的方法
-        reverse(arr);
-
-        //遍历数组
-        printArray(arr);
-    &#125;
-
-    /*
-        两个明确：
-            返回值类型：void
-            参数：int[] arr
-     */
-    public static void reverse(int[] arr) &#123;
-        //循环遍历数组，这一次初始化语句定义两个索引变量，判断条件是开始索引小于等于结束索引
-        for (int start = 0, end = arr.length - 1; start &lt;= end; start++, end--) &#123;
-            //变量交换
-            int temp = arr[start];
-            arr[start] = arr[end];
-            arr[end] = temp;
-        &#125;
-    &#125;
-
-    /*
-        两个明确：
-            返回值类型：void
-            参数：int[] arr
-     */
-    public static void printArray(int[] arr) &#123;
-        System.out.print(&quot;[&quot;);
-
-        for (int x = 0; x &lt; arr.length; x++) &#123;
-            if (x == arr.length - 1) &#123;
-                System.out.print(arr[x]);
-            &#125; else &#123;
-                System.out.print(arr[x] + &quot;, &quot;);
-            &#125;
-        &#125;
-
-        System.out.println(&quot;]&quot;);
-    &#125;
-&#125;</code></pre>
-<h3 id="2-10评委打分"><a href="#2-10评委打分" class="headerlink" title="2.10评委打分"></a>2.10评委打分</h3><h4 id="2-10-1案例需求"><a href="#2-10-1案例需求" class="headerlink" title="2.10.1案例需求"></a>2.10.1案例需求</h4><p>​    在编程竞赛中，有6个评委为参赛的选手打分，分数为0-100的整数分。<br>​        选手的最后得分为：去掉一个最高分和一个最低分后 的4个评委平均值 (不考虑小数部分)。</p>
-<h4 id="2-10-2代码实现"><a href="#2-10-2代码实现" class="headerlink" title="2.10.2代码实现"></a>2.10.2代码实现</h4><pre><code class="java">/*
-    思路：
-        1:定义一个数组，用动态初始化完成数组元素的初始化，长度为6
-        2:键盘录入评委分数
-        3:由于是6个评委打分，所以，接收评委分数的操作，用循环改进
-        4:定义方法实现获取数组中的最高分(数组最大值)，调用方法
-        5:定义方法实现获取数组中的最低分(数组最小值) ，调用方法
-        6:定义方法实现获取数组中的所有元素的和(数组元素求和) ，调用方法
-        7:按照计算规则进行计算得到平均分
-        8:输出平均分
- */
-public class Test10 &#123;
-    public static void main(String[] args) &#123;
-        //定义一个数组，用动态初始化完成数组元素的初始化，长度为6
-        int[] arr = new int[6];
-
-        //键盘录入评委分数
-        Scanner sc = new Scanner(System.in);
-
-        //由于是6个评委打分，所以，接收评委分数的操作，用循环改进
-        for(int x=0; x&lt;arr.length; x++) &#123;
-            System.out.println(&quot;请输入第&quot; + (x + 1) + &quot;个评委的打分：&quot;);
-            arr[x] = sc.nextInt();
-        &#125;
-
-        //printArray(arr);
-
-        //定义方法实现获取数组中的最高分(数组最大值)，调用方法
-        int max = getMax(arr);
-
-        //定义方法实现获取数组中的最低分(数组最小值) ，调用方法
-        int min = getMin(arr);
-
-        //定义方法实现获取数组中的所有元素的和(数组元素求和) ，调用方法
-        int sum = getSum(arr);
-
-        //按照计算规则进行计算得到平均分
-        int avg = (sum - max - min) / (arr.length - 2);
-
-        //输出平均分
-        System.out.println(&quot;选手的最终得分是：&quot; + avg);
-
-    &#125;
-
-    /*
-        两个明确：
-            返回值类型：int
-            参数：int[] arr
-     */
-    public static int getSum(int[] arr) &#123;
-        int sum = 0;
-
-        for(int x=0; x&lt;arr.length; x++) &#123;
-            sum += arr[x];
-        &#125;
-
-        return sum;
-    &#125;
-
-    /*
-        两个明确：
-            返回值类型：int
-            参数：int[] arr
-     */
-    public static int getMin(int[] arr) &#123;
-        int min = arr[0];
-
-        for(int x=1; x&lt;arr.length; x++) &#123;
-            if(arr[x] &lt; min) &#123;
-                min = arr[x];
-            &#125;
-        &#125;
-
-        return min;
-    &#125;
-
-    /*
-        两个明确：
-            返回值类型：int
-            参数：int[] arr
-     */
-    public static int getMax(int[] arr) &#123;
-        int max = arr[0];
-
-        for(int x=1; x&lt;arr.length; x++) &#123;
-            if(arr[x] &gt; max) &#123;
-                max = arr[x];
-            &#125;
-        &#125;
-
-        return max;
-    &#125;
-
-    //遍历数组
-    public static void printArray(int[] arr) &#123;
-        System.out.print(&quot;[&quot;);
-
-        for (int x = 0; x &lt; arr.length; x++) &#123;
-            if (x == arr.length - 1) &#123;
-                System.out.print(arr[x]);
-            &#125; else &#123;
-                System.out.print(arr[x] + &quot;, &quot;);
-            &#125;
-        &#125;
-
-        System.out.println(&quot;]&quot;);
-    &#125;
-&#125;</code></pre>
 ]]></content>
       <categories>
         <category>Java</category>
