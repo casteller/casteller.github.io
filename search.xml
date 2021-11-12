@@ -1942,25 +1942,6 @@ background: transparent !important;
       </tags>
   </entry>
   <entry>
-    <title>Django安装教程</title>
-    <url>/2020/08/23/djangoinstall/</url>
-    <content><![CDATA[<p>在安装 Django 前，系统需要已经安装了Python的开发环境。接下来我们来具体看下不同系统下Django的安装。</p>
-<h2 id="Window-下安装-Django"><a href="#Window-下安装-Django" class="headerlink" title="Window 下安装 Django"></a>Window 下安装 Django</h2><p>如果你还未安装Python环境需要先下载Python安装包。<br>1、Python 下载地址：<a href="https://www.python.org/downloads/">https://www.python.org/downloads/</a><br>2、Django 下载地址：<a href="https://www.djangoproject.com/download/">https://www.djangoproject.com/download/</a><br>注意：目前Django 1.6.x以上版本已经完全兼容Python 3.x。</p>
-<h3 id="Python-安装-已安装的可跳过"><a href="#Python-安装-已安装的可跳过" class="headerlink" title="Python 安装(已安装的可跳过)"></a>Python 安装(已安装的可跳过)</h3><p>安装Python你只需要下载python-x.x.x.msi文件，然后一直点击”Next”按钮即可。<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/install1.png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/install1.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>安装完成后你需要设置Python环境变量。 右击计算机-&gt;属性-&gt;高级-&gt;环境变量-&gt;修改系统变量path，添加Python安装地址，本文实例使用的是C:\Python33，你需要根据你实际情况来安装。<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/install2.png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/install2.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"></p>
-<h3 id="Django-安装"><a href="#Django-安装" class="headerlink" title="Django 安装"></a>Django 安装</h3><p>下载 Django 压缩包，解压并和Python安装目录放在同一个根目录，进入 Django 目录，执行python setup.py install，然后开始安装，Django将要被安装到Python的Lib下site-packages。<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/install3.jpeg" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/install3.jpeg" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>然后是配置环境变量，将这几个目录添加到系统环境变量中： C:\Python33\Lib\site-packages\django;C:\Python33\Scripts。 添加完成后就可以使用Django的django-admin.py命令新建工程了。<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/install4.jpeg" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/install4.jpeg" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"></p>
-<h3 id="检查是否安装成功"><a href="#检查是否安装成功" class="headerlink" title="检查是否安装成功"></a>检查是否安装成功</h3><p>输入以下命令进行检查:</p>
-<pre><code>&gt;&gt;&gt; import django
-&gt;&gt;&gt; django.get_version()</code></pre>
-<p><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/install5.jpeg" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/install5.jpeg" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>如果输出了Django的版本号说明安装正确。</p>
-]]></content>
-      <categories>
-        <category>Django</category>
-      </categories>
-      <tags>
-        <tag>Django</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Jenkins安装教程</title>
     <url>/2020/08/23/Jenkinsinstall01/</url>
     <content><![CDATA[<p>Jenkins安装方法有很多，本文主要介绍通用安装方式（傻瓜式安装）</p>
@@ -2007,6 +1988,25 @@ background: transparent !important;
       </categories>
       <tags>
         <tag>Jenkins</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Django安装教程</title>
+    <url>/2020/08/23/djangoinstall/</url>
+    <content><![CDATA[<p>在安装 Django 前，系统需要已经安装了Python的开发环境。接下来我们来具体看下不同系统下Django的安装。</p>
+<h2 id="Window-下安装-Django"><a href="#Window-下安装-Django" class="headerlink" title="Window 下安装 Django"></a>Window 下安装 Django</h2><p>如果你还未安装Python环境需要先下载Python安装包。<br>1、Python 下载地址：<a href="https://www.python.org/downloads/">https://www.python.org/downloads/</a><br>2、Django 下载地址：<a href="https://www.djangoproject.com/download/">https://www.djangoproject.com/download/</a><br>注意：目前Django 1.6.x以上版本已经完全兼容Python 3.x。</p>
+<h3 id="Python-安装-已安装的可跳过"><a href="#Python-安装-已安装的可跳过" class="headerlink" title="Python 安装(已安装的可跳过)"></a>Python 安装(已安装的可跳过)</h3><p>安装Python你只需要下载python-x.x.x.msi文件，然后一直点击”Next”按钮即可。<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/install1.png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/install1.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>安装完成后你需要设置Python环境变量。 右击计算机-&gt;属性-&gt;高级-&gt;环境变量-&gt;修改系统变量path，添加Python安装地址，本文实例使用的是C:\Python33，你需要根据你实际情况来安装。<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/install2.png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/install2.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"></p>
+<h3 id="Django-安装"><a href="#Django-安装" class="headerlink" title="Django 安装"></a>Django 安装</h3><p>下载 Django 压缩包，解压并和Python安装目录放在同一个根目录，进入 Django 目录，执行python setup.py install，然后开始安装，Django将要被安装到Python的Lib下site-packages。<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/install3.jpeg" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/install3.jpeg" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>然后是配置环境变量，将这几个目录添加到系统环境变量中： C:\Python33\Lib\site-packages\django;C:\Python33\Scripts。 添加完成后就可以使用Django的django-admin.py命令新建工程了。<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/install4.jpeg" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/install4.jpeg" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"></p>
+<h3 id="检查是否安装成功"><a href="#检查是否安装成功" class="headerlink" title="检查是否安装成功"></a>检查是否安装成功</h3><p>输入以下命令进行检查:</p>
+<pre><code>&gt;&gt;&gt; import django
+&gt;&gt;&gt; django.get_version()</code></pre>
+<p><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/install5.jpeg" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/install5.jpeg" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>如果输出了Django的版本号说明安装正确。</p>
+]]></content>
+      <categories>
+        <category>Django</category>
+      </categories>
+      <tags>
+        <tag>Django</tag>
       </tags>
   </entry>
   <entry>
