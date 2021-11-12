@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://www.mz-zone.cn/2021/11/12/20211112001/</loc>
+    
+    <lastmod>2021-11-12</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.mz-zone.cn/2021/10/27/20211027001/</loc>
+    
+    <lastmod>2021-11-12</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.mz-zone.cn/books/index-1.html</loc>
+    
+    <lastmod>2021-11-12</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://www.mz-zone.cn/books/index.html</loc>
     
     <lastmod>2021-11-12</lastmod>
@@ -466,14 +487,14 @@
 
   
   <url>
-    <loc>https://www.mz-zone.cn/tags/Jmeter/</loc>
+    <loc>https://www.mz-zone.cn/tags/Mysql/</loc>
     <lastmod>2021-11-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://www.mz-zone.cn/tags/Mysql/</loc>
+    <loc>https://www.mz-zone.cn/tags/Jmeter/</loc>
     <lastmod>2021-11-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -495,6 +516,13 @@
   
   <url>
     <loc>https://www.mz-zone.cn/tags/%E6%98%A5%E8%8A%82%E7%81%AF%E7%AC%BC/</loc>
+    <lastmod>2021-11-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.mz-zone.cn/tags/Picgo/</loc>
     <lastmod>2021-11-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -598,17 +626,24 @@
     <priority>0.6</priority>
   </url>
   
+  <url>
+    <loc>https://www.mz-zone.cn/tags/hexo/</loc>
+    <lastmod>2021-11-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
 
   
   <url>
-    <loc>https://www.mz-zone.cn/categories/Jmeter/</loc>
+    <loc>https://www.mz-zone.cn/categories/Mysql/</loc>
     <lastmod>2021-11-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://www.mz-zone.cn/categories/Mysql/</loc>
+    <loc>https://www.mz-zone.cn/categories/Jmeter/</loc>
     <lastmod>2021-11-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -637,6 +672,13 @@
   
   <url>
     <loc>https://www.mz-zone.cn/categories/idea/</loc>
+    <lastmod>2021-11-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.mz-zone.cn/categories/Picgo/</loc>
     <lastmod>2021-11-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>

@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>忘记本地MySQL数据库密码解决方案</title>
+    <url>/2020/11/05/2020110501/</url>
+    <content><![CDATA[<div class="note idea"><p>当我们忘记mysql数据库密码时我们就无法正常进入数据库，也就无法修改密码，那么这时该怎么修改密码呢，这里教大家一个简单常用修改密码的方式。</p></div>
+<a id="more"></a>
+<p>数据库版本：5.7.21<br>平台：win7<br>主要分以下10个步骤：<br><strong>💐第一步、打开cmd窗口，进入 MySQL的安装目录。</strong><br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/97f8539ee4983.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/97f8539ee4983.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br><strong>🌸第二步、停止MySQL的服务。</strong><br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/db44d96459204.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/db44d96459204.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/23a53ea461615.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/23a53ea461615.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br>右键MySQL，看到启动是可点击的，证明MySQL服务已停止运行。<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/588ae04afbc92.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/588ae04afbc92.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br><strong>💮第三步、将root用户对数据库操作的的权限授予给别的用户。</strong><br>输入 mysqld –skip-grant-tables 回车<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/4b38162828f65.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/4b38162828f65.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br><strong>🌹第四步、重新打开一个窗口，进入bin目录，输入mysql，然后再输入use mysql</strong><br>如下图所示：<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/be713880ef624.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/be713880ef624.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br><strong>🌺第五步、修改数据库连接密码。</strong><br>命令：</p>
+<pre><code>update user set password=password(&quot;123456&quot;) where user=&quot;root&quot;;</code></pre>
+<div class="note info"><p>注：这里的“123456”为设置的新密码。注意语句后面的“；”，别漏。如果不写“；”，回车之后输入“\g”，效果一样。</p></div>
+<p><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/be2f8087a7748.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/be2f8087a7748.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br>出现错误：<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/514220465c4a0.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/514220465c4a0.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br>正确的应该是：<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/3346c226e1176.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/3346c226e1176.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br>查找解决方案：说是mysql5.7以上没有password这个字段，变成了authentication_string，然后重新设置新密码成功。<br>参考链接：<a href="https://www.techietown.info/2017/04/resolved-error-unknown-column-password-field-list/">https://www.techietown.info/2017/04/resolved-error-unknown-column-password-field-list/</a><br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/ce507845e683a.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/ce507845e683a.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br><strong>🌻第六步、重新加载一下权限，将设置了密码的用户root的权限信息从内存中写入数据库。</strong><br>输入命令flush privileges;，英文分号“;”不可省略。如果不写“；”，回车之后输入“\g”，效果一样。<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/be2f8087a7748.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/be2f8087a7748.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br><strong>🌼第七步、退出 mysql 。输入quit。</strong><br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/5f5a41a046c83.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/5f5a41a046c83.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br><strong>🌷第八步、修改 root 密码后，需要执行下面的语句和新修改的密码。<br>另开一个cmd窗口，执行以下命令，然后提示输入密码：输入4中设置的密码。</strong><br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/55b51f5bd6b41.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/55b51f5bd6b41.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br><strong>🌱第九步、开启数据库服务。</strong><br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/cd29ae01510e4.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/cd29ae01510e4.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/d282adc27e317.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/d282adc27e317.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br><strong>🌲最后一步、验证是否设置成功。</strong><br>另开cmd，进入到mysql的bin目录下，输入mysql –u root –p，回车之后提示输入密码，然后显示如下。连接成功。<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/2f7c31851b5be.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/2f7c31851b5be.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br>心里最想说的话：折腾这么久，还是记住密码吧！！！<br>本文参考链接：<br>    <a href="https://blog.csdn.net/weidong_y/article/details/80493743%EF%BC%9B">https://blog.csdn.net/weidong_y/article/details/80493743；</a><br>    <a href="https://blog.csdn.net/anzhen0429/article/details/78296814%EF%BC%9B">https://blog.csdn.net/anzhen0429/article/details/78296814；</a></p>
+]]></content>
+      <categories>
+        <category>Mysql</category>
+      </categories>
+      <tags>
+        <tag>Mysql</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Jmeter实现分布式并发</title>
     <url>/2020/11/06/2020110601/</url>
     <content><![CDATA[<div class="note idea"><p>在性能测试过程中，一旦进行高并发操作时就会出现以下尴尬场景，JMeter客户端卡死、请求错误或是超时等，为了解决这一问题，我们需要将一次大的操作分布在多个服务器上，由多个服务器来承担负载压力。</p></div>
@@ -23,23 +40,6 @@
       </categories>
       <tags>
         <tag>Jmeter</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>忘记本地MySQL数据库密码解决方案</title>
-    <url>/2020/11/05/2020110501/</url>
-    <content><![CDATA[<div class="note idea"><p>当我们忘记mysql数据库密码时我们就无法正常进入数据库，也就无法修改密码，那么这时该怎么修改密码呢，这里教大家一个简单常用修改密码的方式。</p></div>
-<a id="more"></a>
-<p>数据库版本：5.7.21<br>平台：win7<br>主要分以下10个步骤：<br><strong>💐第一步、打开cmd窗口，进入 MySQL的安装目录。</strong><br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/97f8539ee4983.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/97f8539ee4983.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br><strong>🌸第二步、停止MySQL的服务。</strong><br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/db44d96459204.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/db44d96459204.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/23a53ea461615.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/23a53ea461615.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br>右键MySQL，看到启动是可点击的，证明MySQL服务已停止运行。<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/588ae04afbc92.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/588ae04afbc92.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br><strong>💮第三步、将root用户对数据库操作的的权限授予给别的用户。</strong><br>输入 mysqld –skip-grant-tables 回车<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/4b38162828f65.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/4b38162828f65.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br><strong>🌹第四步、重新打开一个窗口，进入bin目录，输入mysql，然后再输入use mysql</strong><br>如下图所示：<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/be713880ef624.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/be713880ef624.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br><strong>🌺第五步、修改数据库连接密码。</strong><br>命令：</p>
-<pre><code>update user set password=password(&quot;123456&quot;) where user=&quot;root&quot;;</code></pre>
-<div class="note info"><p>注：这里的“123456”为设置的新密码。注意语句后面的“；”，别漏。如果不写“；”，回车之后输入“\g”，效果一样。</p></div>
-<p><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/be2f8087a7748.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/be2f8087a7748.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br>出现错误：<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/514220465c4a0.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/514220465c4a0.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br>正确的应该是：<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/3346c226e1176.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/3346c226e1176.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br>查找解决方案：说是mysql5.7以上没有password这个字段，变成了authentication_string，然后重新设置新密码成功。<br>参考链接：<a href="https://www.techietown.info/2017/04/resolved-error-unknown-column-password-field-list/">https://www.techietown.info/2017/04/resolved-error-unknown-column-password-field-list/</a><br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/ce507845e683a.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/ce507845e683a.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br><strong>🌻第六步、重新加载一下权限，将设置了密码的用户root的权限信息从内存中写入数据库。</strong><br>输入命令flush privileges;，英文分号“;”不可省略。如果不写“；”，回车之后输入“\g”，效果一样。<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/be2f8087a7748.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/be2f8087a7748.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br><strong>🌼第七步、退出 mysql 。输入quit。</strong><br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/5f5a41a046c83.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/5f5a41a046c83.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br><strong>🌷第八步、修改 root 密码后，需要执行下面的语句和新修改的密码。<br>另开一个cmd窗口，执行以下命令，然后提示输入密码：输入4中设置的密码。</strong><br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/55b51f5bd6b41.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/55b51f5bd6b41.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br><strong>🌱第九步、开启数据库服务。</strong><br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/cd29ae01510e4.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/cd29ae01510e4.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/d282adc27e317.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/d282adc27e317.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br><strong>🌲最后一步、验证是否设置成功。</strong><br>另开cmd，进入到mysql的bin目录下，输入mysql –u root –p，回车之后提示输入密码，然后显示如下。连接成功。<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/2f7c31851b5be.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/2f7c31851b5be.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br>心里最想说的话：折腾这么久，还是记住密码吧！！！<br>本文参考链接：<br>    <a href="https://blog.csdn.net/weidong_y/article/details/80493743%EF%BC%9B">https://blog.csdn.net/weidong_y/article/details/80493743；</a><br>    <a href="https://blog.csdn.net/anzhen0429/article/details/78296814%EF%BC%9B">https://blog.csdn.net/anzhen0429/article/details/78296814；</a></p>
-]]></content>
-      <categories>
-        <category>Mysql</category>
-      </categories>
-      <tags>
-        <tag>Mysql</tag>
       </tags>
   </entry>
   <entry>
@@ -1874,6 +1874,54 @@ background: transparent !important;
       </tags>
   </entry>
   <entry>
+    <title>（转载）使用Picgo+Github+jsdelivr 搭建一个免费图床</title>
+    <url>/2021/10/27/20211027001/</url>
+    <content><![CDATA[<div class="note idea"><p>jsDelivr提供GitHub，npm，WordPress等项目的镜像，且有国内节点，访问速度很不错，这也是我们选择它的原因。jsDelivr 的优点在于其专注于性能，可靠性和安全性，并且每个人均可免费使用，没有带宽限制。</p></div>
+<a id="more"></a>
+
+<p>偶然的一次机会，我接触到了 <strong><code>Markdown</code></strong> 语法，随后便喜欢上了这种标记语言。</p>
+<p>目前，我使用 <strong><code>Typora</code></strong> 编辑器。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703161150.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703161150.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"></p>
+<p><strong>Typora</strong> 里面有个非常好用的功能，就是通过 <strong>Picgo</strong> 将图片上传到图床。</p>
+<p>下面就讲一下如何搭建一个免费的图床。</p>
+<h1 id="Picgo-介绍"><a href="#Picgo-介绍" class="headerlink" title="Picgo 介绍"></a>Picgo 介绍</h1><div class="note "><p>Picgo 是一款开源的图片上传工具，项目地址:<a href="https://github.com/Molunerfinn/PicGo">Picgo</a></p></div>
+
+<p>Picgo 支持<code>七牛图床</code>,<code>腾讯云</code>, <code>又拍云</code>,<code>Github</code> 等。</p>
+<p>在众多的图床中我选择<code>Github</code> , 因为他免费.</p>
+<h1 id="搭建图床"><a href="#搭建图床" class="headerlink" title="搭建图床"></a>搭建图床</h1><h2 id="1-注册-登录-Github"><a href="#1-注册-登录-Github" class="headerlink" title="1. 注册 / 登录 Github"></a>1. 注册 / 登录 Github</h2>   <div class="note "><p>这个就不演示了</p></div>
+
+<h2 id="2-创建-Repo"><a href="#2-创建-Repo" class="headerlink" title="2. 创建 Repo"></a>2. 创建 Repo</h2><p>   <img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703161850.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703161850.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703161942.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703161942.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"></p>
+<p>然后点击 <strong><code>Create Repository</code></strong> 就可以了</p>
+<h2 id="3-生成-Taken"><a href="#3-生成-Taken" class="headerlink" title="3.生成 Taken"></a>3.生成 Taken</h2><p><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703162058.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703162058.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703162152.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703162152.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703162322.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703162322.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703162416.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703162416.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"></p>
+<div class="note "><p>创建之后，会生成一串 token</p></div>
+
+<h2 id="4-配置-Picgo"><a href="#4-配置-Picgo" class="headerlink" title="4.配置 Picgo"></a>4.配置 Picgo</h2><div class="note "><p><code>Picgo </code>请到 <a href="https://github.com/Molunerfinn/PicGo">Picgo</a> 下载</p></div>
+
+<p><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703163011.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703163011.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"></p>
+<ul>
+<li>设定仓库名的时候，是按照 “账户名 / 仓库名的格式填写”</li>
+<li>分支名统一填写 “master”</li>
+<li>将之前的 Token 黏贴在这里</li>
+<li>存储的路径可以按照我这样子写，就会在 repository 下创建一个 “img” 文件夹</li>
+<li>自定义域名的作用是，在上传图片后成功后，PicGo 会将 “自定义域名 + 上传的图片名” 生成的访问链接，放到剪切板上</li>
+<li><code>https://raw.githubusercontent.com/用户名/RepositoryName/分支名</code>，自定义域名需要按照这样去填写</li>
+<li>但是由于 Github 在国内的访问速度太慢，所以我们使用 <a href="https://www.jsdelivr.com/">jsdelivr</a> 加速，只需要把自定义域名修改一下就可以了:<code>https://cdn.jsdelivr.net/gh/</code>用户名/RepositoryName</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>将上面的步骤设置好之后，就可以愉快地写 Markdown 了。上传图片有快捷键，默认的是 <code>Ctrl+Shift+P</code>, 可以将剪切板上的图片快捷上传。</p>
+<p>原文链接：<a href="https://howiehye.top/">https://howiehye.top/</a></p>
+]]></content>
+      <categories>
+        <category>Picgo</category>
+      </categories>
+      <tags>
+        <tag>Picgo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Jenkins拉取github仓库代码执行构建并自动发邮件通知</title>
     <url>/2020/08/23/Jenkinsgithub/</url>
     <content><![CDATA[<p>Jenkins 常用的就是项目构建，一般构建都需要从版本控制平台上面拉取项目代码到 Jenkins 服务器上构建。我主要使用的版本控制平台是 GitHub，所以这里就分享一下 Jenkins + GitHub 的基本构建配置过程。</p>
@@ -2164,6 +2212,26 @@ title: 我的朋友们 # 可选，这是友链页的标题
       </tags>
   </entry>
   <entry>
+    <title>Jmeter连接数据库</title>
+    <url>/2020/08/23/jmeterconnectmysql/</url>
+    <content><![CDATA[<p>jmeter要链接mysql数据库，首先得下载mysql jdbc驱动包（注：驱动包的版本一定要与你数据库的版本匹配，驱动版本低于mysql版本有可能会导致连接失败报错）我这里下载的是mysql-connector-java-5.1.23-bin.jar,。</p>
+<p>下载地址：<a href="http://www.java2s.com/Code/Jar/m/Downloadmysqlconnectorjava5123binjar.htm">http://www.java2s.com/Code/Jar/m/Downloadmysqlconnectorjava5123binjar.htm</a></p>
+<p>下载好之后解压将jar包放到\jmeter\apache-jmeter-5.0\lib目录下</p>
+<p>好，接下来进入正题！</p>
+<h2 id="1、添加一个线程组"><a href="#1、添加一个线程组" class="headerlink" title="1、添加一个线程组"></a>1、添加一个线程组</h2><p><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_03%20(2).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_03%20(2).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"></p>
+<h2 id="2、线程组下新建一个JDBC-Connection-Configuration配置元件，详细配置如下图："><a href="#2、线程组下新建一个JDBC-Connection-Configuration配置元件，详细配置如下图：" class="headerlink" title="2、线程组下新建一个JDBC Connection Configuration配置元件，详细配置如下图："></a>2、线程组下新建一个JDBC Connection Configuration配置元件，详细配置如下图：</h2><p><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_03%20(3).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_03%20(3).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"></p>
+<h2 id="3、然后添加一个取样器-JDBC-request"><a href="#3、然后添加一个取样器-JDBC-request" class="headerlink" title="3、然后添加一个取样器 JDBC request"></a>3、然后添加一个取样器 JDBC request</h2><p><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_03%20(4).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_03%20(4).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"></p>
+<h2 id="4、最后添加一个监听器-查看结果树查看响应结果"><a href="#4、最后添加一个监听器-查看结果树查看响应结果" class="headerlink" title="4、最后添加一个监听器 查看结果树查看响应结果"></a>4、最后添加一个监听器 查看结果树查看响应结果</h2><p><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_03%20(1).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_03%20(1).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>好了，以上就是一个最简单的jmeter连接数据库的脚本</p>
+]]></content>
+      <categories>
+        <category>Jmeter</category>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>Mysql</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Linux基础</title>
     <url>/2020/08/23/linuxfoundation01/</url>
     <content><![CDATA[<h1 id="linux简介"><a href="#linux简介" class="headerlink" title="linux简介"></a>linux简介</h1><h2 id="1、基础命令"><a href="#1、基础命令" class="headerlink" title="1、基础命令"></a>1、基础命令</h2><h3 id="1-1、系统命令"><a href="#1-1、系统命令" class="headerlink" title="1.1、系统命令"></a>1.1、系统命令</h3><p>init 0  – 关机<br>init 6  – 重启，也可以用reboot命令</p>
@@ -2237,26 +2305,6 @@ export JAVA_HOME JRE_HOME PATH CLASSPATH</code></pre>
       </categories>
       <tags>
         <tag>Linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Jmeter连接数据库</title>
-    <url>/2020/08/23/jmeterconnectmysql/</url>
-    <content><![CDATA[<p>jmeter要链接mysql数据库，首先得下载mysql jdbc驱动包（注：驱动包的版本一定要与你数据库的版本匹配，驱动版本低于mysql版本有可能会导致连接失败报错）我这里下载的是mysql-connector-java-5.1.23-bin.jar,。</p>
-<p>下载地址：<a href="http://www.java2s.com/Code/Jar/m/Downloadmysqlconnectorjava5123binjar.htm">http://www.java2s.com/Code/Jar/m/Downloadmysqlconnectorjava5123binjar.htm</a></p>
-<p>下载好之后解压将jar包放到\jmeter\apache-jmeter-5.0\lib目录下</p>
-<p>好，接下来进入正题！</p>
-<h2 id="1、添加一个线程组"><a href="#1、添加一个线程组" class="headerlink" title="1、添加一个线程组"></a>1、添加一个线程组</h2><p><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_03%20(2).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_03%20(2).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"></p>
-<h2 id="2、线程组下新建一个JDBC-Connection-Configuration配置元件，详细配置如下图："><a href="#2、线程组下新建一个JDBC-Connection-Configuration配置元件，详细配置如下图：" class="headerlink" title="2、线程组下新建一个JDBC Connection Configuration配置元件，详细配置如下图："></a>2、线程组下新建一个JDBC Connection Configuration配置元件，详细配置如下图：</h2><p><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_03%20(3).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_03%20(3).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"></p>
-<h2 id="3、然后添加一个取样器-JDBC-request"><a href="#3、然后添加一个取样器-JDBC-request" class="headerlink" title="3、然后添加一个取样器 JDBC request"></a>3、然后添加一个取样器 JDBC request</h2><p><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_03%20(4).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_03%20(4).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"></p>
-<h2 id="4、最后添加一个监听器-查看结果树查看响应结果"><a href="#4、最后添加一个监听器-查看结果树查看响应结果" class="headerlink" title="4、最后添加一个监听器 查看结果树查看响应结果"></a>4、最后添加一个监听器 查看结果树查看响应结果</h2><p><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_03%20(1).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_03%20(1).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>好了，以上就是一个最简单的jmeter连接数据库的脚本</p>
-]]></content>
-      <categories>
-        <category>Jmeter</category>
-        <category>数据库</category>
-      </categories>
-      <tags>
-        <tag>Mysql</tag>
       </tags>
   </entry>
   <entry>
@@ -4312,509 +4360,6 @@ public class Test10 &#123;
       </tags>
   </entry>
   <entry>
-    <title>java学习-ArrayList集合&amp;学生管理系统</title>
-    <url>/2021/01/19/20210119009/</url>
-    <content><![CDATA[<h2 id="1-ArrayList"><a href="#1-ArrayList" class="headerlink" title="1.ArrayList"></a>1.ArrayList</h2><h3 id="1-1ArrayList类概述"><a href="#1-1ArrayList类概述" class="headerlink" title="1.1ArrayList类概述"></a>1.1ArrayList类概述</h3><ul>
-<li><p>什么是集合</p>
-<p>​    提供一种存储空间可变的存储模型，存储的数据容量可以发生改变</p>
-</li>
-<li><p>ArrayList集合的特点</p>
-<p>​    底层是数组实现的，长度可以变化</p>
-</li>
-<li><p>泛型的使用</p>
-<p>​    用于约束集合中存储元素的数据类型</p>
-</li>
-</ul>
-<h3 id="1-2ArrayList类常用方法"><a href="#1-2ArrayList类常用方法" class="headerlink" title="1.2ArrayList类常用方法"></a>1.2ArrayList类常用方法</h3><h4 id="1-2-1构造方法"><a href="#1-2-1构造方法" class="headerlink" title="1.2.1构造方法"></a>1.2.1构造方法</h4><table>
-<thead>
-<tr>
-<th>方法名</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>public ArrayList()</td>
-<td>创建一个空的集合对象</td>
-</tr>
-</tbody></table>
-<h4 id="1-2-2成员方法"><a href="#1-2-2成员方法" class="headerlink" title="1.2.2成员方法"></a>1.2.2成员方法</h4><table>
-<thead>
-<tr>
-<th>方法名</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>public boolean   remove(Object o)</td>
-<td>删除指定的元素，返回删除是否成功</td>
-</tr>
-<tr>
-<td>public E   remove(int   index)</td>
-<td>删除指定索引处的元素，返回被删除的元素</td>
-</tr>
-<tr>
-<td>public E   set(int index,E   element)</td>
-<td>修改指定索引处的元素，返回被修改的元素</td>
-</tr>
-<tr>
-<td>public E   get(int   index)</td>
-<td>返回指定索引处的元素</td>
-</tr>
-<tr>
-<td>public int   size()</td>
-<td>返回集合中的元素的个数</td>
-</tr>
-<tr>
-<td>public boolean   add(E e)</td>
-<td>将指定的元素追加到此集合的末尾</td>
-</tr>
-<tr>
-<td>public void   add(int index,E   element)</td>
-<td>在此集合中的指定位置插入指定的元素</td>
-</tr>
-</tbody></table>
-<h4 id="1-2-3示例代码"><a href="#1-2-3示例代码" class="headerlink" title="1.2.3示例代码"></a>1.2.3示例代码</h4><pre><code class="java">public class ArrayListDemo02 &#123;
-    public static void main(String[] args) &#123;
-        //创建集合
-        ArrayList&lt;String&gt; array = new ArrayList&lt;String&gt;();
-
-        //添加元素
-        array.add(&quot;hello&quot;);
-        array.add(&quot;world&quot;);
-        array.add(&quot;java&quot;);
-
-        //public boolean remove(Object o)：删除指定的元素，返回删除是否成功
-//        System.out.println(array.remove(&quot;world&quot;));
-//        System.out.println(array.remove(&quot;javaee&quot;));
-
-        //public E remove(int index)：删除指定索引处的元素，返回被删除的元素
-//        System.out.println(array.remove(1));
-
-        //IndexOutOfBoundsException
-//        System.out.println(array.remove(3));
-
-        //public E set(int index,E element)：修改指定索引处的元素，返回被修改的元素
-//        System.out.println(array.set(1,&quot;javaee&quot;));
-
-        //IndexOutOfBoundsException
-//        System.out.println(array.set(3,&quot;javaee&quot;));
-
-        //public E get(int index)：返回指定索引处的元素
-//        System.out.println(array.get(0));
-//        System.out.println(array.get(1));
-//        System.out.println(array.get(2));
-        //System.out.println(array.get(3)); //？？？？？？ 自己测试
-
-        //public int size()：返回集合中的元素的个数
-        System.out.println(array.size());
-
-        //输出集合
-        System.out.println(&quot;array:&quot; + array);
-    &#125;
-&#125;</code></pre>
-<h3 id="1-3ArrayList存储字符串并遍历"><a href="#1-3ArrayList存储字符串并遍历" class="headerlink" title="1.3ArrayList存储字符串并遍历"></a>1.3ArrayList存储字符串并遍历</h3><h4 id="1-3-1案例需求"><a href="#1-3-1案例需求" class="headerlink" title="1.3.1案例需求"></a>1.3.1案例需求</h4><p>​    创建一个存储字符串的集合，存储3个字符串元素，使用程序实现在控制台遍历该集合</p>
-<h4 id="1-3-2代码实现"><a href="#1-3-2代码实现" class="headerlink" title="1.3.2代码实现"></a>1.3.2代码实现</h4><pre><code class="java">/*
-    思路：
-        1:创建集合对象
-        2:往集合中添加字符串对象
-        3:遍历集合，首先要能够获取到集合中的每一个元素，这个通过get(int index)方法实现
-        4:遍历集合，其次要能够获取到集合的长度，这个通过size()方法实现
-        5:遍历集合的通用格式
- */
-public class ArrayListTest01 &#123;
-    public static void main(String[] args) &#123;
-        //创建集合对象
-        ArrayList&lt;String&gt; array = new ArrayList&lt;String&gt;();
-
-        //往集合中添加字符串对象
-        array.add(&quot;刘正风&quot;);
-        array.add(&quot;左冷禅&quot;);
-        array.add(&quot;风清扬&quot;);
-
-        //遍历集合，其次要能够获取到集合的长度，这个通过size()方法实现
-//        System.out.println(array.size());
-
-        //遍历集合的通用格式
-        for(int i=0; i&lt;array.size(); i++) &#123;
-            String s = array.get(i);
-            System.out.println(s);
-        &#125;
-    &#125;
-&#125;</code></pre>
-<h3 id="1-4ArrayList存储学生对象并遍历"><a href="#1-4ArrayList存储学生对象并遍历" class="headerlink" title="1.4ArrayList存储学生对象并遍历"></a>1.4ArrayList存储学生对象并遍历</h3><h4 id="1-4-1案例需求"><a href="#1-4-1案例需求" class="headerlink" title="1.4.1案例需求"></a>1.4.1案例需求</h4><p>​    创建一个存储学生对象的集合，存储3个学生对象，使用程序实现在控制台遍历该集合</p>
-<h4 id="1-4-2代码实现"><a href="#1-4-2代码实现" class="headerlink" title="1.4.2代码实现"></a>1.4.2代码实现</h4><pre><code class="java">/*
-    思路：
-        1:定义学生类
-        2:创建集合对象
-        3:创建学生对象
-        4:添加学生对象到集合中
-        5:遍历集合，采用通用遍历格式实现
- */
-public class ArrayListTest02 &#123;
-    public static void main(String[] args) &#123;
-        //创建集合对象
-        ArrayList&lt;Student&gt; array = new ArrayList&lt;&gt;();
-
-        //创建学生对象
-        Student s1 = new Student(&quot;林青霞&quot;, 30);
-        Student s2 = new Student(&quot;风清扬&quot;, 33);
-        Student s3 = new Student(&quot;张曼玉&quot;, 18);
-
-        //添加学生对象到集合中
-        array.add(s1);
-        array.add(s2);
-        array.add(s3);
-
-        //遍历集合，采用通用遍历格式实现
-        for (int i = 0; i &lt; array.size(); i++) &#123;
-            Student s = array.get(i);
-            System.out.println(s.getName() + &quot;,&quot; + s.getAge());
-        &#125;
-    &#125;
-&#125;</code></pre>
-<h3 id="1-5ArrayList存储学生对象并遍历升级版"><a href="#1-5ArrayList存储学生对象并遍历升级版" class="headerlink" title="1.5ArrayList存储学生对象并遍历升级版"></a>1.5ArrayList存储学生对象并遍历升级版</h3><h4 id="1-5-1案例需求"><a href="#1-5-1案例需求" class="headerlink" title="1.5.1案例需求"></a>1.5.1案例需求</h4><p>​    创建一个存储学生对象的集合，存储3个学生对象，使用程序实现在控制台遍历该集合</p>
-<p>​        学生的姓名和年龄来自于键盘录入</p>
-<h4 id="1-5-2代码实现"><a href="#1-5-2代码实现" class="headerlink" title="1.5.2代码实现"></a>1.5.2代码实现</h4><pre><code class="java">/*
-    思路：
-        1:定义学生类，为了键盘录入数据方便，把学生类中的成员变量都定义为String类型
-        2:创建集合对象
-        3:键盘录入学生对象所需要的数据
-        4:创建学生对象，把键盘录入的数据赋值给学生对象的成员变量
-        5:往集合中添加学生对象
-        6:遍历集合，采用通用遍历格式实现
- */
-public class ArrayListTest &#123;
-    public static void main(String[] args) &#123;
-        //创建集合对象
-        ArrayList&lt;Student&gt; array = new ArrayList&lt;Student&gt;();
-
-        //为了提高代码的复用性，我们用方法来改进程序
-        addStudent(array);
-        addStudent(array);
-        addStudent(array);
-
-        //遍历集合，采用通用遍历格式实现
-        for (int i = 0; i &lt; array.size(); i++) &#123;
-            Student s = array.get(i);
-            System.out.println(s.getName() + &quot;,&quot; + s.getAge());
-        &#125;
-    &#125;
-
-    /*
-        两个明确：
-            返回值类型：void
-            参数：ArrayList&lt;Student&gt; array
-     */
-    public static void addStudent(ArrayList&lt;Student&gt; array) &#123;
-        //键盘录入学生对象所需要的数据
-        Scanner sc = new Scanner(System.in);
-
-        System.out.println(&quot;请输入学生姓名:&quot;);
-        String name = sc.nextLine();
-
-        System.out.println(&quot;请输入学生年龄:&quot;);
-        String age = sc.nextLine();
-
-        //创建学生对象，把键盘录入的数据赋值给学生对象的成员变量
-        Student s = new Student();
-        s.setName(name);
-        s.setAge(age);
-
-        //往集合中添加学生对象
-        array.add(s);
-    &#125;
-&#125;</code></pre>
-<h2 id="2-学生管理系统"><a href="#2-学生管理系统" class="headerlink" title="2.学生管理系统"></a>2.学生管理系统</h2><h3 id="2-1学生管理系统实现步骤"><a href="#2-1学生管理系统实现步骤" class="headerlink" title="2.1学生管理系统实现步骤"></a>2.1学生管理系统实现步骤</h3><ul>
-<li><p>案例需求</p>
-<p>​    针对目前我们的所学内容，完成一个综合案例：学生管理系统。该系统主要功能如下：</p>
-<p>​    添加学生：通过键盘录入学生信息，添加到集合中</p>
-<p>​    删除学生：通过键盘录入要删除学生的学号，将该学生对象从集合中删除</p>
-<p>​    修改学生：通过键盘录入要修改学生的学号，将该学生对象其他信息进行修改</p>
-<p>​    查看学生：将集合中的学生对象信息进行展示</p>
-<p>​    退出系统：结束程序</p>
-</li>
-<li><p>实现步骤</p>
-<ol>
-<li><p>定义学生类，包含以下成员变量</p>
-<p>​       private String sid            // 学生id</p>
-<p>​       private String name       // 学生姓名</p>
-<p>​       private String age          // 学生年龄</p>
-<p>​       private String address   // 学生所在地</p>
-</li>
-<li><p>学生管理系统主界面的搭建步骤</p>
-<p>2.1 用输出语句完成主界面的编写<br>2.2 用Scanner实现键盘输入<br>2.3 用switch语句完成选择的功能<br>2.4 用循环完成功能结束后再次回到主界面</p>
-</li>
-<li><p>学生管理系统的添加学生功能实现步骤</p>
-<p>3.1 定义一个方法，接收ArrayList<Student>集合<br>3.2 方法内完成添加学生的功能<br>​         ①键盘录入学生信息<br>​         ②根据录入的信息创建学生对象<br>​         ③将学生对象添加到集合中<br>​         ④提示添加成功信息<br>3.3 在添加学生的选项里调用添加学生的方法</p>
-</li>
-<li><p>学生管理系统的查看学生功能实现步骤</p>
-<p>4.1 定义一个方法，接收ArrayList<Student>集合<br>4.2 方法内遍历集合，将学生信息进行输出<br>4.3 在查看所有学生选项里调用查看学生方法</p>
-</li>
-<li><p>学生管理系统的删除学生功能实现步骤</p>
-<p>5.1 定义一个方法，接收ArrayList<Student>集合<br>5.2 方法中接收要删除学生的学号<br>5.3 遍历集合，获取每个学生对象<br>5.4 使用学生对象的学号和录入的要删除的学号进行比较,如果相同，则将当前学生对象从集合中删除<br>5.5 在删除学生选项里调用删除学生的方法</p>
-</li>
-<li><p>学生管理系统的修改学生功能实现步骤</p>
-<p>6.1 定义一个方法，接收ArrayList<Student>集合<br>6.2 方法中接收要修改学生的学号<br>6.3 通过键盘录入学生对象所需的信息，并创建对象<br>6.4 遍历集合，获取每一个学生对象。并和录入的修改学生学号进行比较.如果相同，则使用新学生对象替换当前学生对象<br>6.5 在修改学生选项里调用修改学生的方法</p>
-</li>
-<li><p>退出系统</p>
-<p>使用System.exit(0);退出JVM</p>
-</li>
-</ol>
-</li>
-</ul>
-<h3 id="2-2学生类的定义"><a href="#2-2学生类的定义" class="headerlink" title="2.2学生类的定义"></a>2.2学生类的定义</h3><pre><code class="java">public class Student &#123;
-    //学号
-    private String sid;
-    //姓名
-    private String name;
-    //年龄
-    private String age;
-    //居住地
-    private String address;
-
-    public Student() &#123;
-    &#125;
-
-    public Student(String sid, String name, String age, String address) &#123;
-        this.sid = sid;
-        this.name = name;
-        this.age = age;
-        this.address = address;
-    &#125;
-
-    public String getSid() &#123;
-        return sid;
-    &#125;
-
-    public void setSid(String sid) &#123;
-        this.sid = sid;
-    &#125;
-
-    public String getName() &#123;
-        return name;
-    &#125;
-
-    public void setName(String name) &#123;
-        this.name = name;
-    &#125;
-
-    public String getAge() &#123;
-        return age;
-    &#125;
-
-    public void setAge(String age) &#123;
-        this.age = age;
-    &#125;
-
-    public String getAddress() &#123;
-        return address;
-    &#125;
-
-    public void setAddress(String address) &#123;
-        this.address = address;
-    &#125;
-&#125;</code></pre>
-<h3 id="2-3测试类的定义"><a href="#2-3测试类的定义" class="headerlink" title="2.3测试类的定义"></a>2.3测试类的定义</h3><pre><code class="java">public class StudentManager &#123;
-    /*
-        1:用输出语句完成主界面的编写
-        2:用Scanner实现键盘录入数据
-        3:用switch语句完成操作的选择
-        4:用循环完成再次回到主界面
-    */
-    public static void main(String[] args) &#123;
-        //创建集合对象，用于保存学生数据信息
-        ArrayList&lt;Student&gt; array = new ArrayList&lt;Student&gt;();
-
-        //用循环完成再次回到主界面
-        while (true) &#123;
-            //用输出语句完成主界面的编写
-            System.out.println(&quot;--------欢迎来到学生管理系统--------&quot;);
-            System.out.println(&quot;1 添加学生&quot;);
-            System.out.println(&quot;2 删除学生&quot;);
-            System.out.println(&quot;3 修改学生&quot;);
-            System.out.println(&quot;4 查看所有学生&quot;);
-            System.out.println(&quot;5 退出&quot;);
-            System.out.println(&quot;请输入你的选择：&quot;);
-
-            //用Scanner实现键盘录入数据
-            Scanner sc = new Scanner(System.in);
-            String line = sc.nextLine();
-
-            //用switch语句完成操作的选择
-            switch (line) &#123;
-                case &quot;1&quot;:
-                    addStudent(array);
-                    break;
-                case &quot;2&quot;:
-                    deleteStudent(array);
-                    break;
-                case &quot;3&quot;:
-                    updateStudent(array);
-                    break;
-                case &quot;4&quot;:
-                    findAllStudent(array);
-                    break;
-                case &quot;5&quot;:
-                    System.out.println(&quot;谢谢使用&quot;);
-                    System.exit(0); //JVM退出
-            &#125;
-        &#125;
-    &#125;
-
-    //定义一个方法，用于添加学生信息
-    public static void addStudent(ArrayList&lt;Student&gt; array) &#123;
-        //键盘录入学生对象所需要的数据,显示提示信息，提示要输入何种信息
-        Scanner sc = new Scanner(System.in);
-
-        String sid;
-
-        while (true) &#123;
-            System.out.println(&quot;请输入学生学号：&quot;);
-            sid = sc.nextLine();
-
-            boolean flag = isUsed(array, sid);
-            if (flag) &#123;
-                System.out.println(&quot;你输入的学号已经被占用，请重新输入&quot;);
-            &#125; else &#123;
-                break;
-            &#125;
-        &#125;
-
-        System.out.println(&quot;请输入学生姓名：&quot;);
-        String name = sc.nextLine();
-
-        System.out.println(&quot;请输入学生年龄：&quot;);
-        String age = sc.nextLine();
-
-        System.out.println(&quot;请输入学生居住地：&quot;);
-        String address = sc.nextLine();
-
-        //创建学生对象，把键盘录入的数据赋值给学生对象的成员变量
-        Student s = new Student();
-        s.setSid(sid);
-        s.setName(name);
-        s.setAge(age);
-        s.setAddress(address);
-
-        //将学生对象添加到集合中
-        array.add(s);
-
-        //给出添加成功提示
-        System.out.println(&quot;添加学生成功&quot;);
-    &#125;
-
-    //定义一个方法，判断学号是否被使用
-    public static boolean isUsed(ArrayList&lt;Student&gt; array, String sid) &#123;
-        //如果与集合中的某一个学生学号相同，返回true;如果都不相同，返回false
-        boolean flag = false;
-
-        for(int i=0; i&lt;array.size(); i++) &#123;
-            Student s = array.get(i);
-            if(s.getSid().equals(sid)) &#123;
-                flag = true;
-                break;
-            &#125;
-        &#125;
-
-        return flag;
-    &#125;
-
-
-    //定义一个方法，用于查看学生信息
-    public static void findAllStudent(ArrayList&lt;Student&gt; array) &#123;
-        //判断集合中是否有数据，如果没有显示提示信息
-        if (array.size() == 0) &#123;
-            System.out.println(&quot;无信息，请先添加信息再查询&quot;);
-            //为了让程序不再往下执行，我们在这里写上return;
-            return;
-        &#125;
-
-        //显示表头信息
-        //\t其实是一个tab键的位置
-        System.out.println(&quot;学号\t\t\t姓名\t\t年龄\t\t居住地&quot;);
-
-        //将集合中数据取出按照对应格式显示学生信息，年龄显示补充“岁”
-        for (int i = 0; i &lt; array.size(); i++) &#123;
-            Student s = array.get(i);
-            System.out.println(s.getSid() + &quot;\t&quot; + s.getName() + &quot;\t&quot; + s.getAge() + &quot;岁\t\t&quot; + s.getAddress());
-        &#125;
-    &#125;
-
-    //定义一个方法，用于删除学生信息
-    public static void deleteStudent(ArrayList&lt;Student&gt; array) &#123;
-        //键盘录入要删除的学生学号,显示提示信息
-        Scanner sc = new Scanner(System.in);
-
-        System.out.println(&quot;请输入你要删除的学生的学号：&quot;);
-        String sid = sc.nextLine();
-
-        //在删除/修改学生操作前，对学号是否存在进行判断
-        //如果不存在，显示提示信息
-        //如果存在，执行删除/修改操作
-
-        int index = -1;
-
-        for (int i = 0; i &lt; array.size(); i++) &#123;
-            Student s = array.get(i);
-            if (s.getSid().equals(sid)) &#123;
-                index = i;
-                break;
-            &#125;
-        &#125;
-
-        if (index == -1) &#123;
-            System.out.println(&quot;该信息不存在，请重新输入&quot;);
-        &#125; else &#123;
-            array.remove(index);
-            //给出删除成功提示
-            System.out.println(&quot;删除学生成功&quot;);
-        &#125;
-    &#125;
-
-    //定义一个方法，用于修改学生信息
-    public static void updateStudent(ArrayList&lt;Student&gt; array) &#123;
-        //键盘录入要修改的学生学号，显示提示信息
-        Scanner sc = new Scanner(System.in);
-
-        System.out.println(&quot;请输入你要修改的学生的学号：&quot;);
-        String sid = sc.nextLine();
-
-        //键盘录入要修改的学生信息
-        System.out.println(&quot;请输入学生新姓名：&quot;);
-        String name = sc.nextLine();
-        System.out.println(&quot;请输入学生新年龄：&quot;);
-        String age = sc.nextLine();
-        System.out.println(&quot;请输入学生新居住地：&quot;);
-        String address = sc.nextLine();
-
-        //创建学生对象
-        Student s = new Student();
-        s.setSid(sid);
-        s.setName(name);
-        s.setAge(age);
-        s.setAddress(address);
-
-        //遍历集合修改对应的学生信息
-        for (int i = 0; i &lt; array.size(); i++) &#123;
-            Student student = array.get(i);
-            if (student.getSid().equals(sid)) &#123;
-                array.set(i, s);
-            &#125;
-        &#125;
-
-        //给出修改成功提示
-        System.out.println(&quot;修改学生成功&quot;);
-    &#125;
-&#125;</code></pre>
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>java学习-常用API</title>
     <url>/2021/01/19/20210119008/</url>
     <content><![CDATA[<h2 id="1-API"><a href="#1-API" class="headerlink" title="1.API"></a>1.API</h2><h3 id="1-1API概述"><a href="#1-1API概述" class="headerlink" title="1.1API概述"></a>1.1API概述</h3><ul>
@@ -5406,6 +4951,509 @@ public class StringBuilderTest02 &#123;
       </tags>
   </entry>
   <entry>
+    <title>java学习-ArrayList集合&amp;学生管理系统</title>
+    <url>/2021/01/19/20210119009/</url>
+    <content><![CDATA[<h2 id="1-ArrayList"><a href="#1-ArrayList" class="headerlink" title="1.ArrayList"></a>1.ArrayList</h2><h3 id="1-1ArrayList类概述"><a href="#1-1ArrayList类概述" class="headerlink" title="1.1ArrayList类概述"></a>1.1ArrayList类概述</h3><ul>
+<li><p>什么是集合</p>
+<p>​    提供一种存储空间可变的存储模型，存储的数据容量可以发生改变</p>
+</li>
+<li><p>ArrayList集合的特点</p>
+<p>​    底层是数组实现的，长度可以变化</p>
+</li>
+<li><p>泛型的使用</p>
+<p>​    用于约束集合中存储元素的数据类型</p>
+</li>
+</ul>
+<h3 id="1-2ArrayList类常用方法"><a href="#1-2ArrayList类常用方法" class="headerlink" title="1.2ArrayList类常用方法"></a>1.2ArrayList类常用方法</h3><h4 id="1-2-1构造方法"><a href="#1-2-1构造方法" class="headerlink" title="1.2.1构造方法"></a>1.2.1构造方法</h4><table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public ArrayList()</td>
+<td>创建一个空的集合对象</td>
+</tr>
+</tbody></table>
+<h4 id="1-2-2成员方法"><a href="#1-2-2成员方法" class="headerlink" title="1.2.2成员方法"></a>1.2.2成员方法</h4><table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public boolean   remove(Object o)</td>
+<td>删除指定的元素，返回删除是否成功</td>
+</tr>
+<tr>
+<td>public E   remove(int   index)</td>
+<td>删除指定索引处的元素，返回被删除的元素</td>
+</tr>
+<tr>
+<td>public E   set(int index,E   element)</td>
+<td>修改指定索引处的元素，返回被修改的元素</td>
+</tr>
+<tr>
+<td>public E   get(int   index)</td>
+<td>返回指定索引处的元素</td>
+</tr>
+<tr>
+<td>public int   size()</td>
+<td>返回集合中的元素的个数</td>
+</tr>
+<tr>
+<td>public boolean   add(E e)</td>
+<td>将指定的元素追加到此集合的末尾</td>
+</tr>
+<tr>
+<td>public void   add(int index,E   element)</td>
+<td>在此集合中的指定位置插入指定的元素</td>
+</tr>
+</tbody></table>
+<h4 id="1-2-3示例代码"><a href="#1-2-3示例代码" class="headerlink" title="1.2.3示例代码"></a>1.2.3示例代码</h4><pre><code class="java">public class ArrayListDemo02 &#123;
+    public static void main(String[] args) &#123;
+        //创建集合
+        ArrayList&lt;String&gt; array = new ArrayList&lt;String&gt;();
+
+        //添加元素
+        array.add(&quot;hello&quot;);
+        array.add(&quot;world&quot;);
+        array.add(&quot;java&quot;);
+
+        //public boolean remove(Object o)：删除指定的元素，返回删除是否成功
+//        System.out.println(array.remove(&quot;world&quot;));
+//        System.out.println(array.remove(&quot;javaee&quot;));
+
+        //public E remove(int index)：删除指定索引处的元素，返回被删除的元素
+//        System.out.println(array.remove(1));
+
+        //IndexOutOfBoundsException
+//        System.out.println(array.remove(3));
+
+        //public E set(int index,E element)：修改指定索引处的元素，返回被修改的元素
+//        System.out.println(array.set(1,&quot;javaee&quot;));
+
+        //IndexOutOfBoundsException
+//        System.out.println(array.set(3,&quot;javaee&quot;));
+
+        //public E get(int index)：返回指定索引处的元素
+//        System.out.println(array.get(0));
+//        System.out.println(array.get(1));
+//        System.out.println(array.get(2));
+        //System.out.println(array.get(3)); //？？？？？？ 自己测试
+
+        //public int size()：返回集合中的元素的个数
+        System.out.println(array.size());
+
+        //输出集合
+        System.out.println(&quot;array:&quot; + array);
+    &#125;
+&#125;</code></pre>
+<h3 id="1-3ArrayList存储字符串并遍历"><a href="#1-3ArrayList存储字符串并遍历" class="headerlink" title="1.3ArrayList存储字符串并遍历"></a>1.3ArrayList存储字符串并遍历</h3><h4 id="1-3-1案例需求"><a href="#1-3-1案例需求" class="headerlink" title="1.3.1案例需求"></a>1.3.1案例需求</h4><p>​    创建一个存储字符串的集合，存储3个字符串元素，使用程序实现在控制台遍历该集合</p>
+<h4 id="1-3-2代码实现"><a href="#1-3-2代码实现" class="headerlink" title="1.3.2代码实现"></a>1.3.2代码实现</h4><pre><code class="java">/*
+    思路：
+        1:创建集合对象
+        2:往集合中添加字符串对象
+        3:遍历集合，首先要能够获取到集合中的每一个元素，这个通过get(int index)方法实现
+        4:遍历集合，其次要能够获取到集合的长度，这个通过size()方法实现
+        5:遍历集合的通用格式
+ */
+public class ArrayListTest01 &#123;
+    public static void main(String[] args) &#123;
+        //创建集合对象
+        ArrayList&lt;String&gt; array = new ArrayList&lt;String&gt;();
+
+        //往集合中添加字符串对象
+        array.add(&quot;刘正风&quot;);
+        array.add(&quot;左冷禅&quot;);
+        array.add(&quot;风清扬&quot;);
+
+        //遍历集合，其次要能够获取到集合的长度，这个通过size()方法实现
+//        System.out.println(array.size());
+
+        //遍历集合的通用格式
+        for(int i=0; i&lt;array.size(); i++) &#123;
+            String s = array.get(i);
+            System.out.println(s);
+        &#125;
+    &#125;
+&#125;</code></pre>
+<h3 id="1-4ArrayList存储学生对象并遍历"><a href="#1-4ArrayList存储学生对象并遍历" class="headerlink" title="1.4ArrayList存储学生对象并遍历"></a>1.4ArrayList存储学生对象并遍历</h3><h4 id="1-4-1案例需求"><a href="#1-4-1案例需求" class="headerlink" title="1.4.1案例需求"></a>1.4.1案例需求</h4><p>​    创建一个存储学生对象的集合，存储3个学生对象，使用程序实现在控制台遍历该集合</p>
+<h4 id="1-4-2代码实现"><a href="#1-4-2代码实现" class="headerlink" title="1.4.2代码实现"></a>1.4.2代码实现</h4><pre><code class="java">/*
+    思路：
+        1:定义学生类
+        2:创建集合对象
+        3:创建学生对象
+        4:添加学生对象到集合中
+        5:遍历集合，采用通用遍历格式实现
+ */
+public class ArrayListTest02 &#123;
+    public static void main(String[] args) &#123;
+        //创建集合对象
+        ArrayList&lt;Student&gt; array = new ArrayList&lt;&gt;();
+
+        //创建学生对象
+        Student s1 = new Student(&quot;林青霞&quot;, 30);
+        Student s2 = new Student(&quot;风清扬&quot;, 33);
+        Student s3 = new Student(&quot;张曼玉&quot;, 18);
+
+        //添加学生对象到集合中
+        array.add(s1);
+        array.add(s2);
+        array.add(s3);
+
+        //遍历集合，采用通用遍历格式实现
+        for (int i = 0; i &lt; array.size(); i++) &#123;
+            Student s = array.get(i);
+            System.out.println(s.getName() + &quot;,&quot; + s.getAge());
+        &#125;
+    &#125;
+&#125;</code></pre>
+<h3 id="1-5ArrayList存储学生对象并遍历升级版"><a href="#1-5ArrayList存储学生对象并遍历升级版" class="headerlink" title="1.5ArrayList存储学生对象并遍历升级版"></a>1.5ArrayList存储学生对象并遍历升级版</h3><h4 id="1-5-1案例需求"><a href="#1-5-1案例需求" class="headerlink" title="1.5.1案例需求"></a>1.5.1案例需求</h4><p>​    创建一个存储学生对象的集合，存储3个学生对象，使用程序实现在控制台遍历该集合</p>
+<p>​        学生的姓名和年龄来自于键盘录入</p>
+<h4 id="1-5-2代码实现"><a href="#1-5-2代码实现" class="headerlink" title="1.5.2代码实现"></a>1.5.2代码实现</h4><pre><code class="java">/*
+    思路：
+        1:定义学生类，为了键盘录入数据方便，把学生类中的成员变量都定义为String类型
+        2:创建集合对象
+        3:键盘录入学生对象所需要的数据
+        4:创建学生对象，把键盘录入的数据赋值给学生对象的成员变量
+        5:往集合中添加学生对象
+        6:遍历集合，采用通用遍历格式实现
+ */
+public class ArrayListTest &#123;
+    public static void main(String[] args) &#123;
+        //创建集合对象
+        ArrayList&lt;Student&gt; array = new ArrayList&lt;Student&gt;();
+
+        //为了提高代码的复用性，我们用方法来改进程序
+        addStudent(array);
+        addStudent(array);
+        addStudent(array);
+
+        //遍历集合，采用通用遍历格式实现
+        for (int i = 0; i &lt; array.size(); i++) &#123;
+            Student s = array.get(i);
+            System.out.println(s.getName() + &quot;,&quot; + s.getAge());
+        &#125;
+    &#125;
+
+    /*
+        两个明确：
+            返回值类型：void
+            参数：ArrayList&lt;Student&gt; array
+     */
+    public static void addStudent(ArrayList&lt;Student&gt; array) &#123;
+        //键盘录入学生对象所需要的数据
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println(&quot;请输入学生姓名:&quot;);
+        String name = sc.nextLine();
+
+        System.out.println(&quot;请输入学生年龄:&quot;);
+        String age = sc.nextLine();
+
+        //创建学生对象，把键盘录入的数据赋值给学生对象的成员变量
+        Student s = new Student();
+        s.setName(name);
+        s.setAge(age);
+
+        //往集合中添加学生对象
+        array.add(s);
+    &#125;
+&#125;</code></pre>
+<h2 id="2-学生管理系统"><a href="#2-学生管理系统" class="headerlink" title="2.学生管理系统"></a>2.学生管理系统</h2><h3 id="2-1学生管理系统实现步骤"><a href="#2-1学生管理系统实现步骤" class="headerlink" title="2.1学生管理系统实现步骤"></a>2.1学生管理系统实现步骤</h3><ul>
+<li><p>案例需求</p>
+<p>​    针对目前我们的所学内容，完成一个综合案例：学生管理系统。该系统主要功能如下：</p>
+<p>​    添加学生：通过键盘录入学生信息，添加到集合中</p>
+<p>​    删除学生：通过键盘录入要删除学生的学号，将该学生对象从集合中删除</p>
+<p>​    修改学生：通过键盘录入要修改学生的学号，将该学生对象其他信息进行修改</p>
+<p>​    查看学生：将集合中的学生对象信息进行展示</p>
+<p>​    退出系统：结束程序</p>
+</li>
+<li><p>实现步骤</p>
+<ol>
+<li><p>定义学生类，包含以下成员变量</p>
+<p>​       private String sid            // 学生id</p>
+<p>​       private String name       // 学生姓名</p>
+<p>​       private String age          // 学生年龄</p>
+<p>​       private String address   // 学生所在地</p>
+</li>
+<li><p>学生管理系统主界面的搭建步骤</p>
+<p>2.1 用输出语句完成主界面的编写<br>2.2 用Scanner实现键盘输入<br>2.3 用switch语句完成选择的功能<br>2.4 用循环完成功能结束后再次回到主界面</p>
+</li>
+<li><p>学生管理系统的添加学生功能实现步骤</p>
+<p>3.1 定义一个方法，接收ArrayList<Student>集合<br>3.2 方法内完成添加学生的功能<br>​         ①键盘录入学生信息<br>​         ②根据录入的信息创建学生对象<br>​         ③将学生对象添加到集合中<br>​         ④提示添加成功信息<br>3.3 在添加学生的选项里调用添加学生的方法</p>
+</li>
+<li><p>学生管理系统的查看学生功能实现步骤</p>
+<p>4.1 定义一个方法，接收ArrayList<Student>集合<br>4.2 方法内遍历集合，将学生信息进行输出<br>4.3 在查看所有学生选项里调用查看学生方法</p>
+</li>
+<li><p>学生管理系统的删除学生功能实现步骤</p>
+<p>5.1 定义一个方法，接收ArrayList<Student>集合<br>5.2 方法中接收要删除学生的学号<br>5.3 遍历集合，获取每个学生对象<br>5.4 使用学生对象的学号和录入的要删除的学号进行比较,如果相同，则将当前学生对象从集合中删除<br>5.5 在删除学生选项里调用删除学生的方法</p>
+</li>
+<li><p>学生管理系统的修改学生功能实现步骤</p>
+<p>6.1 定义一个方法，接收ArrayList<Student>集合<br>6.2 方法中接收要修改学生的学号<br>6.3 通过键盘录入学生对象所需的信息，并创建对象<br>6.4 遍历集合，获取每一个学生对象。并和录入的修改学生学号进行比较.如果相同，则使用新学生对象替换当前学生对象<br>6.5 在修改学生选项里调用修改学生的方法</p>
+</li>
+<li><p>退出系统</p>
+<p>使用System.exit(0);退出JVM</p>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="2-2学生类的定义"><a href="#2-2学生类的定义" class="headerlink" title="2.2学生类的定义"></a>2.2学生类的定义</h3><pre><code class="java">public class Student &#123;
+    //学号
+    private String sid;
+    //姓名
+    private String name;
+    //年龄
+    private String age;
+    //居住地
+    private String address;
+
+    public Student() &#123;
+    &#125;
+
+    public Student(String sid, String name, String age, String address) &#123;
+        this.sid = sid;
+        this.name = name;
+        this.age = age;
+        this.address = address;
+    &#125;
+
+    public String getSid() &#123;
+        return sid;
+    &#125;
+
+    public void setSid(String sid) &#123;
+        this.sid = sid;
+    &#125;
+
+    public String getName() &#123;
+        return name;
+    &#125;
+
+    public void setName(String name) &#123;
+        this.name = name;
+    &#125;
+
+    public String getAge() &#123;
+        return age;
+    &#125;
+
+    public void setAge(String age) &#123;
+        this.age = age;
+    &#125;
+
+    public String getAddress() &#123;
+        return address;
+    &#125;
+
+    public void setAddress(String address) &#123;
+        this.address = address;
+    &#125;
+&#125;</code></pre>
+<h3 id="2-3测试类的定义"><a href="#2-3测试类的定义" class="headerlink" title="2.3测试类的定义"></a>2.3测试类的定义</h3><pre><code class="java">public class StudentManager &#123;
+    /*
+        1:用输出语句完成主界面的编写
+        2:用Scanner实现键盘录入数据
+        3:用switch语句完成操作的选择
+        4:用循环完成再次回到主界面
+    */
+    public static void main(String[] args) &#123;
+        //创建集合对象，用于保存学生数据信息
+        ArrayList&lt;Student&gt; array = new ArrayList&lt;Student&gt;();
+
+        //用循环完成再次回到主界面
+        while (true) &#123;
+            //用输出语句完成主界面的编写
+            System.out.println(&quot;--------欢迎来到学生管理系统--------&quot;);
+            System.out.println(&quot;1 添加学生&quot;);
+            System.out.println(&quot;2 删除学生&quot;);
+            System.out.println(&quot;3 修改学生&quot;);
+            System.out.println(&quot;4 查看所有学生&quot;);
+            System.out.println(&quot;5 退出&quot;);
+            System.out.println(&quot;请输入你的选择：&quot;);
+
+            //用Scanner实现键盘录入数据
+            Scanner sc = new Scanner(System.in);
+            String line = sc.nextLine();
+
+            //用switch语句完成操作的选择
+            switch (line) &#123;
+                case &quot;1&quot;:
+                    addStudent(array);
+                    break;
+                case &quot;2&quot;:
+                    deleteStudent(array);
+                    break;
+                case &quot;3&quot;:
+                    updateStudent(array);
+                    break;
+                case &quot;4&quot;:
+                    findAllStudent(array);
+                    break;
+                case &quot;5&quot;:
+                    System.out.println(&quot;谢谢使用&quot;);
+                    System.exit(0); //JVM退出
+            &#125;
+        &#125;
+    &#125;
+
+    //定义一个方法，用于添加学生信息
+    public static void addStudent(ArrayList&lt;Student&gt; array) &#123;
+        //键盘录入学生对象所需要的数据,显示提示信息，提示要输入何种信息
+        Scanner sc = new Scanner(System.in);
+
+        String sid;
+
+        while (true) &#123;
+            System.out.println(&quot;请输入学生学号：&quot;);
+            sid = sc.nextLine();
+
+            boolean flag = isUsed(array, sid);
+            if (flag) &#123;
+                System.out.println(&quot;你输入的学号已经被占用，请重新输入&quot;);
+            &#125; else &#123;
+                break;
+            &#125;
+        &#125;
+
+        System.out.println(&quot;请输入学生姓名：&quot;);
+        String name = sc.nextLine();
+
+        System.out.println(&quot;请输入学生年龄：&quot;);
+        String age = sc.nextLine();
+
+        System.out.println(&quot;请输入学生居住地：&quot;);
+        String address = sc.nextLine();
+
+        //创建学生对象，把键盘录入的数据赋值给学生对象的成员变量
+        Student s = new Student();
+        s.setSid(sid);
+        s.setName(name);
+        s.setAge(age);
+        s.setAddress(address);
+
+        //将学生对象添加到集合中
+        array.add(s);
+
+        //给出添加成功提示
+        System.out.println(&quot;添加学生成功&quot;);
+    &#125;
+
+    //定义一个方法，判断学号是否被使用
+    public static boolean isUsed(ArrayList&lt;Student&gt; array, String sid) &#123;
+        //如果与集合中的某一个学生学号相同，返回true;如果都不相同，返回false
+        boolean flag = false;
+
+        for(int i=0; i&lt;array.size(); i++) &#123;
+            Student s = array.get(i);
+            if(s.getSid().equals(sid)) &#123;
+                flag = true;
+                break;
+            &#125;
+        &#125;
+
+        return flag;
+    &#125;
+
+
+    //定义一个方法，用于查看学生信息
+    public static void findAllStudent(ArrayList&lt;Student&gt; array) &#123;
+        //判断集合中是否有数据，如果没有显示提示信息
+        if (array.size() == 0) &#123;
+            System.out.println(&quot;无信息，请先添加信息再查询&quot;);
+            //为了让程序不再往下执行，我们在这里写上return;
+            return;
+        &#125;
+
+        //显示表头信息
+        //\t其实是一个tab键的位置
+        System.out.println(&quot;学号\t\t\t姓名\t\t年龄\t\t居住地&quot;);
+
+        //将集合中数据取出按照对应格式显示学生信息，年龄显示补充“岁”
+        for (int i = 0; i &lt; array.size(); i++) &#123;
+            Student s = array.get(i);
+            System.out.println(s.getSid() + &quot;\t&quot; + s.getName() + &quot;\t&quot; + s.getAge() + &quot;岁\t\t&quot; + s.getAddress());
+        &#125;
+    &#125;
+
+    //定义一个方法，用于删除学生信息
+    public static void deleteStudent(ArrayList&lt;Student&gt; array) &#123;
+        //键盘录入要删除的学生学号,显示提示信息
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println(&quot;请输入你要删除的学生的学号：&quot;);
+        String sid = sc.nextLine();
+
+        //在删除/修改学生操作前，对学号是否存在进行判断
+        //如果不存在，显示提示信息
+        //如果存在，执行删除/修改操作
+
+        int index = -1;
+
+        for (int i = 0; i &lt; array.size(); i++) &#123;
+            Student s = array.get(i);
+            if (s.getSid().equals(sid)) &#123;
+                index = i;
+                break;
+            &#125;
+        &#125;
+
+        if (index == -1) &#123;
+            System.out.println(&quot;该信息不存在，请重新输入&quot;);
+        &#125; else &#123;
+            array.remove(index);
+            //给出删除成功提示
+            System.out.println(&quot;删除学生成功&quot;);
+        &#125;
+    &#125;
+
+    //定义一个方法，用于修改学生信息
+    public static void updateStudent(ArrayList&lt;Student&gt; array) &#123;
+        //键盘录入要修改的学生学号，显示提示信息
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println(&quot;请输入你要修改的学生的学号：&quot;);
+        String sid = sc.nextLine();
+
+        //键盘录入要修改的学生信息
+        System.out.println(&quot;请输入学生新姓名：&quot;);
+        String name = sc.nextLine();
+        System.out.println(&quot;请输入学生新年龄：&quot;);
+        String age = sc.nextLine();
+        System.out.println(&quot;请输入学生新居住地：&quot;);
+        String address = sc.nextLine();
+
+        //创建学生对象
+        Student s = new Student();
+        s.setSid(sid);
+        s.setName(name);
+        s.setAge(age);
+        s.setAddress(address);
+
+        //遍历集合修改对应的学生信息
+        for (int i = 0; i &lt; array.size(); i++) &#123;
+            Student student = array.get(i);
+            if (student.getSid().equals(sid)) &#123;
+                array.set(i, s);
+            &#125;
+        &#125;
+
+        //给出修改成功提示
+        System.out.println(&quot;修改学生成功&quot;);
+    &#125;
+&#125;</code></pre>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Linux测试必备</title>
     <url>/2021/10/21/20211021001/</url>
     <content><![CDATA[<div class="note idea"><p>软件测试必须掌握的常用linux命令总结，熟练的掌握和使用这些命令可以提高工作效率，并且结合这些命令对测试过程中遇到的问题进行一些初步的定位。</p></div>
@@ -5704,6 +5752,428 @@ public class StringBuilderTest02 &#123;
       </categories>
       <tags>
         <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>hexo博客增加书单</title>
+    <url>/2021/11/12/20211112001/</url>
+    <content><![CDATA[<div class="note idea"><p>想给博客添加书单的想法已经很久了，但是奈何自身能力不足，一直没有实现，百度了很多教程，都不尽如人意。偶然间翻到一位大佬的博客，看到大佬的博客书单，感觉很酷炫，就想自己也弄一个，好在大佬人非常好，二话不说，直接给把教程以及源代码发给我了，废话不多说，上教程！</p></div>
+<a id="more"></a>
+
+<h4 id="第一步：先创建一个新页面，hexo-new-page-books"><a href="#第一步：先创建一个新页面，hexo-new-page-books" class="headerlink" title="第一步：先创建一个新页面，hexo new page books"></a>第一步：先创建一个新页面，<code>hexo new page books</code></h4><p><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/image-20211112165056404.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/image-20211112165056404.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image-20211112165056404"></p>
+<h4 id="第二步：更改新生成的index-md文件"><a href="#第二步：更改新生成的index-md文件" class="headerlink" title="第二步：更改新生成的index.md文件"></a>第二步：更改新生成的<code>index.md</code>文件</h4><p>在<code>front-matter</code>栏加入<code>layout: books</code>如下图所示：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/image-20211112165317377.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/image-20211112165317377.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image-20211112165317377"></p>
+<h4 id="第三步：在themes-volantis-layout-文件夹下创建books-ejs文件并加入以下代码："><a href="#第三步：在themes-volantis-layout-文件夹下创建books-ejs文件并加入以下代码：" class="headerlink" title="第三步：在themes/ volantis/ layout/ 文件夹下创建books.ejs文件并加入以下代码："></a>第三步：在<code>themes/ volantis/ layout/ </code>文件夹下创建<code>books.ejs</code>文件并加入以下代码：</h4><pre><code>&lt;%- partial(&#39;_pre&#39;) %&gt;
+&lt;div class=&#39;l_main&lt;%- page.sidebar == false ? &#39; no_sidebar&#39; : &#39;&#39; %&gt;&#39;&gt;
+    &lt;%- partial(&#39;_partial/article&#39;, &#123;post: page, index: false&#125;) %&gt;
+&lt;/div&gt;
+&lt;style&gt;
+    @media screen and (max-width: 877px) &#123;
+        #book .page .content &#123;
+            flex-direction: column;
+            align-items: center;
+        &#125;
+    &#125;
+
+    #book &#123;
+        width: 100%;
+    &#125;
+
+    #book .info .info-card &#123;
+        position: relative;
+        width: 250px;
+        overflow: hidden;
+        transition: .3s
+    &#125;
+
+    #book .info .info-card .hidden-content &#123;
+        position: absolute;
+        /* border-radius: 50%; */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        top: 50%;
+        left: 50%;
+        height: 0%;
+        transform: translate(-50%, -50%);
+        filter: blur(12px);
+        opacity: 0;
+        background: #fff;
+        width: 100%;
+        transition: .5s;
+    &#125;
+
+    #book .info .info-card .hidden-content .text &#123;
+        height: 80%;
+        width: 80%;
+        padding: 5px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-family: Microsoft YaHei;
+        font-size: 10px;
+        color: #676767;
+        float: left;
+        clear: both;
+        text-align: justify;
+    &#125;
+
+    #book .info .info-card .hidden-content .text::first-letter &#123;
+        font-size: 20px;
+        float: left;
+        /* font-weight: bold; */
+        margin: 0 .2em 0 0;
+
+    &#125;
+
+    #book .info a:hover+.info-card .hidden-content &#123;
+        opacity: 1;
+        height: 100%;
+        width: 100%;
+        filter: unset;
+    &#125;
+
+    /* #book .info:hover .info-card&#123;
+    height:0;
+&#125; */
+
+    #book .info-card h3 &#123;
+        position: unset;
+        background: none;
+        display: block;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+    &#125;
+
+    #book .info-card h3:before &#123;
+        display: none;
+    &#125;
+
+    #book .page &#123;
+        overflow: hidden;
+        border-radius: 3px;
+        width: 100%;
+    &#125;
+
+    @media screen and (min-width: 768px) &#123;
+        #book .content &#123;
+            grid-template-columns: 1fr 1fr;
+        &#125;
+    &#125;
+
+    #book .content &#123;
+        /* background:pink; */
+        /* display: grid; */
+        /* grid-column-gap: 16px; */
+        display: flex;
+        align-items: center;
+        width: 100%;
+        margin: 0;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        padding: 16px;
+        text-align: justify;
+    &#125;
+
+    #book .content li &#123;
+        width: 380px;
+        list-style: none;
+        margin-bottom: 16px;
+        border-radius: 8px;
+        /* padding: 10px; */
+        /* transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+    box-shadow: 0 1px 2px 0px rgb(0 0 0 / 10%); */
+        /* background-color: hsla(0, 0%, 100%, .7); */
+        /* -webkit-box-shadow: 0 14px 38px rgba(0, 0, 0, .08), 0 3px 8px rgba(0, 0, 0, .06);
+    box-shadow: 0 14px 38px rgba(0, 0, 0, .08), 0 3px 8px rgba(0, 0, 0, .06);
+    -webkit-transition: all .3s ease 0s, -webkit-transform .6s cubic-bezier(.6, .2, .1, 1) 0s; */
+        transition: all .3s ease 0s, -webkit-transform .6s cubic-bezier(.6, .2, .1, 1) 0s;
+        transition: all .3s ease 0s, transform .6s cubic-bezier(.6, .2, .1, 1) 0s;
+        transition: all .3s ease 0s, transform .6s cubic-bezier(.6, .2, .1, 1) 0s, -webkit-transform .6s cubic-bezier(.6, .2, .1, 1) 0s;
+    &#125;
+
+    #book .content li .info &#123;
+        /* transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+        box-shadow: 0 1px 2px 0px rgb(0 0 0 / 10%); */
+        border-radius: 8px;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: start;
+        -ms-flex-pack: start;
+        justify-content: flex-start;
+        padding: 16px 12px;
+        line-height: 1.7;
+        list-style: none;
+    &#125;
+
+    .book-container &#123;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -webkit-perspective: 600px;
+        perspective: 600px;
+    &#125;
+
+    .book &#123;
+        position: relative;
+        width: 100px;
+        height: 150px;
+        -webkit-transform-style: preserve-3d;
+        transform-style: preserve-3d;
+        -webkit-transform: rotateY(-30deg);
+        transform: rotateY(-30deg);
+        -webkit-transition: 1s ease;
+        transition: 1s ease;
+        -webkit-animation: bookRotate 0s 1s ease 0s;
+        animation: bookRotate 0s 1s ease 0s;
+        list-style: none;
+    &#125;
+
+    .book:before &#123;
+        content: &quot; &quot;;
+        position: absolute;
+        left: 0;
+        top: 2px;
+        width: 23px;
+        height: 146px;
+        -webkit-transform: translateX(84.5px) rotateY(90deg);
+        transform: translateX(84.5px) rotateY(90deg);
+        background: -webkit-gradient(linear, left top, right top, from(#fff), color-stop(5%, #f9f9f9), color-stop(10%, #fff), color-stop(15%, #f9f9f9), color-stop(20%, #fff), color-stop(25%, #f9f9f9), color-stop(30%, #fff), color-stop(35%, #f9f9f9), color-stop(40%, #fff), color-stop(45%, #f9f9f9), color-stop(50%, #fff), color-stop(55%, #f9f9f9), color-stop(60%, #fff), color-stop(65%, #f9f9f9), color-stop(70%, #fff), color-stop(75%, #f9f9f9), color-stop(80%, #fff), color-stop(85%, #f9f9f9), color-stop(90%, #fff), color-stop(95%, #f9f9f9), to(#fff));
+        background: linear-gradient(90deg, #fff, #f9f9f9 5%, #fff 10%, #f9f9f9 15%, #fff 20%, #f9f9f9 25%, #fff 30%, #f9f9f9 35%, #fff 40%, #f9f9f9 45%, #fff 50%, #f9f9f9 55%, #fff 60%, #f9f9f9 65%, #fff 70%, #f9f9f9 75%, #fff 80%, #f9f9f9 85%, #fff 90%, #f9f9f9 95%, #fff);
+    &#125;
+
+    .book&gt;:first-child &#123;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100px;
+        height: 150px;
+        -webkit-transform: translateZ(12.5px);
+        transform: translateZ(12.5px);
+        border-radius: 0 2px 2px 0;
+        -webkit-box-shadow: 5px 5px 20px #666;
+        box-shadow: 5px 5px 20px #666;
+    &#125;
+
+    .book:after &#123;
+        content: &quot; &quot;;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100px;
+        height: 150px;
+        -webkit-transform: translateZ(-12.5px);
+        transform: translateZ(-12.5px);
+        background-color: #555;
+        border-radius: 0 2px 2px 0;
+    &#125;
+
+    #book .content li .info&gt;div &#123;
+        margin-left: 26px;
+    &#125;
+
+    #book .content li .info h3 &#123;
+        font-size: 16px;
+    &#125;
+
+    #book .content li .info p a &#123;
+        position: relative;
+        color: #b854d4;
+    &#125;
+
+    #book .content li .info p a:before &#123;
+        content: &quot; &quot;attr(href);
+        position: absolute;
+        padding: 0 4px;
+        width: -webkit-max-content;
+        width: -moz-max-content;
+        width: max-content;
+        pointer-events: none;
+        font-family: Fontello;
+        font-size: 12px;
+        -webkit-box-shadow: 0 14px 38px rgba(0, 0, 0, .08), 0 3px 8px rgba(0, 0, 0, .06);
+        box-shadow: 0 14px 38px rgba(0, 0, 0, .08), 0 3px 8px rgba(0, 0, 0, .06);
+        border-radius: 3px;
+        background-color: #fff;
+        opacity: 0;
+        -webkit-transform: scale(.7) translateY(-75%);
+        transform: scale(.7) translateY(-75%);
+        -webkit-transform-origin: left center;
+        transform-origin: left center;
+        -webkit-transition: all .3s ease 0s;
+        transition: all .3s ease 0s;
+    &#125;
+
+    #book .content li .info p a:after &#123;
+        content: &quot;&quot;;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 1.5px;
+        background-color: #b854d4;
+        -webkit-transform: scaleX(0);
+        transform: scaleX(0);
+        -webkit-transform-origin: bottom right;
+        transform-origin: bottom right;
+        -webkit-transition: -webkit-transform .3s ease-out;
+        transition: -webkit-transform .3s ease-out;
+        transition: transform .3s ease-out;
+        transition: transform .3s ease-out, -webkit-transform .3s ease-out;
+    &#125;
+
+    #book .content li .info .fa-star &#123;
+        margin-right: 4px;
+        color: #d68fe9;
+    &#125;
+
+    .icon-star:before &#123;
+        content: &quot;\e80b&quot;;
+    &#125;
+
+    [class*=&quot; icon-&quot;]:before,
+    [class^=icon-]:before &#123;
+        font-family: Fontello;
+        font-style: normal;
+        font-weight: 400;
+        display: inline-block;
+        text-decoration: inherit;
+        width: 1em;
+        text-align: center;
+        font-variant: normal;
+        text-transform: none;
+        line-height: 1em;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    &#125;
+
+    #book .content li .description &#123;
+        padding: 12px;
+        font-size: 14px;
+        line-height: 1.7;
+    &#125;
+
+    #book .content li .info p &#123;
+        font-size: 14px;
+        line-height: 1.7;
+
+    &#125;
+
+    /* @media screen and (min-width: 768px) &#123;
+    #book .content li:hover &#123;
+        -webkit-transform: translateY(-4px);
+        transform: translateY(-4px);
+        -webkit-box-shadow: 0 14px 38px rgba(0, 0, 0, .14), 0 3px 8px rgba(0, 0, 0, .12);
+        box-shadow: 0 14px 38px rgba(0, 0, 0, .14), 0 3px 8px rgba(0, 0, 0, .12);
+    &#125;
+&#125; */
+
+
+    #book .content li:hover .book &#123;
+        -webkit-transform: rotateY(0deg);
+        transform: rotateY(0deg);
+    &#125;
+&lt;/style&gt;</code></pre>
+<h4 id="第四步：在books-index-md正文中加入源代码"><a href="#第四步：在books-index-md正文中加入源代码" class="headerlink" title="第四步：在books/index.md正文中加入源代码"></a>第四步：在<code>books/index.md</code>正文中加入源代码</h4><p>书籍是直接通过HTML的形式写入的，这里给出4本书的样例，效果图如下：<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/image-20211112204832624.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/image-20211112204832624.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image-20211112204832624"></p>
+<pre><code>&lt;div id=&quot;book&quot;&gt;
+        &lt;div class=&quot;page&quot;&gt;
+            &lt;ul class=&quot;content&quot;&gt;
+                &lt;!-- 每个li标签内容代表一本书籍的所有信息 --&gt;
+                &lt;li&gt;
+                    &lt;div class=&quot;info&quot;&gt;
+                        &lt;a href=&quot;https://book.qidian.com/info/1023589917/&quot; target=&quot;_blank&quot; rel=&quot;noreferrer noopener&quot; class=&quot;book-container&quot;&gt;
+                            &lt;div class=&quot;book&quot; title=&quot;水浒传&quot;&gt;
+                                &lt;img src=&quot;https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20211112007.jpg&quot; class=&quot;lazyload&quot; data-srcset=&quot;https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20211112007.jpg&quot; srcset=&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=&quot; alt=&quot;水浒传&quot;&gt;
+                            &lt;/div&gt;
+                        &lt;/a&gt;
+                        &lt;div class=&quot;info-card&quot;&gt;
+                            &lt;div class=&quot;hidden-content&quot;&gt;
+                                &lt;p class=&quot;text&quot;&gt;《水浒传》是一部以描写古代农民起义为题材的长篇小说。它形象地描绘了农民起义从发生、发展直至失败的全过程，深刻揭示了起义的社会根源，满腔热情地歌颂了起义英雄的反抗斗争和他们的社会理想，也具体揭示了起义失败的内在历史原因。&lt;/p&gt;
+                            &lt;/div&gt;
+                            &lt;h3&gt;《水浒传》&lt;/h3&gt;
+                            &lt;p&gt;作者：施耐庵&lt;/p&gt;
+                            &lt;p&gt;出版时间：2005-04-01&lt;/p&gt;
+                                &lt;span&gt;读书笔记：&lt;/span&gt;
+                                &lt;a href=&quot;&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt; 暂无 &lt;/a&gt;
+                            &lt;p&gt;
+                                &lt;span&gt;推荐指数：&lt;/span&gt;
+                                &lt;span&gt;&lt;/span&gt;
+                                &lt;!-- 推荐指数，多少个星星就有以下多少个i标签 --&gt;
+                                &lt;i class=&quot;fas fa-star&quot;&gt;&lt;/i&gt;&lt;i class=&quot;fas fa-star&quot;&gt;&lt;/i&gt;&lt;i class=&quot;fas fa-star&quot;&gt;&lt;/i&gt;&lt;i class=&quot;fas fa-star&quot;&gt;&lt;/i&gt;&lt;i class=&quot;fas fa-star&quot;&gt;&lt;/i&gt;
+                            &lt;/p&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/li&gt;
+                &lt;!-- 每个li标签内容代表一本书籍的所有信息 --&gt;
+                &lt;li&gt;
+                    &lt;div class=&quot;info&quot;&gt;&lt;a href=&quot;https://book.qidian.com/info/1023589911/&quot; target=&quot;_blank&quot; rel=&quot;noreferrer noopener&quot; class=&quot;book-container&quot;&gt;
+                            &lt;div class=&quot;book&quot; title=&quot;三国演义&quot;&gt;&lt;img src=&quot;https://cdn.jsdelivr.net/gh/casteller/berrychenpic/202111120010.jpg&quot; class=&quot;lazyload&quot; data-srcset=&quot;https://cdn.jsdelivr.net/gh/casteller/berrychenpic/202111120010.jpg&quot; srcset=&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=&quot; alt=&quot;三国演义&quot;&gt;&lt;/div&gt;
+                        &lt;/a&gt;
+                        &lt;div class=&quot;info-card&quot;&gt;
+                            &lt;div class=&quot;hidden-content&quot;&gt;
+                                &lt;p class=&quot;text&quot;&gt;《三国演义》描写了从东汉末年到西晋初年之间近百年的历史风云，以描写战争为主，诉说了东汉末年的群雄割据混战和魏、蜀、吴三国之间的政治和军事斗争，最终司马炎一统三国，建立晋朝的故事。反映了三国时代各类社会斗争与矛盾的转化，并概括了这一时代的历史巨变，塑造了一群叱咤风云的三国英雄人物。&lt;/p&gt;
+                            &lt;/div&gt;
+                            &lt;h3&gt;《三国演义》&lt;/h3&gt;
+                            &lt;p&gt;作者：罗贯中&lt;/p&gt;
+                            &lt;p&gt;出版时间：1986-06-01&lt;/p&gt;
+                            &lt;span&gt;读书笔记：&lt;/span&gt;&lt;a href=&quot;javascript:;&quot; target=&quot;&quot; rel=&quot;noopener noreferrer&quot;&gt; 暂无 &lt;/a&gt;&lt;p&gt;&lt;/p&gt;
+                            &lt;p&gt;&lt;span&gt;推荐指数：&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;i class=&quot;fa fa-star&quot;&gt;&lt;/i&gt;&lt;i class=&quot;fa fa-star&quot;&gt;&lt;/i&gt;&lt;i class=&quot;fa fa-star&quot;&gt;&lt;/i&gt;&lt;i class=&quot;fa fa-star&quot;&gt;&lt;/i&gt;&lt;i class=&quot;fa fa-star&quot;&gt;&lt;/i&gt;&lt;/p&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/li&gt;
+                &lt;li&gt;
+                    &lt;div class=&quot;info&quot;&gt;&lt;a href=&quot;http://book.sbkk8.com/gudai/sidawenxuemingzhu/xiyouji/&quot; target=&quot;_blank&quot; rel=&quot;noreferrer noopener&quot; class=&quot;book-container&quot;&gt;
+                            &lt;div class=&quot;book&quot; title=&quot;西游记&quot;&gt;
+                                &lt;img src=&quot;https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20211112008.jpg&quot; class=&quot;lazyload&quot; data-srcset=&quot;https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20211112008.jpg&quot; srcset=&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=&quot; alt=&quot;西游记&quot;&gt;&lt;/div&gt;
+                        &lt;/a&gt;
+                        &lt;div class=&quot;info-card&quot;&gt;
+                            &lt;div class=&quot;hidden-content&quot;&gt;
+                                &lt;p class=&quot;text&quot;&gt;《西游记》是中国古代魔幻小说中的巅峰之作，讲述了唐僧师徒四人一路降妖伏魔、历经艰险到西天求取真经的故事。书中借助惊险的故事充分展现了作者丰富的知识、惊人的想象力和高超的写作技巧。
+                                &lt;/p&gt;
+                            &lt;/div&gt;
+                            &lt;h3&gt;《西游记》&lt;/h3&gt;
+                            &lt;p&gt;作者：吴承恩&lt;/p&gt;
+                            &lt;p&gt;出版时间：1994-04-01&lt;/p&gt;
+                            &lt;span&gt;读书笔记：&lt;/span&gt;&lt;a href=&quot;javascript:;&quot; target=&quot;&quot; rel=&quot;noopener noreferrer&quot;&gt;暂无&lt;/a&gt;&lt;p&gt;&lt;/p&gt;
+                            &lt;p&gt;&lt;span&gt;推荐指数：&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;i class=&quot;fa fa-star&quot;&gt;&lt;/i&gt;&lt;i class=&quot;fa fa-star&quot;&gt;&lt;/i&gt;&lt;i class=&quot;fa fa-star&quot;&gt;&lt;/i&gt;&lt;i class=&quot;fa fa-star&quot;&gt;&lt;/i&gt;&lt;i class=&quot;fa fa-star&quot;&gt;&lt;/i&gt;&lt;/p&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/li&gt;
+                &lt;li&gt;
+                    &lt;div class=&quot;info&quot;&gt;&lt;a href=&quot;https://dushu.baidu.com/pc/detail?gid=4305592439&quot; target=&quot;_blank&quot; rel=&quot;noreferrer noopener&quot; class=&quot;book-container&quot;&gt;
+                            &lt;div class=&quot;book&quot; title=&quot;红楼梦&quot;&gt;
+                                &lt;img src=&quot;https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20211112009.jpg&quot; class=&quot;lazyload&quot; data-srcset=&quot;https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20211112009.jpg&quot; srcset=&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=&quot; alt=&quot;红楼梦&quot;&gt;&lt;/div&gt;
+                        &lt;/a&gt;
+                        &lt;div class=&quot;info-card&quot;&gt;
+                            &lt;div class=&quot;hidden-content&quot;&gt;
+                                &lt;p class=&quot;text&quot;&gt;《红楼梦》是一部现实主义和浪漫主义高度结合的伟大著作，也是一个时代文学艺术的顶峰。全书通过对“贾、史、王、薛”四大家族从繁荣到衰败的描写，真实地展现了当时的社会生活及风俗人情，堪称封建末世的百科全书。
+                                &lt;/p&gt;
+                            &lt;/div&gt;
+                            &lt;h3&gt;《 红楼梦 》&lt;/h3&gt;
+                            &lt;p&gt;作者：曹雪芹&lt;/p&gt;
+                            &lt;p&gt;出版时间：1996-12-01&lt;/p&gt;
+                            &lt;span&gt;读书笔记：&lt;/span&gt;&lt;a href=&quot;javascript:;&quot; target=&quot;&quot; rel=&quot;noopener noreferrer&quot;&gt; 暂无 &lt;/a&gt;&lt;p&gt;&lt;/p&gt;
+                            &lt;p&gt;&lt;span&gt;推荐指数：&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;i class=&quot;fa fa-star&quot;&gt;&lt;/i&gt;&lt;i class=&quot;fa fa-star&quot;&gt;&lt;/i&gt;&lt;i class=&quot;fa fa-star&quot;&gt;&lt;/i&gt;&lt;i class=&quot;fa fa-star&quot;&gt;&lt;/i&gt;&lt;/p&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;</code></pre>
+<p>第五步：最后使用hexo一键三连，<code>hexo clean &amp;&amp; hexo g &amp;&amp; hexo d</code>,然后访问books页面就可以看到效果啦!</p>
+<div class="note guide clear"><p>特别鸣谢提供源码的大佬，有兴趣的可以去逛逛大佬博客，传送门👉<strong><a href="https://wenchong.space/">雨中的博客</a></strong></p></div> ]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
       </tags>
   </entry>
   <entry>
