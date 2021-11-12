@@ -4771,6 +4771,7 @@ footer.footer .copyright p {
   border-bottom: none;
   padding-bottom: 4px;
   border-bottom: none;
+  color: #f44336;
 }
 .l_main .post .article-meta {
   color: var(--color-meta);
