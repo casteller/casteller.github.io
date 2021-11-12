@@ -1,23 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>忘记本地MySQL数据库密码解决方案</title>
-    <url>/2020/11/05/2020110501/</url>
-    <content><![CDATA[<div class="note idea"><p>当我们忘记mysql数据库密码时我们就无法正常进入数据库，也就无法修改密码，那么这时该怎么修改密码呢，这里教大家一个简单常用修改密码的方式。</p></div>
-<a id="more"></a>
-<p>数据库版本：5.7.21<br>平台：win7<br>主要分以下10个步骤：<br><strong>💐第一步、打开cmd窗口，进入 MySQL的安装目录。</strong><br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/97f8539ee4983.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/97f8539ee4983.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br><strong>🌸第二步、停止MySQL的服务。</strong><br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/db44d96459204.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/db44d96459204.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/23a53ea461615.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/23a53ea461615.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br>右键MySQL，看到启动是可点击的，证明MySQL服务已停止运行。<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/588ae04afbc92.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/588ae04afbc92.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br><strong>💮第三步、将root用户对数据库操作的的权限授予给别的用户。</strong><br>输入 mysqld –skip-grant-tables 回车<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/4b38162828f65.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/4b38162828f65.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br><strong>🌹第四步、重新打开一个窗口，进入bin目录，输入mysql，然后再输入use mysql</strong><br>如下图所示：<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/be713880ef624.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/be713880ef624.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br><strong>🌺第五步、修改数据库连接密码。</strong><br>命令：</p>
-<pre><code>update user set password=password(&quot;123456&quot;) where user=&quot;root&quot;;</code></pre>
-<div class="note info"><p>注：这里的“123456”为设置的新密码。注意语句后面的“；”，别漏。如果不写“；”，回车之后输入“\g”，效果一样。</p></div>
-<p><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/be2f8087a7748.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/be2f8087a7748.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br>出现错误：<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/514220465c4a0.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/514220465c4a0.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br>正确的应该是：<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/3346c226e1176.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/3346c226e1176.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br>查找解决方案：说是mysql5.7以上没有password这个字段，变成了authentication_string，然后重新设置新密码成功。<br>参考链接：<a href="https://www.techietown.info/2017/04/resolved-error-unknown-column-password-field-list/">https://www.techietown.info/2017/04/resolved-error-unknown-column-password-field-list/</a><br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/ce507845e683a.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/ce507845e683a.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br><strong>🌻第六步、重新加载一下权限，将设置了密码的用户root的权限信息从内存中写入数据库。</strong><br>输入命令flush privileges;，英文分号“;”不可省略。如果不写“；”，回车之后输入“\g”，效果一样。<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/be2f8087a7748.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/be2f8087a7748.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br><strong>🌼第七步、退出 mysql 。输入quit。</strong><br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/5f5a41a046c83.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/5f5a41a046c83.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br><strong>🌷第八步、修改 root 密码后，需要执行下面的语句和新修改的密码。<br>另开一个cmd窗口，执行以下命令，然后提示输入密码：输入4中设置的密码。</strong><br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/55b51f5bd6b41.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/55b51f5bd6b41.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br><strong>🌱第九步、开启数据库服务。</strong><br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/cd29ae01510e4.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/cd29ae01510e4.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/d282adc27e317.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/d282adc27e317.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br><strong>🌲最后一步、验证是否设置成功。</strong><br>另开cmd，进入到mysql的bin目录下，输入mysql –u root –p，回车之后提示输入密码，然后显示如下。连接成功。<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/2f7c31851b5be.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/2f7c31851b5be.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br>心里最想说的话：折腾这么久，还是记住密码吧！！！<br>本文参考链接：<br>    <a href="https://blog.csdn.net/weidong_y/article/details/80493743%EF%BC%9B">https://blog.csdn.net/weidong_y/article/details/80493743；</a><br>    <a href="https://blog.csdn.net/anzhen0429/article/details/78296814%EF%BC%9B">https://blog.csdn.net/anzhen0429/article/details/78296814；</a></p>
-]]></content>
-      <categories>
-        <category>Mysql</category>
-      </categories>
-      <tags>
-        <tag>Mysql</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Jmeter实现分布式并发</title>
     <url>/2020/11/06/2020110601/</url>
     <content><![CDATA[<div class="note idea"><p>在性能测试过程中，一旦进行高并发操作时就会出现以下尴尬场景，JMeter客户端卡死、请求错误或是超时等，为了解决这一问题，我们需要将一次大的操作分布在多个服务器上，由多个服务器来承担负载压力。</p></div>
@@ -40,6 +23,23 @@
       </categories>
       <tags>
         <tag>Jmeter</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>忘记本地MySQL数据库密码解决方案</title>
+    <url>/2020/11/05/2020110501/</url>
+    <content><![CDATA[<div class="note idea"><p>当我们忘记mysql数据库密码时我们就无法正常进入数据库，也就无法修改密码，那么这时该怎么修改密码呢，这里教大家一个简单常用修改密码的方式。</p></div>
+<a id="more"></a>
+<p>数据库版本：5.7.21<br>平台：win7<br>主要分以下10个步骤：<br><strong>💐第一步、打开cmd窗口，进入 MySQL的安装目录。</strong><br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/97f8539ee4983.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/97f8539ee4983.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br><strong>🌸第二步、停止MySQL的服务。</strong><br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/db44d96459204.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/db44d96459204.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/23a53ea461615.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/23a53ea461615.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br>右键MySQL，看到启动是可点击的，证明MySQL服务已停止运行。<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/588ae04afbc92.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/588ae04afbc92.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br><strong>💮第三步、将root用户对数据库操作的的权限授予给别的用户。</strong><br>输入 mysqld –skip-grant-tables 回车<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/4b38162828f65.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/4b38162828f65.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br><strong>🌹第四步、重新打开一个窗口，进入bin目录，输入mysql，然后再输入use mysql</strong><br>如下图所示：<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/be713880ef624.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/be713880ef624.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br><strong>🌺第五步、修改数据库连接密码。</strong><br>命令：</p>
+<pre><code>update user set password=password(&quot;123456&quot;) where user=&quot;root&quot;;</code></pre>
+<div class="note info"><p>注：这里的“123456”为设置的新密码。注意语句后面的“；”，别漏。如果不写“；”，回车之后输入“\g”，效果一样。</p></div>
+<p><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/be2f8087a7748.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/be2f8087a7748.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br>出现错误：<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/514220465c4a0.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/514220465c4a0.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br>正确的应该是：<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/3346c226e1176.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/3346c226e1176.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br>查找解决方案：说是mysql5.7以上没有password这个字段，变成了authentication_string，然后重新设置新密码成功。<br>参考链接：<a href="https://www.techietown.info/2017/04/resolved-error-unknown-column-password-field-list/">https://www.techietown.info/2017/04/resolved-error-unknown-column-password-field-list/</a><br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/ce507845e683a.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/ce507845e683a.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br><strong>🌻第六步、重新加载一下权限，将设置了密码的用户root的权限信息从内存中写入数据库。</strong><br>输入命令flush privileges;，英文分号“;”不可省略。如果不写“；”，回车之后输入“\g”，效果一样。<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/be2f8087a7748.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/be2f8087a7748.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br><strong>🌼第七步、退出 mysql 。输入quit。</strong><br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/5f5a41a046c83.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/5f5a41a046c83.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br><strong>🌷第八步、修改 root 密码后，需要执行下面的语句和新修改的密码。<br>另开一个cmd窗口，执行以下命令，然后提示输入密码：输入4中设置的密码。</strong><br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/55b51f5bd6b41.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/55b51f5bd6b41.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br><strong>🌱第九步、开启数据库服务。</strong><br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/cd29ae01510e4.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/cd29ae01510e4.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/d282adc27e317.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/d282adc27e317.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br><strong>🌲最后一步、验证是否设置成功。</strong><br>另开cmd，进入到mysql的bin目录下，输入mysql –u root –p，回车之后提示输入密码，然后显示如下。连接成功。<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/2f7c31851b5be.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/2f7c31851b5be.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br>心里最想说的话：折腾这么久，还是记住密码吧！！！<br>本文参考链接：<br>    <a href="https://blog.csdn.net/weidong_y/article/details/80493743%EF%BC%9B">https://blog.csdn.net/weidong_y/article/details/80493743；</a><br>    <a href="https://blog.csdn.net/anzhen0429/article/details/78296814%EF%BC%9B">https://blog.csdn.net/anzhen0429/article/details/78296814；</a></p>
+]]></content>
+      <categories>
+        <category>Mysql</category>
+      </categories>
+      <tags>
+        <tag>Mysql</tag>
       </tags>
   </entry>
   <entry>
@@ -2164,26 +2164,6 @@ title: 我的朋友们 # 可选，这是友链页的标题
       </tags>
   </entry>
   <entry>
-    <title>Jmeter连接数据库</title>
-    <url>/2020/08/23/jmeterconnectmysql/</url>
-    <content><![CDATA[<p>jmeter要链接mysql数据库，首先得下载mysql jdbc驱动包（注：驱动包的版本一定要与你数据库的版本匹配，驱动版本低于mysql版本有可能会导致连接失败报错）我这里下载的是mysql-connector-java-5.1.23-bin.jar,。</p>
-<p>下载地址：<a href="http://www.java2s.com/Code/Jar/m/Downloadmysqlconnectorjava5123binjar.htm">http://www.java2s.com/Code/Jar/m/Downloadmysqlconnectorjava5123binjar.htm</a></p>
-<p>下载好之后解压将jar包放到\jmeter\apache-jmeter-5.0\lib目录下</p>
-<p>好，接下来进入正题！</p>
-<h2 id="1、添加一个线程组"><a href="#1、添加一个线程组" class="headerlink" title="1、添加一个线程组"></a>1、添加一个线程组</h2><p><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_03%20(2).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_03%20(2).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"></p>
-<h2 id="2、线程组下新建一个JDBC-Connection-Configuration配置元件，详细配置如下图："><a href="#2、线程组下新建一个JDBC-Connection-Configuration配置元件，详细配置如下图：" class="headerlink" title="2、线程组下新建一个JDBC Connection Configuration配置元件，详细配置如下图："></a>2、线程组下新建一个JDBC Connection Configuration配置元件，详细配置如下图：</h2><p><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_03%20(3).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_03%20(3).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"></p>
-<h2 id="3、然后添加一个取样器-JDBC-request"><a href="#3、然后添加一个取样器-JDBC-request" class="headerlink" title="3、然后添加一个取样器 JDBC request"></a>3、然后添加一个取样器 JDBC request</h2><p><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_03%20(4).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_03%20(4).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"></p>
-<h2 id="4、最后添加一个监听器-查看结果树查看响应结果"><a href="#4、最后添加一个监听器-查看结果树查看响应结果" class="headerlink" title="4、最后添加一个监听器 查看结果树查看响应结果"></a>4、最后添加一个监听器 查看结果树查看响应结果</h2><p><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_03%20(1).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_03%20(1).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>好了，以上就是一个最简单的jmeter连接数据库的脚本</p>
-]]></content>
-      <categories>
-        <category>Jmeter</category>
-        <category>数据库</category>
-      </categories>
-      <tags>
-        <tag>Mysql</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Linux基础</title>
     <url>/2020/08/23/linuxfoundation01/</url>
     <content><![CDATA[<h1 id="linux简介"><a href="#linux简介" class="headerlink" title="linux简介"></a>linux简介</h1><h2 id="1、基础命令"><a href="#1、基础命令" class="headerlink" title="1、基础命令"></a>1、基础命令</h2><h3 id="1-1、系统命令"><a href="#1-1、系统命令" class="headerlink" title="1.1、系统命令"></a>1.1、系统命令</h3><p>init 0  – 关机<br>init 6  – 重启，也可以用reboot命令</p>
@@ -2257,6 +2237,26 @@ export JAVA_HOME JRE_HOME PATH CLASSPATH</code></pre>
       </categories>
       <tags>
         <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Jmeter连接数据库</title>
+    <url>/2020/08/23/jmeterconnectmysql/</url>
+    <content><![CDATA[<p>jmeter要链接mysql数据库，首先得下载mysql jdbc驱动包（注：驱动包的版本一定要与你数据库的版本匹配，驱动版本低于mysql版本有可能会导致连接失败报错）我这里下载的是mysql-connector-java-5.1.23-bin.jar,。</p>
+<p>下载地址：<a href="http://www.java2s.com/Code/Jar/m/Downloadmysqlconnectorjava5123binjar.htm">http://www.java2s.com/Code/Jar/m/Downloadmysqlconnectorjava5123binjar.htm</a></p>
+<p>下载好之后解压将jar包放到\jmeter\apache-jmeter-5.0\lib目录下</p>
+<p>好，接下来进入正题！</p>
+<h2 id="1、添加一个线程组"><a href="#1、添加一个线程组" class="headerlink" title="1、添加一个线程组"></a>1、添加一个线程组</h2><p><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_03%20(2).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_03%20(2).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"></p>
+<h2 id="2、线程组下新建一个JDBC-Connection-Configuration配置元件，详细配置如下图："><a href="#2、线程组下新建一个JDBC-Connection-Configuration配置元件，详细配置如下图：" class="headerlink" title="2、线程组下新建一个JDBC Connection Configuration配置元件，详细配置如下图："></a>2、线程组下新建一个JDBC Connection Configuration配置元件，详细配置如下图：</h2><p><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_03%20(3).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_03%20(3).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"></p>
+<h2 id="3、然后添加一个取样器-JDBC-request"><a href="#3、然后添加一个取样器-JDBC-request" class="headerlink" title="3、然后添加一个取样器 JDBC request"></a>3、然后添加一个取样器 JDBC request</h2><p><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_03%20(4).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_03%20(4).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"></p>
+<h2 id="4、最后添加一个监听器-查看结果树查看响应结果"><a href="#4、最后添加一个监听器-查看结果树查看响应结果" class="headerlink" title="4、最后添加一个监听器 查看结果树查看响应结果"></a>4、最后添加一个监听器 查看结果树查看响应结果</h2><p><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_03%20(1).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_03%20(1).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>好了，以上就是一个最简单的jmeter连接数据库的脚本</p>
+]]></content>
+      <categories>
+        <category>Jmeter</category>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>Mysql</tag>
       </tags>
   </entry>
   <entry>
@@ -4312,6 +4312,509 @@ public class Test10 &#123;
       </tags>
   </entry>
   <entry>
+    <title>java学习-ArrayList集合&amp;学生管理系统</title>
+    <url>/2021/01/19/20210119009/</url>
+    <content><![CDATA[<h2 id="1-ArrayList"><a href="#1-ArrayList" class="headerlink" title="1.ArrayList"></a>1.ArrayList</h2><h3 id="1-1ArrayList类概述"><a href="#1-1ArrayList类概述" class="headerlink" title="1.1ArrayList类概述"></a>1.1ArrayList类概述</h3><ul>
+<li><p>什么是集合</p>
+<p>​    提供一种存储空间可变的存储模型，存储的数据容量可以发生改变</p>
+</li>
+<li><p>ArrayList集合的特点</p>
+<p>​    底层是数组实现的，长度可以变化</p>
+</li>
+<li><p>泛型的使用</p>
+<p>​    用于约束集合中存储元素的数据类型</p>
+</li>
+</ul>
+<h3 id="1-2ArrayList类常用方法"><a href="#1-2ArrayList类常用方法" class="headerlink" title="1.2ArrayList类常用方法"></a>1.2ArrayList类常用方法</h3><h4 id="1-2-1构造方法"><a href="#1-2-1构造方法" class="headerlink" title="1.2.1构造方法"></a>1.2.1构造方法</h4><table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public ArrayList()</td>
+<td>创建一个空的集合对象</td>
+</tr>
+</tbody></table>
+<h4 id="1-2-2成员方法"><a href="#1-2-2成员方法" class="headerlink" title="1.2.2成员方法"></a>1.2.2成员方法</h4><table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public boolean   remove(Object o)</td>
+<td>删除指定的元素，返回删除是否成功</td>
+</tr>
+<tr>
+<td>public E   remove(int   index)</td>
+<td>删除指定索引处的元素，返回被删除的元素</td>
+</tr>
+<tr>
+<td>public E   set(int index,E   element)</td>
+<td>修改指定索引处的元素，返回被修改的元素</td>
+</tr>
+<tr>
+<td>public E   get(int   index)</td>
+<td>返回指定索引处的元素</td>
+</tr>
+<tr>
+<td>public int   size()</td>
+<td>返回集合中的元素的个数</td>
+</tr>
+<tr>
+<td>public boolean   add(E e)</td>
+<td>将指定的元素追加到此集合的末尾</td>
+</tr>
+<tr>
+<td>public void   add(int index,E   element)</td>
+<td>在此集合中的指定位置插入指定的元素</td>
+</tr>
+</tbody></table>
+<h4 id="1-2-3示例代码"><a href="#1-2-3示例代码" class="headerlink" title="1.2.3示例代码"></a>1.2.3示例代码</h4><pre><code class="java">public class ArrayListDemo02 &#123;
+    public static void main(String[] args) &#123;
+        //创建集合
+        ArrayList&lt;String&gt; array = new ArrayList&lt;String&gt;();
+
+        //添加元素
+        array.add(&quot;hello&quot;);
+        array.add(&quot;world&quot;);
+        array.add(&quot;java&quot;);
+
+        //public boolean remove(Object o)：删除指定的元素，返回删除是否成功
+//        System.out.println(array.remove(&quot;world&quot;));
+//        System.out.println(array.remove(&quot;javaee&quot;));
+
+        //public E remove(int index)：删除指定索引处的元素，返回被删除的元素
+//        System.out.println(array.remove(1));
+
+        //IndexOutOfBoundsException
+//        System.out.println(array.remove(3));
+
+        //public E set(int index,E element)：修改指定索引处的元素，返回被修改的元素
+//        System.out.println(array.set(1,&quot;javaee&quot;));
+
+        //IndexOutOfBoundsException
+//        System.out.println(array.set(3,&quot;javaee&quot;));
+
+        //public E get(int index)：返回指定索引处的元素
+//        System.out.println(array.get(0));
+//        System.out.println(array.get(1));
+//        System.out.println(array.get(2));
+        //System.out.println(array.get(3)); //？？？？？？ 自己测试
+
+        //public int size()：返回集合中的元素的个数
+        System.out.println(array.size());
+
+        //输出集合
+        System.out.println(&quot;array:&quot; + array);
+    &#125;
+&#125;</code></pre>
+<h3 id="1-3ArrayList存储字符串并遍历"><a href="#1-3ArrayList存储字符串并遍历" class="headerlink" title="1.3ArrayList存储字符串并遍历"></a>1.3ArrayList存储字符串并遍历</h3><h4 id="1-3-1案例需求"><a href="#1-3-1案例需求" class="headerlink" title="1.3.1案例需求"></a>1.3.1案例需求</h4><p>​    创建一个存储字符串的集合，存储3个字符串元素，使用程序实现在控制台遍历该集合</p>
+<h4 id="1-3-2代码实现"><a href="#1-3-2代码实现" class="headerlink" title="1.3.2代码实现"></a>1.3.2代码实现</h4><pre><code class="java">/*
+    思路：
+        1:创建集合对象
+        2:往集合中添加字符串对象
+        3:遍历集合，首先要能够获取到集合中的每一个元素，这个通过get(int index)方法实现
+        4:遍历集合，其次要能够获取到集合的长度，这个通过size()方法实现
+        5:遍历集合的通用格式
+ */
+public class ArrayListTest01 &#123;
+    public static void main(String[] args) &#123;
+        //创建集合对象
+        ArrayList&lt;String&gt; array = new ArrayList&lt;String&gt;();
+
+        //往集合中添加字符串对象
+        array.add(&quot;刘正风&quot;);
+        array.add(&quot;左冷禅&quot;);
+        array.add(&quot;风清扬&quot;);
+
+        //遍历集合，其次要能够获取到集合的长度，这个通过size()方法实现
+//        System.out.println(array.size());
+
+        //遍历集合的通用格式
+        for(int i=0; i&lt;array.size(); i++) &#123;
+            String s = array.get(i);
+            System.out.println(s);
+        &#125;
+    &#125;
+&#125;</code></pre>
+<h3 id="1-4ArrayList存储学生对象并遍历"><a href="#1-4ArrayList存储学生对象并遍历" class="headerlink" title="1.4ArrayList存储学生对象并遍历"></a>1.4ArrayList存储学生对象并遍历</h3><h4 id="1-4-1案例需求"><a href="#1-4-1案例需求" class="headerlink" title="1.4.1案例需求"></a>1.4.1案例需求</h4><p>​    创建一个存储学生对象的集合，存储3个学生对象，使用程序实现在控制台遍历该集合</p>
+<h4 id="1-4-2代码实现"><a href="#1-4-2代码实现" class="headerlink" title="1.4.2代码实现"></a>1.4.2代码实现</h4><pre><code class="java">/*
+    思路：
+        1:定义学生类
+        2:创建集合对象
+        3:创建学生对象
+        4:添加学生对象到集合中
+        5:遍历集合，采用通用遍历格式实现
+ */
+public class ArrayListTest02 &#123;
+    public static void main(String[] args) &#123;
+        //创建集合对象
+        ArrayList&lt;Student&gt; array = new ArrayList&lt;&gt;();
+
+        //创建学生对象
+        Student s1 = new Student(&quot;林青霞&quot;, 30);
+        Student s2 = new Student(&quot;风清扬&quot;, 33);
+        Student s3 = new Student(&quot;张曼玉&quot;, 18);
+
+        //添加学生对象到集合中
+        array.add(s1);
+        array.add(s2);
+        array.add(s3);
+
+        //遍历集合，采用通用遍历格式实现
+        for (int i = 0; i &lt; array.size(); i++) &#123;
+            Student s = array.get(i);
+            System.out.println(s.getName() + &quot;,&quot; + s.getAge());
+        &#125;
+    &#125;
+&#125;</code></pre>
+<h3 id="1-5ArrayList存储学生对象并遍历升级版"><a href="#1-5ArrayList存储学生对象并遍历升级版" class="headerlink" title="1.5ArrayList存储学生对象并遍历升级版"></a>1.5ArrayList存储学生对象并遍历升级版</h3><h4 id="1-5-1案例需求"><a href="#1-5-1案例需求" class="headerlink" title="1.5.1案例需求"></a>1.5.1案例需求</h4><p>​    创建一个存储学生对象的集合，存储3个学生对象，使用程序实现在控制台遍历该集合</p>
+<p>​        学生的姓名和年龄来自于键盘录入</p>
+<h4 id="1-5-2代码实现"><a href="#1-5-2代码实现" class="headerlink" title="1.5.2代码实现"></a>1.5.2代码实现</h4><pre><code class="java">/*
+    思路：
+        1:定义学生类，为了键盘录入数据方便，把学生类中的成员变量都定义为String类型
+        2:创建集合对象
+        3:键盘录入学生对象所需要的数据
+        4:创建学生对象，把键盘录入的数据赋值给学生对象的成员变量
+        5:往集合中添加学生对象
+        6:遍历集合，采用通用遍历格式实现
+ */
+public class ArrayListTest &#123;
+    public static void main(String[] args) &#123;
+        //创建集合对象
+        ArrayList&lt;Student&gt; array = new ArrayList&lt;Student&gt;();
+
+        //为了提高代码的复用性，我们用方法来改进程序
+        addStudent(array);
+        addStudent(array);
+        addStudent(array);
+
+        //遍历集合，采用通用遍历格式实现
+        for (int i = 0; i &lt; array.size(); i++) &#123;
+            Student s = array.get(i);
+            System.out.println(s.getName() + &quot;,&quot; + s.getAge());
+        &#125;
+    &#125;
+
+    /*
+        两个明确：
+            返回值类型：void
+            参数：ArrayList&lt;Student&gt; array
+     */
+    public static void addStudent(ArrayList&lt;Student&gt; array) &#123;
+        //键盘录入学生对象所需要的数据
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println(&quot;请输入学生姓名:&quot;);
+        String name = sc.nextLine();
+
+        System.out.println(&quot;请输入学生年龄:&quot;);
+        String age = sc.nextLine();
+
+        //创建学生对象，把键盘录入的数据赋值给学生对象的成员变量
+        Student s = new Student();
+        s.setName(name);
+        s.setAge(age);
+
+        //往集合中添加学生对象
+        array.add(s);
+    &#125;
+&#125;</code></pre>
+<h2 id="2-学生管理系统"><a href="#2-学生管理系统" class="headerlink" title="2.学生管理系统"></a>2.学生管理系统</h2><h3 id="2-1学生管理系统实现步骤"><a href="#2-1学生管理系统实现步骤" class="headerlink" title="2.1学生管理系统实现步骤"></a>2.1学生管理系统实现步骤</h3><ul>
+<li><p>案例需求</p>
+<p>​    针对目前我们的所学内容，完成一个综合案例：学生管理系统。该系统主要功能如下：</p>
+<p>​    添加学生：通过键盘录入学生信息，添加到集合中</p>
+<p>​    删除学生：通过键盘录入要删除学生的学号，将该学生对象从集合中删除</p>
+<p>​    修改学生：通过键盘录入要修改学生的学号，将该学生对象其他信息进行修改</p>
+<p>​    查看学生：将集合中的学生对象信息进行展示</p>
+<p>​    退出系统：结束程序</p>
+</li>
+<li><p>实现步骤</p>
+<ol>
+<li><p>定义学生类，包含以下成员变量</p>
+<p>​       private String sid            // 学生id</p>
+<p>​       private String name       // 学生姓名</p>
+<p>​       private String age          // 学生年龄</p>
+<p>​       private String address   // 学生所在地</p>
+</li>
+<li><p>学生管理系统主界面的搭建步骤</p>
+<p>2.1 用输出语句完成主界面的编写<br>2.2 用Scanner实现键盘输入<br>2.3 用switch语句完成选择的功能<br>2.4 用循环完成功能结束后再次回到主界面</p>
+</li>
+<li><p>学生管理系统的添加学生功能实现步骤</p>
+<p>3.1 定义一个方法，接收ArrayList<Student>集合<br>3.2 方法内完成添加学生的功能<br>​         ①键盘录入学生信息<br>​         ②根据录入的信息创建学生对象<br>​         ③将学生对象添加到集合中<br>​         ④提示添加成功信息<br>3.3 在添加学生的选项里调用添加学生的方法</p>
+</li>
+<li><p>学生管理系统的查看学生功能实现步骤</p>
+<p>4.1 定义一个方法，接收ArrayList<Student>集合<br>4.2 方法内遍历集合，将学生信息进行输出<br>4.3 在查看所有学生选项里调用查看学生方法</p>
+</li>
+<li><p>学生管理系统的删除学生功能实现步骤</p>
+<p>5.1 定义一个方法，接收ArrayList<Student>集合<br>5.2 方法中接收要删除学生的学号<br>5.3 遍历集合，获取每个学生对象<br>5.4 使用学生对象的学号和录入的要删除的学号进行比较,如果相同，则将当前学生对象从集合中删除<br>5.5 在删除学生选项里调用删除学生的方法</p>
+</li>
+<li><p>学生管理系统的修改学生功能实现步骤</p>
+<p>6.1 定义一个方法，接收ArrayList<Student>集合<br>6.2 方法中接收要修改学生的学号<br>6.3 通过键盘录入学生对象所需的信息，并创建对象<br>6.4 遍历集合，获取每一个学生对象。并和录入的修改学生学号进行比较.如果相同，则使用新学生对象替换当前学生对象<br>6.5 在修改学生选项里调用修改学生的方法</p>
+</li>
+<li><p>退出系统</p>
+<p>使用System.exit(0);退出JVM</p>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="2-2学生类的定义"><a href="#2-2学生类的定义" class="headerlink" title="2.2学生类的定义"></a>2.2学生类的定义</h3><pre><code class="java">public class Student &#123;
+    //学号
+    private String sid;
+    //姓名
+    private String name;
+    //年龄
+    private String age;
+    //居住地
+    private String address;
+
+    public Student() &#123;
+    &#125;
+
+    public Student(String sid, String name, String age, String address) &#123;
+        this.sid = sid;
+        this.name = name;
+        this.age = age;
+        this.address = address;
+    &#125;
+
+    public String getSid() &#123;
+        return sid;
+    &#125;
+
+    public void setSid(String sid) &#123;
+        this.sid = sid;
+    &#125;
+
+    public String getName() &#123;
+        return name;
+    &#125;
+
+    public void setName(String name) &#123;
+        this.name = name;
+    &#125;
+
+    public String getAge() &#123;
+        return age;
+    &#125;
+
+    public void setAge(String age) &#123;
+        this.age = age;
+    &#125;
+
+    public String getAddress() &#123;
+        return address;
+    &#125;
+
+    public void setAddress(String address) &#123;
+        this.address = address;
+    &#125;
+&#125;</code></pre>
+<h3 id="2-3测试类的定义"><a href="#2-3测试类的定义" class="headerlink" title="2.3测试类的定义"></a>2.3测试类的定义</h3><pre><code class="java">public class StudentManager &#123;
+    /*
+        1:用输出语句完成主界面的编写
+        2:用Scanner实现键盘录入数据
+        3:用switch语句完成操作的选择
+        4:用循环完成再次回到主界面
+    */
+    public static void main(String[] args) &#123;
+        //创建集合对象，用于保存学生数据信息
+        ArrayList&lt;Student&gt; array = new ArrayList&lt;Student&gt;();
+
+        //用循环完成再次回到主界面
+        while (true) &#123;
+            //用输出语句完成主界面的编写
+            System.out.println(&quot;--------欢迎来到学生管理系统--------&quot;);
+            System.out.println(&quot;1 添加学生&quot;);
+            System.out.println(&quot;2 删除学生&quot;);
+            System.out.println(&quot;3 修改学生&quot;);
+            System.out.println(&quot;4 查看所有学生&quot;);
+            System.out.println(&quot;5 退出&quot;);
+            System.out.println(&quot;请输入你的选择：&quot;);
+
+            //用Scanner实现键盘录入数据
+            Scanner sc = new Scanner(System.in);
+            String line = sc.nextLine();
+
+            //用switch语句完成操作的选择
+            switch (line) &#123;
+                case &quot;1&quot;:
+                    addStudent(array);
+                    break;
+                case &quot;2&quot;:
+                    deleteStudent(array);
+                    break;
+                case &quot;3&quot;:
+                    updateStudent(array);
+                    break;
+                case &quot;4&quot;:
+                    findAllStudent(array);
+                    break;
+                case &quot;5&quot;:
+                    System.out.println(&quot;谢谢使用&quot;);
+                    System.exit(0); //JVM退出
+            &#125;
+        &#125;
+    &#125;
+
+    //定义一个方法，用于添加学生信息
+    public static void addStudent(ArrayList&lt;Student&gt; array) &#123;
+        //键盘录入学生对象所需要的数据,显示提示信息，提示要输入何种信息
+        Scanner sc = new Scanner(System.in);
+
+        String sid;
+
+        while (true) &#123;
+            System.out.println(&quot;请输入学生学号：&quot;);
+            sid = sc.nextLine();
+
+            boolean flag = isUsed(array, sid);
+            if (flag) &#123;
+                System.out.println(&quot;你输入的学号已经被占用，请重新输入&quot;);
+            &#125; else &#123;
+                break;
+            &#125;
+        &#125;
+
+        System.out.println(&quot;请输入学生姓名：&quot;);
+        String name = sc.nextLine();
+
+        System.out.println(&quot;请输入学生年龄：&quot;);
+        String age = sc.nextLine();
+
+        System.out.println(&quot;请输入学生居住地：&quot;);
+        String address = sc.nextLine();
+
+        //创建学生对象，把键盘录入的数据赋值给学生对象的成员变量
+        Student s = new Student();
+        s.setSid(sid);
+        s.setName(name);
+        s.setAge(age);
+        s.setAddress(address);
+
+        //将学生对象添加到集合中
+        array.add(s);
+
+        //给出添加成功提示
+        System.out.println(&quot;添加学生成功&quot;);
+    &#125;
+
+    //定义一个方法，判断学号是否被使用
+    public static boolean isUsed(ArrayList&lt;Student&gt; array, String sid) &#123;
+        //如果与集合中的某一个学生学号相同，返回true;如果都不相同，返回false
+        boolean flag = false;
+
+        for(int i=0; i&lt;array.size(); i++) &#123;
+            Student s = array.get(i);
+            if(s.getSid().equals(sid)) &#123;
+                flag = true;
+                break;
+            &#125;
+        &#125;
+
+        return flag;
+    &#125;
+
+
+    //定义一个方法，用于查看学生信息
+    public static void findAllStudent(ArrayList&lt;Student&gt; array) &#123;
+        //判断集合中是否有数据，如果没有显示提示信息
+        if (array.size() == 0) &#123;
+            System.out.println(&quot;无信息，请先添加信息再查询&quot;);
+            //为了让程序不再往下执行，我们在这里写上return;
+            return;
+        &#125;
+
+        //显示表头信息
+        //\t其实是一个tab键的位置
+        System.out.println(&quot;学号\t\t\t姓名\t\t年龄\t\t居住地&quot;);
+
+        //将集合中数据取出按照对应格式显示学生信息，年龄显示补充“岁”
+        for (int i = 0; i &lt; array.size(); i++) &#123;
+            Student s = array.get(i);
+            System.out.println(s.getSid() + &quot;\t&quot; + s.getName() + &quot;\t&quot; + s.getAge() + &quot;岁\t\t&quot; + s.getAddress());
+        &#125;
+    &#125;
+
+    //定义一个方法，用于删除学生信息
+    public static void deleteStudent(ArrayList&lt;Student&gt; array) &#123;
+        //键盘录入要删除的学生学号,显示提示信息
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println(&quot;请输入你要删除的学生的学号：&quot;);
+        String sid = sc.nextLine();
+
+        //在删除/修改学生操作前，对学号是否存在进行判断
+        //如果不存在，显示提示信息
+        //如果存在，执行删除/修改操作
+
+        int index = -1;
+
+        for (int i = 0; i &lt; array.size(); i++) &#123;
+            Student s = array.get(i);
+            if (s.getSid().equals(sid)) &#123;
+                index = i;
+                break;
+            &#125;
+        &#125;
+
+        if (index == -1) &#123;
+            System.out.println(&quot;该信息不存在，请重新输入&quot;);
+        &#125; else &#123;
+            array.remove(index);
+            //给出删除成功提示
+            System.out.println(&quot;删除学生成功&quot;);
+        &#125;
+    &#125;
+
+    //定义一个方法，用于修改学生信息
+    public static void updateStudent(ArrayList&lt;Student&gt; array) &#123;
+        //键盘录入要修改的学生学号，显示提示信息
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println(&quot;请输入你要修改的学生的学号：&quot;);
+        String sid = sc.nextLine();
+
+        //键盘录入要修改的学生信息
+        System.out.println(&quot;请输入学生新姓名：&quot;);
+        String name = sc.nextLine();
+        System.out.println(&quot;请输入学生新年龄：&quot;);
+        String age = sc.nextLine();
+        System.out.println(&quot;请输入学生新居住地：&quot;);
+        String address = sc.nextLine();
+
+        //创建学生对象
+        Student s = new Student();
+        s.setSid(sid);
+        s.setName(name);
+        s.setAge(age);
+        s.setAddress(address);
+
+        //遍历集合修改对应的学生信息
+        for (int i = 0; i &lt; array.size(); i++) &#123;
+            Student student = array.get(i);
+            if (student.getSid().equals(sid)) &#123;
+                array.set(i, s);
+            &#125;
+        &#125;
+
+        //给出修改成功提示
+        System.out.println(&quot;修改学生成功&quot;);
+    &#125;
+&#125;</code></pre>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>java学习-常用API</title>
     <url>/2021/01/19/20210119008/</url>
     <content><![CDATA[<h2 id="1-API"><a href="#1-API" class="headerlink" title="1.API"></a>1.API</h2><h3 id="1-1API概述"><a href="#1-1API概述" class="headerlink" title="1.1API概述"></a>1.1API概述</h3><ul>
@@ -4894,509 +5397,6 @@ public class StringBuilderTest02 &#123;
 <td>通过toString()就可以实现把StringBuilder转换为String</td>
 </tr>
 </tbody></table>
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>java学习-ArrayList集合&amp;学生管理系统</title>
-    <url>/2021/01/19/20210119009/</url>
-    <content><![CDATA[<h2 id="1-ArrayList"><a href="#1-ArrayList" class="headerlink" title="1.ArrayList"></a>1.ArrayList</h2><h3 id="1-1ArrayList类概述"><a href="#1-1ArrayList类概述" class="headerlink" title="1.1ArrayList类概述"></a>1.1ArrayList类概述</h3><ul>
-<li><p>什么是集合</p>
-<p>​    提供一种存储空间可变的存储模型，存储的数据容量可以发生改变</p>
-</li>
-<li><p>ArrayList集合的特点</p>
-<p>​    底层是数组实现的，长度可以变化</p>
-</li>
-<li><p>泛型的使用</p>
-<p>​    用于约束集合中存储元素的数据类型</p>
-</li>
-</ul>
-<h3 id="1-2ArrayList类常用方法"><a href="#1-2ArrayList类常用方法" class="headerlink" title="1.2ArrayList类常用方法"></a>1.2ArrayList类常用方法</h3><h4 id="1-2-1构造方法"><a href="#1-2-1构造方法" class="headerlink" title="1.2.1构造方法"></a>1.2.1构造方法</h4><table>
-<thead>
-<tr>
-<th>方法名</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>public ArrayList()</td>
-<td>创建一个空的集合对象</td>
-</tr>
-</tbody></table>
-<h4 id="1-2-2成员方法"><a href="#1-2-2成员方法" class="headerlink" title="1.2.2成员方法"></a>1.2.2成员方法</h4><table>
-<thead>
-<tr>
-<th>方法名</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>public boolean   remove(Object o)</td>
-<td>删除指定的元素，返回删除是否成功</td>
-</tr>
-<tr>
-<td>public E   remove(int   index)</td>
-<td>删除指定索引处的元素，返回被删除的元素</td>
-</tr>
-<tr>
-<td>public E   set(int index,E   element)</td>
-<td>修改指定索引处的元素，返回被修改的元素</td>
-</tr>
-<tr>
-<td>public E   get(int   index)</td>
-<td>返回指定索引处的元素</td>
-</tr>
-<tr>
-<td>public int   size()</td>
-<td>返回集合中的元素的个数</td>
-</tr>
-<tr>
-<td>public boolean   add(E e)</td>
-<td>将指定的元素追加到此集合的末尾</td>
-</tr>
-<tr>
-<td>public void   add(int index,E   element)</td>
-<td>在此集合中的指定位置插入指定的元素</td>
-</tr>
-</tbody></table>
-<h4 id="1-2-3示例代码"><a href="#1-2-3示例代码" class="headerlink" title="1.2.3示例代码"></a>1.2.3示例代码</h4><pre><code class="java">public class ArrayListDemo02 &#123;
-    public static void main(String[] args) &#123;
-        //创建集合
-        ArrayList&lt;String&gt; array = new ArrayList&lt;String&gt;();
-
-        //添加元素
-        array.add(&quot;hello&quot;);
-        array.add(&quot;world&quot;);
-        array.add(&quot;java&quot;);
-
-        //public boolean remove(Object o)：删除指定的元素，返回删除是否成功
-//        System.out.println(array.remove(&quot;world&quot;));
-//        System.out.println(array.remove(&quot;javaee&quot;));
-
-        //public E remove(int index)：删除指定索引处的元素，返回被删除的元素
-//        System.out.println(array.remove(1));
-
-        //IndexOutOfBoundsException
-//        System.out.println(array.remove(3));
-
-        //public E set(int index,E element)：修改指定索引处的元素，返回被修改的元素
-//        System.out.println(array.set(1,&quot;javaee&quot;));
-
-        //IndexOutOfBoundsException
-//        System.out.println(array.set(3,&quot;javaee&quot;));
-
-        //public E get(int index)：返回指定索引处的元素
-//        System.out.println(array.get(0));
-//        System.out.println(array.get(1));
-//        System.out.println(array.get(2));
-        //System.out.println(array.get(3)); //？？？？？？ 自己测试
-
-        //public int size()：返回集合中的元素的个数
-        System.out.println(array.size());
-
-        //输出集合
-        System.out.println(&quot;array:&quot; + array);
-    &#125;
-&#125;</code></pre>
-<h3 id="1-3ArrayList存储字符串并遍历"><a href="#1-3ArrayList存储字符串并遍历" class="headerlink" title="1.3ArrayList存储字符串并遍历"></a>1.3ArrayList存储字符串并遍历</h3><h4 id="1-3-1案例需求"><a href="#1-3-1案例需求" class="headerlink" title="1.3.1案例需求"></a>1.3.1案例需求</h4><p>​    创建一个存储字符串的集合，存储3个字符串元素，使用程序实现在控制台遍历该集合</p>
-<h4 id="1-3-2代码实现"><a href="#1-3-2代码实现" class="headerlink" title="1.3.2代码实现"></a>1.3.2代码实现</h4><pre><code class="java">/*
-    思路：
-        1:创建集合对象
-        2:往集合中添加字符串对象
-        3:遍历集合，首先要能够获取到集合中的每一个元素，这个通过get(int index)方法实现
-        4:遍历集合，其次要能够获取到集合的长度，这个通过size()方法实现
-        5:遍历集合的通用格式
- */
-public class ArrayListTest01 &#123;
-    public static void main(String[] args) &#123;
-        //创建集合对象
-        ArrayList&lt;String&gt; array = new ArrayList&lt;String&gt;();
-
-        //往集合中添加字符串对象
-        array.add(&quot;刘正风&quot;);
-        array.add(&quot;左冷禅&quot;);
-        array.add(&quot;风清扬&quot;);
-
-        //遍历集合，其次要能够获取到集合的长度，这个通过size()方法实现
-//        System.out.println(array.size());
-
-        //遍历集合的通用格式
-        for(int i=0; i&lt;array.size(); i++) &#123;
-            String s = array.get(i);
-            System.out.println(s);
-        &#125;
-    &#125;
-&#125;</code></pre>
-<h3 id="1-4ArrayList存储学生对象并遍历"><a href="#1-4ArrayList存储学生对象并遍历" class="headerlink" title="1.4ArrayList存储学生对象并遍历"></a>1.4ArrayList存储学生对象并遍历</h3><h4 id="1-4-1案例需求"><a href="#1-4-1案例需求" class="headerlink" title="1.4.1案例需求"></a>1.4.1案例需求</h4><p>​    创建一个存储学生对象的集合，存储3个学生对象，使用程序实现在控制台遍历该集合</p>
-<h4 id="1-4-2代码实现"><a href="#1-4-2代码实现" class="headerlink" title="1.4.2代码实现"></a>1.4.2代码实现</h4><pre><code class="java">/*
-    思路：
-        1:定义学生类
-        2:创建集合对象
-        3:创建学生对象
-        4:添加学生对象到集合中
-        5:遍历集合，采用通用遍历格式实现
- */
-public class ArrayListTest02 &#123;
-    public static void main(String[] args) &#123;
-        //创建集合对象
-        ArrayList&lt;Student&gt; array = new ArrayList&lt;&gt;();
-
-        //创建学生对象
-        Student s1 = new Student(&quot;林青霞&quot;, 30);
-        Student s2 = new Student(&quot;风清扬&quot;, 33);
-        Student s3 = new Student(&quot;张曼玉&quot;, 18);
-
-        //添加学生对象到集合中
-        array.add(s1);
-        array.add(s2);
-        array.add(s3);
-
-        //遍历集合，采用通用遍历格式实现
-        for (int i = 0; i &lt; array.size(); i++) &#123;
-            Student s = array.get(i);
-            System.out.println(s.getName() + &quot;,&quot; + s.getAge());
-        &#125;
-    &#125;
-&#125;</code></pre>
-<h3 id="1-5ArrayList存储学生对象并遍历升级版"><a href="#1-5ArrayList存储学生对象并遍历升级版" class="headerlink" title="1.5ArrayList存储学生对象并遍历升级版"></a>1.5ArrayList存储学生对象并遍历升级版</h3><h4 id="1-5-1案例需求"><a href="#1-5-1案例需求" class="headerlink" title="1.5.1案例需求"></a>1.5.1案例需求</h4><p>​    创建一个存储学生对象的集合，存储3个学生对象，使用程序实现在控制台遍历该集合</p>
-<p>​        学生的姓名和年龄来自于键盘录入</p>
-<h4 id="1-5-2代码实现"><a href="#1-5-2代码实现" class="headerlink" title="1.5.2代码实现"></a>1.5.2代码实现</h4><pre><code class="java">/*
-    思路：
-        1:定义学生类，为了键盘录入数据方便，把学生类中的成员变量都定义为String类型
-        2:创建集合对象
-        3:键盘录入学生对象所需要的数据
-        4:创建学生对象，把键盘录入的数据赋值给学生对象的成员变量
-        5:往集合中添加学生对象
-        6:遍历集合，采用通用遍历格式实现
- */
-public class ArrayListTest &#123;
-    public static void main(String[] args) &#123;
-        //创建集合对象
-        ArrayList&lt;Student&gt; array = new ArrayList&lt;Student&gt;();
-
-        //为了提高代码的复用性，我们用方法来改进程序
-        addStudent(array);
-        addStudent(array);
-        addStudent(array);
-
-        //遍历集合，采用通用遍历格式实现
-        for (int i = 0; i &lt; array.size(); i++) &#123;
-            Student s = array.get(i);
-            System.out.println(s.getName() + &quot;,&quot; + s.getAge());
-        &#125;
-    &#125;
-
-    /*
-        两个明确：
-            返回值类型：void
-            参数：ArrayList&lt;Student&gt; array
-     */
-    public static void addStudent(ArrayList&lt;Student&gt; array) &#123;
-        //键盘录入学生对象所需要的数据
-        Scanner sc = new Scanner(System.in);
-
-        System.out.println(&quot;请输入学生姓名:&quot;);
-        String name = sc.nextLine();
-
-        System.out.println(&quot;请输入学生年龄:&quot;);
-        String age = sc.nextLine();
-
-        //创建学生对象，把键盘录入的数据赋值给学生对象的成员变量
-        Student s = new Student();
-        s.setName(name);
-        s.setAge(age);
-
-        //往集合中添加学生对象
-        array.add(s);
-    &#125;
-&#125;</code></pre>
-<h2 id="2-学生管理系统"><a href="#2-学生管理系统" class="headerlink" title="2.学生管理系统"></a>2.学生管理系统</h2><h3 id="2-1学生管理系统实现步骤"><a href="#2-1学生管理系统实现步骤" class="headerlink" title="2.1学生管理系统实现步骤"></a>2.1学生管理系统实现步骤</h3><ul>
-<li><p>案例需求</p>
-<p>​    针对目前我们的所学内容，完成一个综合案例：学生管理系统。该系统主要功能如下：</p>
-<p>​    添加学生：通过键盘录入学生信息，添加到集合中</p>
-<p>​    删除学生：通过键盘录入要删除学生的学号，将该学生对象从集合中删除</p>
-<p>​    修改学生：通过键盘录入要修改学生的学号，将该学生对象其他信息进行修改</p>
-<p>​    查看学生：将集合中的学生对象信息进行展示</p>
-<p>​    退出系统：结束程序</p>
-</li>
-<li><p>实现步骤</p>
-<ol>
-<li><p>定义学生类，包含以下成员变量</p>
-<p>​       private String sid            // 学生id</p>
-<p>​       private String name       // 学生姓名</p>
-<p>​       private String age          // 学生年龄</p>
-<p>​       private String address   // 学生所在地</p>
-</li>
-<li><p>学生管理系统主界面的搭建步骤</p>
-<p>2.1 用输出语句完成主界面的编写<br>2.2 用Scanner实现键盘输入<br>2.3 用switch语句完成选择的功能<br>2.4 用循环完成功能结束后再次回到主界面</p>
-</li>
-<li><p>学生管理系统的添加学生功能实现步骤</p>
-<p>3.1 定义一个方法，接收ArrayList<Student>集合<br>3.2 方法内完成添加学生的功能<br>​         ①键盘录入学生信息<br>​         ②根据录入的信息创建学生对象<br>​         ③将学生对象添加到集合中<br>​         ④提示添加成功信息<br>3.3 在添加学生的选项里调用添加学生的方法</p>
-</li>
-<li><p>学生管理系统的查看学生功能实现步骤</p>
-<p>4.1 定义一个方法，接收ArrayList<Student>集合<br>4.2 方法内遍历集合，将学生信息进行输出<br>4.3 在查看所有学生选项里调用查看学生方法</p>
-</li>
-<li><p>学生管理系统的删除学生功能实现步骤</p>
-<p>5.1 定义一个方法，接收ArrayList<Student>集合<br>5.2 方法中接收要删除学生的学号<br>5.3 遍历集合，获取每个学生对象<br>5.4 使用学生对象的学号和录入的要删除的学号进行比较,如果相同，则将当前学生对象从集合中删除<br>5.5 在删除学生选项里调用删除学生的方法</p>
-</li>
-<li><p>学生管理系统的修改学生功能实现步骤</p>
-<p>6.1 定义一个方法，接收ArrayList<Student>集合<br>6.2 方法中接收要修改学生的学号<br>6.3 通过键盘录入学生对象所需的信息，并创建对象<br>6.4 遍历集合，获取每一个学生对象。并和录入的修改学生学号进行比较.如果相同，则使用新学生对象替换当前学生对象<br>6.5 在修改学生选项里调用修改学生的方法</p>
-</li>
-<li><p>退出系统</p>
-<p>使用System.exit(0);退出JVM</p>
-</li>
-</ol>
-</li>
-</ul>
-<h3 id="2-2学生类的定义"><a href="#2-2学生类的定义" class="headerlink" title="2.2学生类的定义"></a>2.2学生类的定义</h3><pre><code class="java">public class Student &#123;
-    //学号
-    private String sid;
-    //姓名
-    private String name;
-    //年龄
-    private String age;
-    //居住地
-    private String address;
-
-    public Student() &#123;
-    &#125;
-
-    public Student(String sid, String name, String age, String address) &#123;
-        this.sid = sid;
-        this.name = name;
-        this.age = age;
-        this.address = address;
-    &#125;
-
-    public String getSid() &#123;
-        return sid;
-    &#125;
-
-    public void setSid(String sid) &#123;
-        this.sid = sid;
-    &#125;
-
-    public String getName() &#123;
-        return name;
-    &#125;
-
-    public void setName(String name) &#123;
-        this.name = name;
-    &#125;
-
-    public String getAge() &#123;
-        return age;
-    &#125;
-
-    public void setAge(String age) &#123;
-        this.age = age;
-    &#125;
-
-    public String getAddress() &#123;
-        return address;
-    &#125;
-
-    public void setAddress(String address) &#123;
-        this.address = address;
-    &#125;
-&#125;</code></pre>
-<h3 id="2-3测试类的定义"><a href="#2-3测试类的定义" class="headerlink" title="2.3测试类的定义"></a>2.3测试类的定义</h3><pre><code class="java">public class StudentManager &#123;
-    /*
-        1:用输出语句完成主界面的编写
-        2:用Scanner实现键盘录入数据
-        3:用switch语句完成操作的选择
-        4:用循环完成再次回到主界面
-    */
-    public static void main(String[] args) &#123;
-        //创建集合对象，用于保存学生数据信息
-        ArrayList&lt;Student&gt; array = new ArrayList&lt;Student&gt;();
-
-        //用循环完成再次回到主界面
-        while (true) &#123;
-            //用输出语句完成主界面的编写
-            System.out.println(&quot;--------欢迎来到学生管理系统--------&quot;);
-            System.out.println(&quot;1 添加学生&quot;);
-            System.out.println(&quot;2 删除学生&quot;);
-            System.out.println(&quot;3 修改学生&quot;);
-            System.out.println(&quot;4 查看所有学生&quot;);
-            System.out.println(&quot;5 退出&quot;);
-            System.out.println(&quot;请输入你的选择：&quot;);
-
-            //用Scanner实现键盘录入数据
-            Scanner sc = new Scanner(System.in);
-            String line = sc.nextLine();
-
-            //用switch语句完成操作的选择
-            switch (line) &#123;
-                case &quot;1&quot;:
-                    addStudent(array);
-                    break;
-                case &quot;2&quot;:
-                    deleteStudent(array);
-                    break;
-                case &quot;3&quot;:
-                    updateStudent(array);
-                    break;
-                case &quot;4&quot;:
-                    findAllStudent(array);
-                    break;
-                case &quot;5&quot;:
-                    System.out.println(&quot;谢谢使用&quot;);
-                    System.exit(0); //JVM退出
-            &#125;
-        &#125;
-    &#125;
-
-    //定义一个方法，用于添加学生信息
-    public static void addStudent(ArrayList&lt;Student&gt; array) &#123;
-        //键盘录入学生对象所需要的数据,显示提示信息，提示要输入何种信息
-        Scanner sc = new Scanner(System.in);
-
-        String sid;
-
-        while (true) &#123;
-            System.out.println(&quot;请输入学生学号：&quot;);
-            sid = sc.nextLine();
-
-            boolean flag = isUsed(array, sid);
-            if (flag) &#123;
-                System.out.println(&quot;你输入的学号已经被占用，请重新输入&quot;);
-            &#125; else &#123;
-                break;
-            &#125;
-        &#125;
-
-        System.out.println(&quot;请输入学生姓名：&quot;);
-        String name = sc.nextLine();
-
-        System.out.println(&quot;请输入学生年龄：&quot;);
-        String age = sc.nextLine();
-
-        System.out.println(&quot;请输入学生居住地：&quot;);
-        String address = sc.nextLine();
-
-        //创建学生对象，把键盘录入的数据赋值给学生对象的成员变量
-        Student s = new Student();
-        s.setSid(sid);
-        s.setName(name);
-        s.setAge(age);
-        s.setAddress(address);
-
-        //将学生对象添加到集合中
-        array.add(s);
-
-        //给出添加成功提示
-        System.out.println(&quot;添加学生成功&quot;);
-    &#125;
-
-    //定义一个方法，判断学号是否被使用
-    public static boolean isUsed(ArrayList&lt;Student&gt; array, String sid) &#123;
-        //如果与集合中的某一个学生学号相同，返回true;如果都不相同，返回false
-        boolean flag = false;
-
-        for(int i=0; i&lt;array.size(); i++) &#123;
-            Student s = array.get(i);
-            if(s.getSid().equals(sid)) &#123;
-                flag = true;
-                break;
-            &#125;
-        &#125;
-
-        return flag;
-    &#125;
-
-
-    //定义一个方法，用于查看学生信息
-    public static void findAllStudent(ArrayList&lt;Student&gt; array) &#123;
-        //判断集合中是否有数据，如果没有显示提示信息
-        if (array.size() == 0) &#123;
-            System.out.println(&quot;无信息，请先添加信息再查询&quot;);
-            //为了让程序不再往下执行，我们在这里写上return;
-            return;
-        &#125;
-
-        //显示表头信息
-        //\t其实是一个tab键的位置
-        System.out.println(&quot;学号\t\t\t姓名\t\t年龄\t\t居住地&quot;);
-
-        //将集合中数据取出按照对应格式显示学生信息，年龄显示补充“岁”
-        for (int i = 0; i &lt; array.size(); i++) &#123;
-            Student s = array.get(i);
-            System.out.println(s.getSid() + &quot;\t&quot; + s.getName() + &quot;\t&quot; + s.getAge() + &quot;岁\t\t&quot; + s.getAddress());
-        &#125;
-    &#125;
-
-    //定义一个方法，用于删除学生信息
-    public static void deleteStudent(ArrayList&lt;Student&gt; array) &#123;
-        //键盘录入要删除的学生学号,显示提示信息
-        Scanner sc = new Scanner(System.in);
-
-        System.out.println(&quot;请输入你要删除的学生的学号：&quot;);
-        String sid = sc.nextLine();
-
-        //在删除/修改学生操作前，对学号是否存在进行判断
-        //如果不存在，显示提示信息
-        //如果存在，执行删除/修改操作
-
-        int index = -1;
-
-        for (int i = 0; i &lt; array.size(); i++) &#123;
-            Student s = array.get(i);
-            if (s.getSid().equals(sid)) &#123;
-                index = i;
-                break;
-            &#125;
-        &#125;
-
-        if (index == -1) &#123;
-            System.out.println(&quot;该信息不存在，请重新输入&quot;);
-        &#125; else &#123;
-            array.remove(index);
-            //给出删除成功提示
-            System.out.println(&quot;删除学生成功&quot;);
-        &#125;
-    &#125;
-
-    //定义一个方法，用于修改学生信息
-    public static void updateStudent(ArrayList&lt;Student&gt; array) &#123;
-        //键盘录入要修改的学生学号，显示提示信息
-        Scanner sc = new Scanner(System.in);
-
-        System.out.println(&quot;请输入你要修改的学生的学号：&quot;);
-        String sid = sc.nextLine();
-
-        //键盘录入要修改的学生信息
-        System.out.println(&quot;请输入学生新姓名：&quot;);
-        String name = sc.nextLine();
-        System.out.println(&quot;请输入学生新年龄：&quot;);
-        String age = sc.nextLine();
-        System.out.println(&quot;请输入学生新居住地：&quot;);
-        String address = sc.nextLine();
-
-        //创建学生对象
-        Student s = new Student();
-        s.setSid(sid);
-        s.setName(name);
-        s.setAge(age);
-        s.setAddress(address);
-
-        //遍历集合修改对应的学生信息
-        for (int i = 0; i &lt; array.size(); i++) &#123;
-            Student student = array.get(i);
-            if (student.getSid().equals(sid)) &#123;
-                array.set(i, s);
-            &#125;
-        &#125;
-
-        //给出修改成功提示
-        System.out.println(&quot;修改学生成功&quot;);
-    &#125;
-&#125;</code></pre>
 ]]></content>
       <categories>
         <category>Java</category>
