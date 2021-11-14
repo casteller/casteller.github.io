@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://www.mz-zone.cn/books/index.html</loc>
+    
+    <lastmod>2021-11-14</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://www.mz-zone.cn/2021/11/12/20211112001/</loc>
     
     <lastmod>2021-11-12</lastmod>
@@ -10,20 +17,6 @@
   
   <url>
     <loc>https://www.mz-zone.cn/2021/10/27/20211027001/</loc>
-    
-    <lastmod>2021-11-12</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.mz-zone.cn/books/index-1.html</loc>
-    
-    <lastmod>2021-11-12</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.mz-zone.cn/books/index.html</loc>
     
     <lastmod>2021-11-12</lastmod>
     
@@ -480,7 +473,7 @@
 
   <url>
     <loc>https://www.mz-zone.cn/</loc>
-    <lastmod>2021-11-12</lastmod>
+    <lastmod>2021-11-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -488,147 +481,147 @@
   
   <url>
     <loc>https://www.mz-zone.cn/tags/Mysql/</loc>
-    <lastmod>2021-11-12</lastmod>
+    <lastmod>2021-11-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.mz-zone.cn/tags/Jmeter/</loc>
-    <lastmod>2021-11-12</lastmod>
+    <lastmod>2021-11-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.mz-zone.cn/tags/pywin32/</loc>
-    <lastmod>2021-11-12</lastmod>
+    <lastmod>2021-11-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.mz-zone.cn/tags/Java/</loc>
-    <lastmod>2021-11-12</lastmod>
+    <lastmod>2021-11-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.mz-zone.cn/tags/%E6%98%A5%E8%8A%82%E7%81%AF%E7%AC%BC/</loc>
-    <lastmod>2021-11-12</lastmod>
+    <lastmod>2021-11-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.mz-zone.cn/tags/Picgo/</loc>
-    <lastmod>2021-11-12</lastmod>
+    <lastmod>2021-11-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.mz-zone.cn/tags/Jenkins/</loc>
-    <lastmod>2021-11-12</lastmod>
+    <lastmod>2021-11-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.mz-zone.cn/tags/Django/</loc>
-    <lastmod>2021-11-12</lastmod>
+    <lastmod>2021-11-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.mz-zone.cn/tags/python/</loc>
-    <lastmod>2021-11-12</lastmod>
+    <lastmod>2021-11-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.mz-zone.cn/tags/volantis/</loc>
-    <lastmod>2021-11-12</lastmod>
+    <lastmod>2021-11-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.mz-zone.cn/tags/Issues/</loc>
-    <lastmod>2021-11-12</lastmod>
+    <lastmod>2021-11-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.mz-zone.cn/tags/Hexo/</loc>
-    <lastmod>2021-11-12</lastmod>
+    <lastmod>2021-11-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.mz-zone.cn/tags/Linux/</loc>
-    <lastmod>2021-11-12</lastmod>
+    <lastmod>2021-11-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.mz-zone.cn/tags/openpyxl/</loc>
-    <lastmod>2021-11-12</lastmod>
+    <lastmod>2021-11-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.mz-zone.cn/tags/pip/</loc>
-    <lastmod>2021-11-12</lastmod>
+    <lastmod>2021-11-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.mz-zone.cn/tags/%E5%8F%8C%E8%89%B2%E7%90%83/</loc>
-    <lastmod>2021-11-12</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.mz-zone.cn/tags/charles/</loc>
-    <lastmod>2021-11-12</lastmod>
+    <lastmod>2021-11-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.mz-zone.cn/tags/redis/</loc>
-    <lastmod>2021-11-12</lastmod>
+    <lastmod>2021-11-14</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.mz-zone.cn/tags/charles/</loc>
+    <lastmod>2021-11-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.mz-zone.cn/tags/Selenium/</loc>
-    <lastmod>2021-11-12</lastmod>
+    <lastmod>2021-11-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.mz-zone.cn/tags/Pillow/</loc>
-    <lastmod>2021-11-12</lastmod>
+    <lastmod>2021-11-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.mz-zone.cn/tags/hexo/</loc>
-    <lastmod>2021-11-12</lastmod>
+    <lastmod>2021-11-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -637,98 +630,98 @@
   
   <url>
     <loc>https://www.mz-zone.cn/categories/Mysql/</loc>
-    <lastmod>2021-11-12</lastmod>
+    <lastmod>2021-11-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.mz-zone.cn/categories/Jmeter/</loc>
-    <lastmod>2021-11-12</lastmod>
+    <lastmod>2021-11-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.mz-zone.cn/categories/Selenium/</loc>
-    <lastmod>2021-11-12</lastmod>
+    <lastmod>2021-11-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.mz-zone.cn/categories/Java/</loc>
-    <lastmod>2021-11-12</lastmod>
+    <lastmod>2021-11-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.mz-zone.cn/categories/Hexo/</loc>
-    <lastmod>2021-11-12</lastmod>
+    <lastmod>2021-11-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.mz-zone.cn/categories/idea/</loc>
-    <lastmod>2021-11-12</lastmod>
+    <lastmod>2021-11-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.mz-zone.cn/categories/Picgo/</loc>
-    <lastmod>2021-11-12</lastmod>
+    <lastmod>2021-11-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.mz-zone.cn/categories/Jenkins/</loc>
-    <lastmod>2021-11-12</lastmod>
+    <lastmod>2021-11-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.mz-zone.cn/categories/Django/</loc>
-    <lastmod>2021-11-12</lastmod>
+    <lastmod>2021-11-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.mz-zone.cn/categories/python/</loc>
-    <lastmod>2021-11-12</lastmod>
+    <lastmod>2021-11-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.mz-zone.cn/categories/Linux/</loc>
-    <lastmod>2021-11-12</lastmod>
+    <lastmod>2021-11-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.mz-zone.cn/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
-    <lastmod>2021-11-12</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.mz-zone.cn/categories/charles/</loc>
-    <lastmod>2021-11-12</lastmod>
+    <lastmod>2021-11-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.mz-zone.cn/categories/redis/</loc>
-    <lastmod>2021-11-12</lastmod>
+    <lastmod>2021-11-14</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.mz-zone.cn/categories/charles/</loc>
+    <lastmod>2021-11-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
