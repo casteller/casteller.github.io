@@ -5234,7 +5234,7 @@ code {
 .md h6 {
   position: relative;
   pointer-events: none;
-  margin-top: 0;
+  margin-top: 40px;
   font-weight: 520;
 }
 .md h1 >a,
@@ -7680,5 +7680,12 @@ ul.list-v >li>a:hover {
     opacity: 0;
     -webkit-transform: translateY(-100%);
     transform: translateY(-100%);
+  }
+}
+@media screen and (max-width: 2048px) {
+  .l_header {
+    left: 0 !important;
+    border-radius: 0 !important;
+    max-width: 100% !important;
   }
 }

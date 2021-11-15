@@ -6181,7 +6181,7 @@ public class ArrayListTest &#123;
     <url>/2020/10/23/volantis-article/</url>
     <content><![CDATA[<div class="note idea"><p>此文主要记录volantis主题内置标签插件的用法，以及常用的md语法，方便写文章时查阅</p></div>
 <a id="more"></a>
-<h2 id="1、文本类"><a href="#1、文本类" class="headerlink" title="1、文本类"></a><strong>1、文本类</strong></h2><h3 id="👉1-1、行内文本样式"><a href="#👉1-1、行内文本样式" class="headerlink" title="👉1.1、行内文本样式"></a>👉<strong>1.1、行内文本样式</strong></h3><u>下划线</u>
+<h2 id="1、文本类"><a href="#1、文本类" class="headerlink" title="1、文本类"></a><strong>1、文本类</strong></h2><h3 id="1-1、行内文本样式"><a href="#1-1、行内文本样式" class="headerlink" title="1.1、行内文本样式"></a><strong>1.1、行内文本样式</strong></h3><u>下划线</u>
 <pre><code>&#123;% u 下划线 %&#125; </code></pre>
 <p>带 <emp>着重号</emp> 的文本</p>
 <pre><code>&#123;% emp 着重号 %&#125;</code></pre>
