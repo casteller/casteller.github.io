@@ -522,13 +522,6 @@
   </url>
   
   <url>
-    <loc>https://www.mz-zone.cn/tags/Picgo/</loc>
-    <lastmod>2022-11-30</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://www.mz-zone.cn/tags/Linux/</loc>
     <lastmod>2022-11-30</lastmod>
     <changefreq>daily</changefreq>
@@ -536,7 +529,7 @@
   </url>
   
   <url>
-    <loc>https://www.mz-zone.cn/tags/Jenkins/</loc>
+    <loc>https://www.mz-zone.cn/tags/Picgo/</loc>
     <lastmod>2022-11-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -544,6 +537,13 @@
   
   <url>
     <loc>https://www.mz-zone.cn/tags/hexo/</loc>
+    <lastmod>2022-11-30</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.mz-zone.cn/tags/Jenkins/</loc>
     <lastmod>2022-11-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -613,14 +613,14 @@
   </url>
   
   <url>
-    <loc>https://www.mz-zone.cn/tags/Selenium/</loc>
+    <loc>https://www.mz-zone.cn/tags/redis/</loc>
     <lastmod>2022-11-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://www.mz-zone.cn/tags/redis/</loc>
+    <loc>https://www.mz-zone.cn/tags/Selenium/</loc>
     <lastmod>2022-11-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -678,14 +678,14 @@
   </url>
   
   <url>
-    <loc>https://www.mz-zone.cn/categories/Picgo/</loc>
+    <loc>https://www.mz-zone.cn/categories/Linux/</loc>
     <lastmod>2022-11-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://www.mz-zone.cn/categories/Linux/</loc>
+    <loc>https://www.mz-zone.cn/categories/Picgo/</loc>
     <lastmod>2022-11-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
