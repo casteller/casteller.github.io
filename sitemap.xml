@@ -487,13 +487,6 @@
 
   
   <url>
-    <loc>https://www.mz-zone.cn/tags/Mysql/</loc>
-    <lastmod>2022-11-30</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://www.mz-zone.cn/tags/Jmeter/</loc>
     <lastmod>2022-11-30</lastmod>
     <changefreq>daily</changefreq>
@@ -501,7 +494,7 @@
   </url>
   
   <url>
-    <loc>https://www.mz-zone.cn/tags/pywin32/</loc>
+    <loc>https://www.mz-zone.cn/tags/Mysql/</loc>
     <lastmod>2022-11-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -509,6 +502,13 @@
   
   <url>
     <loc>https://www.mz-zone.cn/tags/Java/</loc>
+    <lastmod>2022-11-30</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.mz-zone.cn/tags/pywin32/</loc>
     <lastmod>2022-11-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -585,14 +585,14 @@
   </url>
   
   <url>
-    <loc>https://www.mz-zone.cn/tags/pip/</loc>
+    <loc>https://www.mz-zone.cn/tags/openpyxl/</loc>
     <lastmod>2022-11-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://www.mz-zone.cn/tags/openpyxl/</loc>
+    <loc>https://www.mz-zone.cn/tags/pip/</loc>
     <lastmod>2022-11-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -636,13 +636,6 @@
 
   
   <url>
-    <loc>https://www.mz-zone.cn/categories/Mysql/</loc>
-    <lastmod>2022-11-30</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://www.mz-zone.cn/categories/Jmeter/</loc>
     <lastmod>2022-11-30</lastmod>
     <changefreq>daily</changefreq>
@@ -650,7 +643,7 @@
   </url>
   
   <url>
-    <loc>https://www.mz-zone.cn/categories/Selenium/</loc>
+    <loc>https://www.mz-zone.cn/categories/Mysql/</loc>
     <lastmod>2022-11-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -664,7 +657,21 @@
   </url>
   
   <url>
+    <loc>https://www.mz-zone.cn/categories/Selenium/</loc>
+    <lastmod>2022-11-30</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://www.mz-zone.cn/categories/Hexo/</loc>
+    <lastmod>2022-11-30</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.mz-zone.cn/categories/idea/</loc>
     <lastmod>2022-11-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -679,13 +686,6 @@
   
   <url>
     <loc>https://www.mz-zone.cn/categories/Picgo/</loc>
-    <lastmod>2022-11-30</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.mz-zone.cn/categories/idea/</loc>
     <lastmod>2022-11-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
