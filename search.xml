@@ -78,321 +78,6 @@ else:
       </tags>
   </entry>
   <entry>
-    <title>java学习-基础语法(1)</title>
-    <url>/2021/01/19/20210119001/</url>
-    <content><![CDATA[<h1 id="day01-java基础语法"><a href="#day01-java基础语法" class="headerlink" title="day01 - java基础语法"></a>day01 - java基础语法</h1><h2 id="1-Java概述"><a href="#1-Java概述" class="headerlink" title="1. Java概述"></a>1. Java概述</h2><h3 id="1-1-Java语言发展史（了解）"><a href="#1-1-Java语言发展史（了解）" class="headerlink" title="1.1 Java语言发展史（了解）"></a>1.1 Java语言发展史（了解）</h3><p>语言：人与人交流沟通的表达方式</p>
-<p>计算机语言：人与计算机之间进行信息交流沟通的一种特殊语言</p>
-<p>Java语言是美国Sun公司（Stanford University Network）在1995年推出的计算机语言</p>
-<p>Java之父：詹姆斯·高斯林（James Gosling）</p>
-<p>2009年，Sun公司被甲骨文公司收购，所以我们现在访问oracle官网即可：<a href="https://www.oracle.com/">https://www.oracle.com</a> </p>
-<p>当前，我们课程使用的JDK版本：11.0</p>
-<h3 id="1-2-Java语言跨平台原理（理解）"><a href="#1-2-Java语言跨平台原理（理解）" class="headerlink" title="1.2 Java语言跨平台原理（理解）"></a>1.2 Java语言跨平台原理（理解）</h3><p>Java程序并非是直接运行的，Java编译器将Java源程序编译成与平台无关的字节码文件(class文件)，然后由Java虚拟机（JVM）对字节码文件解释执行。所以在不同的操作系统下，只需安装不同的Java虚拟机即可实现java程序的跨平台。</p>
-<h3 id="1-3-JRE和JDK（记忆）"><a href="#1-3-JRE和JDK（记忆）" class="headerlink" title="1.3 JRE和JDK（记忆）"></a>1.3 JRE和JDK（记忆）</h3><p>JVM（Java Virtual Machine），Java虚拟机</p>
-<p>JRE（Java Runtime Environment），Java运行环境，包含了JVM和Java的核心类库（Java API）</p>
-<p>JDK（Java Development Kit）称为Java开发工具，包含了JRE和开发工具</p>
-<p>总结：我们只需安装JDK即可，它包含了java的运行环境和虚拟机。</p>
-<h3 id="1-4-JDK的下载和安装（应用）"><a href="#1-4-JDK的下载和安装（应用）" class="headerlink" title="1.4 JDK的下载和安装（应用）"></a>1.4 JDK的下载和安装（应用）</h3><h4 id="1-4-1-下载"><a href="#1-4-1-下载" class="headerlink" title="1.4.1 下载"></a>1.4.1 下载</h4><p>通过官方网站获取JDK</p>
-<p><a href="http://www.oracle.com/">http://www.oracle.com</a></p>
-<p><strong>注意</strong>：针对不同的操作系统，需要下载对应版本的JDK。</p>
-<p>具体下载步骤请参见《JDK下载及安装说明文档》</p>
-<h4 id="1-4-2-安装"><a href="#1-4-2-安装" class="headerlink" title="1.4.2 安装"></a>1.4.2 安装</h4><p>傻瓜式安装，下一步即可。但默认的安装路径是在C:\Program Files下，为方便统一管理建议修改安装路径，将与开发相关的软件都安装到一个目录下，例如：E:\develop。</p>
-<p><strong>注意</strong>：安装路径不要包含中文或者空格等特殊字符（使用纯英文目录）。</p>
-<p>具体安装步骤请参见《JDK下载及安装说明文档》</p>
-<h4 id="1-4-3-JDK的安装目录介绍"><a href="#1-4-3-JDK的安装目录介绍" class="headerlink" title="1.4.3 JDK的安装目录介绍"></a>1.4.3 JDK的安装目录介绍</h4><table>
-<thead>
-<tr>
-<th>目录名称</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>bin</td>
-<td>该路径下存放了JDK的各种工具命令。javac和java就放在这个目录。</td>
-</tr>
-<tr>
-<td>conf</td>
-<td>该路径下存放了JDK的相关配置文件。</td>
-</tr>
-<tr>
-<td>include</td>
-<td>该路径下存放了一些平台特定的头文件。</td>
-</tr>
-<tr>
-<td>jmods</td>
-<td>该路径下存放了JDK的各种模块。</td>
-</tr>
-<tr>
-<td>legal</td>
-<td>该路径下存放了JDK各模块的授权文档。</td>
-</tr>
-<tr>
-<td>lib</td>
-<td>该路径下存放了JDK工具的一些补充JAR包。</td>
-</tr>
-</tbody></table>
-<h2 id="2-第一个演示程序"><a href="#2-第一个演示程序" class="headerlink" title="2. 第一个演示程序"></a>2. 第一个演示程序</h2><h3 id="2-1-常用DOS命令（应用）"><a href="#2-1-常用DOS命令（应用）" class="headerlink" title="2.1 常用DOS命令（应用）"></a>2.1 常用DOS命令（应用）</h3><p>在接触集成开发环境之前，我们需要使用命令行窗口对java程序进行编译和运行，所以需要知道一些常用DOS命令。</p>
-<p>1、打开命令行窗口的方式：win + r打开运行窗口，输入cmd，回车。</p>
-<p>2、常用命令及其作用</p>
-<table>
-<thead>
-<tr>
-<th>操作</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>盘符名称:</td>
-<td>盘符切换。E:回车，表示切换到E盘。</td>
-</tr>
-<tr>
-<td>dir</td>
-<td>查看当前路径下的内容。</td>
-</tr>
-<tr>
-<td>cd 目录</td>
-<td>进入单级目录。cd itheima</td>
-</tr>
-<tr>
-<td>cd ..</td>
-<td>回退到上一级目录。</td>
-</tr>
-<tr>
-<td>cd 目录1\目录2...</td>
-<td>进入多级目录。cd itheima\JavaSE</td>
-</tr>
-<tr>
-<td>cd \</td>
-<td>回退到盘符目录。</td>
-</tr>
-<tr>
-<td>cls</td>
-<td>清屏。</td>
-</tr>
-<tr>
-<td>exit</td>
-<td>退出命令提示符窗口。</td>
-</tr>
-</tbody></table>
-<h3 id="2-2-Path环境变量的配置（应用）"><a href="#2-2-Path环境变量的配置（应用）" class="headerlink" title="2.2 Path环境变量的配置（应用）"></a>2.2 Path环境变量的配置（应用）</h3><h4 id="2-2-1-为什么配置环境变量"><a href="#2-2-1-为什么配置环境变量" class="headerlink" title="2.2.1 为什么配置环境变量"></a>2.2.1 为什么配置环境变量</h4><p>开发Java程序，需要使用JDK提供的开发工具（比如javac.exe、java.exe等命令），而这些工具在JDK的安装目录的bin目录下，如果不配置环境变量，那么这些命令只可以在该目录下执行。我们不可能把所有的java文件都放到JDK的bin目录下，所以配置环境变量的作用就是可以使bin目录下的java相关命令可以在任意目录下使用。</p>
-<h4 id="2-2-2-配置环境变量步骤"><a href="#2-2-2-配置环境变量步骤" class="headerlink" title="2.2.2 配置环境变量步骤"></a>2.2.2 配置环境变量步骤</h4><p>具体配置步骤请参见《Java环境变量配置说明》文档。    </p>
-<h3 id="2-3-HelloWorld案例（应用）"><a href="#2-3-HelloWorld案例（应用）" class="headerlink" title="2.3 HelloWorld案例（应用）"></a>2.3 HelloWorld案例（应用）</h3><p>HelloWorld案例是指在计算机屏幕上输出“HelloWorld”这行文字。各种计算机语言都习惯使用该案例作为第一个演示案例。</p>
-<h4 id="2-3-1-Java程序开发运行流程"><a href="#2-3-1-Java程序开发运行流程" class="headerlink" title="2.3.1 Java程序开发运行流程"></a>2.3.1 Java程序开发运行流程</h4><p>开发Java程序，需要三个步骤：编写程序，编译程序，运行程序。</p>
-<h4 id="2-3-2-HelloWorld案例的编写"><a href="#2-3-2-HelloWorld案例的编写" class="headerlink" title="2.3.2 HelloWorld案例的编写"></a>2.3.2 HelloWorld案例的编写</h4><p>1、新建文本文档文件，修改名称为HelloWorld.java。</p>
-<p>2、用记事本打开HelloWorld.java文件，输写程序内容。</p>
-<pre><code class="java">public class HelloWorld &#123;
-    public static void main(String[] args) &#123;
-        System.out.println(&quot;HelloWorld&quot;);
-    &#125;
-&#125;</code></pre>
-<h4 id="2-3-3-HelloWorld案例的编译和运行"><a href="#2-3-3-HelloWorld案例的编译和运行" class="headerlink" title="2.3.3 HelloWorld案例的编译和运行"></a>2.3.3 HelloWorld案例的编译和运行</h4><p>存文件，打开命令行窗口，将目录切换至java文件所在目录，编译java文件生成class文件，运行class文件。</p>
-<blockquote>
-<p>编译：javac 文件名.java</p>
-<p>范例：javac HelloWorld.java</p>
-<p>执行：java 类名</p>
-<p>范例：java HelloWorld</p>
-</blockquote>
-<h3 id="2-4-HelloWorld案例常见问题（理解）"><a href="#2-4-HelloWorld案例常见问题（理解）" class="headerlink" title="2.4 HelloWorld案例常见问题（理解）"></a>2.4 HelloWorld案例常见问题（理解）</h3><h4 id="2-4-1-BUG"><a href="#2-4-1-BUG" class="headerlink" title="2.4.1 BUG"></a>2.4.1 BUG</h4><p>在电脑系统或程序中，隐藏着的一些未被发现的缺陷或问题统称为bug（漏洞）。</p>
-<h4 id="2-4-2-BUG的解决"><a href="#2-4-2-BUG的解决" class="headerlink" title="2.4.2 BUG的解决"></a>2.4.2 BUG的解决</h4><p>1、具备识别BUG的能力：多看</p>
-<p>2、具备分析BUG的能力：多思考，多查资料</p>
-<p>3、具备解决BUG的能力：多尝试，多总结</p>
-<h4 id="2-4-3-HelloWorld案例常见问题"><a href="#2-4-3-HelloWorld案例常见问题" class="headerlink" title="2.4.3 HelloWorld案例常见问题"></a>2.4.3 HelloWorld案例常见问题</h4><p>1、非法字符问题。Java中的符号都是英文格式的。</p>
-<p>2、大小写问题。Java语言对大小写敏感（区分大小写）。</p>
-<p>3、在系统中显示文件的扩展名，避免出现HelloWorld.java.txt文件。</p>
-<p>4、编译命令后的java文件名需要带文件后缀.java</p>
-<p>5、运行命令后的class文件名（类名）不带文件后缀.class</p>
-<p>…</p>
-<h3 id="2-5-Notepad-软件的安装和使用（应用）"><a href="#2-5-Notepad-软件的安装和使用（应用）" class="headerlink" title="2.5 Notepad++软件的安装和使用（应用）"></a>2.5 Notepad++软件的安装和使用（应用）</h3><h4 id="2-5-1-什么要使用Notepad-软件"><a href="#2-5-1-什么要使用Notepad-软件" class="headerlink" title="2.5.1 什么要使用Notepad++软件"></a>2.5.1 什么要使用Notepad++软件</h4><p>Notepad++功能比windows中的自带记事本功能强大，除了可以用来制作一般的纯文字说明文件，也十分适合编写计算机程序代码。Notepad++有行号，能够快速定位问题位置，还有语法高亮度显示、代码折叠等功能。而且它是免费的。</p>
-<h4 id="2-5-2-Notepad-软件安装"><a href="#2-5-2-Notepad-软件安装" class="headerlink" title="2.5.2 Notepad++软件安装"></a>2.5.2 Notepad++软件安装</h4><p>安装：傻瓜式安装，一直下一步即可。建议也安装到统一的开发软件目录下，比如E:\develop。</p>
-<p>具体安装步骤请参见《Nodepad++软件安装及配置说明》文档。</p>
-<h4 id="2-5-3Notepad-软件配置"><a href="#2-5-3Notepad-软件配置" class="headerlink" title="2.5.3Notepad++软件配置"></a>2.5.3Notepad++软件配置</h4><p>安装完毕之后，为了使用方便，做一个简单的配置：修改默认语言和编码。</p>
-<p>具体配置的说明请参见《Nodepad++软件安装及配置说明》文档。</p>
-<h2 id="3-java基础语法"><a href="#3-java基础语法" class="headerlink" title="3. java基础语法"></a>3. java基础语法</h2><h4 id="3-1-注释（理解）"><a href="#3-1-注释（理解）" class="headerlink" title="3.1 注释（理解）"></a>3.1 注释（理解）</h4><p>注释是对代码的解释和说明文字，可以提高程序的可读性，因此在程序中添加必要的注释文字十分重要。Java中的注释分为三种：</p>
-<p>单行注释。单行注释的格式是使用//，从//开始至本行结尾的文字将作为注释文字。</p>
-<pre><code class="java">// 这是单行注释文字</code></pre>
-<p>多行注释。多行注释的格式是使用/* 和 */将一段较长的注释括起来。</p>
-<pre><code class="java">/*
-这是多行注释文字
-这是多行注释文字
-这是多行注释文字
-*/
-注意：多行注释不能嵌套使用。</code></pre>
-<p>文档注释。文档注释以<code>/**</code>开始，以<code>*/</code>结束。（以后讲）</p>
-<h4 id="3-2-关键字（理解）"><a href="#3-2-关键字（理解）" class="headerlink" title="3.2 关键字（理解）"></a>3.2 关键字（理解）</h4><p>关键字是指被java语言赋予了特殊含义的单词。</p>
-<p>关键字的特点：</p>
-<p>​    关键字的字母全部小写。</p>
-<p>​    常用的代码编辑器对关键字都有高亮显示，比如现在我们能看到的public、class、static等。</p>
-<h4 id="3-3-常量（应用）"><a href="#3-3-常量（应用）" class="headerlink" title="3.3 常量（应用）"></a>3.3 常量（应用）</h4><p>常量：在程序运行过程中，其值不可以发生改变的量。</p>
-<p>Java中的常量分类：</p>
-<p>​    字符串常量  用双引号括起来的多个字符（可以包含0个、一个或多个），例如”a”、”abc”、”中国”等</p>
-<p>​    整数常量  整数，例如：-10、0、88等</p>
-<p>​    小数常量  小数，例如：-5.5、1.0、88.88等</p>
-<p>​    字符常量  用单引号括起来的一个字符，例如：’a’、’5’、’B’、’中’等</p>
-<p>​    布尔常量  布尔值，表示真假，只有两个值true和false</p>
-<p>​    空常量  一个特殊的值，空值，值为null</p>
-<p>除空常量外，其他常量均可使用输出语句直接输出。</p>
-<pre><code class="java">public class Demo &#123;
-    public static void main(String[] args) &#123;
-        System.out.println(10); // 输出一个整数
-        System.out.println(5.5); // 输出一个小数
-        System.out.println(&#39;a&#39;); // 输出一个字符
-        System.out.println(true); // 输出boolean值true
-        System.out.println(&quot;欢迎来到黑马程序员&quot;); // 输出字符串
-    &#125;
-&#125;</code></pre>
-<h4 id="3-4-数据类型（记忆、应用）"><a href="#3-4-数据类型（记忆、应用）" class="headerlink" title="3.4 数据类型（记忆、应用）"></a>3.4 数据类型（记忆、应用）</h4><h5 id="3-4-1-计算机存储单元"><a href="#3-4-1-计算机存储单元" class="headerlink" title="3.4.1 计算机存储单元"></a>3.4.1 计算机存储单元</h5><p>我们知道计算机是可以用来存储数据的，但是无论是内存还是硬盘，计算机存储设备的最小信息单元叫“位（bit）”，我们又称之为“比特位”，通常用小写的字母”b”表示。而计算机中最基本的存储单元叫“字节（byte）”，</p>
-<p>通常用大写字母”B”表示，字节是由连续的8个位组成。</p>
-<p>除了字节外还有一些常用的存储单位，其换算单位如下：</p>
-<p>1B（字节） = 8bit</p>
-<p>1KB = 1024B</p>
-<p>1MB = 1024KB</p>
-<p>1GB = 1024MB</p>
-<p>1TB = 1024GB</p>
-<h5 id="3-4-2-Java中的数据类型"><a href="#3-4-2-Java中的数据类型" class="headerlink" title="3.4.2 Java中的数据类型"></a>3.4.2 Java中的数据类型</h5><p>Java是一个强类型语言，Java中的数据必须明确数据类型。在Java中的数据类型包括基本数据类型和引用数据类型两种。</p>
-<p>Java中的基本数据类型：</p>
-<table>
-<thead>
-<tr>
-<th align="center">数据类型</th>
-<th align="center">关键字</th>
-<th align="center">内存占用</th>
-<th align="center">取值范围</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">整数</td>
-<td align="center">byte</td>
-<td align="center">1</td>
-<td align="center">负的2的7次方 ~ 2的7次方-1(-128~127)</td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center">short</td>
-<td align="center">2</td>
-<td align="center">负的2的15次方 ~ 2的15次方-1(-32768~32767)</td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center">int</td>
-<td align="center">4</td>
-<td align="center">负的2的31次方 ~ 2的31次方-1</td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center">long</td>
-<td align="center">8</td>
-<td align="center">负的2的63次方 ~ 2的63次方-1</td>
-</tr>
-<tr>
-<td align="center">浮点数</td>
-<td align="center">float</td>
-<td align="center">4</td>
-<td align="center">1.401298e-45 ~ 3.402823e+38</td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center">double</td>
-<td align="center">8</td>
-<td align="center">4.9000000e-324 ~ 1.797693e+308</td>
-</tr>
-<tr>
-<td align="center">字符</td>
-<td align="center">char</td>
-<td align="center">2</td>
-<td align="center">0-65535</td>
-</tr>
-<tr>
-<td align="center">布尔</td>
-<td align="center">boolean</td>
-<td align="center">1</td>
-<td align="center">true，false</td>
-</tr>
-</tbody></table>
-<p>说明：</p>
-<p>​    e+38表示是乘以10的38次方，同样，e-45表示乘以10的负45次方。</p>
-<p>​    在java中整数默认是int类型，浮点数默认是double类型。</p>
-<h4 id="3-5-变量（应用）"><a href="#3-5-变量（应用）" class="headerlink" title="3.5 变量（应用）"></a>3.5 变量（应用）</h4><h5 id="3-5-1-变量的定义"><a href="#3-5-1-变量的定义" class="headerlink" title="3.5.1 变量的定义"></a>3.5.1 变量的定义</h5><p>变量：在程序运行过程中，其值可以发生改变的量。</p>
-<p>从本质上讲，变量是内存中的一小块区域，其值可以在一定范围内变化。</p>
-<p>变量的定义格式：</p>
-<pre><code class="java">数据类型 变量名 = 初始化值; // 声明变量并赋值
-int age = 18;
-System.out.println(age);</code></pre>
-<p>或者</p>
-<pre><code class="java">// 先声明，后赋值（使用前赋值即可）
-数据类型 变量名;
-变量名 = 初始化值;
-double money;
-money = 55.5;
-System.out.println(money);</code></pre>
-<p>还可以在同一行定义多个同一种数据类型的变量，中间使用逗号隔开。但不建议使用这种方式，降低程序的可读性。</p>
-<pre><code class="java">int a = 10, b = 20; // 定义int类型的变量a和b，中间使用逗号隔开
-System.out.println(a);
-System.out.println(b);
-
-int c,d; // 声明int类型的变量c和d，中间使用逗号隔开
-c = 30;
-d = 40;
-System.out.println(c);
-System.out.println(d);</code></pre>
-<p>变量的使用：通过变量名访问即可。</p>
-<h5 id="3-5-2-使用变量时的注意事项"><a href="#3-5-2-使用变量时的注意事项" class="headerlink" title="3.5.2 使用变量时的注意事项"></a>3.5.2 使用变量时的注意事项</h5><ol>
-<li>在同一对花括号中，变量名不能重复。</li>
-<li>变量在使用之前，必须初始化（赋值）。</li>
-<li>定义long类型的变量时，需要在整数的后面加L（大小写均可，建议大写）。因为整数默认是int类型，整数太大可能超出int范围。</li>
-<li>定义float类型的变量时，需要在小数的后面加F（大小写均可，建议大写）。因为浮点数的默认类型是double， double的取值范围是大于float的，类型不兼容。</li>
-</ol>
-<h4 id="3-6-标识符（记忆、理解）"><a href="#3-6-标识符（记忆、理解）" class="headerlink" title="3.6 标识符（记忆、理解）"></a>3.6 标识符（记忆、理解）</h4><p>标识符是用户编程时使用的名字，用于给类、方法、变量、常量等命名。</p>
-<p>Java中标识符的组成规则：</p>
-<p>​    由字母、数字、下划线“_”、美元符号“$”组成，第一个字符不能是数字。</p>
-<p>​    不能使用java中的关键字作为标识符。    </p>
-<p>​    标识符对大小写敏感（区分大小写）。</p>
-<p>Java中标识符的命名约定：</p>
-<p>​    小驼峰式命名：变量名、方法名</p>
-<p>​        首字母小写，从第二个单词开始每个单词的首字母大写。</p>
-<p>​    大驼峰式命名：类名</p>
-<p>​        每个单词的首字母都大写。</p>
-<p>​    另外，标识符的命名最好可以做到见名知意</p>
-<p>​        例如：username、studentNumber等。</p>
-<h4 id="3-7-类型转换（理解）"><a href="#3-7-类型转换（理解）" class="headerlink" title="3.7 类型转换（理解）"></a>3.7 类型转换（理解）</h4><p>在Java中，一些数据类型之间是可以相互转换的。分为两种情况：自动类型转换和强制类型转换。</p>
-<p>自动类型转换：</p>
-<p>​    把一个表示数据范围小的数值或者变量赋值给另一个表示数据范围大的变量。这种转换方式是自动的，直接书写即可。例如：</p>
-<pre><code class="java">double num = 10; // 将int类型的10直接赋值给double类型
-System.out.println(num); // 输出10.0</code></pre>
-<p>强制类型转换：</p>
-<p>​    把一个表示数据范围大的数值或者变量赋值给另一个表示数据范围小的变量。</p>
-<p>​    强制类型转换格式：目标数据类型 变量名 = (目标数据类型)值或者变量;</p>
-<p>​    例如：</p>
-<pre><code class="java">double num1 = 5.5;
-int num2 = (int) num1; // 将double类型的num1强制转换为int类型
-System.out.println(num2); // 输出5（小数位直接舍弃）</code></pre>
-<p>说明：</p>
-<ol>
-<li>char类型的数据转换为int类型是按照码表中对应的int值进行计算的。比如在ASCII码表中，’a’对应97。</li>
-</ol>
-<pre><code class="java">int a = &#39;a&#39;;
-System.out.println(a); // 将输出97</code></pre>
-<ol start="2">
-<li>整数默认是int类型，byte、short和char类型数据参与运算均会自动转换为int类型。</li>
-</ol>
-<pre><code class="java">byte b1 = 10;
-byte b2 = 20;
-byte b3 = b1 + b2; 
-// 第三行代码会报错，b1和b2会自动转换为int类型，计算结果为int，int赋值给byte需要强制类型转换。
-// 修改为:
-int num = b1 + b2;
-// 或者：
-byte b3 = (byte) (b1 + b2);</code></pre>
-<ol>
-<li>boolean类型不能与其他基本数据类型相互转换。</li>
-</ol>
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>java学习-基础语法(2)</title>
     <url>/2021/01/19/20210119002/</url>
     <content><![CDATA[<h1 id="day02-Java基础语法"><a href="#day02-Java基础语法" class="headerlink" title="day02 - Java基础语法"></a>day02 - Java基础语法</h1><h2 id="1-运算符"><a href="#1-运算符" class="headerlink" title="1. 运算符"></a>1. 运算符</h2><h3 id="1-1-算术运算符（理解）"><a href="#1-1-算术运算符（理解）" class="headerlink" title="1.1 算术运算符（理解）"></a>1.1 算术运算符（理解）</h3><h4 id="1-1-1-运算符和表达式"><a href="#1-1-1-运算符和表达式" class="headerlink" title="1.1.1 运算符和表达式"></a>1.1.1 运算符和表达式</h4><p>运算符：对常量或者变量进行操作的符号</p>
@@ -957,6 +642,321 @@ public class IfTest02 &#123;
         &#125;
     &#125;
 &#125;</code></pre>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>java学习-基础语法(1)</title>
+    <url>/2021/01/19/20210119001/</url>
+    <content><![CDATA[<h1 id="day01-java基础语法"><a href="#day01-java基础语法" class="headerlink" title="day01 - java基础语法"></a>day01 - java基础语法</h1><h2 id="1-Java概述"><a href="#1-Java概述" class="headerlink" title="1. Java概述"></a>1. Java概述</h2><h3 id="1-1-Java语言发展史（了解）"><a href="#1-1-Java语言发展史（了解）" class="headerlink" title="1.1 Java语言发展史（了解）"></a>1.1 Java语言发展史（了解）</h3><p>语言：人与人交流沟通的表达方式</p>
+<p>计算机语言：人与计算机之间进行信息交流沟通的一种特殊语言</p>
+<p>Java语言是美国Sun公司（Stanford University Network）在1995年推出的计算机语言</p>
+<p>Java之父：詹姆斯·高斯林（James Gosling）</p>
+<p>2009年，Sun公司被甲骨文公司收购，所以我们现在访问oracle官网即可：<a href="https://www.oracle.com/">https://www.oracle.com</a> </p>
+<p>当前，我们课程使用的JDK版本：11.0</p>
+<h3 id="1-2-Java语言跨平台原理（理解）"><a href="#1-2-Java语言跨平台原理（理解）" class="headerlink" title="1.2 Java语言跨平台原理（理解）"></a>1.2 Java语言跨平台原理（理解）</h3><p>Java程序并非是直接运行的，Java编译器将Java源程序编译成与平台无关的字节码文件(class文件)，然后由Java虚拟机（JVM）对字节码文件解释执行。所以在不同的操作系统下，只需安装不同的Java虚拟机即可实现java程序的跨平台。</p>
+<h3 id="1-3-JRE和JDK（记忆）"><a href="#1-3-JRE和JDK（记忆）" class="headerlink" title="1.3 JRE和JDK（记忆）"></a>1.3 JRE和JDK（记忆）</h3><p>JVM（Java Virtual Machine），Java虚拟机</p>
+<p>JRE（Java Runtime Environment），Java运行环境，包含了JVM和Java的核心类库（Java API）</p>
+<p>JDK（Java Development Kit）称为Java开发工具，包含了JRE和开发工具</p>
+<p>总结：我们只需安装JDK即可，它包含了java的运行环境和虚拟机。</p>
+<h3 id="1-4-JDK的下载和安装（应用）"><a href="#1-4-JDK的下载和安装（应用）" class="headerlink" title="1.4 JDK的下载和安装（应用）"></a>1.4 JDK的下载和安装（应用）</h3><h4 id="1-4-1-下载"><a href="#1-4-1-下载" class="headerlink" title="1.4.1 下载"></a>1.4.1 下载</h4><p>通过官方网站获取JDK</p>
+<p><a href="http://www.oracle.com/">http://www.oracle.com</a></p>
+<p><strong>注意</strong>：针对不同的操作系统，需要下载对应版本的JDK。</p>
+<p>具体下载步骤请参见《JDK下载及安装说明文档》</p>
+<h4 id="1-4-2-安装"><a href="#1-4-2-安装" class="headerlink" title="1.4.2 安装"></a>1.4.2 安装</h4><p>傻瓜式安装，下一步即可。但默认的安装路径是在C:\Program Files下，为方便统一管理建议修改安装路径，将与开发相关的软件都安装到一个目录下，例如：E:\develop。</p>
+<p><strong>注意</strong>：安装路径不要包含中文或者空格等特殊字符（使用纯英文目录）。</p>
+<p>具体安装步骤请参见《JDK下载及安装说明文档》</p>
+<h4 id="1-4-3-JDK的安装目录介绍"><a href="#1-4-3-JDK的安装目录介绍" class="headerlink" title="1.4.3 JDK的安装目录介绍"></a>1.4.3 JDK的安装目录介绍</h4><table>
+<thead>
+<tr>
+<th>目录名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>bin</td>
+<td>该路径下存放了JDK的各种工具命令。javac和java就放在这个目录。</td>
+</tr>
+<tr>
+<td>conf</td>
+<td>该路径下存放了JDK的相关配置文件。</td>
+</tr>
+<tr>
+<td>include</td>
+<td>该路径下存放了一些平台特定的头文件。</td>
+</tr>
+<tr>
+<td>jmods</td>
+<td>该路径下存放了JDK的各种模块。</td>
+</tr>
+<tr>
+<td>legal</td>
+<td>该路径下存放了JDK各模块的授权文档。</td>
+</tr>
+<tr>
+<td>lib</td>
+<td>该路径下存放了JDK工具的一些补充JAR包。</td>
+</tr>
+</tbody></table>
+<h2 id="2-第一个演示程序"><a href="#2-第一个演示程序" class="headerlink" title="2. 第一个演示程序"></a>2. 第一个演示程序</h2><h3 id="2-1-常用DOS命令（应用）"><a href="#2-1-常用DOS命令（应用）" class="headerlink" title="2.1 常用DOS命令（应用）"></a>2.1 常用DOS命令（应用）</h3><p>在接触集成开发环境之前，我们需要使用命令行窗口对java程序进行编译和运行，所以需要知道一些常用DOS命令。</p>
+<p>1、打开命令行窗口的方式：win + r打开运行窗口，输入cmd，回车。</p>
+<p>2、常用命令及其作用</p>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>盘符名称:</td>
+<td>盘符切换。E:回车，表示切换到E盘。</td>
+</tr>
+<tr>
+<td>dir</td>
+<td>查看当前路径下的内容。</td>
+</tr>
+<tr>
+<td>cd 目录</td>
+<td>进入单级目录。cd itheima</td>
+</tr>
+<tr>
+<td>cd ..</td>
+<td>回退到上一级目录。</td>
+</tr>
+<tr>
+<td>cd 目录1\目录2...</td>
+<td>进入多级目录。cd itheima\JavaSE</td>
+</tr>
+<tr>
+<td>cd \</td>
+<td>回退到盘符目录。</td>
+</tr>
+<tr>
+<td>cls</td>
+<td>清屏。</td>
+</tr>
+<tr>
+<td>exit</td>
+<td>退出命令提示符窗口。</td>
+</tr>
+</tbody></table>
+<h3 id="2-2-Path环境变量的配置（应用）"><a href="#2-2-Path环境变量的配置（应用）" class="headerlink" title="2.2 Path环境变量的配置（应用）"></a>2.2 Path环境变量的配置（应用）</h3><h4 id="2-2-1-为什么配置环境变量"><a href="#2-2-1-为什么配置环境变量" class="headerlink" title="2.2.1 为什么配置环境变量"></a>2.2.1 为什么配置环境变量</h4><p>开发Java程序，需要使用JDK提供的开发工具（比如javac.exe、java.exe等命令），而这些工具在JDK的安装目录的bin目录下，如果不配置环境变量，那么这些命令只可以在该目录下执行。我们不可能把所有的java文件都放到JDK的bin目录下，所以配置环境变量的作用就是可以使bin目录下的java相关命令可以在任意目录下使用。</p>
+<h4 id="2-2-2-配置环境变量步骤"><a href="#2-2-2-配置环境变量步骤" class="headerlink" title="2.2.2 配置环境变量步骤"></a>2.2.2 配置环境变量步骤</h4><p>具体配置步骤请参见《Java环境变量配置说明》文档。    </p>
+<h3 id="2-3-HelloWorld案例（应用）"><a href="#2-3-HelloWorld案例（应用）" class="headerlink" title="2.3 HelloWorld案例（应用）"></a>2.3 HelloWorld案例（应用）</h3><p>HelloWorld案例是指在计算机屏幕上输出“HelloWorld”这行文字。各种计算机语言都习惯使用该案例作为第一个演示案例。</p>
+<h4 id="2-3-1-Java程序开发运行流程"><a href="#2-3-1-Java程序开发运行流程" class="headerlink" title="2.3.1 Java程序开发运行流程"></a>2.3.1 Java程序开发运行流程</h4><p>开发Java程序，需要三个步骤：编写程序，编译程序，运行程序。</p>
+<h4 id="2-3-2-HelloWorld案例的编写"><a href="#2-3-2-HelloWorld案例的编写" class="headerlink" title="2.3.2 HelloWorld案例的编写"></a>2.3.2 HelloWorld案例的编写</h4><p>1、新建文本文档文件，修改名称为HelloWorld.java。</p>
+<p>2、用记事本打开HelloWorld.java文件，输写程序内容。</p>
+<pre><code class="java">public class HelloWorld &#123;
+    public static void main(String[] args) &#123;
+        System.out.println(&quot;HelloWorld&quot;);
+    &#125;
+&#125;</code></pre>
+<h4 id="2-3-3-HelloWorld案例的编译和运行"><a href="#2-3-3-HelloWorld案例的编译和运行" class="headerlink" title="2.3.3 HelloWorld案例的编译和运行"></a>2.3.3 HelloWorld案例的编译和运行</h4><p>存文件，打开命令行窗口，将目录切换至java文件所在目录，编译java文件生成class文件，运行class文件。</p>
+<blockquote>
+<p>编译：javac 文件名.java</p>
+<p>范例：javac HelloWorld.java</p>
+<p>执行：java 类名</p>
+<p>范例：java HelloWorld</p>
+</blockquote>
+<h3 id="2-4-HelloWorld案例常见问题（理解）"><a href="#2-4-HelloWorld案例常见问题（理解）" class="headerlink" title="2.4 HelloWorld案例常见问题（理解）"></a>2.4 HelloWorld案例常见问题（理解）</h3><h4 id="2-4-1-BUG"><a href="#2-4-1-BUG" class="headerlink" title="2.4.1 BUG"></a>2.4.1 BUG</h4><p>在电脑系统或程序中，隐藏着的一些未被发现的缺陷或问题统称为bug（漏洞）。</p>
+<h4 id="2-4-2-BUG的解决"><a href="#2-4-2-BUG的解决" class="headerlink" title="2.4.2 BUG的解决"></a>2.4.2 BUG的解决</h4><p>1、具备识别BUG的能力：多看</p>
+<p>2、具备分析BUG的能力：多思考，多查资料</p>
+<p>3、具备解决BUG的能力：多尝试，多总结</p>
+<h4 id="2-4-3-HelloWorld案例常见问题"><a href="#2-4-3-HelloWorld案例常见问题" class="headerlink" title="2.4.3 HelloWorld案例常见问题"></a>2.4.3 HelloWorld案例常见问题</h4><p>1、非法字符问题。Java中的符号都是英文格式的。</p>
+<p>2、大小写问题。Java语言对大小写敏感（区分大小写）。</p>
+<p>3、在系统中显示文件的扩展名，避免出现HelloWorld.java.txt文件。</p>
+<p>4、编译命令后的java文件名需要带文件后缀.java</p>
+<p>5、运行命令后的class文件名（类名）不带文件后缀.class</p>
+<p>…</p>
+<h3 id="2-5-Notepad-软件的安装和使用（应用）"><a href="#2-5-Notepad-软件的安装和使用（应用）" class="headerlink" title="2.5 Notepad++软件的安装和使用（应用）"></a>2.5 Notepad++软件的安装和使用（应用）</h3><h4 id="2-5-1-什么要使用Notepad-软件"><a href="#2-5-1-什么要使用Notepad-软件" class="headerlink" title="2.5.1 什么要使用Notepad++软件"></a>2.5.1 什么要使用Notepad++软件</h4><p>Notepad++功能比windows中的自带记事本功能强大，除了可以用来制作一般的纯文字说明文件，也十分适合编写计算机程序代码。Notepad++有行号，能够快速定位问题位置，还有语法高亮度显示、代码折叠等功能。而且它是免费的。</p>
+<h4 id="2-5-2-Notepad-软件安装"><a href="#2-5-2-Notepad-软件安装" class="headerlink" title="2.5.2 Notepad++软件安装"></a>2.5.2 Notepad++软件安装</h4><p>安装：傻瓜式安装，一直下一步即可。建议也安装到统一的开发软件目录下，比如E:\develop。</p>
+<p>具体安装步骤请参见《Nodepad++软件安装及配置说明》文档。</p>
+<h4 id="2-5-3Notepad-软件配置"><a href="#2-5-3Notepad-软件配置" class="headerlink" title="2.5.3Notepad++软件配置"></a>2.5.3Notepad++软件配置</h4><p>安装完毕之后，为了使用方便，做一个简单的配置：修改默认语言和编码。</p>
+<p>具体配置的说明请参见《Nodepad++软件安装及配置说明》文档。</p>
+<h2 id="3-java基础语法"><a href="#3-java基础语法" class="headerlink" title="3. java基础语法"></a>3. java基础语法</h2><h4 id="3-1-注释（理解）"><a href="#3-1-注释（理解）" class="headerlink" title="3.1 注释（理解）"></a>3.1 注释（理解）</h4><p>注释是对代码的解释和说明文字，可以提高程序的可读性，因此在程序中添加必要的注释文字十分重要。Java中的注释分为三种：</p>
+<p>单行注释。单行注释的格式是使用//，从//开始至本行结尾的文字将作为注释文字。</p>
+<pre><code class="java">// 这是单行注释文字</code></pre>
+<p>多行注释。多行注释的格式是使用/* 和 */将一段较长的注释括起来。</p>
+<pre><code class="java">/*
+这是多行注释文字
+这是多行注释文字
+这是多行注释文字
+*/
+注意：多行注释不能嵌套使用。</code></pre>
+<p>文档注释。文档注释以<code>/**</code>开始，以<code>*/</code>结束。（以后讲）</p>
+<h4 id="3-2-关键字（理解）"><a href="#3-2-关键字（理解）" class="headerlink" title="3.2 关键字（理解）"></a>3.2 关键字（理解）</h4><p>关键字是指被java语言赋予了特殊含义的单词。</p>
+<p>关键字的特点：</p>
+<p>​    关键字的字母全部小写。</p>
+<p>​    常用的代码编辑器对关键字都有高亮显示，比如现在我们能看到的public、class、static等。</p>
+<h4 id="3-3-常量（应用）"><a href="#3-3-常量（应用）" class="headerlink" title="3.3 常量（应用）"></a>3.3 常量（应用）</h4><p>常量：在程序运行过程中，其值不可以发生改变的量。</p>
+<p>Java中的常量分类：</p>
+<p>​    字符串常量  用双引号括起来的多个字符（可以包含0个、一个或多个），例如”a”、”abc”、”中国”等</p>
+<p>​    整数常量  整数，例如：-10、0、88等</p>
+<p>​    小数常量  小数，例如：-5.5、1.0、88.88等</p>
+<p>​    字符常量  用单引号括起来的一个字符，例如：’a’、’5’、’B’、’中’等</p>
+<p>​    布尔常量  布尔值，表示真假，只有两个值true和false</p>
+<p>​    空常量  一个特殊的值，空值，值为null</p>
+<p>除空常量外，其他常量均可使用输出语句直接输出。</p>
+<pre><code class="java">public class Demo &#123;
+    public static void main(String[] args) &#123;
+        System.out.println(10); // 输出一个整数
+        System.out.println(5.5); // 输出一个小数
+        System.out.println(&#39;a&#39;); // 输出一个字符
+        System.out.println(true); // 输出boolean值true
+        System.out.println(&quot;欢迎来到黑马程序员&quot;); // 输出字符串
+    &#125;
+&#125;</code></pre>
+<h4 id="3-4-数据类型（记忆、应用）"><a href="#3-4-数据类型（记忆、应用）" class="headerlink" title="3.4 数据类型（记忆、应用）"></a>3.4 数据类型（记忆、应用）</h4><h5 id="3-4-1-计算机存储单元"><a href="#3-4-1-计算机存储单元" class="headerlink" title="3.4.1 计算机存储单元"></a>3.4.1 计算机存储单元</h5><p>我们知道计算机是可以用来存储数据的，但是无论是内存还是硬盘，计算机存储设备的最小信息单元叫“位（bit）”，我们又称之为“比特位”，通常用小写的字母”b”表示。而计算机中最基本的存储单元叫“字节（byte）”，</p>
+<p>通常用大写字母”B”表示，字节是由连续的8个位组成。</p>
+<p>除了字节外还有一些常用的存储单位，其换算单位如下：</p>
+<p>1B（字节） = 8bit</p>
+<p>1KB = 1024B</p>
+<p>1MB = 1024KB</p>
+<p>1GB = 1024MB</p>
+<p>1TB = 1024GB</p>
+<h5 id="3-4-2-Java中的数据类型"><a href="#3-4-2-Java中的数据类型" class="headerlink" title="3.4.2 Java中的数据类型"></a>3.4.2 Java中的数据类型</h5><p>Java是一个强类型语言，Java中的数据必须明确数据类型。在Java中的数据类型包括基本数据类型和引用数据类型两种。</p>
+<p>Java中的基本数据类型：</p>
+<table>
+<thead>
+<tr>
+<th align="center">数据类型</th>
+<th align="center">关键字</th>
+<th align="center">内存占用</th>
+<th align="center">取值范围</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">整数</td>
+<td align="center">byte</td>
+<td align="center">1</td>
+<td align="center">负的2的7次方 ~ 2的7次方-1(-128~127)</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">short</td>
+<td align="center">2</td>
+<td align="center">负的2的15次方 ~ 2的15次方-1(-32768~32767)</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">int</td>
+<td align="center">4</td>
+<td align="center">负的2的31次方 ~ 2的31次方-1</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">long</td>
+<td align="center">8</td>
+<td align="center">负的2的63次方 ~ 2的63次方-1</td>
+</tr>
+<tr>
+<td align="center">浮点数</td>
+<td align="center">float</td>
+<td align="center">4</td>
+<td align="center">1.401298e-45 ~ 3.402823e+38</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">double</td>
+<td align="center">8</td>
+<td align="center">4.9000000e-324 ~ 1.797693e+308</td>
+</tr>
+<tr>
+<td align="center">字符</td>
+<td align="center">char</td>
+<td align="center">2</td>
+<td align="center">0-65535</td>
+</tr>
+<tr>
+<td align="center">布尔</td>
+<td align="center">boolean</td>
+<td align="center">1</td>
+<td align="center">true，false</td>
+</tr>
+</tbody></table>
+<p>说明：</p>
+<p>​    e+38表示是乘以10的38次方，同样，e-45表示乘以10的负45次方。</p>
+<p>​    在java中整数默认是int类型，浮点数默认是double类型。</p>
+<h4 id="3-5-变量（应用）"><a href="#3-5-变量（应用）" class="headerlink" title="3.5 变量（应用）"></a>3.5 变量（应用）</h4><h5 id="3-5-1-变量的定义"><a href="#3-5-1-变量的定义" class="headerlink" title="3.5.1 变量的定义"></a>3.5.1 变量的定义</h5><p>变量：在程序运行过程中，其值可以发生改变的量。</p>
+<p>从本质上讲，变量是内存中的一小块区域，其值可以在一定范围内变化。</p>
+<p>变量的定义格式：</p>
+<pre><code class="java">数据类型 变量名 = 初始化值; // 声明变量并赋值
+int age = 18;
+System.out.println(age);</code></pre>
+<p>或者</p>
+<pre><code class="java">// 先声明，后赋值（使用前赋值即可）
+数据类型 变量名;
+变量名 = 初始化值;
+double money;
+money = 55.5;
+System.out.println(money);</code></pre>
+<p>还可以在同一行定义多个同一种数据类型的变量，中间使用逗号隔开。但不建议使用这种方式，降低程序的可读性。</p>
+<pre><code class="java">int a = 10, b = 20; // 定义int类型的变量a和b，中间使用逗号隔开
+System.out.println(a);
+System.out.println(b);
+
+int c,d; // 声明int类型的变量c和d，中间使用逗号隔开
+c = 30;
+d = 40;
+System.out.println(c);
+System.out.println(d);</code></pre>
+<p>变量的使用：通过变量名访问即可。</p>
+<h5 id="3-5-2-使用变量时的注意事项"><a href="#3-5-2-使用变量时的注意事项" class="headerlink" title="3.5.2 使用变量时的注意事项"></a>3.5.2 使用变量时的注意事项</h5><ol>
+<li>在同一对花括号中，变量名不能重复。</li>
+<li>变量在使用之前，必须初始化（赋值）。</li>
+<li>定义long类型的变量时，需要在整数的后面加L（大小写均可，建议大写）。因为整数默认是int类型，整数太大可能超出int范围。</li>
+<li>定义float类型的变量时，需要在小数的后面加F（大小写均可，建议大写）。因为浮点数的默认类型是double， double的取值范围是大于float的，类型不兼容。</li>
+</ol>
+<h4 id="3-6-标识符（记忆、理解）"><a href="#3-6-标识符（记忆、理解）" class="headerlink" title="3.6 标识符（记忆、理解）"></a>3.6 标识符（记忆、理解）</h4><p>标识符是用户编程时使用的名字，用于给类、方法、变量、常量等命名。</p>
+<p>Java中标识符的组成规则：</p>
+<p>​    由字母、数字、下划线“_”、美元符号“$”组成，第一个字符不能是数字。</p>
+<p>​    不能使用java中的关键字作为标识符。    </p>
+<p>​    标识符对大小写敏感（区分大小写）。</p>
+<p>Java中标识符的命名约定：</p>
+<p>​    小驼峰式命名：变量名、方法名</p>
+<p>​        首字母小写，从第二个单词开始每个单词的首字母大写。</p>
+<p>​    大驼峰式命名：类名</p>
+<p>​        每个单词的首字母都大写。</p>
+<p>​    另外，标识符的命名最好可以做到见名知意</p>
+<p>​        例如：username、studentNumber等。</p>
+<h4 id="3-7-类型转换（理解）"><a href="#3-7-类型转换（理解）" class="headerlink" title="3.7 类型转换（理解）"></a>3.7 类型转换（理解）</h4><p>在Java中，一些数据类型之间是可以相互转换的。分为两种情况：自动类型转换和强制类型转换。</p>
+<p>自动类型转换：</p>
+<p>​    把一个表示数据范围小的数值或者变量赋值给另一个表示数据范围大的变量。这种转换方式是自动的，直接书写即可。例如：</p>
+<pre><code class="java">double num = 10; // 将int类型的10直接赋值给double类型
+System.out.println(num); // 输出10.0</code></pre>
+<p>强制类型转换：</p>
+<p>​    把一个表示数据范围大的数值或者变量赋值给另一个表示数据范围小的变量。</p>
+<p>​    强制类型转换格式：目标数据类型 变量名 = (目标数据类型)值或者变量;</p>
+<p>​    例如：</p>
+<pre><code class="java">double num1 = 5.5;
+int num2 = (int) num1; // 将double类型的num1强制转换为int类型
+System.out.println(num2); // 输出5（小数位直接舍弃）</code></pre>
+<p>说明：</p>
+<ol>
+<li>char类型的数据转换为int类型是按照码表中对应的int值进行计算的。比如在ASCII码表中，’a’对应97。</li>
+</ol>
+<pre><code class="java">int a = &#39;a&#39;;
+System.out.println(a); // 将输出97</code></pre>
+<ol start="2">
+<li>整数默认是int类型，byte、short和char类型数据参与运算均会自动转换为int类型。</li>
+</ol>
+<pre><code class="java">byte b1 = 10;
+byte b2 = 20;
+byte b3 = b1 + b2; 
+// 第三行代码会报错，b1和b2会自动转换为int类型，计算结果为int，int赋值给byte需要强制类型转换。
+// 修改为:
+int num = b1 + b2;
+// 或者：
+byte b3 = (byte) (b1 + b2);</code></pre>
+<ol>
+<li>boolean类型不能与其他基本数据类型相互转换。</li>
+</ol>
 ]]></content>
       <categories>
         <category>Java</category>
@@ -4540,53 +4540,6 @@ public class ArrayListTest &#123;
       </tags>
   </entry>
   <entry>
-    <title>IntelliJ IDEA 2021.2.1激活破解图文教程（亲测有效，永久激活）</title>
-    <url>/2021/09/16/20210916/</url>
-    <content><![CDATA[<div class="note idea"><p>分享一个一劳永逸的破解方法，通过无限重置 30 天试用期的方式，无需再为激活码、安装参数失效担忧，亲测有效，方法简单，下面是详细教程哟~</p></div>
-<a id="more"></a>
-<p>笔者发现一个可以无限重置 IDEA 30天试用期的方法， 暴力无解，简单又稳定，再也不用担心激活码经常失效的问题了，具体步骤跟着下面的图文教程一步一步来就行，非常简单哟。<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/163030609139714" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/163030609139714" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"><br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/163030613859087" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/163030613859087" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"></p>
-<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><ul>
-<li><strong>本教程适用于 IntelliJ IDEA 2021.2.1 以下所有版本，请放心食用~</strong></li>
-<li><strong>本教程适用于 JetBrains 全系列产品，包括 Pycharm、IDEA、WebStorm、Phpstorm、Datagrip、RubyMine、CLion、AppCode 等。</strong></li>
-<li><strong>本教程适用 Windows/Mac/Linux 系统，文中以 Windows 系统为例做讲解，其他系统按照教程顺序即可。</strong></li>
-</ul>
-<h2 id="第一步-下载最新的-IDEA-2021-2-1-版本安装包"><a href="#第一步-下载最新的-IDEA-2021-2-1-版本安装包" class="headerlink" title="第一步:下载最新的 IDEA 2021.2.1 版本安装包"></a><strong>第一步:下载最新的 IDEA 2021.2.1 版本安装包</strong></h2><p>我们先从IDEA 官网下载 IDEA 2021.2.1 版本的安装包，下载链接如下：<br><a href="https://www.jetbrains.com/idea/download/">https://www.jetbrains.com/idea/download/</a><br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/162788778392370" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/162788778392370" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"><br>点击下载，静心等待其下载完毕即可。</p>
-<h2 id="第二步-先卸载老版本的-IDEA"><a href="#第二步-先卸载老版本的-IDEA" class="headerlink" title="第二步: 先卸载老版本的 IDEA"></a><strong>第二步: 先卸载老版本的 IDEA</strong></h2><blockquote>
-<p>注意，如果电脑上之前有安装老版本的 IDEA, 需要先卸载干净，否则可能安装失败！<br>注意，一定要先卸载干净掉老版本的 IDEA。</p>
-</blockquote>
-<p>1.笔者之前安装了老版本的 IDEA, 所以要先卸载，未安装老版本 IDEA 的小伙伴直接跳过，看后面步骤就行:<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/1616142110243.jpg" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/1616142110243.jpg" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"><br>卸载成功后，点击关闭:<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/161227500640133.jpg" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/161227500640133.jpg" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"><br>卸载成功后，双击刚刚下载好的 <code>idea</code> exe 格式安装包, 打开它；</p>
-<h2 id="第三步-开始安装-IDEA-2021-2-1-版本"><a href="#第三步-开始安装-IDEA-2021-2-1-版本" class="headerlink" title="第三步: 开始安装 IDEA 2021.2.1 版本"></a><strong>第三步: 开始安装 IDEA 2021.2.1 版本</strong></h2><p>2.安装目录默认为 <code>C:\Program Files\JetBrains\IntelliJ IDEA 2021.2.1</code>, 这里笔者选择的是默认路径:<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/162788774473355" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/162788774473355" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"><br>3.勾选自己想要创建的桌面快捷方式，笔者的操作系统是 64 位的，所以勾选的 64 位快捷方式：<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/161227511743444.jpg" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/161227511743444.jpg" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"><br>4.点击 <code>Install</code> ：<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/161227515963842.jpg" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/161227515963842.jpg" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"><br>5.安装完成后，勾选 <code>Run IntelliJ IDEA</code>，点击 <code>Finish</code> 运行软件:<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/161227518784184.jpg" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/161227518784184.jpg" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"></p>
-<h2 id="第四步：开始激活"><a href="#第四步：开始激活" class="headerlink" title="第四步：开始激活"></a><strong>第四步：开始激活</strong></h2><p>6.等待 IDEA 2021.2.1 运行, 中间会先弹出一个注册框，我们勾选 <code>Evaluate for free</code>, 点击 <code>Evaluate</code>， 先试用30天:<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/1616141581896.jpg" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/1616141581896.jpg" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"><br><strong>注意，如果没有弹出上面的界面，可执行重置30天试用期脚本，<a href="https://pan.baidu.com/s/1gljcF1kW6i4go8HLc2GzeA">点击进入破解补丁下载地址</a>提取码：klzl</strong><br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/WechatIMG713.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/WechatIMG713.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"><br>打开该文件夹后，有对应系统的执行脚本，执行即可：</p>
-<blockquote>
-<p>windows系统：reset_jetbrains_eval_windows.vbs linux/<br>mac系统：reset_jetbrains_eval_mac_linux.sh</p>
-</blockquote>
-<p>7.进入 IDEA 中， 先随便新建个 Java 工程， 然后将网盘中最新的 IDEA 无限重置 30 天试用期补丁 <code>ide-eval-resetter-2.1.6.zip</code>拖入 IDEA 界面中，如下图所示：<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/160922391957819.jpg" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/160922391957819.jpg" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"></p>
-<blockquote>
-<p><strong>注意：</strong><br><strong>zip补丁包无需解压 ~ 无需解压 ~ 无需解压 ~</strong><br><strong>激活后补丁不要移动，不要删除~</strong></p>
-</blockquote>
-<p><strong>另外一种安装补丁的方式</strong><br><strong>如果无法拖动安装，你可以在<code>Settings/Preferences...</code> -&gt; <code>Plugins</code> 里手动安装插件（<code>Install Plugin From Disk...</code>），参考下图:</strong><br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/161881715122776" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/161881715122776" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"><br>注意： MacOS 系统可能会自动解压，然后把<code>zip</code>包丢进回收站, 需要注意一下~<br>插件安装成功后，会提示如下：<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/160922431249643.jpg" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/160922431249643.jpg" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"></p>
-<h2 id="第六步-重启IDEA-！重启IDEA！"><a href="#第六步-重启IDEA-！重启IDEA！" class="headerlink" title="第六步: 重启IDEA ！重启IDEA！"></a><strong>第六步: 重启IDEA ！重启IDEA！</strong></h2><p>安装成功后，重启 IDEA. 可以通过点击 <code>Help</code> 菜单，若列表中出现 <code>Eval Reset</code>选项，则代表安装成功，可以参考下面的图示。<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/160922462708315.jpg" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/160922462708315.jpg" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"></p>
-<h2 id="第七步-安装成功，如何使用？"><a href="#第七步-安装成功，如何使用？" class="headerlink" title="第七步: 安装成功，如何使用？"></a><strong>第七步: 安装成功，如何使用？</strong></h2><p>一般来说，在IDE窗口切出去或切回来时（窗口失去/得到焦点）会触发事件，检测是否长达<code>25</code>天都没有重置30天试用期，到时候会给出通知让你选择。（初次安装因为无法获取上次重置时间，会直接给予提示）<br>也可以手动唤出插件的主界面：<br>如果IDE没有打开项目，在<code>Welcome</code>界面点击菜单：<code>Get Help</code> -&gt; <code>Eval Reset</code><br>如果IDE打开了项目，点击菜单：<code>Help</code> -&gt; <code>Eval Reset</code><br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/160922462708315.jpg" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/160922462708315.jpg" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"><br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/160922469596943.jpg" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/160922469596943.jpg" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"><br>唤出的插件主界面中包含了一些显示信息，<code>2</code>个按钮，<code>1</code>个勾选项：<br>按钮：<code>Reload</code> 用来刷新界面上的显示信息，其中包括上一次重置30天试用期的时间。<br>按钮：<code>Reset</code> 点击会询问是否重置试用30天并<strong>重启IDE</strong>。选择<code>Yes</code>则执行重置操作并<strong>重启IDE生效</strong>，选择<code>No</code>则什么也不做。（<strong>此为手动重置方式</strong>）<br><strong>有强迫症的小伙伴，若觉得自动重置不安心，可以通过这种方式来主动重置30天试用期，重置成功后，点击菜单 Help -&gt; Register 可查看最新的剩余试用时间。</strong><br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/160922546973318.jpg" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/160922546973318.jpg" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"><br>勾选项：<code>Auto reset before per restart</code> 如果勾选了，则自勾选后<strong>每次重启/退出IDE时会自动重置试用信息</strong>，你无需做额外的事情。（<strong>此为自动重置方式</strong>）<br><strong>PS: 注意：自动重置是当你重启 IDEA 的时候触发。</strong><br><strong>PS: 注意：自动重置是当你重启 IDEA 的时候触发。</strong><br><strong>PS: 注意：自动重置是当你重启 IDEA 的时候触发。</strong><br><img src="https://www.cxybug.com/chezai-music/163030613859087" class="lazyload placeholder" data-srcset="https://www.cxybug.com/chezai-music/163030613859087" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"></p>
-<h2 id="第八步-如何查看剩余的试用期"><a href="#第八步-如何查看剩余的试用期" class="headerlink" title="第八步: 如何查看剩余的试用期"></a><strong>第八步: 如何查看剩余的试用期</strong></h2><p>进入 IDEA 界面后，点击 <code>Help</code> -&gt; <code>Register</code> 查看：<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/158691933254071.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/158691933254071.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"><br>可以看到，试用期还剩余30天：<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/160922563192214.jpg" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/160922563192214.jpg" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"><br>无限重置大法好呀，这样我们就相当于永久激活了 IDEA 了，比较重要的点是，这种方法非常稳定，不会动不动就失效。</p>
-<h2 id="一些说明"><a href="#一些说明" class="headerlink" title="一些说明"></a><strong>一些说明</strong></h2><ul>
-<li>重置30天试用期需要<strong>重启IDE生效</strong>！</li>
-<li>本插件默认不会显示其主界面，如果你需要，参考本文：<code>如何使用</code>小节。</li>
-<li>市场付费插件的试用信息也会<strong>一并重置</strong>。</li>
-<li>如果长达<code>25</code>天不曾有任何重置动作，IDE会有<strong>通知询问</strong>你是否进行重置。</li>
-<li>如果勾选：<code>Auto reset before per restart</code> ，重置是静默无感知的。</li>
-<li>简单来说：勾选了<code>Auto reset before per restart</code>则无需再管，一劳永逸。<div class="note link green"><p>本文参考链接：<a href="https://www.exception.site/essay/idea-reset-eval">https://www.exception.site/essay/idea-reset-eval</a></p></div>
-
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>idea</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Linux测试必备</title>
     <url>/2021/10/21/20211021001/</url>
     <content><![CDATA[<div class="note idea"><p>软件测试必须掌握的常用linux命令总结，熟练的掌握和使用这些命令可以提高工作效率，并且结合这些命令对测试过程中遇到的问题进行一些初步的定位。</p></div>
@@ -4933,6 +4886,53 @@ public class ArrayListTest &#123;
       </categories>
       <tags>
         <tag>Picgo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>IntelliJ IDEA 2021.2.1激活破解图文教程（亲测有效，永久激活）</title>
+    <url>/2021/09/16/20210916/</url>
+    <content><![CDATA[<div class="note idea"><p>分享一个一劳永逸的破解方法，通过无限重置 30 天试用期的方式，无需再为激活码、安装参数失效担忧，亲测有效，方法简单，下面是详细教程哟~</p></div>
+<a id="more"></a>
+<p>笔者发现一个可以无限重置 IDEA 30天试用期的方法， 暴力无解，简单又稳定，再也不用担心激活码经常失效的问题了，具体步骤跟着下面的图文教程一步一步来就行，非常简单哟。<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/163030609139714" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/163030609139714" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"><br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/163030613859087" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/163030613859087" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"></p>
+<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><ul>
+<li><strong>本教程适用于 IntelliJ IDEA 2021.2.1 以下所有版本，请放心食用~</strong></li>
+<li><strong>本教程适用于 JetBrains 全系列产品，包括 Pycharm、IDEA、WebStorm、Phpstorm、Datagrip、RubyMine、CLion、AppCode 等。</strong></li>
+<li><strong>本教程适用 Windows/Mac/Linux 系统，文中以 Windows 系统为例做讲解，其他系统按照教程顺序即可。</strong></li>
+</ul>
+<h2 id="第一步-下载最新的-IDEA-2021-2-1-版本安装包"><a href="#第一步-下载最新的-IDEA-2021-2-1-版本安装包" class="headerlink" title="第一步:下载最新的 IDEA 2021.2.1 版本安装包"></a><strong>第一步:下载最新的 IDEA 2021.2.1 版本安装包</strong></h2><p>我们先从IDEA 官网下载 IDEA 2021.2.1 版本的安装包，下载链接如下：<br><a href="https://www.jetbrains.com/idea/download/">https://www.jetbrains.com/idea/download/</a><br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/162788778392370" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/162788778392370" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"><br>点击下载，静心等待其下载完毕即可。</p>
+<h2 id="第二步-先卸载老版本的-IDEA"><a href="#第二步-先卸载老版本的-IDEA" class="headerlink" title="第二步: 先卸载老版本的 IDEA"></a><strong>第二步: 先卸载老版本的 IDEA</strong></h2><blockquote>
+<p>注意，如果电脑上之前有安装老版本的 IDEA, 需要先卸载干净，否则可能安装失败！<br>注意，一定要先卸载干净掉老版本的 IDEA。</p>
+</blockquote>
+<p>1.笔者之前安装了老版本的 IDEA, 所以要先卸载，未安装老版本 IDEA 的小伙伴直接跳过，看后面步骤就行:<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/1616142110243.jpg" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/1616142110243.jpg" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"><br>卸载成功后，点击关闭:<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/161227500640133.jpg" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/161227500640133.jpg" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"><br>卸载成功后，双击刚刚下载好的 <code>idea</code> exe 格式安装包, 打开它；</p>
+<h2 id="第三步-开始安装-IDEA-2021-2-1-版本"><a href="#第三步-开始安装-IDEA-2021-2-1-版本" class="headerlink" title="第三步: 开始安装 IDEA 2021.2.1 版本"></a><strong>第三步: 开始安装 IDEA 2021.2.1 版本</strong></h2><p>2.安装目录默认为 <code>C:\Program Files\JetBrains\IntelliJ IDEA 2021.2.1</code>, 这里笔者选择的是默认路径:<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/162788774473355" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/162788774473355" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"><br>3.勾选自己想要创建的桌面快捷方式，笔者的操作系统是 64 位的，所以勾选的 64 位快捷方式：<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/161227511743444.jpg" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/161227511743444.jpg" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"><br>4.点击 <code>Install</code> ：<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/161227515963842.jpg" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/161227515963842.jpg" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"><br>5.安装完成后，勾选 <code>Run IntelliJ IDEA</code>，点击 <code>Finish</code> 运行软件:<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/161227518784184.jpg" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/161227518784184.jpg" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"></p>
+<h2 id="第四步：开始激活"><a href="#第四步：开始激活" class="headerlink" title="第四步：开始激活"></a><strong>第四步：开始激活</strong></h2><p>6.等待 IDEA 2021.2.1 运行, 中间会先弹出一个注册框，我们勾选 <code>Evaluate for free</code>, 点击 <code>Evaluate</code>， 先试用30天:<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/1616141581896.jpg" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/1616141581896.jpg" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"><br><strong>注意，如果没有弹出上面的界面，可执行重置30天试用期脚本，<a href="https://pan.baidu.com/s/1gljcF1kW6i4go8HLc2GzeA">点击进入破解补丁下载地址</a>提取码：klzl</strong><br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/WechatIMG713.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/WechatIMG713.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"><br>打开该文件夹后，有对应系统的执行脚本，执行即可：</p>
+<blockquote>
+<p>windows系统：reset_jetbrains_eval_windows.vbs linux/<br>mac系统：reset_jetbrains_eval_mac_linux.sh</p>
+</blockquote>
+<p>7.进入 IDEA 中， 先随便新建个 Java 工程， 然后将网盘中最新的 IDEA 无限重置 30 天试用期补丁 <code>ide-eval-resetter-2.1.6.zip</code>拖入 IDEA 界面中，如下图所示：<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/160922391957819.jpg" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/160922391957819.jpg" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"></p>
+<blockquote>
+<p><strong>注意：</strong><br><strong>zip补丁包无需解压 ~ 无需解压 ~ 无需解压 ~</strong><br><strong>激活后补丁不要移动，不要删除~</strong></p>
+</blockquote>
+<p><strong>另外一种安装补丁的方式</strong><br><strong>如果无法拖动安装，你可以在<code>Settings/Preferences...</code> -&gt; <code>Plugins</code> 里手动安装插件（<code>Install Plugin From Disk...</code>），参考下图:</strong><br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/161881715122776" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/161881715122776" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"><br>注意： MacOS 系统可能会自动解压，然后把<code>zip</code>包丢进回收站, 需要注意一下~<br>插件安装成功后，会提示如下：<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/160922431249643.jpg" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/160922431249643.jpg" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"></p>
+<h2 id="第六步-重启IDEA-！重启IDEA！"><a href="#第六步-重启IDEA-！重启IDEA！" class="headerlink" title="第六步: 重启IDEA ！重启IDEA！"></a><strong>第六步: 重启IDEA ！重启IDEA！</strong></h2><p>安装成功后，重启 IDEA. 可以通过点击 <code>Help</code> 菜单，若列表中出现 <code>Eval Reset</code>选项，则代表安装成功，可以参考下面的图示。<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/160922462708315.jpg" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/160922462708315.jpg" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"></p>
+<h2 id="第七步-安装成功，如何使用？"><a href="#第七步-安装成功，如何使用？" class="headerlink" title="第七步: 安装成功，如何使用？"></a><strong>第七步: 安装成功，如何使用？</strong></h2><p>一般来说，在IDE窗口切出去或切回来时（窗口失去/得到焦点）会触发事件，检测是否长达<code>25</code>天都没有重置30天试用期，到时候会给出通知让你选择。（初次安装因为无法获取上次重置时间，会直接给予提示）<br>也可以手动唤出插件的主界面：<br>如果IDE没有打开项目，在<code>Welcome</code>界面点击菜单：<code>Get Help</code> -&gt; <code>Eval Reset</code><br>如果IDE打开了项目，点击菜单：<code>Help</code> -&gt; <code>Eval Reset</code><br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/160922462708315.jpg" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/160922462708315.jpg" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"><br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/160922469596943.jpg" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/160922469596943.jpg" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"><br>唤出的插件主界面中包含了一些显示信息，<code>2</code>个按钮，<code>1</code>个勾选项：<br>按钮：<code>Reload</code> 用来刷新界面上的显示信息，其中包括上一次重置30天试用期的时间。<br>按钮：<code>Reset</code> 点击会询问是否重置试用30天并<strong>重启IDE</strong>。选择<code>Yes</code>则执行重置操作并<strong>重启IDE生效</strong>，选择<code>No</code>则什么也不做。（<strong>此为手动重置方式</strong>）<br><strong>有强迫症的小伙伴，若觉得自动重置不安心，可以通过这种方式来主动重置30天试用期，重置成功后，点击菜单 Help -&gt; Register 可查看最新的剩余试用时间。</strong><br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/160922546973318.jpg" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/160922546973318.jpg" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"><br>勾选项：<code>Auto reset before per restart</code> 如果勾选了，则自勾选后<strong>每次重启/退出IDE时会自动重置试用信息</strong>，你无需做额外的事情。（<strong>此为自动重置方式</strong>）<br><strong>PS: 注意：自动重置是当你重启 IDEA 的时候触发。</strong><br><strong>PS: 注意：自动重置是当你重启 IDEA 的时候触发。</strong><br><strong>PS: 注意：自动重置是当你重启 IDEA 的时候触发。</strong><br><img src="https://www.cxybug.com/chezai-music/163030613859087" class="lazyload placeholder" data-srcset="https://www.cxybug.com/chezai-music/163030613859087" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"></p>
+<h2 id="第八步-如何查看剩余的试用期"><a href="#第八步-如何查看剩余的试用期" class="headerlink" title="第八步: 如何查看剩余的试用期"></a><strong>第八步: 如何查看剩余的试用期</strong></h2><p>进入 IDEA 界面后，点击 <code>Help</code> -&gt; <code>Register</code> 查看：<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/158691933254071.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/158691933254071.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"><br>可以看到，试用期还剩余30天：<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/160922563192214.jpg" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/160922563192214.jpg" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"><br>无限重置大法好呀，这样我们就相当于永久激活了 IDEA 了，比较重要的点是，这种方法非常稳定，不会动不动就失效。</p>
+<h2 id="一些说明"><a href="#一些说明" class="headerlink" title="一些说明"></a><strong>一些说明</strong></h2><ul>
+<li>重置30天试用期需要<strong>重启IDE生效</strong>！</li>
+<li>本插件默认不会显示其主界面，如果你需要，参考本文：<code>如何使用</code>小节。</li>
+<li>市场付费插件的试用信息也会<strong>一并重置</strong>。</li>
+<li>如果长达<code>25</code>天不曾有任何重置动作，IDE会有<strong>通知询问</strong>你是否进行重置。</li>
+<li>如果勾选：<code>Auto reset before per restart</code> ，重置是静默无感知的。</li>
+<li>简单来说：勾选了<code>Auto reset before per restart</code>则无需再管，一劳永逸。<div class="note link green"><p>本文参考链接：<a href="https://www.exception.site/essay/idea-reset-eval">https://www.exception.site/essay/idea-reset-eval</a></p></div>
+
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>idea</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
       </tags>
   </entry>
   <entry>
@@ -5648,26 +5648,6 @@ title: 我的朋友们 # 可选，这是友链页的标题
       </tags>
   </entry>
   <entry>
-    <title>Jmeter连接数据库</title>
-    <url>/2020/08/23/jmeterconnectmysql/</url>
-    <content><![CDATA[<p>jmeter要链接mysql数据库，首先得下载mysql jdbc驱动包（注：驱动包的版本一定要与你数据库的版本匹配，驱动版本低于mysql版本有可能会导致连接失败报错）我这里下载的是mysql-connector-java-5.1.23-bin.jar,。</p>
-<p>下载地址：<a href="http://www.java2s.com/Code/Jar/m/Downloadmysqlconnectorjava5123binjar.htm">http://www.java2s.com/Code/Jar/m/Downloadmysqlconnectorjava5123binjar.htm</a></p>
-<p>下载好之后解压将jar包放到\jmeter\apache-jmeter-5.0\lib目录下</p>
-<p>好，接下来进入正题！</p>
-<h2 id="1、添加一个线程组"><a href="#1、添加一个线程组" class="headerlink" title="1、添加一个线程组"></a>1、添加一个线程组</h2><p><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_03%20(2).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_03%20(2).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"></p>
-<h2 id="2、线程组下新建一个JDBC-Connection-Configuration配置元件，详细配置如下图："><a href="#2、线程组下新建一个JDBC-Connection-Configuration配置元件，详细配置如下图：" class="headerlink" title="2、线程组下新建一个JDBC Connection Configuration配置元件，详细配置如下图："></a>2、线程组下新建一个JDBC Connection Configuration配置元件，详细配置如下图：</h2><p><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_03%20(3).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_03%20(3).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"></p>
-<h2 id="3、然后添加一个取样器-JDBC-request"><a href="#3、然后添加一个取样器-JDBC-request" class="headerlink" title="3、然后添加一个取样器 JDBC request"></a>3、然后添加一个取样器 JDBC request</h2><p><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_03%20(4).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_03%20(4).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"></p>
-<h2 id="4、最后添加一个监听器-查看结果树查看响应结果"><a href="#4、最后添加一个监听器-查看结果树查看响应结果" class="headerlink" title="4、最后添加一个监听器 查看结果树查看响应结果"></a>4、最后添加一个监听器 查看结果树查看响应结果</h2><p><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_03%20(1).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_03%20(1).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>好了，以上就是一个最简单的jmeter连接数据库的脚本</p>
-]]></content>
-      <categories>
-        <category>Jmeter</category>
-        <category>数据库</category>
-      </categories>
-      <tags>
-        <tag>Mysql</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Linux基础</title>
     <url>/2020/08/23/linuxfoundation01/</url>
     <content><![CDATA[<h1 id="linux简介"><a href="#linux简介" class="headerlink" title="linux简介"></a>linux简介</h1><h2 id="1、基础命令"><a href="#1、基础命令" class="headerlink" title="1、基础命令"></a>1、基础命令</h2><h3 id="1-1、系统命令"><a href="#1-1、系统命令" class="headerlink" title="1.1、系统命令"></a>1.1、系统命令</h3><p>init 0  – 关机<br>init 6  – 重启，也可以用reboot命令</p>
@@ -5741,6 +5721,56 @@ export JAVA_HOME JRE_HOME PATH CLASSPATH</code></pre>
       </categories>
       <tags>
         <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Jmeter连接数据库</title>
+    <url>/2020/08/23/jmeterconnectmysql/</url>
+    <content><![CDATA[<p>jmeter要链接mysql数据库，首先得下载mysql jdbc驱动包（注：驱动包的版本一定要与你数据库的版本匹配，驱动版本低于mysql版本有可能会导致连接失败报错）我这里下载的是mysql-connector-java-5.1.23-bin.jar,。</p>
+<p>下载地址：<a href="http://www.java2s.com/Code/Jar/m/Downloadmysqlconnectorjava5123binjar.htm">http://www.java2s.com/Code/Jar/m/Downloadmysqlconnectorjava5123binjar.htm</a></p>
+<p>下载好之后解压将jar包放到\jmeter\apache-jmeter-5.0\lib目录下</p>
+<p>好，接下来进入正题！</p>
+<h2 id="1、添加一个线程组"><a href="#1、添加一个线程组" class="headerlink" title="1、添加一个线程组"></a>1、添加一个线程组</h2><p><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_03%20(2).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_03%20(2).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"></p>
+<h2 id="2、线程组下新建一个JDBC-Connection-Configuration配置元件，详细配置如下图："><a href="#2、线程组下新建一个JDBC-Connection-Configuration配置元件，详细配置如下图：" class="headerlink" title="2、线程组下新建一个JDBC Connection Configuration配置元件，详细配置如下图："></a>2、线程组下新建一个JDBC Connection Configuration配置元件，详细配置如下图：</h2><p><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_03%20(3).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_03%20(3).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"></p>
+<h2 id="3、然后添加一个取样器-JDBC-request"><a href="#3、然后添加一个取样器-JDBC-request" class="headerlink" title="3、然后添加一个取样器 JDBC request"></a>3、然后添加一个取样器 JDBC request</h2><p><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_03%20(4).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_03%20(4).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"></p>
+<h2 id="4、最后添加一个监听器-查看结果树查看响应结果"><a href="#4、最后添加一个监听器-查看结果树查看响应结果" class="headerlink" title="4、最后添加一个监听器 查看结果树查看响应结果"></a>4、最后添加一个监听器 查看结果树查看响应结果</h2><p><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_03%20(1).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_03%20(1).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>好了，以上就是一个最简单的jmeter连接数据库的脚本</p>
+]]></content>
+      <categories>
+        <category>Jmeter</category>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>Mysql</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Python pip下载速度慢? Windows设置国内源，用阿里云国内镜像加速</title>
+    <url>/2020/08/21/pipup/</url>
+    <content><![CDATA[<p>pip 提供了对 Python 包的查找、下载、安装、卸载的功能，是非常方便的 Python 包管理工具。但是，令人苦恼的是 pip 在国内的下载速度非常慢，速度常常只有每秒几十 K，甚至才几 K，小点的包还好，还能等，更多的时候，则是完全要把人逼疯的节奏。</p>
+<p>这里，咪博士就教大家，如何在 Windows 下，为 pip 设置国内源。设置完成之后，速度可以达到每秒好几 M，快到飞起来。这里我们选用阿里云的国内镜像。毕竟有大金主支持，稳定性有保障。</p>
+<h2 id="一、新建-pip-配置文件夹"><a href="#一、新建-pip-配置文件夹" class="headerlink" title="一、新建 pip 配置文件夹"></a>一、新建 pip 配置文件夹</h2><p>先在 windows “文件资源管理器” 地址栏 输入 %APPDATA% 按回车，打开程序自定义设置文件夹</p>
+<p>然后，创建名为 pip  的文件夹，用于存放 pip 配置文件</p>
+<p><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/aHR0cDovL3d3dy5pcGFvbWkuY29tL3dwLWNvbnRlbnQvdXBsb2Fkcy8yMDE3LzExL2NyZWF0ZV9waXBfZm9sZGVyLnBuZw" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/aHR0cDovL3d3dy5pcGFvbWkuY29tL3dwLWNvbnRlbnQvdXBsb2Fkcy8yMDE3LzExL2NyZWF0ZV9waXBfZm9sZGVyLnBuZw" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"></p>
+<h2 id="二、新建-pip-配置文件"><a href="#二、新建-pip-配置文件" class="headerlink" title="二、新建 pip 配置文件"></a>二、新建 pip 配置文件</h2><p>在刚才创建好的 pip 文件夹中，新建 名为 pip.ini 的配置文件<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/N0T_3KZ4U~%5BUIBR$DOS6AD2.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/N0T_3KZ4U~%5BUIBR$DOS6AD2.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"></p>
+<h2 id="三、设置-pip-国内源-使用-阿里云-国内镜像"><a href="#三、设置-pip-国内源-使用-阿里云-国内镜像" class="headerlink" title="三、设置 pip 国内源 (使用 阿里云 国内镜像)"></a>三、设置 pip 国内源 (使用 阿里云 国内镜像)</h2><p>在 pip.ini 文件中输入以下内容，然后保存</p>
+<pre><code>[global]
+
+index-url=http://mirrors.aliyun.com/pypi/simple/
+
+[install]
+
+trusted-host=mirrors.aliyun.com</code></pre>
+<p>如果嫌麻烦，也可以直接下载咪博士准备好的配置文件 <a href="https://pan.baidu.com/s/1o8xEWRK">https://pan.baidu.com/s/1o8xEWRK</a></p>
+<h2 id="四、验证设置"><a href="#四、验证设置" class="headerlink" title="四、验证设置"></a>四、验证设置</h2><p>按 windows 徽标+ R，输入 cmd，按回车，调出 windows 命令行窗口<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/aHR0cDovL3d3dy5pcGFvbWkuY29tL3dwLWNvbnRlbnQvdXBsb2Fkcy8yMDE3LzExL3dpbmRvd3NfY21kLnBuZw" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/aHR0cDovL3d3dy5pcGFvbWkuY29tL3dwLWNvbnRlbnQvdXBsb2Fkcy8yMDE3LzExL3dpbmRvd3NfY21kLnBuZw" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"><br>尝试用 pip 安装一个比较大一点的包，譬如 kivy.deps.gstreamer (约 120 M)</p>
+<pre><code>python -m pip install kivy.deps.gstreamer</code></pre>
+<p>注意到 pip 从阿里云 (aliyun) 下载，速度达到了每秒 7.5 M，快到飞起来<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/NR%7BEF5%60CGRJ4HWDVL1JL7$U.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/NR%7BEF5%60CGRJ4HWDVL1JL7$U.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br>妈妈再也不用担心 pip 下载速度慢啦。</p>
+]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>pip</tag>
       </tags>
   </entry>
   <entry>
@@ -5909,36 +5939,6 @@ sheet.merge_cells(&#39;A1:C3&#39;) # 合并一个矩形区域中的单元格</co
       </categories>
       <tags>
         <tag>openpyxl</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Python pip下载速度慢? Windows设置国内源，用阿里云国内镜像加速</title>
-    <url>/2020/08/21/pipup/</url>
-    <content><![CDATA[<p>pip 提供了对 Python 包的查找、下载、安装、卸载的功能，是非常方便的 Python 包管理工具。但是，令人苦恼的是 pip 在国内的下载速度非常慢，速度常常只有每秒几十 K，甚至才几 K，小点的包还好，还能等，更多的时候，则是完全要把人逼疯的节奏。</p>
-<p>这里，咪博士就教大家，如何在 Windows 下，为 pip 设置国内源。设置完成之后，速度可以达到每秒好几 M，快到飞起来。这里我们选用阿里云的国内镜像。毕竟有大金主支持，稳定性有保障。</p>
-<h2 id="一、新建-pip-配置文件夹"><a href="#一、新建-pip-配置文件夹" class="headerlink" title="一、新建 pip 配置文件夹"></a>一、新建 pip 配置文件夹</h2><p>先在 windows “文件资源管理器” 地址栏 输入 %APPDATA% 按回车，打开程序自定义设置文件夹</p>
-<p>然后，创建名为 pip  的文件夹，用于存放 pip 配置文件</p>
-<p><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/aHR0cDovL3d3dy5pcGFvbWkuY29tL3dwLWNvbnRlbnQvdXBsb2Fkcy8yMDE3LzExL2NyZWF0ZV9waXBfZm9sZGVyLnBuZw" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/aHR0cDovL3d3dy5pcGFvbWkuY29tL3dwLWNvbnRlbnQvdXBsb2Fkcy8yMDE3LzExL2NyZWF0ZV9waXBfZm9sZGVyLnBuZw" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"></p>
-<h2 id="二、新建-pip-配置文件"><a href="#二、新建-pip-配置文件" class="headerlink" title="二、新建 pip 配置文件"></a>二、新建 pip 配置文件</h2><p>在刚才创建好的 pip 文件夹中，新建 名为 pip.ini 的配置文件<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/N0T_3KZ4U~%5BUIBR$DOS6AD2.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/N0T_3KZ4U~%5BUIBR$DOS6AD2.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"></p>
-<h2 id="三、设置-pip-国内源-使用-阿里云-国内镜像"><a href="#三、设置-pip-国内源-使用-阿里云-国内镜像" class="headerlink" title="三、设置 pip 国内源 (使用 阿里云 国内镜像)"></a>三、设置 pip 国内源 (使用 阿里云 国内镜像)</h2><p>在 pip.ini 文件中输入以下内容，然后保存</p>
-<pre><code>[global]
-
-index-url=http://mirrors.aliyun.com/pypi/simple/
-
-[install]
-
-trusted-host=mirrors.aliyun.com</code></pre>
-<p>如果嫌麻烦，也可以直接下载咪博士准备好的配置文件 <a href="https://pan.baidu.com/s/1o8xEWRK">https://pan.baidu.com/s/1o8xEWRK</a></p>
-<h2 id="四、验证设置"><a href="#四、验证设置" class="headerlink" title="四、验证设置"></a>四、验证设置</h2><p>按 windows 徽标+ R，输入 cmd，按回车，调出 windows 命令行窗口<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/aHR0cDovL3d3dy5pcGFvbWkuY29tL3dwLWNvbnRlbnQvdXBsb2Fkcy8yMDE3LzExL3dpbmRvd3NfY21kLnBuZw" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/aHR0cDovL3d3dy5pcGFvbWkuY29tL3dwLWNvbnRlbnQvdXBsb2Fkcy8yMDE3LzExL3dpbmRvd3NfY21kLnBuZw" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"><br>尝试用 pip 安装一个比较大一点的包，譬如 kivy.deps.gstreamer (约 120 M)</p>
-<pre><code>python -m pip install kivy.deps.gstreamer</code></pre>
-<p>注意到 pip 从阿里云 (aliyun) 下载，速度达到了每秒 7.5 M，快到飞起来<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/NR%7BEF5%60CGRJ4HWDVL1JL7$U.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/NR%7BEF5%60CGRJ4HWDVL1JL7$U.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br>妈妈再也不用担心 pip 下载速度慢啦。</p>
-]]></content>
-      <categories>
-        <category>python</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-        <tag>pip</tag>
       </tags>
   </entry>
   <entry>
