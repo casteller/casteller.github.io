@@ -487,14 +487,14 @@
 
   
   <url>
-    <loc>https://www.mz-zone.cn/tags/Jmeter/</loc>
+    <loc>https://www.mz-zone.cn/tags/Mysql/</loc>
     <lastmod>2023-01-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://www.mz-zone.cn/tags/Mysql/</loc>
+    <loc>https://www.mz-zone.cn/tags/Jmeter/</loc>
     <lastmod>2023-01-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -522,14 +522,14 @@
   </url>
   
   <url>
-    <loc>https://www.mz-zone.cn/tags/Picgo/</loc>
+    <loc>https://www.mz-zone.cn/tags/Linux/</loc>
     <lastmod>2023-01-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://www.mz-zone.cn/tags/Jenkins/</loc>
+    <loc>https://www.mz-zone.cn/tags/Picgo/</loc>
     <lastmod>2023-01-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -543,7 +543,7 @@
   </url>
   
   <url>
-    <loc>https://www.mz-zone.cn/tags/Linux/</loc>
+    <loc>https://www.mz-zone.cn/tags/Jenkins/</loc>
     <lastmod>2023-01-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -571,14 +571,14 @@
   </url>
   
   <url>
-    <loc>https://www.mz-zone.cn/tags/Hexo/</loc>
+    <loc>https://www.mz-zone.cn/tags/Issues/</loc>
     <lastmod>2023-01-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://www.mz-zone.cn/tags/Issues/</loc>
+    <loc>https://www.mz-zone.cn/tags/Hexo/</loc>
     <lastmod>2023-01-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -636,14 +636,14 @@
 
   
   <url>
-    <loc>https://www.mz-zone.cn/categories/Jmeter/</loc>
+    <loc>https://www.mz-zone.cn/categories/Mysql/</loc>
     <lastmod>2023-01-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://www.mz-zone.cn/categories/Mysql/</loc>
+    <loc>https://www.mz-zone.cn/categories/Jmeter/</loc>
     <lastmod>2023-01-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -664,6 +664,13 @@
   </url>
   
   <url>
+    <loc>https://www.mz-zone.cn/categories/Hexo/</loc>
+    <lastmod>2023-01-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://www.mz-zone.cn/categories/idea/</loc>
     <lastmod>2023-01-16</lastmod>
     <changefreq>daily</changefreq>
@@ -671,7 +678,7 @@
   </url>
   
   <url>
-    <loc>https://www.mz-zone.cn/categories/Hexo/</loc>
+    <loc>https://www.mz-zone.cn/categories/Linux/</loc>
     <lastmod>2023-01-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -686,13 +693,6 @@
   
   <url>
     <loc>https://www.mz-zone.cn/categories/Jenkins/</loc>
-    <lastmod>2023-01-16</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.mz-zone.cn/categories/Linux/</loc>
     <lastmod>2023-01-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
