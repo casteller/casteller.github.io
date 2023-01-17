@@ -78,695 +78,6 @@ else:
       </tags>
   </entry>
   <entry>
-    <title>java学习-IDEA工具&amp;数组</title>
-    <url>/2021/01/19/20210119004/</url>
-    <content><![CDATA[<h2 id="0-IDEA开发工具"><a href="#0-IDEA开发工具" class="headerlink" title="0.IDEA开发工具"></a>0.IDEA开发工具</h2><p>​    参见：IDEA工具安装详解.pdf</p>
-<h2 id="1-数组"><a href="#1-数组" class="headerlink" title="1.数组"></a>1.数组</h2><h3 id="1-1什么是数组【理解】"><a href="#1-1什么是数组【理解】" class="headerlink" title="1.1什么是数组【理解】"></a>1.1什么是数组【理解】</h3><p>​    数组就是存储数据长度固定的容器，存储多个数据的数据类型要一致。 </p>
-<h3 id="1-2数组定义格式【记忆】"><a href="#1-2数组定义格式【记忆】" class="headerlink" title="1.2数组定义格式【记忆】"></a>1.2数组定义格式【记忆】</h3><h4 id="1-2-1第一种"><a href="#1-2-1第一种" class="headerlink" title="1.2.1第一种"></a>1.2.1第一种</h4><p>​    数据类型[] 数组名</p>
-<p>​    示例：</p>
-<pre><code class="java">int[] arr;        
-double[] arr;      
-char[] arr;</code></pre>
-<h4 id="1-2-2第二种"><a href="#1-2-2第二种" class="headerlink" title="1.2.2第二种"></a>1.2.2第二种</h4><p>​    数据类型 数组名[]</p>
-<p>​    示例：</p>
-<pre><code class="java">int arr[];
-double arr[];
-char arr[];</code></pre>
-<h3 id="1-3数组动态初始化【应用】"><a href="#1-3数组动态初始化【应用】" class="headerlink" title="1.3数组动态初始化【应用】"></a>1.3数组动态初始化【应用】</h3><h4 id="1-3-1什么是动态初始化"><a href="#1-3-1什么是动态初始化" class="headerlink" title="1.3.1什么是动态初始化"></a>1.3.1什么是动态初始化</h4><p>​    数组动态初始化就是只给定数组的长度，由系统给出默认初始化值。</p>
-<h4 id="1-3-2动态初始化格式"><a href="#1-3-2动态初始化格式" class="headerlink" title="1.3.2动态初始化格式"></a>1.3.2动态初始化格式</h4><pre><code class="java">数据类型[] 数组名 = new 数据类型[数组长度];</code></pre>
-<pre><code class="java">int[] arr = new int[3];</code></pre>
-<h4 id="1-3-3动态初始化格式详解"><a href="#1-3-3动态初始化格式详解" class="headerlink" title="1.3.3动态初始化格式详解"></a>1.3.3动态初始化格式详解</h4><ul>
-<li><p>等号左边：</p>
-<ul>
-<li><p>int:数组的数据类型</p>
-</li>
-<li><p>[]:代表这是一个数组</p>
-</li>
-<li><p>arr:代表数组的名称</p>
-</li>
-</ul>
-</li>
-<li><p>等号右边：</p>
-<ul>
-<li><p>new:为数组开辟内存空间</p>
-</li>
-<li><p>int:数组的数据类型</p>
-</li>
-<li><p>[]:代表这是一个数组</p>
-</li>
-<li><p>5:代表数组的长度</p>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="1-4数组元素访问【应用】"><a href="#1-4数组元素访问【应用】" class="headerlink" title="1.4数组元素访问【应用】"></a>1.4数组元素访问【应用】</h3><h4 id="1-4-1什么是索引"><a href="#1-4-1什么是索引" class="headerlink" title="1.4.1什么是索引"></a>1.4.1什么是索引</h4><p>​    每一个存储到数组的元素，都会自动的拥有一个编号，从0开始。</p>
-<p>​    这个自动编号称为数组索引(index)，可以通过数组的索引访问到数组中的元素。     </p>
-<h4 id="1-4-2访问数组元素格式"><a href="#1-4-2访问数组元素格式" class="headerlink" title="1.4.2访问数组元素格式"></a>1.4.2访问数组元素格式</h4><pre><code class="java">数组名[索引];</code></pre>
-<h4 id="1-4-3示例代码"><a href="#1-4-3示例代码" class="headerlink" title="1.4.3示例代码"></a>1.4.3示例代码</h4><pre><code class="java">public class ArrayDemo &#123;
-    public static void main(String[] args) &#123;
-        int[] arr = new int[3];
-
-        //输出数组名
-        System.out.println(arr); //[I@880ec60
-
-        //输出数组中的元素
-        System.out.println(arr[0]);
-        System.out.println(arr[1]);
-        System.out.println(arr[2]);
-    &#125;
-&#125;</code></pre>
-<h3 id="1-5内存分配【理解】"><a href="#1-5内存分配【理解】" class="headerlink" title="1.5内存分配【理解】"></a>1.5内存分配【理解】</h3><h4 id="1-5-1内存概述"><a href="#1-5-1内存概述" class="headerlink" title="1.5.1内存概述"></a>1.5.1内存概述</h4><p>​    内存是计算机中的重要原件，临时存储区域，作用是运行程序。</p>
-<p>​    我们编写的程序是存放在硬盘中的，在硬盘中的程序是不会运行的。</p>
-<p>​    必须放进内存中才能运行，运行完毕后会清空内存。 </p>
-<p>​    Java虚拟机要运行程序，必须要对内存进行空间的分配和管理。 </p>
-<h4 id="1-5-2java中的内存分配"><a href="#1-5-2java中的内存分配" class="headerlink" title="1.5.2java中的内存分配"></a>1.5.2java中的内存分配</h4><ul>
-<li>目前我们只需要记住两个内存，分别是：栈内存和堆内存</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>区域名称</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>寄存器</td>
-<td>给CPU使用，和我们开发无关。</td>
-</tr>
-<tr>
-<td>本地方法栈</td>
-<td>JVM在使用操作系统功能的时候使用，和我们开发无关。</td>
-</tr>
-<tr>
-<td>方法区</td>
-<td>存储可以运行的class文件。</td>
-</tr>
-<tr>
-<td>堆内存</td>
-<td>存储对象或者数组，new来创建的，都存储在堆内存。</td>
-</tr>
-<tr>
-<td>方法栈</td>
-<td>方法运行时使用的内存，比如main方法运行，进入方法栈中执行。</td>
-</tr>
-</tbody></table>
-<h3 id="1-6单个数组的内存图【理解】"><a href="#1-6单个数组的内存图【理解】" class="headerlink" title="1.6单个数组的内存图【理解】"></a>1.6单个数组的内存图【理解】</h3><h3 id="1-7多个数组的内存图【理解】"><a href="#1-7多个数组的内存图【理解】" class="headerlink" title="1.7多个数组的内存图【理解】"></a>1.7多个数组的内存图【理解】</h3><h3 id="1-8多个数组指向相同内存图【理解】"><a href="#1-8多个数组指向相同内存图【理解】" class="headerlink" title="1.8多个数组指向相同内存图【理解】"></a>1.8多个数组指向相同内存图【理解】</h3><h3 id="1-9数组静态初始化【应用】"><a href="#1-9数组静态初始化【应用】" class="headerlink" title="1.9数组静态初始化【应用】"></a>1.9数组静态初始化【应用】</h3><h4 id="1-9-1什么是静态初始化"><a href="#1-9-1什么是静态初始化" class="headerlink" title="1.9.1什么是静态初始化"></a>1.9.1什么是静态初始化</h4><p>​    在创建数组时，直接将元素确定    </p>
-<h4 id="1-9-2静态初始化格式"><a href="#1-9-2静态初始化格式" class="headerlink" title="1.9.2静态初始化格式"></a>1.9.2静态初始化格式</h4><ul>
-<li><p>完整版格式</p>
-<pre><code class="java">数据类型[] 数组名 = new 数据类型[]&#123;元素1,元素2,...&#125;;</code></pre>
-</li>
-<li><p>简化版格式</p>
-<pre><code class="java">数据类型[] 数组名 = &#123;元素1,元素2,...&#125;;</code></pre>
-</li>
-</ul>
-<h4 id="1-9-3示例代码"><a href="#1-9-3示例代码" class="headerlink" title="1.9.3示例代码"></a>1.9.3示例代码</h4><pre><code class="java">public class ArrayDemo &#123;
-    public static void main(String[] args) &#123;
-        //定义数组
-        int[] arr = &#123;1, 2, 3&#125;;
-
-        //输出数组名
-        System.out.println(arr);
-
-        //输出数组中的元素
-        System.out.println(arr[0]);
-        System.out.println(arr[1]);
-        System.out.println(arr[2]);
-    &#125;
-&#125;</code></pre>
-<h3 id="1-10数组操作的两个常见小问题【应用】"><a href="#1-10数组操作的两个常见小问题【应用】" class="headerlink" title="1.10数组操作的两个常见小问题【应用】"></a>1.10数组操作的两个常见小问题【应用】</h3><h4 id="1-10-1索引越界异常"><a href="#1-10-1索引越界异常" class="headerlink" title="1.10.1索引越界异常"></a>1.10.1索引越界异常</h4><ul>
-<li><p>出现原因</p>
-<pre><code class="java">public class ArrayDemo &#123;
-    public static void main(String[] args) &#123;
-        int[] arr = new int[3];
-        System.out.println(arr[3]);
-    &#125;
-&#125;</code></pre>
-<p>数组长度为3，索引范围是0~2，但是我们却访问了一个3的索引。</p>
-<p>程序运行后，将会抛出ArrayIndexOutOfBoundsException 数组越界异常。在开发中，数组的越界异常是不能出现的，一旦出现了，就必须要修改我们编写的代码。 </p>
-</li>
-<li><p>解决方案</p>
-<p>将错误的索引修改为正确的索引范围即可！</p>
-</li>
-</ul>
-<h4 id="1-10-2空指针异常"><a href="#1-10-2空指针异常" class="headerlink" title="1.10.2空指针异常"></a>1.10.2空指针异常</h4><ul>
-<li><p>出现原因</p>
-<pre><code class="java">public class ArrayDemo &#123;
-    public static void main(String[] args) &#123;
-        int[] arr = new int[3];
-
-        //把null赋值给数组
-        arr = null;
-        System.out.println(arr[0]);
-    &#125;
-&#125;</code></pre>
-<p>arr = null 这行代码，意味着变量arr将不会再保存数组的内存地址，也就不允许再操作数组了，因此运行的时候会抛出 NullPointerException 空指针异常。在开发中，数组的越界异常是不能出现的，一旦出现了，就必须要修改我们编写的代码。</p>
-</li>
-<li><p>解决方案</p>
-<p>给数组一个真正的堆内存空间引用即可！</p>
-</li>
-</ul>
-<h3 id="1-11数组遍历【应用】"><a href="#1-11数组遍历【应用】" class="headerlink" title="1.11数组遍历【应用】"></a>1.11数组遍历【应用】</h3><ul>
-<li><p>数组遍历：就是将数组中的每个元素分别获取出来，就是遍历。遍历也是数组操作中的基石。</p>
-<pre><code class="java">public class ArrayTest01 &#123;
-    public static void main(String[] args) &#123;
-        int[] arr = &#123; 1, 2, 3, 4, 5 &#125;;
-        System.out.println(arr[0]);
-        System.out.println(arr[1]);
-        System.out.println(arr[2]);
-        System.out.println(arr[3]);
-        System.out.println(arr[4]);
-    &#125;
-&#125;</code></pre>
-<p>以上代码是可以将数组中每个元素全部遍历出来，但是如果数组元素非常多，这种写法肯定不行，因此我们需要改造成循环的写法。数组的索引是 0 到 lenght-1 ，可以作为循环的条件出现。 </p>
-<pre><code class="java">public class ArrayTest01 &#123;
-    public static void main(String[] args) &#123;
-        //定义数组
-        int[] arr = &#123;11, 22, 33, 44, 55&#125;;
-
-        //使用通用的遍历格式
-        for(int x = 0; x &lt; arr.length; x++) &#123;
-            System.out.println(arr[x]);
-        &#125;
-    &#125;
-&#125;</code></pre>
-</li>
-</ul>
-<h3 id="1-12数组最值【应用】"><a href="#1-12数组最值【应用】" class="headerlink" title="1.12数组最值【应用】"></a>1.12数组最值【应用】</h3><ul>
-<li><p>最大值获取：从数组的所有元素中找出最大值。</p>
-</li>
-<li><p>实现思路：</p>
-<ul>
-<li>定义变量，保存数组0索引上的元素</li>
-<li>遍历数组，获取出数组中的每个元素</li>
-<li>将遍历到的元素和保存数组0索引上值的变量进行比较</li>
-<li>如果数组元素的值大于了变量的值，变量记录住新的值</li>
-<li>数组循环遍历结束，变量保存的就是数组中的最大值 </li>
-</ul>
-</li>
-<li><p>代码实现：</p>
-<pre><code class="java">public class ArrayTest02 &#123;
-    public static void main(String[] args) &#123;
-        //定义数组
-        int[] arr = &#123;12, 45, 98, 73, 60&#125;;
-        //定义一个变量，用于保存最大值
-        //取数组中第一个数据作为变量的初始值
-        int max = arr[0];
-        //与数组中剩余的数据逐个比对，每次比对将最大值保存到变量中
-        for(int x=1; x&lt;arr.length; x++) &#123;
-            if(arr[x] &gt; max) &#123;
-                max = arr[x];
-            &#125;
-        &#125;
-        //循环结束后打印变量的值
-        System.out.println(&quot;max:&quot; + max);
-    &#125;
-&#125;</code></pre>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>java学习-switch&amp;循环语句</title>
-    <url>/2021/01/19/20210119003/</url>
-    <content><![CDATA[<h2 id="1-switch语句"><a href="#1-switch语句" class="headerlink" title="1. switch语句"></a>1. switch语句</h2><h3 id="1-1-switch语句结构（掌握）"><a href="#1-1-switch语句结构（掌握）" class="headerlink" title="1.1 switch语句结构（掌握）"></a>1.1 switch语句结构（掌握）</h3><ul>
-<li><p>格式</p>
-<pre><code class="java">switch (表达式) &#123;
-    case 1:
-        语句体1;
-        break;
-    case 2:
-        语句体2;
-        break;
-    ...
-    default:
-        语句体n+1;
-        break;
-&#125;</code></pre>
-</li>
-<li><p>执行流程：</p>
-<ul>
-<li>首先计算出表达式的值 </li>
-<li>其次，和case依次比较，一旦有对应的值，就会执行相应的语句，在执行的过程中，遇到break就会结 束。 </li>
-<li>最后，如果所有的case都和表达式的值不匹配，就会执行default语句体部分，然后程序结束掉。 </li>
-</ul>
-</li>
-</ul>
-<h3 id="1-2-switch语句练习-春夏秋冬（应用）"><a href="#1-2-switch语句练习-春夏秋冬（应用）" class="headerlink" title="1.2 switch语句练习-春夏秋冬（应用）"></a>1.2 switch语句练习-春夏秋冬（应用）</h3><ul>
-<li>需求：一年有12个月，分属于春夏秋冬4个季节，键盘录入一个月份，请用程序实现判断该月份属于哪个季节，并输出。 </li>
-<li>运行结果：</li>
-</ul>
-<pre><code>春：3、4、5
-夏：6、7、8
-秋：9、10、11
-冬：1、2、12</code></pre>
-<ul>
-<li>示例代码：</li>
-</ul>
-<pre><code class="java">public class Demo1 &#123;
-    public static void main(String[] args) &#123;
-        //键盘录入月份数据，使用变量接收
-        Scanner sc = new Scanner(System.in);
-        System.out.println(&quot;请输入一个月份：&quot;);
-        int month = sc.nextInt();
-        //case穿透
-        switch(month) &#123;
-            case 1:
-            case 2:
-            case 12:
-                System.out.println(&quot;冬季&quot;);
-                break;
-            case 3:
-            case 4:
-            case 5:
-                System.out.println(&quot;春季&quot;);
-                break;
-            case 6:
-            case 7:
-            case 8:
-                System.out.println(&quot;夏季&quot;);
-                break;
-            case 9:
-            case 10:
-            case 11:
-                System.out.println(&quot;秋季&quot;);
-                break;
-            default:
-                System.out.println(&quot;你输入的月份有误&quot;);
-        &#125;
-    &#125;
-&#125;</code></pre>
-<ul>
-<li>注意：如果switch中得case，没有对应break的话，则会出现case穿透的现象。</li>
-</ul>
-<h2 id="2-for循环"><a href="#2-for循环" class="headerlink" title="2. for循环"></a>2. for循环</h2><h3 id="2-1-for循环结构（掌握）"><a href="#2-1-for循环结构（掌握）" class="headerlink" title="2.1 for循环结构（掌握）"></a>2.1 for循环结构（掌握）</h3><ul>
-<li><p>循环：</p>
-<p>循环语句可以在满足循环条件的情况下，反复执行某一段代码，这段被重复执行的代码被称为循环体语句，当反复 执行这个循环体时，需要在合适的时候把循环判断条件修改为false，从而结束循环，否则循环将一直执行下去，形 成死循环。 </p>
-</li>
-<li><p>for循环格式：</p>
-</li>
-</ul>
-<pre><code class="java">for (初始化语句;条件判断语句;条件控制语句) &#123;
-    循环体语句;
-&#125;</code></pre>
-<ul>
-<li><p>格式解释：</p>
-<ul>
-<li>初始化语句：  用于表示循环开启时的起始状态，简单说就是循环开始的时候什么样</li>
-<li>条件判断语句：用于表示循环反复执行的条件，简单说就是判断循环是否能一直执行下去</li>
-<li>循环体语句：  用于表示循环反复执行的内容，简单说就是循环反复执行的事情</li>
-<li>条件控制语句：用于表示循环执行中每次变化的内容，简单说就是控制循环是否能执行下去</li>
-</ul>
-</li>
-<li><p>执行流程：</p>
-<p>①执行初始化语句</p>
-<p>②执行条件判断语句，看其结果是true还是false</p>
-<p>​             如果是false，循环结束</p>
-<p>​             如果是true，继续执行</p>
-<p>③执行循环体语句</p>
-<p>④执行条件控制语句</p>
-<p>⑤回到②继续</p>
-</li>
-</ul>
-<h3 id="2-2-for循环练习-输出数据（应用）"><a href="#2-2-for循环练习-输出数据（应用）" class="headerlink" title="2.2 for循环练习-输出数据（应用）"></a>2.2 for循环练习-输出数据（应用）</h3><ul>
-<li>需求：在控制台输出1-5和5-1的数据 </li>
-<li>示例代码：</li>
-</ul>
-<pre><code class="java">public class ForTest01 &#123;
-    public static void main(String[] args) &#123;
-        //需求：输出数据1-5
-        for(int i=1; i&lt;=5; i++) &#123;
-            System.out.println(i);
-        &#125;
-        System.out.println(&quot;--------&quot;);
-        //需求：输出数据5-1
-        for(int i=5; i&gt;=1; i--) &#123;
-            System.out.println(i);
-        &#125;
-    &#125;
-&#125;</code></pre>
-<h3 id="2-3-for循环练习-求和（应用）"><a href="#2-3-for循环练习-求和（应用）" class="headerlink" title="2.3 for循环练习-求和（应用）"></a>2.3 for循环练习-求和（应用）</h3><ul>
-<li>需求：求1-5之间的数据和，并把求和结果在控制台输出 </li>
-<li>示例代码：</li>
-</ul>
-<pre><code class="java">public class ForTest02 &#123;
-    public static void main(String[] args) &#123;
-        //求和的最终结果必须保存起来，需要定义一个变量，用于保存求和的结果，初始值为0
-        int sum = 0;
-        //从1开始到5结束的数据，使用循环结构完成
-        for(int i=1; i&lt;=5; i++) &#123;
-            //将反复进行的事情写入循环结构内部
-             // 此处反复进行的事情是将数据 i 加到用于保存最终求和的变量 sum 中
-            sum += i;
-            /*
-                sum += i;    sum = sum + i;
-                第一次：sum = sum + i = 0 + 1 = 1;
-                第二次：sum = sum + i = 1 + 2 = 3;
-                第三次：sum = sum + i = 3 + 3 = 6;
-                第四次：sum = sum + i = 6 + 4 = 10;
-                第五次：sum = sum + i = 10 + 5 = 15;
-            */
-        &#125;
-        //当循环执行完毕时，将最终数据打印出来
-        System.out.println(&quot;1-5之间的数据和是：&quot; + sum);
-    &#125;
-&#125;</code></pre>
-<ul>
-<li>本题要点：<ul>
-<li>今后遇到的需求中，如果带有求和二字，请立即联想到求和变量</li>
-<li>求和变量的定义位置，必须在循环外部，如果在循环内部则计算出的数据将是错误的</li>
-</ul>
-</li>
-</ul>
-<h3 id="2-4-for循环练习-求偶数和（应用）"><a href="#2-4-for循环练习-求偶数和（应用）" class="headerlink" title="2.4 for循环练习-求偶数和（应用）"></a>2.4 for循环练习-求偶数和（应用）</h3><ul>
-<li>需求：求1-100之间的偶数和，并把求和结果在控制台输出 }</li>
-<li>示例代码：</li>
-</ul>
-<pre><code class="java">public class ForTest03 &#123;
-    public static void main(String[] args) &#123;
-        //求和的最终结果必须保存起来，需要定义一个变量，用于保存求和的结果，初始值为0
-        int sum = 0;
-        //对1-100的数据求和与1-5的数据求和几乎完全一样，仅仅是结束条件不同
-        for(int i=1; i&lt;=100; i++) &#123;
-            //对1-100的偶数求和，需要对求和操作添加限制条件，判断是否是偶数
-            if(i%2 == 0) &#123;
-                sum += i;
-            &#125;
-        &#125;
-        //当循环执行完毕时，将最终数据打印出来
-        System.out.println(&quot;1-100之间的偶数和是：&quot; + sum);
-    &#125;
-&#125;</code></pre>
-<h3 id="2-5-for循环练习-水仙花（应用）"><a href="#2-5-for循环练习-水仙花（应用）" class="headerlink" title="2.5 for循环练习-水仙花（应用）"></a>2.5 for循环练习-水仙花（应用）</h3><ul>
-<li>需求：在控制台输出所有的“水仙花数” </li>
-<li>解释：什么是水仙花数？<ul>
-<li>水仙花数，指的是一个三位数，个位、十位、百位的数字立方和等于原数<ul>
-<li>例如<code>153  3*3*3 + 5*5*5 + 1*1*1 = 153</code></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>思路：<ol>
-<li>获取所有的三位数，准备进行筛选，最小的三位数为100，最大的三位数为999，使用for循环获取</li>
-<li>获取每一个三位数的个位，十位，百位，做if语句判断是否是水仙花数</li>
-</ol>
-</li>
-<li>示例代码</li>
-</ul>
-<pre><code class="java">public class ForTest04 &#123;
-    public static void main(String[] args) &#123;
-        //输出所有的水仙花数必然要使用到循环，遍历所有的三位数，三位数从100开始，到999结束
-        for(int i=100; i&lt;1000; i++) &#123;
-            //在计算之前获取三位数中每个位上的值
-            int ge = i%10;
-            int shi = i/10%10;
-            int bai = i/10/10%10;
-
-            //判定条件是将三位数中的每个数值取出来，计算立方和后与原始数字比较是否相等
-            if(ge*ge*ge + shi*shi*shi + bai*bai*bai == i) &#123;
-                //输出满足条件的数字就是水仙花数
-                System.out.println(i);
-            &#125;
-        &#125;
-    &#125;
-&#125;</code></pre>
-<h3 id="2-6-for循环练习-统计水仙花数个数（应用）"><a href="#2-6-for循环练习-统计水仙花数个数（应用）" class="headerlink" title="2.6 for循环练习-统计水仙花数个数（应用）"></a>2.6 for循环练习-统计水仙花数个数（应用）</h3><ul>
-<li>需求：统计“水仙花数”一共有多少个，并在控制台输出个数 </li>
-<li>示例代码：</li>
-</ul>
-<pre><code class="java">public class ForTest05 &#123;
-    public static void main(String[] args) &#123;
-        //定义变量count，用于保存“水仙花数”的数量，初始值为0
-        int count = 0;
-        //输出所有的水仙花数必然要使用到循环，遍历所有的三位数，三位数从100开始，到999结束
-        for(int i=100; i&lt;1000; i++) &#123;
-            //在计算之前获取三位数中每个位上的值
-            int ge = i%10;
-            int shi = i/10%10;
-            int bai = i/10/10%10;
-            //在判定水仙花数的过程中，满足条件不再输出，更改为修改count的值，使count+1
-            if(ge*ge*ge + shi*shi*shi + bai*bai*bai == i) &#123;
-                count++;
-            &#125;
-        &#125;
-        //打印输出最终结果
-        System.out.println(&quot;水仙花共有：&quot; + count + &quot;个&quot;);
-    &#125;
-&#125;</code></pre>
-<ul>
-<li>本题要点：<ul>
-<li>今后如果需求带有统计xxx，请先想到计数器变量</li>
-<li>计数器变量定义的位置，必须在循环外部</li>
-</ul>
-</li>
-</ul>
-<h2 id="3-while循环"><a href="#3-while循环" class="headerlink" title="3. while循环"></a>3. while循环</h2><h3 id="3-1-while结构（掌握）"><a href="#3-1-while结构（掌握）" class="headerlink" title="3.1 while结构（掌握）"></a>3.1 while结构（掌握）</h3><ul>
-<li><p>while循环完整格式：</p>
-<pre><code class="java">初始化语句;
-while (条件判断语句) &#123;
-    循环体语句;
-    条件控制语句;
-&#125;</code></pre>
-</li>
-<li><p>while循环执行流程：</p>
-<p>①执行初始化语句</p>
-<p>②执行条件判断语句，看其结果是true还是false</p>
-<p>​             如果是false，循环结束</p>
-<p>​             如果是true，继续执行</p>
-<p>③执行循环体语句</p>
-<p>④执行条件控制语句</p>
-<p>⑤回到②继续</p>
-</li>
-<li><p>示例代码：</p>
-</li>
-</ul>
-<pre><code class="java">public class WhileDemo &#123;
-    public static void main(String[] args) &#123;
-        //需求：在控制台输出5次&quot;HelloWorld&quot;
-        //for循环实现
-        for(int i=1; i&lt;=5; i++) &#123;
-            System.out.println(&quot;HelloWorld&quot;);
-        &#125;
-        System.out.println(&quot;--------&quot;);
-        //while循环实现
-        int j = 1;
-        while(j&lt;=5) &#123;
-            System.out.println(&quot;HelloWorld&quot;);
-            j++;
-        &#125;
-    &#125;
-&#125;</code></pre>
-<h3 id="3-2-while循环练习-珠穆朗玛峰（应用）"><a href="#3-2-while循环练习-珠穆朗玛峰（应用）" class="headerlink" title="3.2 while循环练习-珠穆朗玛峰（应用）"></a>3.2 while循环练习-珠穆朗玛峰（应用）</h3><ul>
-<li>需求：世界最高山峰是珠穆朗玛峰(8844.43米=8844430毫米)，假如我有一张足够大的纸，它的厚度是0.1毫米。请问，我折叠多少次，可以折成珠穆朗玛峰的高度?</li>
-<li>示例代码：</li>
-</ul>
-<pre><code class="java">public class WhileTest &#123;
-    public static void main(String[] args) &#123;
-        //定义一个计数器，初始值为0
-        int count = 0;
-        //定义纸张厚度
-        double paper = 0.1;
-        //定义珠穆朗玛峰的高度
-        int zf = 8844430;
-        //因为要反复折叠，所以要使用循环，但是不知道折叠多少次，这种情况下更适合使用while循环
-        //折叠的过程中当纸张厚度大于珠峰就停止了，因此继续执行的要求是纸张厚度小于珠峰高度
-        while(paper &lt;= zf) &#123;
-            //循环的执行过程中每次纸张折叠，纸张的厚度要加倍
-            paper *= 2;
-            //在循环中执行累加，对应折叠了多少次
-            count++;
-        &#125;
-        //打印计数器的值
-        System.out.println(&quot;需要折叠：&quot; + count + &quot;次&quot;);
-    &#125;
-&#125;</code></pre>
-<h2 id="4-循环细节"><a href="#4-循环细节" class="headerlink" title="4. 循环细节"></a>4. 循环细节</h2><h3 id="4-1-do…while循环结构（掌握）"><a href="#4-1-do…while循环结构（掌握）" class="headerlink" title="4.1 do…while循环结构（掌握）"></a>4.1 do…while循环结构（掌握）</h3><ul>
-<li><p>完整格式：</p>
-<pre><code class="java">初始化语句;
-do &#123;
-    循环体语句;
-    条件控制语句;
-&#125;while(条件判断语句);</code></pre>
-</li>
-<li><p>执行流程：</p>
-<p>① 执行初始化语句</p>
-<p>② 执行循环体语句</p>
-<p>③ 执行条件控制语句</p>
-<p>④ 执行条件判断语句，看其结果是true还是false</p>
-<p>如果是false，循环结束</p>
-<p>如果是true，继续执行</p>
-<p>⑤ 回到②继续</p>
-</li>
-<li><p>示例代码：</p>
-</li>
-</ul>
-<pre><code class="java">public class DoWhileDemo &#123;
-    public static void main(String[] args) &#123;
-        //需求：在控制台输出5次&quot;HelloWorld&quot;
-        //for循环实现
-        for(int i=1; i&lt;=5; i++) &#123;
-            System.out.println(&quot;HelloWorld&quot;);
-        &#125;
-        System.out.println(&quot;--------&quot;);
-        //do...while循环实现
-        int j = 1;
-        do &#123;
-            System.out.println(&quot;HelloWorld&quot;);
-            j++;
-        &#125;while(j&lt;=5);
-    &#125;
-&#125;</code></pre>
-<h3 id="4-2-三种循环的区别（理解）"><a href="#4-2-三种循环的区别（理解）" class="headerlink" title="4.2 三种循环的区别（理解）"></a>4.2 三种循环的区别（理解）</h3><ul>
-<li>三种循环的区别<ul>
-<li>for循环和while循环先判断条件是否成立，然后决定是否执行循环体（先判断后执行）</li>
-<li>do…while循环先执行一次循环体，然后判断条件是否成立，是否继续执行循环体（先执行后判断）</li>
-</ul>
-</li>
-<li>for循环和while的区别<ul>
-<li>条件控制语句所控制的自增变量，因为归属for循环的语法结构中，在for循环结束后，就不能再次被访问到了</li>
-<li>条件控制语句所控制的自增变量，对于while循环来说不归属其语法结构中，在while循环结束后，该变量还可以继续使用</li>
-</ul>
-</li>
-<li>死循环（无限循环）的三种格式<ol>
-<li>for(;;){}</li>
-<li>while(true){}</li>
-<li>do {} while(true);</li>
-</ol>
-</li>
-</ul>
-<h3 id="4-3-跳转控制语句（掌握）"><a href="#4-3-跳转控制语句（掌握）" class="headerlink" title="4.3 跳转控制语句（掌握）"></a>4.3 跳转控制语句（掌握）</h3><ul>
-<li>跳转控制语句（break）<ul>
-<li>跳出循环，结束循环</li>
-</ul>
-</li>
-<li>跳转控制语句（continue）<ul>
-<li>跳过本次循环，继续下次循环</li>
-</ul>
-</li>
-<li>注意： continue只能在循环中进行使用！</li>
-</ul>
-<h3 id="4-4-循环嵌套（理解）"><a href="#4-4-循环嵌套（理解）" class="headerlink" title="4.4 循环嵌套（理解）"></a>4.4 循环嵌套（理解）</h3><ul>
-<li><p>循环嵌套概述：在循环中，继续定义循环</p>
-</li>
-<li><p>示例代码：</p>
-<pre><code class="java">    public static void main(String[] args) &#123;
-        //外循环控制小时的范围，内循环控制分钟的范围
-        for (int hour = 0; hour &lt; 24; hour++) &#123;
-            for (int minute = 0; minute &lt; 60; minute++) &#123;
-                System.out.println(hour + &quot;时&quot; + minute + &quot;分&quot;);
-            &#125;
-            System.out.println(&quot;--------&quot;);
-        &#125;
-    &#125;</code></pre>
-</li>
-<li><p>理解：</p>
-<ul>
-<li>请反复理解这句话（整个内循环，就是外循环的一个循环体，内部循环体没有执行完毕，外循环是不会继续向下执行的）</li>
-</ul>
-</li>
-<li><p>结论：</p>
-<ul>
-<li>外循环执行一次，内循环执行一圈</li>
-</ul>
-</li>
-</ul>
-<h2 id="5-Random"><a href="#5-Random" class="headerlink" title="5. Random"></a>5. Random</h2><h3 id="5-1-Random产生随机数（掌握）"><a href="#5-1-Random产生随机数（掌握）" class="headerlink" title="5.1 Random产生随机数（掌握）"></a>5.1 Random产生随机数（掌握）</h3><ul>
-<li><p>概述：</p>
-<ul>
-<li>Random类似Scanner，也是Java提供好的API，内部提供了产生随机数的功能<ul>
-<li>API后续课程详细讲解，现在可以简单理解为Java已经写好的代码</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>使用步骤：</p>
-<ol>
-<li><p>导入包</p>
-<p>import java.util.Random;</p>
-</li>
-<li><p>创建对象</p>
-<p>Random r = new Random();</p>
-</li>
-<li><p>产生随机数</p>
-<p>int num = r.nextInt(10);</p>
-<p>解释： 10代表的是一个范围，如果括号写10，产生的随机数就是0-9，括号写20，参数的随机数则是0-19</p>
-</li>
-</ol>
-</li>
-<li><p>示例代码：</p>
-</li>
-</ul>
-<pre><code class="java">import java.util.Random;
-public class RandomDemo &#123;
-    public static void main(String[] args) &#123;
-        //创建对象
-        Random r = new Random();
-        //用循环获取10个随机数
-        for(int i=0; i&lt;10; i++) &#123;
-            //获取随机数
-            int number = r.nextInt(10);
-            System.out.println(&quot;number:&quot; + number);
-        &#125;
-        //需求：获取一个1-100之间的随机数
-        int x = r.nextInt(100) + 1;
-        System.out.println(x);
-    &#125;
-&#125;</code></pre>
-<h3 id="5-3-Random练习-猜数字（应用）"><a href="#5-3-Random练习-猜数字（应用）" class="headerlink" title="5.3 Random练习-猜数字（应用）"></a>5.3 Random练习-猜数字（应用）</h3><ul>
-<li><p>需求：</p>
-<p>程序自动生成一个1-100之间的数字，使用程序实现猜出这个数字是多少？</p>
-<p>当猜错的时候根据不同情况给出相应的提示</p>
-<p>A. 如果猜的数字比真实数字大，提示你猜的数据大了</p>
-<p>B. 如果猜的数字比真实数字小，提示你猜的数据小了</p>
-<p>C. 如果猜的数字与真实数字相等，提示恭喜你猜中了</p>
-</li>
-<li><p>示例代码：</p>
-</li>
-</ul>
-<pre><code class="java">import java.util.Random;
-import java.util.Scanner;
-
-public class RandomTest &#123;
-    public static void main(String[] args) &#123;
-        //要完成猜数字的游戏，首先需要有一个要猜的数字，使用随机数生成该数字，范围1到100
-        Random r = new Random();
-        int number = r.nextInt(100) + 1;
-
-        while(true) &#123;
-            //使用程序实现猜数字，每次均要输入猜测的数字值，需要使用键盘录入实现
-            Scanner sc = new Scanner(System.in);
-
-            System.out.println(&quot;请输入你要猜的数字：&quot;);
-            int guessNumber = sc.nextInt();
-
-            //比较输入的数字和系统产生的数据，需要使用分支语句。
-             //这里使用if..else..if..格式，根据不同情况进行猜测结果显示
-            if(guessNumber &gt; number) &#123;
-                System.out.println(&quot;你猜的数字&quot; + guessNumber + &quot;大了&quot;);
-            &#125; else if(guessNumber &lt; number) &#123;
-                System.out.println(&quot;你猜的数字&quot; + guessNumber + &quot;小了&quot;);
-            &#125; else &#123;
-                System.out.println(&quot;恭喜你猜中了&quot;);
-                break;
-            &#125;
-        &#125;
-
-    &#125;
-&#125;</code></pre>
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>java学习-基础语法(1)</title>
     <url>/2021/01/19/20210119001/</url>
     <content><![CDATA[<h1 id="day01-java基础语法"><a href="#day01-java基础语法" class="headerlink" title="day01 - java基础语法"></a>day01 - java基础语法</h1><h2 id="1-Java概述"><a href="#1-Java概述" class="headerlink" title="1. Java概述"></a>1. Java概述</h2><h3 id="1-1-Java语言发展史（了解）"><a href="#1-1-Java语言发展史（了解）" class="headerlink" title="1.1 Java语言发展史（了解）"></a>1.1 Java语言发展史（了解）</h3><p>语言：人与人交流沟通的表达方式</p>
@@ -1655,6 +966,695 @@ public class IfTest02 &#123;
       </tags>
   </entry>
   <entry>
+    <title>java学习-IDEA工具&amp;数组</title>
+    <url>/2021/01/19/20210119004/</url>
+    <content><![CDATA[<h2 id="0-IDEA开发工具"><a href="#0-IDEA开发工具" class="headerlink" title="0.IDEA开发工具"></a>0.IDEA开发工具</h2><p>​    参见：IDEA工具安装详解.pdf</p>
+<h2 id="1-数组"><a href="#1-数组" class="headerlink" title="1.数组"></a>1.数组</h2><h3 id="1-1什么是数组【理解】"><a href="#1-1什么是数组【理解】" class="headerlink" title="1.1什么是数组【理解】"></a>1.1什么是数组【理解】</h3><p>​    数组就是存储数据长度固定的容器，存储多个数据的数据类型要一致。 </p>
+<h3 id="1-2数组定义格式【记忆】"><a href="#1-2数组定义格式【记忆】" class="headerlink" title="1.2数组定义格式【记忆】"></a>1.2数组定义格式【记忆】</h3><h4 id="1-2-1第一种"><a href="#1-2-1第一种" class="headerlink" title="1.2.1第一种"></a>1.2.1第一种</h4><p>​    数据类型[] 数组名</p>
+<p>​    示例：</p>
+<pre><code class="java">int[] arr;        
+double[] arr;      
+char[] arr;</code></pre>
+<h4 id="1-2-2第二种"><a href="#1-2-2第二种" class="headerlink" title="1.2.2第二种"></a>1.2.2第二种</h4><p>​    数据类型 数组名[]</p>
+<p>​    示例：</p>
+<pre><code class="java">int arr[];
+double arr[];
+char arr[];</code></pre>
+<h3 id="1-3数组动态初始化【应用】"><a href="#1-3数组动态初始化【应用】" class="headerlink" title="1.3数组动态初始化【应用】"></a>1.3数组动态初始化【应用】</h3><h4 id="1-3-1什么是动态初始化"><a href="#1-3-1什么是动态初始化" class="headerlink" title="1.3.1什么是动态初始化"></a>1.3.1什么是动态初始化</h4><p>​    数组动态初始化就是只给定数组的长度，由系统给出默认初始化值。</p>
+<h4 id="1-3-2动态初始化格式"><a href="#1-3-2动态初始化格式" class="headerlink" title="1.3.2动态初始化格式"></a>1.3.2动态初始化格式</h4><pre><code class="java">数据类型[] 数组名 = new 数据类型[数组长度];</code></pre>
+<pre><code class="java">int[] arr = new int[3];</code></pre>
+<h4 id="1-3-3动态初始化格式详解"><a href="#1-3-3动态初始化格式详解" class="headerlink" title="1.3.3动态初始化格式详解"></a>1.3.3动态初始化格式详解</h4><ul>
+<li><p>等号左边：</p>
+<ul>
+<li><p>int:数组的数据类型</p>
+</li>
+<li><p>[]:代表这是一个数组</p>
+</li>
+<li><p>arr:代表数组的名称</p>
+</li>
+</ul>
+</li>
+<li><p>等号右边：</p>
+<ul>
+<li><p>new:为数组开辟内存空间</p>
+</li>
+<li><p>int:数组的数据类型</p>
+</li>
+<li><p>[]:代表这是一个数组</p>
+</li>
+<li><p>5:代表数组的长度</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-4数组元素访问【应用】"><a href="#1-4数组元素访问【应用】" class="headerlink" title="1.4数组元素访问【应用】"></a>1.4数组元素访问【应用】</h3><h4 id="1-4-1什么是索引"><a href="#1-4-1什么是索引" class="headerlink" title="1.4.1什么是索引"></a>1.4.1什么是索引</h4><p>​    每一个存储到数组的元素，都会自动的拥有一个编号，从0开始。</p>
+<p>​    这个自动编号称为数组索引(index)，可以通过数组的索引访问到数组中的元素。     </p>
+<h4 id="1-4-2访问数组元素格式"><a href="#1-4-2访问数组元素格式" class="headerlink" title="1.4.2访问数组元素格式"></a>1.4.2访问数组元素格式</h4><pre><code class="java">数组名[索引];</code></pre>
+<h4 id="1-4-3示例代码"><a href="#1-4-3示例代码" class="headerlink" title="1.4.3示例代码"></a>1.4.3示例代码</h4><pre><code class="java">public class ArrayDemo &#123;
+    public static void main(String[] args) &#123;
+        int[] arr = new int[3];
+
+        //输出数组名
+        System.out.println(arr); //[I@880ec60
+
+        //输出数组中的元素
+        System.out.println(arr[0]);
+        System.out.println(arr[1]);
+        System.out.println(arr[2]);
+    &#125;
+&#125;</code></pre>
+<h3 id="1-5内存分配【理解】"><a href="#1-5内存分配【理解】" class="headerlink" title="1.5内存分配【理解】"></a>1.5内存分配【理解】</h3><h4 id="1-5-1内存概述"><a href="#1-5-1内存概述" class="headerlink" title="1.5.1内存概述"></a>1.5.1内存概述</h4><p>​    内存是计算机中的重要原件，临时存储区域，作用是运行程序。</p>
+<p>​    我们编写的程序是存放在硬盘中的，在硬盘中的程序是不会运行的。</p>
+<p>​    必须放进内存中才能运行，运行完毕后会清空内存。 </p>
+<p>​    Java虚拟机要运行程序，必须要对内存进行空间的分配和管理。 </p>
+<h4 id="1-5-2java中的内存分配"><a href="#1-5-2java中的内存分配" class="headerlink" title="1.5.2java中的内存分配"></a>1.5.2java中的内存分配</h4><ul>
+<li>目前我们只需要记住两个内存，分别是：栈内存和堆内存</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>区域名称</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>寄存器</td>
+<td>给CPU使用，和我们开发无关。</td>
+</tr>
+<tr>
+<td>本地方法栈</td>
+<td>JVM在使用操作系统功能的时候使用，和我们开发无关。</td>
+</tr>
+<tr>
+<td>方法区</td>
+<td>存储可以运行的class文件。</td>
+</tr>
+<tr>
+<td>堆内存</td>
+<td>存储对象或者数组，new来创建的，都存储在堆内存。</td>
+</tr>
+<tr>
+<td>方法栈</td>
+<td>方法运行时使用的内存，比如main方法运行，进入方法栈中执行。</td>
+</tr>
+</tbody></table>
+<h3 id="1-6单个数组的内存图【理解】"><a href="#1-6单个数组的内存图【理解】" class="headerlink" title="1.6单个数组的内存图【理解】"></a>1.6单个数组的内存图【理解】</h3><h3 id="1-7多个数组的内存图【理解】"><a href="#1-7多个数组的内存图【理解】" class="headerlink" title="1.7多个数组的内存图【理解】"></a>1.7多个数组的内存图【理解】</h3><h3 id="1-8多个数组指向相同内存图【理解】"><a href="#1-8多个数组指向相同内存图【理解】" class="headerlink" title="1.8多个数组指向相同内存图【理解】"></a>1.8多个数组指向相同内存图【理解】</h3><h3 id="1-9数组静态初始化【应用】"><a href="#1-9数组静态初始化【应用】" class="headerlink" title="1.9数组静态初始化【应用】"></a>1.9数组静态初始化【应用】</h3><h4 id="1-9-1什么是静态初始化"><a href="#1-9-1什么是静态初始化" class="headerlink" title="1.9.1什么是静态初始化"></a>1.9.1什么是静态初始化</h4><p>​    在创建数组时，直接将元素确定    </p>
+<h4 id="1-9-2静态初始化格式"><a href="#1-9-2静态初始化格式" class="headerlink" title="1.9.2静态初始化格式"></a>1.9.2静态初始化格式</h4><ul>
+<li><p>完整版格式</p>
+<pre><code class="java">数据类型[] 数组名 = new 数据类型[]&#123;元素1,元素2,...&#125;;</code></pre>
+</li>
+<li><p>简化版格式</p>
+<pre><code class="java">数据类型[] 数组名 = &#123;元素1,元素2,...&#125;;</code></pre>
+</li>
+</ul>
+<h4 id="1-9-3示例代码"><a href="#1-9-3示例代码" class="headerlink" title="1.9.3示例代码"></a>1.9.3示例代码</h4><pre><code class="java">public class ArrayDemo &#123;
+    public static void main(String[] args) &#123;
+        //定义数组
+        int[] arr = &#123;1, 2, 3&#125;;
+
+        //输出数组名
+        System.out.println(arr);
+
+        //输出数组中的元素
+        System.out.println(arr[0]);
+        System.out.println(arr[1]);
+        System.out.println(arr[2]);
+    &#125;
+&#125;</code></pre>
+<h3 id="1-10数组操作的两个常见小问题【应用】"><a href="#1-10数组操作的两个常见小问题【应用】" class="headerlink" title="1.10数组操作的两个常见小问题【应用】"></a>1.10数组操作的两个常见小问题【应用】</h3><h4 id="1-10-1索引越界异常"><a href="#1-10-1索引越界异常" class="headerlink" title="1.10.1索引越界异常"></a>1.10.1索引越界异常</h4><ul>
+<li><p>出现原因</p>
+<pre><code class="java">public class ArrayDemo &#123;
+    public static void main(String[] args) &#123;
+        int[] arr = new int[3];
+        System.out.println(arr[3]);
+    &#125;
+&#125;</code></pre>
+<p>数组长度为3，索引范围是0~2，但是我们却访问了一个3的索引。</p>
+<p>程序运行后，将会抛出ArrayIndexOutOfBoundsException 数组越界异常。在开发中，数组的越界异常是不能出现的，一旦出现了，就必须要修改我们编写的代码。 </p>
+</li>
+<li><p>解决方案</p>
+<p>将错误的索引修改为正确的索引范围即可！</p>
+</li>
+</ul>
+<h4 id="1-10-2空指针异常"><a href="#1-10-2空指针异常" class="headerlink" title="1.10.2空指针异常"></a>1.10.2空指针异常</h4><ul>
+<li><p>出现原因</p>
+<pre><code class="java">public class ArrayDemo &#123;
+    public static void main(String[] args) &#123;
+        int[] arr = new int[3];
+
+        //把null赋值给数组
+        arr = null;
+        System.out.println(arr[0]);
+    &#125;
+&#125;</code></pre>
+<p>arr = null 这行代码，意味着变量arr将不会再保存数组的内存地址，也就不允许再操作数组了，因此运行的时候会抛出 NullPointerException 空指针异常。在开发中，数组的越界异常是不能出现的，一旦出现了，就必须要修改我们编写的代码。</p>
+</li>
+<li><p>解决方案</p>
+<p>给数组一个真正的堆内存空间引用即可！</p>
+</li>
+</ul>
+<h3 id="1-11数组遍历【应用】"><a href="#1-11数组遍历【应用】" class="headerlink" title="1.11数组遍历【应用】"></a>1.11数组遍历【应用】</h3><ul>
+<li><p>数组遍历：就是将数组中的每个元素分别获取出来，就是遍历。遍历也是数组操作中的基石。</p>
+<pre><code class="java">public class ArrayTest01 &#123;
+    public static void main(String[] args) &#123;
+        int[] arr = &#123; 1, 2, 3, 4, 5 &#125;;
+        System.out.println(arr[0]);
+        System.out.println(arr[1]);
+        System.out.println(arr[2]);
+        System.out.println(arr[3]);
+        System.out.println(arr[4]);
+    &#125;
+&#125;</code></pre>
+<p>以上代码是可以将数组中每个元素全部遍历出来，但是如果数组元素非常多，这种写法肯定不行，因此我们需要改造成循环的写法。数组的索引是 0 到 lenght-1 ，可以作为循环的条件出现。 </p>
+<pre><code class="java">public class ArrayTest01 &#123;
+    public static void main(String[] args) &#123;
+        //定义数组
+        int[] arr = &#123;11, 22, 33, 44, 55&#125;;
+
+        //使用通用的遍历格式
+        for(int x = 0; x &lt; arr.length; x++) &#123;
+            System.out.println(arr[x]);
+        &#125;
+    &#125;
+&#125;</code></pre>
+</li>
+</ul>
+<h3 id="1-12数组最值【应用】"><a href="#1-12数组最值【应用】" class="headerlink" title="1.12数组最值【应用】"></a>1.12数组最值【应用】</h3><ul>
+<li><p>最大值获取：从数组的所有元素中找出最大值。</p>
+</li>
+<li><p>实现思路：</p>
+<ul>
+<li>定义变量，保存数组0索引上的元素</li>
+<li>遍历数组，获取出数组中的每个元素</li>
+<li>将遍历到的元素和保存数组0索引上值的变量进行比较</li>
+<li>如果数组元素的值大于了变量的值，变量记录住新的值</li>
+<li>数组循环遍历结束，变量保存的就是数组中的最大值 </li>
+</ul>
+</li>
+<li><p>代码实现：</p>
+<pre><code class="java">public class ArrayTest02 &#123;
+    public static void main(String[] args) &#123;
+        //定义数组
+        int[] arr = &#123;12, 45, 98, 73, 60&#125;;
+        //定义一个变量，用于保存最大值
+        //取数组中第一个数据作为变量的初始值
+        int max = arr[0];
+        //与数组中剩余的数据逐个比对，每次比对将最大值保存到变量中
+        for(int x=1; x&lt;arr.length; x++) &#123;
+            if(arr[x] &gt; max) &#123;
+                max = arr[x];
+            &#125;
+        &#125;
+        //循环结束后打印变量的值
+        System.out.println(&quot;max:&quot; + max);
+    &#125;
+&#125;</code></pre>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>java学习-switch&amp;循环语句</title>
+    <url>/2021/01/19/20210119003/</url>
+    <content><![CDATA[<h2 id="1-switch语句"><a href="#1-switch语句" class="headerlink" title="1. switch语句"></a>1. switch语句</h2><h3 id="1-1-switch语句结构（掌握）"><a href="#1-1-switch语句结构（掌握）" class="headerlink" title="1.1 switch语句结构（掌握）"></a>1.1 switch语句结构（掌握）</h3><ul>
+<li><p>格式</p>
+<pre><code class="java">switch (表达式) &#123;
+    case 1:
+        语句体1;
+        break;
+    case 2:
+        语句体2;
+        break;
+    ...
+    default:
+        语句体n+1;
+        break;
+&#125;</code></pre>
+</li>
+<li><p>执行流程：</p>
+<ul>
+<li>首先计算出表达式的值 </li>
+<li>其次，和case依次比较，一旦有对应的值，就会执行相应的语句，在执行的过程中，遇到break就会结 束。 </li>
+<li>最后，如果所有的case都和表达式的值不匹配，就会执行default语句体部分，然后程序结束掉。 </li>
+</ul>
+</li>
+</ul>
+<h3 id="1-2-switch语句练习-春夏秋冬（应用）"><a href="#1-2-switch语句练习-春夏秋冬（应用）" class="headerlink" title="1.2 switch语句练习-春夏秋冬（应用）"></a>1.2 switch语句练习-春夏秋冬（应用）</h3><ul>
+<li>需求：一年有12个月，分属于春夏秋冬4个季节，键盘录入一个月份，请用程序实现判断该月份属于哪个季节，并输出。 </li>
+<li>运行结果：</li>
+</ul>
+<pre><code>春：3、4、5
+夏：6、7、8
+秋：9、10、11
+冬：1、2、12</code></pre>
+<ul>
+<li>示例代码：</li>
+</ul>
+<pre><code class="java">public class Demo1 &#123;
+    public static void main(String[] args) &#123;
+        //键盘录入月份数据，使用变量接收
+        Scanner sc = new Scanner(System.in);
+        System.out.println(&quot;请输入一个月份：&quot;);
+        int month = sc.nextInt();
+        //case穿透
+        switch(month) &#123;
+            case 1:
+            case 2:
+            case 12:
+                System.out.println(&quot;冬季&quot;);
+                break;
+            case 3:
+            case 4:
+            case 5:
+                System.out.println(&quot;春季&quot;);
+                break;
+            case 6:
+            case 7:
+            case 8:
+                System.out.println(&quot;夏季&quot;);
+                break;
+            case 9:
+            case 10:
+            case 11:
+                System.out.println(&quot;秋季&quot;);
+                break;
+            default:
+                System.out.println(&quot;你输入的月份有误&quot;);
+        &#125;
+    &#125;
+&#125;</code></pre>
+<ul>
+<li>注意：如果switch中得case，没有对应break的话，则会出现case穿透的现象。</li>
+</ul>
+<h2 id="2-for循环"><a href="#2-for循环" class="headerlink" title="2. for循环"></a>2. for循环</h2><h3 id="2-1-for循环结构（掌握）"><a href="#2-1-for循环结构（掌握）" class="headerlink" title="2.1 for循环结构（掌握）"></a>2.1 for循环结构（掌握）</h3><ul>
+<li><p>循环：</p>
+<p>循环语句可以在满足循环条件的情况下，反复执行某一段代码，这段被重复执行的代码被称为循环体语句，当反复 执行这个循环体时，需要在合适的时候把循环判断条件修改为false，从而结束循环，否则循环将一直执行下去，形 成死循环。 </p>
+</li>
+<li><p>for循环格式：</p>
+</li>
+</ul>
+<pre><code class="java">for (初始化语句;条件判断语句;条件控制语句) &#123;
+    循环体语句;
+&#125;</code></pre>
+<ul>
+<li><p>格式解释：</p>
+<ul>
+<li>初始化语句：  用于表示循环开启时的起始状态，简单说就是循环开始的时候什么样</li>
+<li>条件判断语句：用于表示循环反复执行的条件，简单说就是判断循环是否能一直执行下去</li>
+<li>循环体语句：  用于表示循环反复执行的内容，简单说就是循环反复执行的事情</li>
+<li>条件控制语句：用于表示循环执行中每次变化的内容，简单说就是控制循环是否能执行下去</li>
+</ul>
+</li>
+<li><p>执行流程：</p>
+<p>①执行初始化语句</p>
+<p>②执行条件判断语句，看其结果是true还是false</p>
+<p>​             如果是false，循环结束</p>
+<p>​             如果是true，继续执行</p>
+<p>③执行循环体语句</p>
+<p>④执行条件控制语句</p>
+<p>⑤回到②继续</p>
+</li>
+</ul>
+<h3 id="2-2-for循环练习-输出数据（应用）"><a href="#2-2-for循环练习-输出数据（应用）" class="headerlink" title="2.2 for循环练习-输出数据（应用）"></a>2.2 for循环练习-输出数据（应用）</h3><ul>
+<li>需求：在控制台输出1-5和5-1的数据 </li>
+<li>示例代码：</li>
+</ul>
+<pre><code class="java">public class ForTest01 &#123;
+    public static void main(String[] args) &#123;
+        //需求：输出数据1-5
+        for(int i=1; i&lt;=5; i++) &#123;
+            System.out.println(i);
+        &#125;
+        System.out.println(&quot;--------&quot;);
+        //需求：输出数据5-1
+        for(int i=5; i&gt;=1; i--) &#123;
+            System.out.println(i);
+        &#125;
+    &#125;
+&#125;</code></pre>
+<h3 id="2-3-for循环练习-求和（应用）"><a href="#2-3-for循环练习-求和（应用）" class="headerlink" title="2.3 for循环练习-求和（应用）"></a>2.3 for循环练习-求和（应用）</h3><ul>
+<li>需求：求1-5之间的数据和，并把求和结果在控制台输出 </li>
+<li>示例代码：</li>
+</ul>
+<pre><code class="java">public class ForTest02 &#123;
+    public static void main(String[] args) &#123;
+        //求和的最终结果必须保存起来，需要定义一个变量，用于保存求和的结果，初始值为0
+        int sum = 0;
+        //从1开始到5结束的数据，使用循环结构完成
+        for(int i=1; i&lt;=5; i++) &#123;
+            //将反复进行的事情写入循环结构内部
+             // 此处反复进行的事情是将数据 i 加到用于保存最终求和的变量 sum 中
+            sum += i;
+            /*
+                sum += i;    sum = sum + i;
+                第一次：sum = sum + i = 0 + 1 = 1;
+                第二次：sum = sum + i = 1 + 2 = 3;
+                第三次：sum = sum + i = 3 + 3 = 6;
+                第四次：sum = sum + i = 6 + 4 = 10;
+                第五次：sum = sum + i = 10 + 5 = 15;
+            */
+        &#125;
+        //当循环执行完毕时，将最终数据打印出来
+        System.out.println(&quot;1-5之间的数据和是：&quot; + sum);
+    &#125;
+&#125;</code></pre>
+<ul>
+<li>本题要点：<ul>
+<li>今后遇到的需求中，如果带有求和二字，请立即联想到求和变量</li>
+<li>求和变量的定义位置，必须在循环外部，如果在循环内部则计算出的数据将是错误的</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-4-for循环练习-求偶数和（应用）"><a href="#2-4-for循环练习-求偶数和（应用）" class="headerlink" title="2.4 for循环练习-求偶数和（应用）"></a>2.4 for循环练习-求偶数和（应用）</h3><ul>
+<li>需求：求1-100之间的偶数和，并把求和结果在控制台输出 }</li>
+<li>示例代码：</li>
+</ul>
+<pre><code class="java">public class ForTest03 &#123;
+    public static void main(String[] args) &#123;
+        //求和的最终结果必须保存起来，需要定义一个变量，用于保存求和的结果，初始值为0
+        int sum = 0;
+        //对1-100的数据求和与1-5的数据求和几乎完全一样，仅仅是结束条件不同
+        for(int i=1; i&lt;=100; i++) &#123;
+            //对1-100的偶数求和，需要对求和操作添加限制条件，判断是否是偶数
+            if(i%2 == 0) &#123;
+                sum += i;
+            &#125;
+        &#125;
+        //当循环执行完毕时，将最终数据打印出来
+        System.out.println(&quot;1-100之间的偶数和是：&quot; + sum);
+    &#125;
+&#125;</code></pre>
+<h3 id="2-5-for循环练习-水仙花（应用）"><a href="#2-5-for循环练习-水仙花（应用）" class="headerlink" title="2.5 for循环练习-水仙花（应用）"></a>2.5 for循环练习-水仙花（应用）</h3><ul>
+<li>需求：在控制台输出所有的“水仙花数” </li>
+<li>解释：什么是水仙花数？<ul>
+<li>水仙花数，指的是一个三位数，个位、十位、百位的数字立方和等于原数<ul>
+<li>例如<code>153  3*3*3 + 5*5*5 + 1*1*1 = 153</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>思路：<ol>
+<li>获取所有的三位数，准备进行筛选，最小的三位数为100，最大的三位数为999，使用for循环获取</li>
+<li>获取每一个三位数的个位，十位，百位，做if语句判断是否是水仙花数</li>
+</ol>
+</li>
+<li>示例代码</li>
+</ul>
+<pre><code class="java">public class ForTest04 &#123;
+    public static void main(String[] args) &#123;
+        //输出所有的水仙花数必然要使用到循环，遍历所有的三位数，三位数从100开始，到999结束
+        for(int i=100; i&lt;1000; i++) &#123;
+            //在计算之前获取三位数中每个位上的值
+            int ge = i%10;
+            int shi = i/10%10;
+            int bai = i/10/10%10;
+
+            //判定条件是将三位数中的每个数值取出来，计算立方和后与原始数字比较是否相等
+            if(ge*ge*ge + shi*shi*shi + bai*bai*bai == i) &#123;
+                //输出满足条件的数字就是水仙花数
+                System.out.println(i);
+            &#125;
+        &#125;
+    &#125;
+&#125;</code></pre>
+<h3 id="2-6-for循环练习-统计水仙花数个数（应用）"><a href="#2-6-for循环练习-统计水仙花数个数（应用）" class="headerlink" title="2.6 for循环练习-统计水仙花数个数（应用）"></a>2.6 for循环练习-统计水仙花数个数（应用）</h3><ul>
+<li>需求：统计“水仙花数”一共有多少个，并在控制台输出个数 </li>
+<li>示例代码：</li>
+</ul>
+<pre><code class="java">public class ForTest05 &#123;
+    public static void main(String[] args) &#123;
+        //定义变量count，用于保存“水仙花数”的数量，初始值为0
+        int count = 0;
+        //输出所有的水仙花数必然要使用到循环，遍历所有的三位数，三位数从100开始，到999结束
+        for(int i=100; i&lt;1000; i++) &#123;
+            //在计算之前获取三位数中每个位上的值
+            int ge = i%10;
+            int shi = i/10%10;
+            int bai = i/10/10%10;
+            //在判定水仙花数的过程中，满足条件不再输出，更改为修改count的值，使count+1
+            if(ge*ge*ge + shi*shi*shi + bai*bai*bai == i) &#123;
+                count++;
+            &#125;
+        &#125;
+        //打印输出最终结果
+        System.out.println(&quot;水仙花共有：&quot; + count + &quot;个&quot;);
+    &#125;
+&#125;</code></pre>
+<ul>
+<li>本题要点：<ul>
+<li>今后如果需求带有统计xxx，请先想到计数器变量</li>
+<li>计数器变量定义的位置，必须在循环外部</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-while循环"><a href="#3-while循环" class="headerlink" title="3. while循环"></a>3. while循环</h2><h3 id="3-1-while结构（掌握）"><a href="#3-1-while结构（掌握）" class="headerlink" title="3.1 while结构（掌握）"></a>3.1 while结构（掌握）</h3><ul>
+<li><p>while循环完整格式：</p>
+<pre><code class="java">初始化语句;
+while (条件判断语句) &#123;
+    循环体语句;
+    条件控制语句;
+&#125;</code></pre>
+</li>
+<li><p>while循环执行流程：</p>
+<p>①执行初始化语句</p>
+<p>②执行条件判断语句，看其结果是true还是false</p>
+<p>​             如果是false，循环结束</p>
+<p>​             如果是true，继续执行</p>
+<p>③执行循环体语句</p>
+<p>④执行条件控制语句</p>
+<p>⑤回到②继续</p>
+</li>
+<li><p>示例代码：</p>
+</li>
+</ul>
+<pre><code class="java">public class WhileDemo &#123;
+    public static void main(String[] args) &#123;
+        //需求：在控制台输出5次&quot;HelloWorld&quot;
+        //for循环实现
+        for(int i=1; i&lt;=5; i++) &#123;
+            System.out.println(&quot;HelloWorld&quot;);
+        &#125;
+        System.out.println(&quot;--------&quot;);
+        //while循环实现
+        int j = 1;
+        while(j&lt;=5) &#123;
+            System.out.println(&quot;HelloWorld&quot;);
+            j++;
+        &#125;
+    &#125;
+&#125;</code></pre>
+<h3 id="3-2-while循环练习-珠穆朗玛峰（应用）"><a href="#3-2-while循环练习-珠穆朗玛峰（应用）" class="headerlink" title="3.2 while循环练习-珠穆朗玛峰（应用）"></a>3.2 while循环练习-珠穆朗玛峰（应用）</h3><ul>
+<li>需求：世界最高山峰是珠穆朗玛峰(8844.43米=8844430毫米)，假如我有一张足够大的纸，它的厚度是0.1毫米。请问，我折叠多少次，可以折成珠穆朗玛峰的高度?</li>
+<li>示例代码：</li>
+</ul>
+<pre><code class="java">public class WhileTest &#123;
+    public static void main(String[] args) &#123;
+        //定义一个计数器，初始值为0
+        int count = 0;
+        //定义纸张厚度
+        double paper = 0.1;
+        //定义珠穆朗玛峰的高度
+        int zf = 8844430;
+        //因为要反复折叠，所以要使用循环，但是不知道折叠多少次，这种情况下更适合使用while循环
+        //折叠的过程中当纸张厚度大于珠峰就停止了，因此继续执行的要求是纸张厚度小于珠峰高度
+        while(paper &lt;= zf) &#123;
+            //循环的执行过程中每次纸张折叠，纸张的厚度要加倍
+            paper *= 2;
+            //在循环中执行累加，对应折叠了多少次
+            count++;
+        &#125;
+        //打印计数器的值
+        System.out.println(&quot;需要折叠：&quot; + count + &quot;次&quot;);
+    &#125;
+&#125;</code></pre>
+<h2 id="4-循环细节"><a href="#4-循环细节" class="headerlink" title="4. 循环细节"></a>4. 循环细节</h2><h3 id="4-1-do…while循环结构（掌握）"><a href="#4-1-do…while循环结构（掌握）" class="headerlink" title="4.1 do…while循环结构（掌握）"></a>4.1 do…while循环结构（掌握）</h3><ul>
+<li><p>完整格式：</p>
+<pre><code class="java">初始化语句;
+do &#123;
+    循环体语句;
+    条件控制语句;
+&#125;while(条件判断语句);</code></pre>
+</li>
+<li><p>执行流程：</p>
+<p>① 执行初始化语句</p>
+<p>② 执行循环体语句</p>
+<p>③ 执行条件控制语句</p>
+<p>④ 执行条件判断语句，看其结果是true还是false</p>
+<p>如果是false，循环结束</p>
+<p>如果是true，继续执行</p>
+<p>⑤ 回到②继续</p>
+</li>
+<li><p>示例代码：</p>
+</li>
+</ul>
+<pre><code class="java">public class DoWhileDemo &#123;
+    public static void main(String[] args) &#123;
+        //需求：在控制台输出5次&quot;HelloWorld&quot;
+        //for循环实现
+        for(int i=1; i&lt;=5; i++) &#123;
+            System.out.println(&quot;HelloWorld&quot;);
+        &#125;
+        System.out.println(&quot;--------&quot;);
+        //do...while循环实现
+        int j = 1;
+        do &#123;
+            System.out.println(&quot;HelloWorld&quot;);
+            j++;
+        &#125;while(j&lt;=5);
+    &#125;
+&#125;</code></pre>
+<h3 id="4-2-三种循环的区别（理解）"><a href="#4-2-三种循环的区别（理解）" class="headerlink" title="4.2 三种循环的区别（理解）"></a>4.2 三种循环的区别（理解）</h3><ul>
+<li>三种循环的区别<ul>
+<li>for循环和while循环先判断条件是否成立，然后决定是否执行循环体（先判断后执行）</li>
+<li>do…while循环先执行一次循环体，然后判断条件是否成立，是否继续执行循环体（先执行后判断）</li>
+</ul>
+</li>
+<li>for循环和while的区别<ul>
+<li>条件控制语句所控制的自增变量，因为归属for循环的语法结构中，在for循环结束后，就不能再次被访问到了</li>
+<li>条件控制语句所控制的自增变量，对于while循环来说不归属其语法结构中，在while循环结束后，该变量还可以继续使用</li>
+</ul>
+</li>
+<li>死循环（无限循环）的三种格式<ol>
+<li>for(;;){}</li>
+<li>while(true){}</li>
+<li>do {} while(true);</li>
+</ol>
+</li>
+</ul>
+<h3 id="4-3-跳转控制语句（掌握）"><a href="#4-3-跳转控制语句（掌握）" class="headerlink" title="4.3 跳转控制语句（掌握）"></a>4.3 跳转控制语句（掌握）</h3><ul>
+<li>跳转控制语句（break）<ul>
+<li>跳出循环，结束循环</li>
+</ul>
+</li>
+<li>跳转控制语句（continue）<ul>
+<li>跳过本次循环，继续下次循环</li>
+</ul>
+</li>
+<li>注意： continue只能在循环中进行使用！</li>
+</ul>
+<h3 id="4-4-循环嵌套（理解）"><a href="#4-4-循环嵌套（理解）" class="headerlink" title="4.4 循环嵌套（理解）"></a>4.4 循环嵌套（理解）</h3><ul>
+<li><p>循环嵌套概述：在循环中，继续定义循环</p>
+</li>
+<li><p>示例代码：</p>
+<pre><code class="java">    public static void main(String[] args) &#123;
+        //外循环控制小时的范围，内循环控制分钟的范围
+        for (int hour = 0; hour &lt; 24; hour++) &#123;
+            for (int minute = 0; minute &lt; 60; minute++) &#123;
+                System.out.println(hour + &quot;时&quot; + minute + &quot;分&quot;);
+            &#125;
+            System.out.println(&quot;--------&quot;);
+        &#125;
+    &#125;</code></pre>
+</li>
+<li><p>理解：</p>
+<ul>
+<li>请反复理解这句话（整个内循环，就是外循环的一个循环体，内部循环体没有执行完毕，外循环是不会继续向下执行的）</li>
+</ul>
+</li>
+<li><p>结论：</p>
+<ul>
+<li>外循环执行一次，内循环执行一圈</li>
+</ul>
+</li>
+</ul>
+<h2 id="5-Random"><a href="#5-Random" class="headerlink" title="5. Random"></a>5. Random</h2><h3 id="5-1-Random产生随机数（掌握）"><a href="#5-1-Random产生随机数（掌握）" class="headerlink" title="5.1 Random产生随机数（掌握）"></a>5.1 Random产生随机数（掌握）</h3><ul>
+<li><p>概述：</p>
+<ul>
+<li>Random类似Scanner，也是Java提供好的API，内部提供了产生随机数的功能<ul>
+<li>API后续课程详细讲解，现在可以简单理解为Java已经写好的代码</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>使用步骤：</p>
+<ol>
+<li><p>导入包</p>
+<p>import java.util.Random;</p>
+</li>
+<li><p>创建对象</p>
+<p>Random r = new Random();</p>
+</li>
+<li><p>产生随机数</p>
+<p>int num = r.nextInt(10);</p>
+<p>解释： 10代表的是一个范围，如果括号写10，产生的随机数就是0-9，括号写20，参数的随机数则是0-19</p>
+</li>
+</ol>
+</li>
+<li><p>示例代码：</p>
+</li>
+</ul>
+<pre><code class="java">import java.util.Random;
+public class RandomDemo &#123;
+    public static void main(String[] args) &#123;
+        //创建对象
+        Random r = new Random();
+        //用循环获取10个随机数
+        for(int i=0; i&lt;10; i++) &#123;
+            //获取随机数
+            int number = r.nextInt(10);
+            System.out.println(&quot;number:&quot; + number);
+        &#125;
+        //需求：获取一个1-100之间的随机数
+        int x = r.nextInt(100) + 1;
+        System.out.println(x);
+    &#125;
+&#125;</code></pre>
+<h3 id="5-3-Random练习-猜数字（应用）"><a href="#5-3-Random练习-猜数字（应用）" class="headerlink" title="5.3 Random练习-猜数字（应用）"></a>5.3 Random练习-猜数字（应用）</h3><ul>
+<li><p>需求：</p>
+<p>程序自动生成一个1-100之间的数字，使用程序实现猜出这个数字是多少？</p>
+<p>当猜错的时候根据不同情况给出相应的提示</p>
+<p>A. 如果猜的数字比真实数字大，提示你猜的数据大了</p>
+<p>B. 如果猜的数字比真实数字小，提示你猜的数据小了</p>
+<p>C. 如果猜的数字与真实数字相等，提示恭喜你猜中了</p>
+</li>
+<li><p>示例代码：</p>
+</li>
+</ul>
+<pre><code class="java">import java.util.Random;
+import java.util.Scanner;
+
+public class RandomTest &#123;
+    public static void main(String[] args) &#123;
+        //要完成猜数字的游戏，首先需要有一个要猜的数字，使用随机数生成该数字，范围1到100
+        Random r = new Random();
+        int number = r.nextInt(100) + 1;
+
+        while(true) &#123;
+            //使用程序实现猜数字，每次均要输入猜测的数字值，需要使用键盘录入实现
+            Scanner sc = new Scanner(System.in);
+
+            System.out.println(&quot;请输入你要猜的数字：&quot;);
+            int guessNumber = sc.nextInt();
+
+            //比较输入的数字和系统产生的数据，需要使用分支语句。
+             //这里使用if..else..if..格式，根据不同情况进行猜测结果显示
+            if(guessNumber &gt; number) &#123;
+                System.out.println(&quot;你猜的数字&quot; + guessNumber + &quot;大了&quot;);
+            &#125; else if(guessNumber &lt; number) &#123;
+                System.out.println(&quot;你猜的数字&quot; + guessNumber + &quot;小了&quot;);
+            &#125; else &#123;
+                System.out.println(&quot;恭喜你猜中了&quot;);
+                break;
+            &#125;
+        &#125;
+
+    &#125;
+&#125;</code></pre>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>java学习-方法</title>
     <url>/2021/01/19/20210119005/</url>
     <content><![CDATA[<h2 id="1-方法概述"><a href="#1-方法概述" class="headerlink" title="1. 方法概述"></a>1. 方法概述</h2><h3 id="1-1-方法的概念（理解）"><a href="#1-1-方法的概念（理解）" class="headerlink" title="1.1 方法的概念（理解）"></a>1.1 方法的概念（理解）</h3><p>​    方法（method）是将具有独立功能的代码块组织成为一个整体，使其具有特殊功能的代码集</p>
@@ -2209,1001 +2209,6 @@ public class MethodDemo02 &#123;
       </tags>
   </entry>
   <entry>
-    <title>java学习-ArrayList集合&amp;学生管理系统</title>
-    <url>/2021/01/19/20210119009/</url>
-    <content><![CDATA[<h2 id="1-ArrayList"><a href="#1-ArrayList" class="headerlink" title="1.ArrayList"></a>1.ArrayList</h2><h3 id="1-1ArrayList类概述"><a href="#1-1ArrayList类概述" class="headerlink" title="1.1ArrayList类概述"></a>1.1ArrayList类概述</h3><ul>
-<li><p>什么是集合</p>
-<p>​    提供一种存储空间可变的存储模型，存储的数据容量可以发生改变</p>
-</li>
-<li><p>ArrayList集合的特点</p>
-<p>​    底层是数组实现的，长度可以变化</p>
-</li>
-<li><p>泛型的使用</p>
-<p>​    用于约束集合中存储元素的数据类型</p>
-</li>
-</ul>
-<h3 id="1-2ArrayList类常用方法"><a href="#1-2ArrayList类常用方法" class="headerlink" title="1.2ArrayList类常用方法"></a>1.2ArrayList类常用方法</h3><h4 id="1-2-1构造方法"><a href="#1-2-1构造方法" class="headerlink" title="1.2.1构造方法"></a>1.2.1构造方法</h4><table>
-<thead>
-<tr>
-<th>方法名</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>public ArrayList()</td>
-<td>创建一个空的集合对象</td>
-</tr>
-</tbody></table>
-<h4 id="1-2-2成员方法"><a href="#1-2-2成员方法" class="headerlink" title="1.2.2成员方法"></a>1.2.2成员方法</h4><table>
-<thead>
-<tr>
-<th>方法名</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>public boolean   remove(Object o)</td>
-<td>删除指定的元素，返回删除是否成功</td>
-</tr>
-<tr>
-<td>public E   remove(int   index)</td>
-<td>删除指定索引处的元素，返回被删除的元素</td>
-</tr>
-<tr>
-<td>public E   set(int index,E   element)</td>
-<td>修改指定索引处的元素，返回被修改的元素</td>
-</tr>
-<tr>
-<td>public E   get(int   index)</td>
-<td>返回指定索引处的元素</td>
-</tr>
-<tr>
-<td>public int   size()</td>
-<td>返回集合中的元素的个数</td>
-</tr>
-<tr>
-<td>public boolean   add(E e)</td>
-<td>将指定的元素追加到此集合的末尾</td>
-</tr>
-<tr>
-<td>public void   add(int index,E   element)</td>
-<td>在此集合中的指定位置插入指定的元素</td>
-</tr>
-</tbody></table>
-<h4 id="1-2-3示例代码"><a href="#1-2-3示例代码" class="headerlink" title="1.2.3示例代码"></a>1.2.3示例代码</h4><pre><code class="java">public class ArrayListDemo02 &#123;
-    public static void main(String[] args) &#123;
-        //创建集合
-        ArrayList&lt;String&gt; array = new ArrayList&lt;String&gt;();
-
-        //添加元素
-        array.add(&quot;hello&quot;);
-        array.add(&quot;world&quot;);
-        array.add(&quot;java&quot;);
-
-        //public boolean remove(Object o)：删除指定的元素，返回删除是否成功
-//        System.out.println(array.remove(&quot;world&quot;));
-//        System.out.println(array.remove(&quot;javaee&quot;));
-
-        //public E remove(int index)：删除指定索引处的元素，返回被删除的元素
-//        System.out.println(array.remove(1));
-
-        //IndexOutOfBoundsException
-//        System.out.println(array.remove(3));
-
-        //public E set(int index,E element)：修改指定索引处的元素，返回被修改的元素
-//        System.out.println(array.set(1,&quot;javaee&quot;));
-
-        //IndexOutOfBoundsException
-//        System.out.println(array.set(3,&quot;javaee&quot;));
-
-        //public E get(int index)：返回指定索引处的元素
-//        System.out.println(array.get(0));
-//        System.out.println(array.get(1));
-//        System.out.println(array.get(2));
-        //System.out.println(array.get(3)); //？？？？？？ 自己测试
-
-        //public int size()：返回集合中的元素的个数
-        System.out.println(array.size());
-
-        //输出集合
-        System.out.println(&quot;array:&quot; + array);
-    &#125;
-&#125;</code></pre>
-<h3 id="1-3ArrayList存储字符串并遍历"><a href="#1-3ArrayList存储字符串并遍历" class="headerlink" title="1.3ArrayList存储字符串并遍历"></a>1.3ArrayList存储字符串并遍历</h3><h4 id="1-3-1案例需求"><a href="#1-3-1案例需求" class="headerlink" title="1.3.1案例需求"></a>1.3.1案例需求</h4><p>​    创建一个存储字符串的集合，存储3个字符串元素，使用程序实现在控制台遍历该集合</p>
-<h4 id="1-3-2代码实现"><a href="#1-3-2代码实现" class="headerlink" title="1.3.2代码实现"></a>1.3.2代码实现</h4><pre><code class="java">/*
-    思路：
-        1:创建集合对象
-        2:往集合中添加字符串对象
-        3:遍历集合，首先要能够获取到集合中的每一个元素，这个通过get(int index)方法实现
-        4:遍历集合，其次要能够获取到集合的长度，这个通过size()方法实现
-        5:遍历集合的通用格式
- */
-public class ArrayListTest01 &#123;
-    public static void main(String[] args) &#123;
-        //创建集合对象
-        ArrayList&lt;String&gt; array = new ArrayList&lt;String&gt;();
-
-        //往集合中添加字符串对象
-        array.add(&quot;刘正风&quot;);
-        array.add(&quot;左冷禅&quot;);
-        array.add(&quot;风清扬&quot;);
-
-        //遍历集合，其次要能够获取到集合的长度，这个通过size()方法实现
-//        System.out.println(array.size());
-
-        //遍历集合的通用格式
-        for(int i=0; i&lt;array.size(); i++) &#123;
-            String s = array.get(i);
-            System.out.println(s);
-        &#125;
-    &#125;
-&#125;</code></pre>
-<h3 id="1-4ArrayList存储学生对象并遍历"><a href="#1-4ArrayList存储学生对象并遍历" class="headerlink" title="1.4ArrayList存储学生对象并遍历"></a>1.4ArrayList存储学生对象并遍历</h3><h4 id="1-4-1案例需求"><a href="#1-4-1案例需求" class="headerlink" title="1.4.1案例需求"></a>1.4.1案例需求</h4><p>​    创建一个存储学生对象的集合，存储3个学生对象，使用程序实现在控制台遍历该集合</p>
-<h4 id="1-4-2代码实现"><a href="#1-4-2代码实现" class="headerlink" title="1.4.2代码实现"></a>1.4.2代码实现</h4><pre><code class="java">/*
-    思路：
-        1:定义学生类
-        2:创建集合对象
-        3:创建学生对象
-        4:添加学生对象到集合中
-        5:遍历集合，采用通用遍历格式实现
- */
-public class ArrayListTest02 &#123;
-    public static void main(String[] args) &#123;
-        //创建集合对象
-        ArrayList&lt;Student&gt; array = new ArrayList&lt;&gt;();
-
-        //创建学生对象
-        Student s1 = new Student(&quot;林青霞&quot;, 30);
-        Student s2 = new Student(&quot;风清扬&quot;, 33);
-        Student s3 = new Student(&quot;张曼玉&quot;, 18);
-
-        //添加学生对象到集合中
-        array.add(s1);
-        array.add(s2);
-        array.add(s3);
-
-        //遍历集合，采用通用遍历格式实现
-        for (int i = 0; i &lt; array.size(); i++) &#123;
-            Student s = array.get(i);
-            System.out.println(s.getName() + &quot;,&quot; + s.getAge());
-        &#125;
-    &#125;
-&#125;</code></pre>
-<h3 id="1-5ArrayList存储学生对象并遍历升级版"><a href="#1-5ArrayList存储学生对象并遍历升级版" class="headerlink" title="1.5ArrayList存储学生对象并遍历升级版"></a>1.5ArrayList存储学生对象并遍历升级版</h3><h4 id="1-5-1案例需求"><a href="#1-5-1案例需求" class="headerlink" title="1.5.1案例需求"></a>1.5.1案例需求</h4><p>​    创建一个存储学生对象的集合，存储3个学生对象，使用程序实现在控制台遍历该集合</p>
-<p>​        学生的姓名和年龄来自于键盘录入</p>
-<h4 id="1-5-2代码实现"><a href="#1-5-2代码实现" class="headerlink" title="1.5.2代码实现"></a>1.5.2代码实现</h4><pre><code class="java">/*
-    思路：
-        1:定义学生类，为了键盘录入数据方便，把学生类中的成员变量都定义为String类型
-        2:创建集合对象
-        3:键盘录入学生对象所需要的数据
-        4:创建学生对象，把键盘录入的数据赋值给学生对象的成员变量
-        5:往集合中添加学生对象
-        6:遍历集合，采用通用遍历格式实现
- */
-public class ArrayListTest &#123;
-    public static void main(String[] args) &#123;
-        //创建集合对象
-        ArrayList&lt;Student&gt; array = new ArrayList&lt;Student&gt;();
-
-        //为了提高代码的复用性，我们用方法来改进程序
-        addStudent(array);
-        addStudent(array);
-        addStudent(array);
-
-        //遍历集合，采用通用遍历格式实现
-        for (int i = 0; i &lt; array.size(); i++) &#123;
-            Student s = array.get(i);
-            System.out.println(s.getName() + &quot;,&quot; + s.getAge());
-        &#125;
-    &#125;
-
-    /*
-        两个明确：
-            返回值类型：void
-            参数：ArrayList&lt;Student&gt; array
-     */
-    public static void addStudent(ArrayList&lt;Student&gt; array) &#123;
-        //键盘录入学生对象所需要的数据
-        Scanner sc = new Scanner(System.in);
-
-        System.out.println(&quot;请输入学生姓名:&quot;);
-        String name = sc.nextLine();
-
-        System.out.println(&quot;请输入学生年龄:&quot;);
-        String age = sc.nextLine();
-
-        //创建学生对象，把键盘录入的数据赋值给学生对象的成员变量
-        Student s = new Student();
-        s.setName(name);
-        s.setAge(age);
-
-        //往集合中添加学生对象
-        array.add(s);
-    &#125;
-&#125;</code></pre>
-<h2 id="2-学生管理系统"><a href="#2-学生管理系统" class="headerlink" title="2.学生管理系统"></a>2.学生管理系统</h2><h3 id="2-1学生管理系统实现步骤"><a href="#2-1学生管理系统实现步骤" class="headerlink" title="2.1学生管理系统实现步骤"></a>2.1学生管理系统实现步骤</h3><ul>
-<li><p>案例需求</p>
-<p>​    针对目前我们的所学内容，完成一个综合案例：学生管理系统。该系统主要功能如下：</p>
-<p>​    添加学生：通过键盘录入学生信息，添加到集合中</p>
-<p>​    删除学生：通过键盘录入要删除学生的学号，将该学生对象从集合中删除</p>
-<p>​    修改学生：通过键盘录入要修改学生的学号，将该学生对象其他信息进行修改</p>
-<p>​    查看学生：将集合中的学生对象信息进行展示</p>
-<p>​    退出系统：结束程序</p>
-</li>
-<li><p>实现步骤</p>
-<ol>
-<li><p>定义学生类，包含以下成员变量</p>
-<p>​       private String sid            // 学生id</p>
-<p>​       private String name       // 学生姓名</p>
-<p>​       private String age          // 学生年龄</p>
-<p>​       private String address   // 学生所在地</p>
-</li>
-<li><p>学生管理系统主界面的搭建步骤</p>
-<p>2.1 用输出语句完成主界面的编写<br>2.2 用Scanner实现键盘输入<br>2.3 用switch语句完成选择的功能<br>2.4 用循环完成功能结束后再次回到主界面</p>
-</li>
-<li><p>学生管理系统的添加学生功能实现步骤</p>
-<p>3.1 定义一个方法，接收ArrayList<Student>集合<br>3.2 方法内完成添加学生的功能<br>​         ①键盘录入学生信息<br>​         ②根据录入的信息创建学生对象<br>​         ③将学生对象添加到集合中<br>​         ④提示添加成功信息<br>3.3 在添加学生的选项里调用添加学生的方法</p>
-</li>
-<li><p>学生管理系统的查看学生功能实现步骤</p>
-<p>4.1 定义一个方法，接收ArrayList<Student>集合<br>4.2 方法内遍历集合，将学生信息进行输出<br>4.3 在查看所有学生选项里调用查看学生方法</p>
-</li>
-<li><p>学生管理系统的删除学生功能实现步骤</p>
-<p>5.1 定义一个方法，接收ArrayList<Student>集合<br>5.2 方法中接收要删除学生的学号<br>5.3 遍历集合，获取每个学生对象<br>5.4 使用学生对象的学号和录入的要删除的学号进行比较,如果相同，则将当前学生对象从集合中删除<br>5.5 在删除学生选项里调用删除学生的方法</p>
-</li>
-<li><p>学生管理系统的修改学生功能实现步骤</p>
-<p>6.1 定义一个方法，接收ArrayList<Student>集合<br>6.2 方法中接收要修改学生的学号<br>6.3 通过键盘录入学生对象所需的信息，并创建对象<br>6.4 遍历集合，获取每一个学生对象。并和录入的修改学生学号进行比较.如果相同，则使用新学生对象替换当前学生对象<br>6.5 在修改学生选项里调用修改学生的方法</p>
-</li>
-<li><p>退出系统</p>
-<p>使用System.exit(0);退出JVM</p>
-</li>
-</ol>
-</li>
-</ul>
-<h3 id="2-2学生类的定义"><a href="#2-2学生类的定义" class="headerlink" title="2.2学生类的定义"></a>2.2学生类的定义</h3><pre><code class="java">public class Student &#123;
-    //学号
-    private String sid;
-    //姓名
-    private String name;
-    //年龄
-    private String age;
-    //居住地
-    private String address;
-
-    public Student() &#123;
-    &#125;
-
-    public Student(String sid, String name, String age, String address) &#123;
-        this.sid = sid;
-        this.name = name;
-        this.age = age;
-        this.address = address;
-    &#125;
-
-    public String getSid() &#123;
-        return sid;
-    &#125;
-
-    public void setSid(String sid) &#123;
-        this.sid = sid;
-    &#125;
-
-    public String getName() &#123;
-        return name;
-    &#125;
-
-    public void setName(String name) &#123;
-        this.name = name;
-    &#125;
-
-    public String getAge() &#123;
-        return age;
-    &#125;
-
-    public void setAge(String age) &#123;
-        this.age = age;
-    &#125;
-
-    public String getAddress() &#123;
-        return address;
-    &#125;
-
-    public void setAddress(String address) &#123;
-        this.address = address;
-    &#125;
-&#125;</code></pre>
-<h3 id="2-3测试类的定义"><a href="#2-3测试类的定义" class="headerlink" title="2.3测试类的定义"></a>2.3测试类的定义</h3><pre><code class="java">public class StudentManager &#123;
-    /*
-        1:用输出语句完成主界面的编写
-        2:用Scanner实现键盘录入数据
-        3:用switch语句完成操作的选择
-        4:用循环完成再次回到主界面
-    */
-    public static void main(String[] args) &#123;
-        //创建集合对象，用于保存学生数据信息
-        ArrayList&lt;Student&gt; array = new ArrayList&lt;Student&gt;();
-
-        //用循环完成再次回到主界面
-        while (true) &#123;
-            //用输出语句完成主界面的编写
-            System.out.println(&quot;--------欢迎来到学生管理系统--------&quot;);
-            System.out.println(&quot;1 添加学生&quot;);
-            System.out.println(&quot;2 删除学生&quot;);
-            System.out.println(&quot;3 修改学生&quot;);
-            System.out.println(&quot;4 查看所有学生&quot;);
-            System.out.println(&quot;5 退出&quot;);
-            System.out.println(&quot;请输入你的选择：&quot;);
-
-            //用Scanner实现键盘录入数据
-            Scanner sc = new Scanner(System.in);
-            String line = sc.nextLine();
-
-            //用switch语句完成操作的选择
-            switch (line) &#123;
-                case &quot;1&quot;:
-                    addStudent(array);
-                    break;
-                case &quot;2&quot;:
-                    deleteStudent(array);
-                    break;
-                case &quot;3&quot;:
-                    updateStudent(array);
-                    break;
-                case &quot;4&quot;:
-                    findAllStudent(array);
-                    break;
-                case &quot;5&quot;:
-                    System.out.println(&quot;谢谢使用&quot;);
-                    System.exit(0); //JVM退出
-            &#125;
-        &#125;
-    &#125;
-
-    //定义一个方法，用于添加学生信息
-    public static void addStudent(ArrayList&lt;Student&gt; array) &#123;
-        //键盘录入学生对象所需要的数据,显示提示信息，提示要输入何种信息
-        Scanner sc = new Scanner(System.in);
-
-        String sid;
-
-        while (true) &#123;
-            System.out.println(&quot;请输入学生学号：&quot;);
-            sid = sc.nextLine();
-
-            boolean flag = isUsed(array, sid);
-            if (flag) &#123;
-                System.out.println(&quot;你输入的学号已经被占用，请重新输入&quot;);
-            &#125; else &#123;
-                break;
-            &#125;
-        &#125;
-
-        System.out.println(&quot;请输入学生姓名：&quot;);
-        String name = sc.nextLine();
-
-        System.out.println(&quot;请输入学生年龄：&quot;);
-        String age = sc.nextLine();
-
-        System.out.println(&quot;请输入学生居住地：&quot;);
-        String address = sc.nextLine();
-
-        //创建学生对象，把键盘录入的数据赋值给学生对象的成员变量
-        Student s = new Student();
-        s.setSid(sid);
-        s.setName(name);
-        s.setAge(age);
-        s.setAddress(address);
-
-        //将学生对象添加到集合中
-        array.add(s);
-
-        //给出添加成功提示
-        System.out.println(&quot;添加学生成功&quot;);
-    &#125;
-
-    //定义一个方法，判断学号是否被使用
-    public static boolean isUsed(ArrayList&lt;Student&gt; array, String sid) &#123;
-        //如果与集合中的某一个学生学号相同，返回true;如果都不相同，返回false
-        boolean flag = false;
-
-        for(int i=0; i&lt;array.size(); i++) &#123;
-            Student s = array.get(i);
-            if(s.getSid().equals(sid)) &#123;
-                flag = true;
-                break;
-            &#125;
-        &#125;
-
-        return flag;
-    &#125;
-
-
-    //定义一个方法，用于查看学生信息
-    public static void findAllStudent(ArrayList&lt;Student&gt; array) &#123;
-        //判断集合中是否有数据，如果没有显示提示信息
-        if (array.size() == 0) &#123;
-            System.out.println(&quot;无信息，请先添加信息再查询&quot;);
-            //为了让程序不再往下执行，我们在这里写上return;
-            return;
-        &#125;
-
-        //显示表头信息
-        //\t其实是一个tab键的位置
-        System.out.println(&quot;学号\t\t\t姓名\t\t年龄\t\t居住地&quot;);
-
-        //将集合中数据取出按照对应格式显示学生信息，年龄显示补充“岁”
-        for (int i = 0; i &lt; array.size(); i++) &#123;
-            Student s = array.get(i);
-            System.out.println(s.getSid() + &quot;\t&quot; + s.getName() + &quot;\t&quot; + s.getAge() + &quot;岁\t\t&quot; + s.getAddress());
-        &#125;
-    &#125;
-
-    //定义一个方法，用于删除学生信息
-    public static void deleteStudent(ArrayList&lt;Student&gt; array) &#123;
-        //键盘录入要删除的学生学号,显示提示信息
-        Scanner sc = new Scanner(System.in);
-
-        System.out.println(&quot;请输入你要删除的学生的学号：&quot;);
-        String sid = sc.nextLine();
-
-        //在删除/修改学生操作前，对学号是否存在进行判断
-        //如果不存在，显示提示信息
-        //如果存在，执行删除/修改操作
-
-        int index = -1;
-
-        for (int i = 0; i &lt; array.size(); i++) &#123;
-            Student s = array.get(i);
-            if (s.getSid().equals(sid)) &#123;
-                index = i;
-                break;
-            &#125;
-        &#125;
-
-        if (index == -1) &#123;
-            System.out.println(&quot;该信息不存在，请重新输入&quot;);
-        &#125; else &#123;
-            array.remove(index);
-            //给出删除成功提示
-            System.out.println(&quot;删除学生成功&quot;);
-        &#125;
-    &#125;
-
-    //定义一个方法，用于修改学生信息
-    public static void updateStudent(ArrayList&lt;Student&gt; array) &#123;
-        //键盘录入要修改的学生学号，显示提示信息
-        Scanner sc = new Scanner(System.in);
-
-        System.out.println(&quot;请输入你要修改的学生的学号：&quot;);
-        String sid = sc.nextLine();
-
-        //键盘录入要修改的学生信息
-        System.out.println(&quot;请输入学生新姓名：&quot;);
-        String name = sc.nextLine();
-        System.out.println(&quot;请输入学生新年龄：&quot;);
-        String age = sc.nextLine();
-        System.out.println(&quot;请输入学生新居住地：&quot;);
-        String address = sc.nextLine();
-
-        //创建学生对象
-        Student s = new Student();
-        s.setSid(sid);
-        s.setName(name);
-        s.setAge(age);
-        s.setAddress(address);
-
-        //遍历集合修改对应的学生信息
-        for (int i = 0; i &lt; array.size(); i++) &#123;
-            Student student = array.get(i);
-            if (student.getSid().equals(sid)) &#123;
-                array.set(i, s);
-            &#125;
-        &#125;
-
-        //给出修改成功提示
-        System.out.println(&quot;修改学生成功&quot;);
-    &#125;
-&#125;</code></pre>
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>java学习-Debug&amp;基础练习</title>
-    <url>/2021/01/19/20210119006/</url>
-    <content><![CDATA[<h2 id="1-Debug模式"><a href="#1-Debug模式" class="headerlink" title="1.Debug模式"></a>1.Debug模式</h2><h3 id="1-1什么是Debug模式"><a href="#1-1什么是Debug模式" class="headerlink" title="1.1什么是Debug模式"></a>1.1什么是Debug模式</h3><p>是供程序员使用的程序调试工具，它可以用于查看程序的执行流程，也可以用于追踪程序执行过程来调试程序。</p>
-<h3 id="1-2Debug模式操作流程"><a href="#1-2Debug模式操作流程" class="headerlink" title="1.2Debug模式操作流程"></a>1.2Debug模式操作流程</h3><ul>
-<li><p>如何加断点</p>
-<ul>
-<li>选择要设置断点的代码行，在行号的区域后面单击鼠标左键即可</li>
-</ul>
-</li>
-<li><p>如何运行加了断点的程序</p>
-<ul>
-<li>在代码区域右键Debug执行</li>
-</ul>
-</li>
-<li><p>看哪里</p>
-<ul>
-<li><p>看Debugger窗口</p>
-</li>
-<li><p>看Console窗口</p>
-</li>
-</ul>
-</li>
-<li><p>点哪里</p>
-<ul>
-<li>点Step Into (F7)这个箭头，也可以直接按F7</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li><p>如何删除断点</p>
-<ul>
-<li>选择要删除的断点，单击鼠标左键即可</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li>如果是多个断点，可以每一个再点击一次。也可以一次性全部删除</li>
-</ul>
-<h2 id="2-基础练习"><a href="#2-基础练习" class="headerlink" title="2.基础练习"></a>2.基础练习</h2><h3 id="2-1减肥计划if版本"><a href="#2-1减肥计划if版本" class="headerlink" title="2.1减肥计划if版本"></a>2.1减肥计划if版本</h3><h4 id="2-1-1案例需求"><a href="#2-1-1案例需求" class="headerlink" title="2.1.1案例需求"></a>2.1.1案例需求</h4><p>​    输入星期数，显示今天的减肥活动<br>​          周一：跑步<br>​          周二：游泳<br>​          周三：慢走<br>​          周四：动感单车<br>​          周五：拳击<br>​          周六：爬山<br>​          周日：好好吃一顿</p>
-<h4 id="2-1-2代码实现"><a href="#2-1-2代码实现" class="headerlink" title="2.1.2代码实现"></a>2.1.2代码实现</h4><pre><code class="java">/*
-    思路：
-        1:键盘录入一个星期数，用一个变量接收
-        2:对星期数进行判断，这里用 if 语句实现
-        3:在对应的语句控制中输出对应的减肥活动
- */
-public class Test01 &#123;
-    public static void main(String[] args) &#123;
-        //键盘录入一个星期数，用一个变量接收
-        Scanner sc = new Scanner(System.in);
-
-        System.out.println(&quot;请输入一个星期数：&quot;);
-        int week = sc.nextInt();
-
-        //对星期数进行判断，这里用 if 语句实现
-        if (week &lt; 1 || week &gt; 7) &#123;
-            System.out.println(&quot;你输入的星期数有误&quot;);
-        &#125; else if (week == 1) &#123;
-            System.out.println(&quot;跑步&quot;);
-        &#125; else if (week == 2) &#123;
-            System.out.println(&quot;游泳&quot;);
-        &#125; else if (week == 3) &#123;
-            System.out.println(&quot;慢走&quot;);
-        &#125; else if (week == 4) &#123;
-            System.out.println(&quot;动感单车&quot;);
-        &#125; else if (week == 5) &#123;
-            System.out.println(&quot;拳击&quot;);
-        &#125; else if (week == 6) &#123;
-            System.out.println(&quot;爬山&quot;);
-        &#125; else &#123;
-            System.out.println(&quot;好好吃一顿&quot;);
-        &#125;
-    &#125;
-&#125;</code></pre>
-<h3 id="2-2减肥计划switch版本"><a href="#2-2减肥计划switch版本" class="headerlink" title="2.2减肥计划switch版本"></a>2.2减肥计划switch版本</h3><h4 id="2-2-1案例需求"><a href="#2-2-1案例需求" class="headerlink" title="2.2.1案例需求"></a>2.2.1案例需求</h4><p>​    输入星期数，显示今天的减肥活动<br>​          周一：跑步<br>​          周二：游泳<br>​          周三：慢走<br>​          周四：动感单车<br>​          周五：拳击<br>​          周六：爬山<br>​          周日：好好吃一顿</p>
-<h4 id="2-2-2代码实现"><a href="#2-2-2代码实现" class="headerlink" title="2.2.2代码实现"></a>2.2.2代码实现</h4><pre><code class="java">/*
-    思路：
-        1:键盘录入一个星期数，用一个变量接收
-        2:对星期数进行判断，这里用 switch 语句实现
-        3:在对应的语句控制中输出对应的减肥活动
-
-    导包：
-        1:手动导包  import java.util.Scanner;
-        2:快捷键导包 Alt+Enter
-        3:自动导包
- */
-public class Test02 &#123;
-    public static void main(String[] args) &#123;
-        //键盘录入一个星期数，用一个变量接收
-        Scanner sc = new Scanner(System.in);
-
-        System.out.println(&quot;请输入一个星期数：&quot;);
-        int week = sc.nextInt();
-
-        //对星期数进行判断，这里用 switch 语句实现
-        switch (week) &#123;
-            case 1:
-                System.out.println(&quot;跑步&quot;);
-                break;
-            case 2:
-                System.out.println(&quot;游泳&quot;);
-                break;
-            case 3:
-                System.out.println(&quot;慢走&quot;);
-                break;
-            case 4:
-                System.out.println(&quot;动感单车&quot;);
-                break;
-            case 5:
-                System.out.println(&quot;拳击&quot;);
-                break;
-            case 6:
-                System.out.println(&quot;爬山&quot;);
-                break;
-            case 7:
-                System.out.println(&quot;好好吃一顿&quot;);
-                break;
-            default:
-                System.out.println(&quot;你输入的星期数有误&quot;);
-        &#125;
-    &#125;
-&#125;</code></pre>
-<h3 id="2-3逢七跳过"><a href="#2-3逢七跳过" class="headerlink" title="2.3逢七跳过"></a>2.3逢七跳过</h3><h4 id="2-3-1案例需求"><a href="#2-3-1案例需求" class="headerlink" title="2.3.1案例需求"></a>2.3.1案例需求</h4><p>​    朋友聚会的时候可能会玩一个游戏：逢七过。<br>​        规则是：从任意一个数字开始报数，当你要报的数字包含7或者是7的倍数时都要说：过。<br>​        为了帮助大家更好的玩这个游戏，这里我们直接在控制台打印出1-100之间的满足逢七必过规则的数据。<br>​        这样，大家将来在玩游戏的时候，就知道哪些数据要说：过。    </p>
-<h4 id="2-3-2代码实现"><a href="#2-3-2代码实现" class="headerlink" title="2.3.2代码实现"></a>2.3.2代码实现</h4><pre><code class="java">/*
-    思路：
-        1:数据在1-100之间，用for循环实现数据的获取
-        2:根据规则，用if语句实现数据的判断：要么个位是7，要么十位是7，要么能够被7整除
-        3:在控制台输出满足规则的数据
- */
-public class Test03 &#123;
-    public static void main(String[] args) &#123;
-        //数据在1-100之间，用for循环实现数据的获取
-        for(int x=1; x&lt;=100; x++) &#123;
-            //根据规则，用if语句实现数据的判断：要么个位是7，要么十位是7，要么能够被7整除
-            if(x%10==7 || x/10%10==7 || x%7==0) &#123;
-                //在控制台输出满足规则的数据
-                System.out.println(x);
-            &#125;
-        &#125;
-    &#125;
-&#125;</code></pre>
-<h3 id="2-4不死神兔"><a href="#2-4不死神兔" class="headerlink" title="2.4不死神兔"></a>2.4不死神兔</h3><h4 id="2-4-1案例需求"><a href="#2-4-1案例需求" class="headerlink" title="2.4.1案例需求"></a>2.4.1案例需求</h4><p>​    有一对兔子，从出生后第3个月起每个月都生一对兔子，小兔子长到第三个月后每个月又生一对兔子，<br>​        假如兔子都不死，问第二十个月的兔子对数为多少？    </p>
-<h4 id="2-4-2代码实现"><a href="#2-4-2代码实现" class="headerlink" title="2.4.2代码实现"></a>2.4.2代码实现</h4><pre><code class="java">/*
-   思路：
-        1:为了存储多个月的兔子对数，定义一个数组，用动态初始化完成数组元素的初始化，长度为20
-        2:因为第1个月，第2个月兔子的对数是已知的，都是1，所以数组的第1个元素，第2个元素值也都是1
-        3:用循环实现计算每个月的兔子对数
-        4:输出数组中最后一个元素的值，就是第20个月的兔子对数
- */
-public class Test04 &#123;
-    public static void main(String[] args) &#123;
-        //为了存储多个月的兔子对数，定义一个数组，用动态初始化完成数组元素的初始化，长度为20
-        int[] arr = new int[20];
-
-        //因为第1个月，第2个月兔子的对数是已知的，都是1，所以数组的第1个元素，第2个元素值也都是1
-        arr[0] = 1;
-        arr[1] = 1;
-
-        //用循环实现计算每个月的兔子对数
-        for(int x=2; x&lt;arr.length; x++) &#123;
-            arr[x] = arr[x-2] + arr[x-1];
-        &#125;
-
-        //输出数组中最后一个元素的值，就是第20个月的兔子对数
-        System.out.println(&quot;第二十个月兔子的对数是：&quot; + arr[19]);
-    &#125;
-&#125;</code></pre>
-<h3 id="2-5百钱白鸡"><a href="#2-5百钱白鸡" class="headerlink" title="2.5百钱白鸡"></a>2.5百钱白鸡</h3><h4 id="2-5-1案例需求"><a href="#2-5-1案例需求" class="headerlink" title="2.5.1案例需求"></a>2.5.1案例需求</h4><p>​    我国古代数学家张丘建在《算经》一书中提出的数学问题：鸡翁一值钱五，鸡母一值钱三，鸡雏三值钱一。<br>​        百钱买百鸡，问鸡翁、鸡母、鸡雏各几何？</p>
-<h4 id="2-5-2代码实现"><a href="#2-5-2代码实现" class="headerlink" title="2.5.2代码实现"></a>2.5.2代码实现</h4><pre><code class="java">/*
-    思路：
-        1:第1层循环，用于表示鸡翁的范围，初始化表达式的变量定义为 x=0，判断条件是x&lt;=20
-        2:第2层循环，用于表示鸡母的范围，初始化表达式的变量定义为 y=0，判断条件是y&lt;=33
-        3:这个时候，用于表示鸡雏的变量 z = 100 – x – y
-        4:判断表达式 z%3==0 和表达式 5*x + 3*y + z/3 = 100 是否同时成立，如果成立，输出对应的 x，y，z 的值，就是对应的鸡翁，鸡母，鸡雏的值
- */
-public class Test05 &#123;
-    public static void main(String[] args) &#123;
-        //第1层循环，用于表示鸡翁的范围，初始化表达式的变量定义为 x=0，判断条件是x&lt;=20
-        for(int x=0; x&lt;=20; x++) &#123;
-            //第2层循环，用于表示鸡母的范围，初始化表达式的变量定义为 y=0，判断条件是y&lt;=33
-            for(int y=0; y&lt;=33; y++) &#123;
-                //这个时候，用于表示鸡雏的变量 z = 100 – x – y
-                int z = 100 - x - y;
-
-                //判断表达式 z%3==0 和表达式 5*x + 3*y + z/3 = 100 是否同时成立
-                if(z%3==0 &amp;&amp; 5*x+3*y+z/3==100) &#123;
-                    System.out.println(x+&quot;,&quot;+y+&quot;,&quot;+z);
-                &#125;
-            &#125;
-        &#125;
-    &#125;
-&#125;</code></pre>
-<h3 id="2-6数组元素求和"><a href="#2-6数组元素求和" class="headerlink" title="2.6数组元素求和"></a>2.6数组元素求和</h3><h4 id="2-6-1案例需求"><a href="#2-6-1案例需求" class="headerlink" title="2.6.1案例需求"></a>2.6.1案例需求</h4><p>​    有这样的一个数组，元素是{68,27,95,88,171,996,51,210}。求出该数组中满足要求的元素和，<br>​        要求是：求和的元素个位和十位都不能是7，并且只能是偶数</p>
-<h4 id="2-6-2代码实现"><a href="#2-6-2代码实现" class="headerlink" title="2.6.2代码实现"></a>2.6.2代码实现</h4><pre><code class="java">/*
-   思路：
-        1:定义一个数组，用静态初始化完成数组元素的初始化
-        2:定义一个求和变量，初始值是0
-        3:遍历数组，获取到数组中的每一个元素
-        4:判断该元素是否满足条件，如果满足条件就累加
-        5:输出求和变量的值
- */
-public class Test06 &#123;
-    public static void main(String[] args) &#123;
-        //定义一个数组，用静态初始化完成数组元素的初始化
-        int[] arr = &#123;68, 27, 95, 88, 171, 996, 51, 210&#125;;
-
-        //定义一个求和变量，初始值是0
-        int sum = 0;
-
-        //遍历数组，获取到数组中的每一个元素
-        for(int x=0; x&lt;arr.length; x++) &#123;
-            //判断该元素是否满足条件，如果满足条件就累加
-            if(arr[x]%10!=7 &amp;&amp; arr[x]/10%10!=7 &amp;&amp; arr[x]%2==0) &#123;
-                sum += arr[x];
-            &#125;
-        &#125;
-
-        //输出求和变量的值
-        System.out.println(&quot;sum:&quot; + sum);
-    &#125;
-&#125;</code></pre>
-<h3 id="2-7判断两个数组是否相同"><a href="#2-7判断两个数组是否相同" class="headerlink" title="2.7判断两个数组是否相同"></a>2.7判断两个数组是否相同</h3><h4 id="2-7-1案例需求"><a href="#2-7-1案例需求" class="headerlink" title="2.7.1案例需求"></a>2.7.1案例需求</h4><p>​    定义一个方法，用于比较两个数组的内容是否相同</p>
-<h4 id="2-7-2代码实现"><a href="#2-7-2代码实现" class="headerlink" title="2.7.2代码实现"></a>2.7.2代码实现</h4><pre><code class="java">/*
-    思路：
-        1:定义两个数组，分别使用静态初始化完成数组元素的初始化
-        2:定义一个方法，用于比较两个数组的内容是否相同
-        3:比较两个数组的内容是否相同，按照下面的步骤实现就可以了
-            首先比较数组长度，如果长度不相同，数组内容肯定不相同，返回false
-            其次遍历，比较两个数组中的每一个元素，只要有元素不相同，返回false
-            最后循环遍历结束后，返回true
-        4:调用方法，用变量接收
-        5:输出结果
- */
-public class Test07 &#123;
-    public static void main(String[] args) &#123;
-        //定义两个数组，分别使用静态初始化完成数组元素的初始化
-        int[] arr = &#123;11, 22, 33, 44, 55&#125;;
-        //int[] arr2 = &#123;11, 22, 33, 44, 55&#125;;
-        int[] arr2 = &#123;11, 22, 33, 44, 5&#125;;
-
-
-        //调用方法，用变量接收
-        boolean flag = compare(arr,arr2);
-        //输出结果
-        System.out.println(flag);
-    &#125;
-
-    //定义一个方法，用于比较两个数组的内容是否相同
-    /*
-        两个明确：
-            返回值类型：boolean
-            参数：int[] arr, int[] arr2
-     */
-    public static boolean compare(int[] arr, int[] arr2) &#123;
-        //首先比较数组长度，如果长度不相同，数组内容肯定不相同，返回false
-        if(arr.length != arr2.length) &#123;
-            return false;
-        &#125;
-
-        //其次遍历，比较两个数组中的每一个元素，只要有元素不相同，返回false
-        for(int x=0; x&lt;arr.length; x++) &#123;
-            if(arr[x] != arr2[x]) &#123;
-                return false;
-            &#125;
-        &#125;
-
-        //最后循环遍历结束后，返回true
-        return true;
-    &#125;
-&#125;</code></pre>
-<h3 id="2-8查找元素在数组中出现的索引位置"><a href="#2-8查找元素在数组中出现的索引位置" class="headerlink" title="2.8查找元素在数组中出现的索引位置"></a>2.8查找元素在数组中出现的索引位置</h3><h4 id="2-8-1案例需求"><a href="#2-8-1案例需求" class="headerlink" title="2.8.1案例需求"></a>2.8.1案例需求</h4><p>​    已知一个数组 arr = {19, 28, 37, 46, 50}; 键盘录入一个数据，查找该数据在数组中的索引。</p>
-<p>​    并在控制台输出找到的索引值。如果没有查找到，则输出-1</p>
-<h4 id="2-8-2代码实现"><a href="#2-8-2代码实现" class="headerlink" title="2.8.2代码实现"></a>2.8.2代码实现</h4><pre><code class="java">/*
-    思路：
-        1:定义一个数组，用静态初始化完成数组元素的初始化
-        2:键盘录入要查找的数据，用一个变量接收
-        3:定义一个索引变量，初始值为-1
-        4:遍历数组，获取到数组中的每一个元素
-        5:拿键盘录入的数据和数组中的每一个元素进行比较，如果值相同，就把该值对应的索引赋值给索引变量,并结束循环
-        6:输出索引变量
- */
-public class Test08 &#123;
-    public static void main(String[] args) &#123;
-        //定义一个数组，用静态初始化完成数组元素的初始化
-        int[] arr = &#123;19, 28, 37, 46, 50&#125;;
-
-        //键盘录入要查找的数据，用一个变量接收
-        Scanner sc = new Scanner(System.in);
-        System.out.println(&quot;请输入要查找的数据：&quot;);
-        int number = sc.nextInt();
-
-        //调用方法
-        int index = getIndex(arr, number);
-
-        //输出索引变量
-        System.out.println(&quot;index: &quot; + index);
-    &#125;
-
-    //查找指定的数据在数组中的索引
-    /*
-        两个明确：
-            返回值类型：int
-            参数：int[] arr, int number
-     */
-    public static int getIndex(int[] arr, int number) &#123;
-        //定义一个索引变量，初始值为-1
-        int index = -1;
-
-        //遍历数组，获取到数组中的每一个元素
-        for(int x=0; x&lt;arr.length; x++) &#123;
-            //拿键盘录入的数据和数组中的每一个元素进行比较，如果值相同，就把该值对应的索引赋值给索引变量,并结束循环
-            if(arr[x] == number) &#123;
-                index = x;
-                break;
-            &#125;
-        &#125;
-
-        //返回索引
-        return index;
-    &#125;
-&#125;</code></pre>
-<h3 id="2-9数组元素反转"><a href="#2-9数组元素反转" class="headerlink" title="2.9数组元素反转"></a>2.9数组元素反转</h3><h4 id="2-9-1案例需求"><a href="#2-9-1案例需求" class="headerlink" title="2.9.1案例需求"></a>2.9.1案例需求</h4><p>​    已知一个数组 arr = {19, 28, 37, 46, 50}; 用程序实现把数组中的元素值交换，<br>​        交换后的数组 arr = {50, 46, 37, 28, 19}; 并在控制台输出交换后的数组元素。</p>
-<h4 id="2-9-2代码实现"><a href="#2-9-2代码实现" class="headerlink" title="2.9.2代码实现"></a>2.9.2代码实现</h4><pre><code class="java">/*
-    思路：
-        1:定义一个数组，用静态初始化完成数组元素的初始化
-        2:循环遍历数组，这一次初始化语句定义两个索引变量，判断条件是开始索引小于等于结束索引
-        3:变量交换
-        4:遍历数组
- */
-public class Test09 &#123;
-    public static void main(String[] args) &#123;
-        //定义一个数组，用静态初始化完成数组元素的初始化
-        int[] arr = &#123;19, 28, 37, 46, 50&#125;;
-
-        //调用反转的方法
-        reverse(arr);
-
-        //遍历数组
-        printArray(arr);
-    &#125;
-
-    /*
-        两个明确：
-            返回值类型：void
-            参数：int[] arr
-     */
-    public static void reverse(int[] arr) &#123;
-        //循环遍历数组，这一次初始化语句定义两个索引变量，判断条件是开始索引小于等于结束索引
-        for (int start = 0, end = arr.length - 1; start &lt;= end; start++, end--) &#123;
-            //变量交换
-            int temp = arr[start];
-            arr[start] = arr[end];
-            arr[end] = temp;
-        &#125;
-    &#125;
-
-    /*
-        两个明确：
-            返回值类型：void
-            参数：int[] arr
-     */
-    public static void printArray(int[] arr) &#123;
-        System.out.print(&quot;[&quot;);
-
-        for (int x = 0; x &lt; arr.length; x++) &#123;
-            if (x == arr.length - 1) &#123;
-                System.out.print(arr[x]);
-            &#125; else &#123;
-                System.out.print(arr[x] + &quot;, &quot;);
-            &#125;
-        &#125;
-
-        System.out.println(&quot;]&quot;);
-    &#125;
-&#125;</code></pre>
-<h3 id="2-10评委打分"><a href="#2-10评委打分" class="headerlink" title="2.10评委打分"></a>2.10评委打分</h3><h4 id="2-10-1案例需求"><a href="#2-10-1案例需求" class="headerlink" title="2.10.1案例需求"></a>2.10.1案例需求</h4><p>​    在编程竞赛中，有6个评委为参赛的选手打分，分数为0-100的整数分。<br>​        选手的最后得分为：去掉一个最高分和一个最低分后 的4个评委平均值 (不考虑小数部分)。</p>
-<h4 id="2-10-2代码实现"><a href="#2-10-2代码实现" class="headerlink" title="2.10.2代码实现"></a>2.10.2代码实现</h4><pre><code class="java">/*
-    思路：
-        1:定义一个数组，用动态初始化完成数组元素的初始化，长度为6
-        2:键盘录入评委分数
-        3:由于是6个评委打分，所以，接收评委分数的操作，用循环改进
-        4:定义方法实现获取数组中的最高分(数组最大值)，调用方法
-        5:定义方法实现获取数组中的最低分(数组最小值) ，调用方法
-        6:定义方法实现获取数组中的所有元素的和(数组元素求和) ，调用方法
-        7:按照计算规则进行计算得到平均分
-        8:输出平均分
- */
-public class Test10 &#123;
-    public static void main(String[] args) &#123;
-        //定义一个数组，用动态初始化完成数组元素的初始化，长度为6
-        int[] arr = new int[6];
-
-        //键盘录入评委分数
-        Scanner sc = new Scanner(System.in);
-
-        //由于是6个评委打分，所以，接收评委分数的操作，用循环改进
-        for(int x=0; x&lt;arr.length; x++) &#123;
-            System.out.println(&quot;请输入第&quot; + (x + 1) + &quot;个评委的打分：&quot;);
-            arr[x] = sc.nextInt();
-        &#125;
-
-        //printArray(arr);
-
-        //定义方法实现获取数组中的最高分(数组最大值)，调用方法
-        int max = getMax(arr);
-
-        //定义方法实现获取数组中的最低分(数组最小值) ，调用方法
-        int min = getMin(arr);
-
-        //定义方法实现获取数组中的所有元素的和(数组元素求和) ，调用方法
-        int sum = getSum(arr);
-
-        //按照计算规则进行计算得到平均分
-        int avg = (sum - max - min) / (arr.length - 2);
-
-        //输出平均分
-        System.out.println(&quot;选手的最终得分是：&quot; + avg);
-
-    &#125;
-
-    /*
-        两个明确：
-            返回值类型：int
-            参数：int[] arr
-     */
-    public static int getSum(int[] arr) &#123;
-        int sum = 0;
-
-        for(int x=0; x&lt;arr.length; x++) &#123;
-            sum += arr[x];
-        &#125;
-
-        return sum;
-    &#125;
-
-    /*
-        两个明确：
-            返回值类型：int
-            参数：int[] arr
-     */
-    public static int getMin(int[] arr) &#123;
-        int min = arr[0];
-
-        for(int x=1; x&lt;arr.length; x++) &#123;
-            if(arr[x] &lt; min) &#123;
-                min = arr[x];
-            &#125;
-        &#125;
-
-        return min;
-    &#125;
-
-    /*
-        两个明确：
-            返回值类型：int
-            参数：int[] arr
-     */
-    public static int getMax(int[] arr) &#123;
-        int max = arr[0];
-
-        for(int x=1; x&lt;arr.length; x++) &#123;
-            if(arr[x] &gt; max) &#123;
-                max = arr[x];
-            &#125;
-        &#125;
-
-        return max;
-    &#125;
-
-    //遍历数组
-    public static void printArray(int[] arr) &#123;
-        System.out.print(&quot;[&quot;);
-
-        for (int x = 0; x &lt; arr.length; x++) &#123;
-            if (x == arr.length - 1) &#123;
-                System.out.print(arr[x]);
-            &#125; else &#123;
-                System.out.print(arr[x] + &quot;, &quot;);
-            &#125;
-        &#125;
-
-        System.out.println(&quot;]&quot;);
-    &#125;
-&#125;</code></pre>
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>java学习-面向对象</title>
     <url>/2021/01/19/20210119007/</url>
     <content><![CDATA[<h2 id="1-类和对象"><a href="#1-类和对象" class="headerlink" title="1. 类和对象"></a>1. 类和对象</h2><h3 id="1-1-类和对象的理解"><a href="#1-1-类和对象的理解" class="headerlink" title="1.1 类和对象的理解"></a>1.1 类和对象的理解</h3><p>客观存在的事物皆为对象 ，所以我们也常常说万物皆对象。</p>
@@ -3709,6 +2714,1001 @@ public class StudentDemo &#123;
         //使用带参构造方法直接创建带有属性值的对象
         Student s2 = new Student(&quot;林青霞&quot;,30);
         s2.show();
+    &#125;
+&#125;</code></pre>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>java学习-Debug&amp;基础练习</title>
+    <url>/2021/01/19/20210119006/</url>
+    <content><![CDATA[<h2 id="1-Debug模式"><a href="#1-Debug模式" class="headerlink" title="1.Debug模式"></a>1.Debug模式</h2><h3 id="1-1什么是Debug模式"><a href="#1-1什么是Debug模式" class="headerlink" title="1.1什么是Debug模式"></a>1.1什么是Debug模式</h3><p>是供程序员使用的程序调试工具，它可以用于查看程序的执行流程，也可以用于追踪程序执行过程来调试程序。</p>
+<h3 id="1-2Debug模式操作流程"><a href="#1-2Debug模式操作流程" class="headerlink" title="1.2Debug模式操作流程"></a>1.2Debug模式操作流程</h3><ul>
+<li><p>如何加断点</p>
+<ul>
+<li>选择要设置断点的代码行，在行号的区域后面单击鼠标左键即可</li>
+</ul>
+</li>
+<li><p>如何运行加了断点的程序</p>
+<ul>
+<li>在代码区域右键Debug执行</li>
+</ul>
+</li>
+<li><p>看哪里</p>
+<ul>
+<li><p>看Debugger窗口</p>
+</li>
+<li><p>看Console窗口</p>
+</li>
+</ul>
+</li>
+<li><p>点哪里</p>
+<ul>
+<li>点Step Into (F7)这个箭头，也可以直接按F7</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>如何删除断点</p>
+<ul>
+<li>选择要删除的断点，单击鼠标左键即可</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>如果是多个断点，可以每一个再点击一次。也可以一次性全部删除</li>
+</ul>
+<h2 id="2-基础练习"><a href="#2-基础练习" class="headerlink" title="2.基础练习"></a>2.基础练习</h2><h3 id="2-1减肥计划if版本"><a href="#2-1减肥计划if版本" class="headerlink" title="2.1减肥计划if版本"></a>2.1减肥计划if版本</h3><h4 id="2-1-1案例需求"><a href="#2-1-1案例需求" class="headerlink" title="2.1.1案例需求"></a>2.1.1案例需求</h4><p>​    输入星期数，显示今天的减肥活动<br>​          周一：跑步<br>​          周二：游泳<br>​          周三：慢走<br>​          周四：动感单车<br>​          周五：拳击<br>​          周六：爬山<br>​          周日：好好吃一顿</p>
+<h4 id="2-1-2代码实现"><a href="#2-1-2代码实现" class="headerlink" title="2.1.2代码实现"></a>2.1.2代码实现</h4><pre><code class="java">/*
+    思路：
+        1:键盘录入一个星期数，用一个变量接收
+        2:对星期数进行判断，这里用 if 语句实现
+        3:在对应的语句控制中输出对应的减肥活动
+ */
+public class Test01 &#123;
+    public static void main(String[] args) &#123;
+        //键盘录入一个星期数，用一个变量接收
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println(&quot;请输入一个星期数：&quot;);
+        int week = sc.nextInt();
+
+        //对星期数进行判断，这里用 if 语句实现
+        if (week &lt; 1 || week &gt; 7) &#123;
+            System.out.println(&quot;你输入的星期数有误&quot;);
+        &#125; else if (week == 1) &#123;
+            System.out.println(&quot;跑步&quot;);
+        &#125; else if (week == 2) &#123;
+            System.out.println(&quot;游泳&quot;);
+        &#125; else if (week == 3) &#123;
+            System.out.println(&quot;慢走&quot;);
+        &#125; else if (week == 4) &#123;
+            System.out.println(&quot;动感单车&quot;);
+        &#125; else if (week == 5) &#123;
+            System.out.println(&quot;拳击&quot;);
+        &#125; else if (week == 6) &#123;
+            System.out.println(&quot;爬山&quot;);
+        &#125; else &#123;
+            System.out.println(&quot;好好吃一顿&quot;);
+        &#125;
+    &#125;
+&#125;</code></pre>
+<h3 id="2-2减肥计划switch版本"><a href="#2-2减肥计划switch版本" class="headerlink" title="2.2减肥计划switch版本"></a>2.2减肥计划switch版本</h3><h4 id="2-2-1案例需求"><a href="#2-2-1案例需求" class="headerlink" title="2.2.1案例需求"></a>2.2.1案例需求</h4><p>​    输入星期数，显示今天的减肥活动<br>​          周一：跑步<br>​          周二：游泳<br>​          周三：慢走<br>​          周四：动感单车<br>​          周五：拳击<br>​          周六：爬山<br>​          周日：好好吃一顿</p>
+<h4 id="2-2-2代码实现"><a href="#2-2-2代码实现" class="headerlink" title="2.2.2代码实现"></a>2.2.2代码实现</h4><pre><code class="java">/*
+    思路：
+        1:键盘录入一个星期数，用一个变量接收
+        2:对星期数进行判断，这里用 switch 语句实现
+        3:在对应的语句控制中输出对应的减肥活动
+
+    导包：
+        1:手动导包  import java.util.Scanner;
+        2:快捷键导包 Alt+Enter
+        3:自动导包
+ */
+public class Test02 &#123;
+    public static void main(String[] args) &#123;
+        //键盘录入一个星期数，用一个变量接收
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println(&quot;请输入一个星期数：&quot;);
+        int week = sc.nextInt();
+
+        //对星期数进行判断，这里用 switch 语句实现
+        switch (week) &#123;
+            case 1:
+                System.out.println(&quot;跑步&quot;);
+                break;
+            case 2:
+                System.out.println(&quot;游泳&quot;);
+                break;
+            case 3:
+                System.out.println(&quot;慢走&quot;);
+                break;
+            case 4:
+                System.out.println(&quot;动感单车&quot;);
+                break;
+            case 5:
+                System.out.println(&quot;拳击&quot;);
+                break;
+            case 6:
+                System.out.println(&quot;爬山&quot;);
+                break;
+            case 7:
+                System.out.println(&quot;好好吃一顿&quot;);
+                break;
+            default:
+                System.out.println(&quot;你输入的星期数有误&quot;);
+        &#125;
+    &#125;
+&#125;</code></pre>
+<h3 id="2-3逢七跳过"><a href="#2-3逢七跳过" class="headerlink" title="2.3逢七跳过"></a>2.3逢七跳过</h3><h4 id="2-3-1案例需求"><a href="#2-3-1案例需求" class="headerlink" title="2.3.1案例需求"></a>2.3.1案例需求</h4><p>​    朋友聚会的时候可能会玩一个游戏：逢七过。<br>​        规则是：从任意一个数字开始报数，当你要报的数字包含7或者是7的倍数时都要说：过。<br>​        为了帮助大家更好的玩这个游戏，这里我们直接在控制台打印出1-100之间的满足逢七必过规则的数据。<br>​        这样，大家将来在玩游戏的时候，就知道哪些数据要说：过。    </p>
+<h4 id="2-3-2代码实现"><a href="#2-3-2代码实现" class="headerlink" title="2.3.2代码实现"></a>2.3.2代码实现</h4><pre><code class="java">/*
+    思路：
+        1:数据在1-100之间，用for循环实现数据的获取
+        2:根据规则，用if语句实现数据的判断：要么个位是7，要么十位是7，要么能够被7整除
+        3:在控制台输出满足规则的数据
+ */
+public class Test03 &#123;
+    public static void main(String[] args) &#123;
+        //数据在1-100之间，用for循环实现数据的获取
+        for(int x=1; x&lt;=100; x++) &#123;
+            //根据规则，用if语句实现数据的判断：要么个位是7，要么十位是7，要么能够被7整除
+            if(x%10==7 || x/10%10==7 || x%7==0) &#123;
+                //在控制台输出满足规则的数据
+                System.out.println(x);
+            &#125;
+        &#125;
+    &#125;
+&#125;</code></pre>
+<h3 id="2-4不死神兔"><a href="#2-4不死神兔" class="headerlink" title="2.4不死神兔"></a>2.4不死神兔</h3><h4 id="2-4-1案例需求"><a href="#2-4-1案例需求" class="headerlink" title="2.4.1案例需求"></a>2.4.1案例需求</h4><p>​    有一对兔子，从出生后第3个月起每个月都生一对兔子，小兔子长到第三个月后每个月又生一对兔子，<br>​        假如兔子都不死，问第二十个月的兔子对数为多少？    </p>
+<h4 id="2-4-2代码实现"><a href="#2-4-2代码实现" class="headerlink" title="2.4.2代码实现"></a>2.4.2代码实现</h4><pre><code class="java">/*
+   思路：
+        1:为了存储多个月的兔子对数，定义一个数组，用动态初始化完成数组元素的初始化，长度为20
+        2:因为第1个月，第2个月兔子的对数是已知的，都是1，所以数组的第1个元素，第2个元素值也都是1
+        3:用循环实现计算每个月的兔子对数
+        4:输出数组中最后一个元素的值，就是第20个月的兔子对数
+ */
+public class Test04 &#123;
+    public static void main(String[] args) &#123;
+        //为了存储多个月的兔子对数，定义一个数组，用动态初始化完成数组元素的初始化，长度为20
+        int[] arr = new int[20];
+
+        //因为第1个月，第2个月兔子的对数是已知的，都是1，所以数组的第1个元素，第2个元素值也都是1
+        arr[0] = 1;
+        arr[1] = 1;
+
+        //用循环实现计算每个月的兔子对数
+        for(int x=2; x&lt;arr.length; x++) &#123;
+            arr[x] = arr[x-2] + arr[x-1];
+        &#125;
+
+        //输出数组中最后一个元素的值，就是第20个月的兔子对数
+        System.out.println(&quot;第二十个月兔子的对数是：&quot; + arr[19]);
+    &#125;
+&#125;</code></pre>
+<h3 id="2-5百钱白鸡"><a href="#2-5百钱白鸡" class="headerlink" title="2.5百钱白鸡"></a>2.5百钱白鸡</h3><h4 id="2-5-1案例需求"><a href="#2-5-1案例需求" class="headerlink" title="2.5.1案例需求"></a>2.5.1案例需求</h4><p>​    我国古代数学家张丘建在《算经》一书中提出的数学问题：鸡翁一值钱五，鸡母一值钱三，鸡雏三值钱一。<br>​        百钱买百鸡，问鸡翁、鸡母、鸡雏各几何？</p>
+<h4 id="2-5-2代码实现"><a href="#2-5-2代码实现" class="headerlink" title="2.5.2代码实现"></a>2.5.2代码实现</h4><pre><code class="java">/*
+    思路：
+        1:第1层循环，用于表示鸡翁的范围，初始化表达式的变量定义为 x=0，判断条件是x&lt;=20
+        2:第2层循环，用于表示鸡母的范围，初始化表达式的变量定义为 y=0，判断条件是y&lt;=33
+        3:这个时候，用于表示鸡雏的变量 z = 100 – x – y
+        4:判断表达式 z%3==0 和表达式 5*x + 3*y + z/3 = 100 是否同时成立，如果成立，输出对应的 x，y，z 的值，就是对应的鸡翁，鸡母，鸡雏的值
+ */
+public class Test05 &#123;
+    public static void main(String[] args) &#123;
+        //第1层循环，用于表示鸡翁的范围，初始化表达式的变量定义为 x=0，判断条件是x&lt;=20
+        for(int x=0; x&lt;=20; x++) &#123;
+            //第2层循环，用于表示鸡母的范围，初始化表达式的变量定义为 y=0，判断条件是y&lt;=33
+            for(int y=0; y&lt;=33; y++) &#123;
+                //这个时候，用于表示鸡雏的变量 z = 100 – x – y
+                int z = 100 - x - y;
+
+                //判断表达式 z%3==0 和表达式 5*x + 3*y + z/3 = 100 是否同时成立
+                if(z%3==0 &amp;&amp; 5*x+3*y+z/3==100) &#123;
+                    System.out.println(x+&quot;,&quot;+y+&quot;,&quot;+z);
+                &#125;
+            &#125;
+        &#125;
+    &#125;
+&#125;</code></pre>
+<h3 id="2-6数组元素求和"><a href="#2-6数组元素求和" class="headerlink" title="2.6数组元素求和"></a>2.6数组元素求和</h3><h4 id="2-6-1案例需求"><a href="#2-6-1案例需求" class="headerlink" title="2.6.1案例需求"></a>2.6.1案例需求</h4><p>​    有这样的一个数组，元素是{68,27,95,88,171,996,51,210}。求出该数组中满足要求的元素和，<br>​        要求是：求和的元素个位和十位都不能是7，并且只能是偶数</p>
+<h4 id="2-6-2代码实现"><a href="#2-6-2代码实现" class="headerlink" title="2.6.2代码实现"></a>2.6.2代码实现</h4><pre><code class="java">/*
+   思路：
+        1:定义一个数组，用静态初始化完成数组元素的初始化
+        2:定义一个求和变量，初始值是0
+        3:遍历数组，获取到数组中的每一个元素
+        4:判断该元素是否满足条件，如果满足条件就累加
+        5:输出求和变量的值
+ */
+public class Test06 &#123;
+    public static void main(String[] args) &#123;
+        //定义一个数组，用静态初始化完成数组元素的初始化
+        int[] arr = &#123;68, 27, 95, 88, 171, 996, 51, 210&#125;;
+
+        //定义一个求和变量，初始值是0
+        int sum = 0;
+
+        //遍历数组，获取到数组中的每一个元素
+        for(int x=0; x&lt;arr.length; x++) &#123;
+            //判断该元素是否满足条件，如果满足条件就累加
+            if(arr[x]%10!=7 &amp;&amp; arr[x]/10%10!=7 &amp;&amp; arr[x]%2==0) &#123;
+                sum += arr[x];
+            &#125;
+        &#125;
+
+        //输出求和变量的值
+        System.out.println(&quot;sum:&quot; + sum);
+    &#125;
+&#125;</code></pre>
+<h3 id="2-7判断两个数组是否相同"><a href="#2-7判断两个数组是否相同" class="headerlink" title="2.7判断两个数组是否相同"></a>2.7判断两个数组是否相同</h3><h4 id="2-7-1案例需求"><a href="#2-7-1案例需求" class="headerlink" title="2.7.1案例需求"></a>2.7.1案例需求</h4><p>​    定义一个方法，用于比较两个数组的内容是否相同</p>
+<h4 id="2-7-2代码实现"><a href="#2-7-2代码实现" class="headerlink" title="2.7.2代码实现"></a>2.7.2代码实现</h4><pre><code class="java">/*
+    思路：
+        1:定义两个数组，分别使用静态初始化完成数组元素的初始化
+        2:定义一个方法，用于比较两个数组的内容是否相同
+        3:比较两个数组的内容是否相同，按照下面的步骤实现就可以了
+            首先比较数组长度，如果长度不相同，数组内容肯定不相同，返回false
+            其次遍历，比较两个数组中的每一个元素，只要有元素不相同，返回false
+            最后循环遍历结束后，返回true
+        4:调用方法，用变量接收
+        5:输出结果
+ */
+public class Test07 &#123;
+    public static void main(String[] args) &#123;
+        //定义两个数组，分别使用静态初始化完成数组元素的初始化
+        int[] arr = &#123;11, 22, 33, 44, 55&#125;;
+        //int[] arr2 = &#123;11, 22, 33, 44, 55&#125;;
+        int[] arr2 = &#123;11, 22, 33, 44, 5&#125;;
+
+
+        //调用方法，用变量接收
+        boolean flag = compare(arr,arr2);
+        //输出结果
+        System.out.println(flag);
+    &#125;
+
+    //定义一个方法，用于比较两个数组的内容是否相同
+    /*
+        两个明确：
+            返回值类型：boolean
+            参数：int[] arr, int[] arr2
+     */
+    public static boolean compare(int[] arr, int[] arr2) &#123;
+        //首先比较数组长度，如果长度不相同，数组内容肯定不相同，返回false
+        if(arr.length != arr2.length) &#123;
+            return false;
+        &#125;
+
+        //其次遍历，比较两个数组中的每一个元素，只要有元素不相同，返回false
+        for(int x=0; x&lt;arr.length; x++) &#123;
+            if(arr[x] != arr2[x]) &#123;
+                return false;
+            &#125;
+        &#125;
+
+        //最后循环遍历结束后，返回true
+        return true;
+    &#125;
+&#125;</code></pre>
+<h3 id="2-8查找元素在数组中出现的索引位置"><a href="#2-8查找元素在数组中出现的索引位置" class="headerlink" title="2.8查找元素在数组中出现的索引位置"></a>2.8查找元素在数组中出现的索引位置</h3><h4 id="2-8-1案例需求"><a href="#2-8-1案例需求" class="headerlink" title="2.8.1案例需求"></a>2.8.1案例需求</h4><p>​    已知一个数组 arr = {19, 28, 37, 46, 50}; 键盘录入一个数据，查找该数据在数组中的索引。</p>
+<p>​    并在控制台输出找到的索引值。如果没有查找到，则输出-1</p>
+<h4 id="2-8-2代码实现"><a href="#2-8-2代码实现" class="headerlink" title="2.8.2代码实现"></a>2.8.2代码实现</h4><pre><code class="java">/*
+    思路：
+        1:定义一个数组，用静态初始化完成数组元素的初始化
+        2:键盘录入要查找的数据，用一个变量接收
+        3:定义一个索引变量，初始值为-1
+        4:遍历数组，获取到数组中的每一个元素
+        5:拿键盘录入的数据和数组中的每一个元素进行比较，如果值相同，就把该值对应的索引赋值给索引变量,并结束循环
+        6:输出索引变量
+ */
+public class Test08 &#123;
+    public static void main(String[] args) &#123;
+        //定义一个数组，用静态初始化完成数组元素的初始化
+        int[] arr = &#123;19, 28, 37, 46, 50&#125;;
+
+        //键盘录入要查找的数据，用一个变量接收
+        Scanner sc = new Scanner(System.in);
+        System.out.println(&quot;请输入要查找的数据：&quot;);
+        int number = sc.nextInt();
+
+        //调用方法
+        int index = getIndex(arr, number);
+
+        //输出索引变量
+        System.out.println(&quot;index: &quot; + index);
+    &#125;
+
+    //查找指定的数据在数组中的索引
+    /*
+        两个明确：
+            返回值类型：int
+            参数：int[] arr, int number
+     */
+    public static int getIndex(int[] arr, int number) &#123;
+        //定义一个索引变量，初始值为-1
+        int index = -1;
+
+        //遍历数组，获取到数组中的每一个元素
+        for(int x=0; x&lt;arr.length; x++) &#123;
+            //拿键盘录入的数据和数组中的每一个元素进行比较，如果值相同，就把该值对应的索引赋值给索引变量,并结束循环
+            if(arr[x] == number) &#123;
+                index = x;
+                break;
+            &#125;
+        &#125;
+
+        //返回索引
+        return index;
+    &#125;
+&#125;</code></pre>
+<h3 id="2-9数组元素反转"><a href="#2-9数组元素反转" class="headerlink" title="2.9数组元素反转"></a>2.9数组元素反转</h3><h4 id="2-9-1案例需求"><a href="#2-9-1案例需求" class="headerlink" title="2.9.1案例需求"></a>2.9.1案例需求</h4><p>​    已知一个数组 arr = {19, 28, 37, 46, 50}; 用程序实现把数组中的元素值交换，<br>​        交换后的数组 arr = {50, 46, 37, 28, 19}; 并在控制台输出交换后的数组元素。</p>
+<h4 id="2-9-2代码实现"><a href="#2-9-2代码实现" class="headerlink" title="2.9.2代码实现"></a>2.9.2代码实现</h4><pre><code class="java">/*
+    思路：
+        1:定义一个数组，用静态初始化完成数组元素的初始化
+        2:循环遍历数组，这一次初始化语句定义两个索引变量，判断条件是开始索引小于等于结束索引
+        3:变量交换
+        4:遍历数组
+ */
+public class Test09 &#123;
+    public static void main(String[] args) &#123;
+        //定义一个数组，用静态初始化完成数组元素的初始化
+        int[] arr = &#123;19, 28, 37, 46, 50&#125;;
+
+        //调用反转的方法
+        reverse(arr);
+
+        //遍历数组
+        printArray(arr);
+    &#125;
+
+    /*
+        两个明确：
+            返回值类型：void
+            参数：int[] arr
+     */
+    public static void reverse(int[] arr) &#123;
+        //循环遍历数组，这一次初始化语句定义两个索引变量，判断条件是开始索引小于等于结束索引
+        for (int start = 0, end = arr.length - 1; start &lt;= end; start++, end--) &#123;
+            //变量交换
+            int temp = arr[start];
+            arr[start] = arr[end];
+            arr[end] = temp;
+        &#125;
+    &#125;
+
+    /*
+        两个明确：
+            返回值类型：void
+            参数：int[] arr
+     */
+    public static void printArray(int[] arr) &#123;
+        System.out.print(&quot;[&quot;);
+
+        for (int x = 0; x &lt; arr.length; x++) &#123;
+            if (x == arr.length - 1) &#123;
+                System.out.print(arr[x]);
+            &#125; else &#123;
+                System.out.print(arr[x] + &quot;, &quot;);
+            &#125;
+        &#125;
+
+        System.out.println(&quot;]&quot;);
+    &#125;
+&#125;</code></pre>
+<h3 id="2-10评委打分"><a href="#2-10评委打分" class="headerlink" title="2.10评委打分"></a>2.10评委打分</h3><h4 id="2-10-1案例需求"><a href="#2-10-1案例需求" class="headerlink" title="2.10.1案例需求"></a>2.10.1案例需求</h4><p>​    在编程竞赛中，有6个评委为参赛的选手打分，分数为0-100的整数分。<br>​        选手的最后得分为：去掉一个最高分和一个最低分后 的4个评委平均值 (不考虑小数部分)。</p>
+<h4 id="2-10-2代码实现"><a href="#2-10-2代码实现" class="headerlink" title="2.10.2代码实现"></a>2.10.2代码实现</h4><pre><code class="java">/*
+    思路：
+        1:定义一个数组，用动态初始化完成数组元素的初始化，长度为6
+        2:键盘录入评委分数
+        3:由于是6个评委打分，所以，接收评委分数的操作，用循环改进
+        4:定义方法实现获取数组中的最高分(数组最大值)，调用方法
+        5:定义方法实现获取数组中的最低分(数组最小值) ，调用方法
+        6:定义方法实现获取数组中的所有元素的和(数组元素求和) ，调用方法
+        7:按照计算规则进行计算得到平均分
+        8:输出平均分
+ */
+public class Test10 &#123;
+    public static void main(String[] args) &#123;
+        //定义一个数组，用动态初始化完成数组元素的初始化，长度为6
+        int[] arr = new int[6];
+
+        //键盘录入评委分数
+        Scanner sc = new Scanner(System.in);
+
+        //由于是6个评委打分，所以，接收评委分数的操作，用循环改进
+        for(int x=0; x&lt;arr.length; x++) &#123;
+            System.out.println(&quot;请输入第&quot; + (x + 1) + &quot;个评委的打分：&quot;);
+            arr[x] = sc.nextInt();
+        &#125;
+
+        //printArray(arr);
+
+        //定义方法实现获取数组中的最高分(数组最大值)，调用方法
+        int max = getMax(arr);
+
+        //定义方法实现获取数组中的最低分(数组最小值) ，调用方法
+        int min = getMin(arr);
+
+        //定义方法实现获取数组中的所有元素的和(数组元素求和) ，调用方法
+        int sum = getSum(arr);
+
+        //按照计算规则进行计算得到平均分
+        int avg = (sum - max - min) / (arr.length - 2);
+
+        //输出平均分
+        System.out.println(&quot;选手的最终得分是：&quot; + avg);
+
+    &#125;
+
+    /*
+        两个明确：
+            返回值类型：int
+            参数：int[] arr
+     */
+    public static int getSum(int[] arr) &#123;
+        int sum = 0;
+
+        for(int x=0; x&lt;arr.length; x++) &#123;
+            sum += arr[x];
+        &#125;
+
+        return sum;
+    &#125;
+
+    /*
+        两个明确：
+            返回值类型：int
+            参数：int[] arr
+     */
+    public static int getMin(int[] arr) &#123;
+        int min = arr[0];
+
+        for(int x=1; x&lt;arr.length; x++) &#123;
+            if(arr[x] &lt; min) &#123;
+                min = arr[x];
+            &#125;
+        &#125;
+
+        return min;
+    &#125;
+
+    /*
+        两个明确：
+            返回值类型：int
+            参数：int[] arr
+     */
+    public static int getMax(int[] arr) &#123;
+        int max = arr[0];
+
+        for(int x=1; x&lt;arr.length; x++) &#123;
+            if(arr[x] &gt; max) &#123;
+                max = arr[x];
+            &#125;
+        &#125;
+
+        return max;
+    &#125;
+
+    //遍历数组
+    public static void printArray(int[] arr) &#123;
+        System.out.print(&quot;[&quot;);
+
+        for (int x = 0; x &lt; arr.length; x++) &#123;
+            if (x == arr.length - 1) &#123;
+                System.out.print(arr[x]);
+            &#125; else &#123;
+                System.out.print(arr[x] + &quot;, &quot;);
+            &#125;
+        &#125;
+
+        System.out.println(&quot;]&quot;);
+    &#125;
+&#125;</code></pre>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>java学习-ArrayList集合&amp;学生管理系统</title>
+    <url>/2021/01/19/20210119009/</url>
+    <content><![CDATA[<h2 id="1-ArrayList"><a href="#1-ArrayList" class="headerlink" title="1.ArrayList"></a>1.ArrayList</h2><h3 id="1-1ArrayList类概述"><a href="#1-1ArrayList类概述" class="headerlink" title="1.1ArrayList类概述"></a>1.1ArrayList类概述</h3><ul>
+<li><p>什么是集合</p>
+<p>​    提供一种存储空间可变的存储模型，存储的数据容量可以发生改变</p>
+</li>
+<li><p>ArrayList集合的特点</p>
+<p>​    底层是数组实现的，长度可以变化</p>
+</li>
+<li><p>泛型的使用</p>
+<p>​    用于约束集合中存储元素的数据类型</p>
+</li>
+</ul>
+<h3 id="1-2ArrayList类常用方法"><a href="#1-2ArrayList类常用方法" class="headerlink" title="1.2ArrayList类常用方法"></a>1.2ArrayList类常用方法</h3><h4 id="1-2-1构造方法"><a href="#1-2-1构造方法" class="headerlink" title="1.2.1构造方法"></a>1.2.1构造方法</h4><table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public ArrayList()</td>
+<td>创建一个空的集合对象</td>
+</tr>
+</tbody></table>
+<h4 id="1-2-2成员方法"><a href="#1-2-2成员方法" class="headerlink" title="1.2.2成员方法"></a>1.2.2成员方法</h4><table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public boolean   remove(Object o)</td>
+<td>删除指定的元素，返回删除是否成功</td>
+</tr>
+<tr>
+<td>public E   remove(int   index)</td>
+<td>删除指定索引处的元素，返回被删除的元素</td>
+</tr>
+<tr>
+<td>public E   set(int index,E   element)</td>
+<td>修改指定索引处的元素，返回被修改的元素</td>
+</tr>
+<tr>
+<td>public E   get(int   index)</td>
+<td>返回指定索引处的元素</td>
+</tr>
+<tr>
+<td>public int   size()</td>
+<td>返回集合中的元素的个数</td>
+</tr>
+<tr>
+<td>public boolean   add(E e)</td>
+<td>将指定的元素追加到此集合的末尾</td>
+</tr>
+<tr>
+<td>public void   add(int index,E   element)</td>
+<td>在此集合中的指定位置插入指定的元素</td>
+</tr>
+</tbody></table>
+<h4 id="1-2-3示例代码"><a href="#1-2-3示例代码" class="headerlink" title="1.2.3示例代码"></a>1.2.3示例代码</h4><pre><code class="java">public class ArrayListDemo02 &#123;
+    public static void main(String[] args) &#123;
+        //创建集合
+        ArrayList&lt;String&gt; array = new ArrayList&lt;String&gt;();
+
+        //添加元素
+        array.add(&quot;hello&quot;);
+        array.add(&quot;world&quot;);
+        array.add(&quot;java&quot;);
+
+        //public boolean remove(Object o)：删除指定的元素，返回删除是否成功
+//        System.out.println(array.remove(&quot;world&quot;));
+//        System.out.println(array.remove(&quot;javaee&quot;));
+
+        //public E remove(int index)：删除指定索引处的元素，返回被删除的元素
+//        System.out.println(array.remove(1));
+
+        //IndexOutOfBoundsException
+//        System.out.println(array.remove(3));
+
+        //public E set(int index,E element)：修改指定索引处的元素，返回被修改的元素
+//        System.out.println(array.set(1,&quot;javaee&quot;));
+
+        //IndexOutOfBoundsException
+//        System.out.println(array.set(3,&quot;javaee&quot;));
+
+        //public E get(int index)：返回指定索引处的元素
+//        System.out.println(array.get(0));
+//        System.out.println(array.get(1));
+//        System.out.println(array.get(2));
+        //System.out.println(array.get(3)); //？？？？？？ 自己测试
+
+        //public int size()：返回集合中的元素的个数
+        System.out.println(array.size());
+
+        //输出集合
+        System.out.println(&quot;array:&quot; + array);
+    &#125;
+&#125;</code></pre>
+<h3 id="1-3ArrayList存储字符串并遍历"><a href="#1-3ArrayList存储字符串并遍历" class="headerlink" title="1.3ArrayList存储字符串并遍历"></a>1.3ArrayList存储字符串并遍历</h3><h4 id="1-3-1案例需求"><a href="#1-3-1案例需求" class="headerlink" title="1.3.1案例需求"></a>1.3.1案例需求</h4><p>​    创建一个存储字符串的集合，存储3个字符串元素，使用程序实现在控制台遍历该集合</p>
+<h4 id="1-3-2代码实现"><a href="#1-3-2代码实现" class="headerlink" title="1.3.2代码实现"></a>1.3.2代码实现</h4><pre><code class="java">/*
+    思路：
+        1:创建集合对象
+        2:往集合中添加字符串对象
+        3:遍历集合，首先要能够获取到集合中的每一个元素，这个通过get(int index)方法实现
+        4:遍历集合，其次要能够获取到集合的长度，这个通过size()方法实现
+        5:遍历集合的通用格式
+ */
+public class ArrayListTest01 &#123;
+    public static void main(String[] args) &#123;
+        //创建集合对象
+        ArrayList&lt;String&gt; array = new ArrayList&lt;String&gt;();
+
+        //往集合中添加字符串对象
+        array.add(&quot;刘正风&quot;);
+        array.add(&quot;左冷禅&quot;);
+        array.add(&quot;风清扬&quot;);
+
+        //遍历集合，其次要能够获取到集合的长度，这个通过size()方法实现
+//        System.out.println(array.size());
+
+        //遍历集合的通用格式
+        for(int i=0; i&lt;array.size(); i++) &#123;
+            String s = array.get(i);
+            System.out.println(s);
+        &#125;
+    &#125;
+&#125;</code></pre>
+<h3 id="1-4ArrayList存储学生对象并遍历"><a href="#1-4ArrayList存储学生对象并遍历" class="headerlink" title="1.4ArrayList存储学生对象并遍历"></a>1.4ArrayList存储学生对象并遍历</h3><h4 id="1-4-1案例需求"><a href="#1-4-1案例需求" class="headerlink" title="1.4.1案例需求"></a>1.4.1案例需求</h4><p>​    创建一个存储学生对象的集合，存储3个学生对象，使用程序实现在控制台遍历该集合</p>
+<h4 id="1-4-2代码实现"><a href="#1-4-2代码实现" class="headerlink" title="1.4.2代码实现"></a>1.4.2代码实现</h4><pre><code class="java">/*
+    思路：
+        1:定义学生类
+        2:创建集合对象
+        3:创建学生对象
+        4:添加学生对象到集合中
+        5:遍历集合，采用通用遍历格式实现
+ */
+public class ArrayListTest02 &#123;
+    public static void main(String[] args) &#123;
+        //创建集合对象
+        ArrayList&lt;Student&gt; array = new ArrayList&lt;&gt;();
+
+        //创建学生对象
+        Student s1 = new Student(&quot;林青霞&quot;, 30);
+        Student s2 = new Student(&quot;风清扬&quot;, 33);
+        Student s3 = new Student(&quot;张曼玉&quot;, 18);
+
+        //添加学生对象到集合中
+        array.add(s1);
+        array.add(s2);
+        array.add(s3);
+
+        //遍历集合，采用通用遍历格式实现
+        for (int i = 0; i &lt; array.size(); i++) &#123;
+            Student s = array.get(i);
+            System.out.println(s.getName() + &quot;,&quot; + s.getAge());
+        &#125;
+    &#125;
+&#125;</code></pre>
+<h3 id="1-5ArrayList存储学生对象并遍历升级版"><a href="#1-5ArrayList存储学生对象并遍历升级版" class="headerlink" title="1.5ArrayList存储学生对象并遍历升级版"></a>1.5ArrayList存储学生对象并遍历升级版</h3><h4 id="1-5-1案例需求"><a href="#1-5-1案例需求" class="headerlink" title="1.5.1案例需求"></a>1.5.1案例需求</h4><p>​    创建一个存储学生对象的集合，存储3个学生对象，使用程序实现在控制台遍历该集合</p>
+<p>​        学生的姓名和年龄来自于键盘录入</p>
+<h4 id="1-5-2代码实现"><a href="#1-5-2代码实现" class="headerlink" title="1.5.2代码实现"></a>1.5.2代码实现</h4><pre><code class="java">/*
+    思路：
+        1:定义学生类，为了键盘录入数据方便，把学生类中的成员变量都定义为String类型
+        2:创建集合对象
+        3:键盘录入学生对象所需要的数据
+        4:创建学生对象，把键盘录入的数据赋值给学生对象的成员变量
+        5:往集合中添加学生对象
+        6:遍历集合，采用通用遍历格式实现
+ */
+public class ArrayListTest &#123;
+    public static void main(String[] args) &#123;
+        //创建集合对象
+        ArrayList&lt;Student&gt; array = new ArrayList&lt;Student&gt;();
+
+        //为了提高代码的复用性，我们用方法来改进程序
+        addStudent(array);
+        addStudent(array);
+        addStudent(array);
+
+        //遍历集合，采用通用遍历格式实现
+        for (int i = 0; i &lt; array.size(); i++) &#123;
+            Student s = array.get(i);
+            System.out.println(s.getName() + &quot;,&quot; + s.getAge());
+        &#125;
+    &#125;
+
+    /*
+        两个明确：
+            返回值类型：void
+            参数：ArrayList&lt;Student&gt; array
+     */
+    public static void addStudent(ArrayList&lt;Student&gt; array) &#123;
+        //键盘录入学生对象所需要的数据
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println(&quot;请输入学生姓名:&quot;);
+        String name = sc.nextLine();
+
+        System.out.println(&quot;请输入学生年龄:&quot;);
+        String age = sc.nextLine();
+
+        //创建学生对象，把键盘录入的数据赋值给学生对象的成员变量
+        Student s = new Student();
+        s.setName(name);
+        s.setAge(age);
+
+        //往集合中添加学生对象
+        array.add(s);
+    &#125;
+&#125;</code></pre>
+<h2 id="2-学生管理系统"><a href="#2-学生管理系统" class="headerlink" title="2.学生管理系统"></a>2.学生管理系统</h2><h3 id="2-1学生管理系统实现步骤"><a href="#2-1学生管理系统实现步骤" class="headerlink" title="2.1学生管理系统实现步骤"></a>2.1学生管理系统实现步骤</h3><ul>
+<li><p>案例需求</p>
+<p>​    针对目前我们的所学内容，完成一个综合案例：学生管理系统。该系统主要功能如下：</p>
+<p>​    添加学生：通过键盘录入学生信息，添加到集合中</p>
+<p>​    删除学生：通过键盘录入要删除学生的学号，将该学生对象从集合中删除</p>
+<p>​    修改学生：通过键盘录入要修改学生的学号，将该学生对象其他信息进行修改</p>
+<p>​    查看学生：将集合中的学生对象信息进行展示</p>
+<p>​    退出系统：结束程序</p>
+</li>
+<li><p>实现步骤</p>
+<ol>
+<li><p>定义学生类，包含以下成员变量</p>
+<p>​       private String sid            // 学生id</p>
+<p>​       private String name       // 学生姓名</p>
+<p>​       private String age          // 学生年龄</p>
+<p>​       private String address   // 学生所在地</p>
+</li>
+<li><p>学生管理系统主界面的搭建步骤</p>
+<p>2.1 用输出语句完成主界面的编写<br>2.2 用Scanner实现键盘输入<br>2.3 用switch语句完成选择的功能<br>2.4 用循环完成功能结束后再次回到主界面</p>
+</li>
+<li><p>学生管理系统的添加学生功能实现步骤</p>
+<p>3.1 定义一个方法，接收ArrayList<Student>集合<br>3.2 方法内完成添加学生的功能<br>​         ①键盘录入学生信息<br>​         ②根据录入的信息创建学生对象<br>​         ③将学生对象添加到集合中<br>​         ④提示添加成功信息<br>3.3 在添加学生的选项里调用添加学生的方法</p>
+</li>
+<li><p>学生管理系统的查看学生功能实现步骤</p>
+<p>4.1 定义一个方法，接收ArrayList<Student>集合<br>4.2 方法内遍历集合，将学生信息进行输出<br>4.3 在查看所有学生选项里调用查看学生方法</p>
+</li>
+<li><p>学生管理系统的删除学生功能实现步骤</p>
+<p>5.1 定义一个方法，接收ArrayList<Student>集合<br>5.2 方法中接收要删除学生的学号<br>5.3 遍历集合，获取每个学生对象<br>5.4 使用学生对象的学号和录入的要删除的学号进行比较,如果相同，则将当前学生对象从集合中删除<br>5.5 在删除学生选项里调用删除学生的方法</p>
+</li>
+<li><p>学生管理系统的修改学生功能实现步骤</p>
+<p>6.1 定义一个方法，接收ArrayList<Student>集合<br>6.2 方法中接收要修改学生的学号<br>6.3 通过键盘录入学生对象所需的信息，并创建对象<br>6.4 遍历集合，获取每一个学生对象。并和录入的修改学生学号进行比较.如果相同，则使用新学生对象替换当前学生对象<br>6.5 在修改学生选项里调用修改学生的方法</p>
+</li>
+<li><p>退出系统</p>
+<p>使用System.exit(0);退出JVM</p>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="2-2学生类的定义"><a href="#2-2学生类的定义" class="headerlink" title="2.2学生类的定义"></a>2.2学生类的定义</h3><pre><code class="java">public class Student &#123;
+    //学号
+    private String sid;
+    //姓名
+    private String name;
+    //年龄
+    private String age;
+    //居住地
+    private String address;
+
+    public Student() &#123;
+    &#125;
+
+    public Student(String sid, String name, String age, String address) &#123;
+        this.sid = sid;
+        this.name = name;
+        this.age = age;
+        this.address = address;
+    &#125;
+
+    public String getSid() &#123;
+        return sid;
+    &#125;
+
+    public void setSid(String sid) &#123;
+        this.sid = sid;
+    &#125;
+
+    public String getName() &#123;
+        return name;
+    &#125;
+
+    public void setName(String name) &#123;
+        this.name = name;
+    &#125;
+
+    public String getAge() &#123;
+        return age;
+    &#125;
+
+    public void setAge(String age) &#123;
+        this.age = age;
+    &#125;
+
+    public String getAddress() &#123;
+        return address;
+    &#125;
+
+    public void setAddress(String address) &#123;
+        this.address = address;
+    &#125;
+&#125;</code></pre>
+<h3 id="2-3测试类的定义"><a href="#2-3测试类的定义" class="headerlink" title="2.3测试类的定义"></a>2.3测试类的定义</h3><pre><code class="java">public class StudentManager &#123;
+    /*
+        1:用输出语句完成主界面的编写
+        2:用Scanner实现键盘录入数据
+        3:用switch语句完成操作的选择
+        4:用循环完成再次回到主界面
+    */
+    public static void main(String[] args) &#123;
+        //创建集合对象，用于保存学生数据信息
+        ArrayList&lt;Student&gt; array = new ArrayList&lt;Student&gt;();
+
+        //用循环完成再次回到主界面
+        while (true) &#123;
+            //用输出语句完成主界面的编写
+            System.out.println(&quot;--------欢迎来到学生管理系统--------&quot;);
+            System.out.println(&quot;1 添加学生&quot;);
+            System.out.println(&quot;2 删除学生&quot;);
+            System.out.println(&quot;3 修改学生&quot;);
+            System.out.println(&quot;4 查看所有学生&quot;);
+            System.out.println(&quot;5 退出&quot;);
+            System.out.println(&quot;请输入你的选择：&quot;);
+
+            //用Scanner实现键盘录入数据
+            Scanner sc = new Scanner(System.in);
+            String line = sc.nextLine();
+
+            //用switch语句完成操作的选择
+            switch (line) &#123;
+                case &quot;1&quot;:
+                    addStudent(array);
+                    break;
+                case &quot;2&quot;:
+                    deleteStudent(array);
+                    break;
+                case &quot;3&quot;:
+                    updateStudent(array);
+                    break;
+                case &quot;4&quot;:
+                    findAllStudent(array);
+                    break;
+                case &quot;5&quot;:
+                    System.out.println(&quot;谢谢使用&quot;);
+                    System.exit(0); //JVM退出
+            &#125;
+        &#125;
+    &#125;
+
+    //定义一个方法，用于添加学生信息
+    public static void addStudent(ArrayList&lt;Student&gt; array) &#123;
+        //键盘录入学生对象所需要的数据,显示提示信息，提示要输入何种信息
+        Scanner sc = new Scanner(System.in);
+
+        String sid;
+
+        while (true) &#123;
+            System.out.println(&quot;请输入学生学号：&quot;);
+            sid = sc.nextLine();
+
+            boolean flag = isUsed(array, sid);
+            if (flag) &#123;
+                System.out.println(&quot;你输入的学号已经被占用，请重新输入&quot;);
+            &#125; else &#123;
+                break;
+            &#125;
+        &#125;
+
+        System.out.println(&quot;请输入学生姓名：&quot;);
+        String name = sc.nextLine();
+
+        System.out.println(&quot;请输入学生年龄：&quot;);
+        String age = sc.nextLine();
+
+        System.out.println(&quot;请输入学生居住地：&quot;);
+        String address = sc.nextLine();
+
+        //创建学生对象，把键盘录入的数据赋值给学生对象的成员变量
+        Student s = new Student();
+        s.setSid(sid);
+        s.setName(name);
+        s.setAge(age);
+        s.setAddress(address);
+
+        //将学生对象添加到集合中
+        array.add(s);
+
+        //给出添加成功提示
+        System.out.println(&quot;添加学生成功&quot;);
+    &#125;
+
+    //定义一个方法，判断学号是否被使用
+    public static boolean isUsed(ArrayList&lt;Student&gt; array, String sid) &#123;
+        //如果与集合中的某一个学生学号相同，返回true;如果都不相同，返回false
+        boolean flag = false;
+
+        for(int i=0; i&lt;array.size(); i++) &#123;
+            Student s = array.get(i);
+            if(s.getSid().equals(sid)) &#123;
+                flag = true;
+                break;
+            &#125;
+        &#125;
+
+        return flag;
+    &#125;
+
+
+    //定义一个方法，用于查看学生信息
+    public static void findAllStudent(ArrayList&lt;Student&gt; array) &#123;
+        //判断集合中是否有数据，如果没有显示提示信息
+        if (array.size() == 0) &#123;
+            System.out.println(&quot;无信息，请先添加信息再查询&quot;);
+            //为了让程序不再往下执行，我们在这里写上return;
+            return;
+        &#125;
+
+        //显示表头信息
+        //\t其实是一个tab键的位置
+        System.out.println(&quot;学号\t\t\t姓名\t\t年龄\t\t居住地&quot;);
+
+        //将集合中数据取出按照对应格式显示学生信息，年龄显示补充“岁”
+        for (int i = 0; i &lt; array.size(); i++) &#123;
+            Student s = array.get(i);
+            System.out.println(s.getSid() + &quot;\t&quot; + s.getName() + &quot;\t&quot; + s.getAge() + &quot;岁\t\t&quot; + s.getAddress());
+        &#125;
+    &#125;
+
+    //定义一个方法，用于删除学生信息
+    public static void deleteStudent(ArrayList&lt;Student&gt; array) &#123;
+        //键盘录入要删除的学生学号,显示提示信息
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println(&quot;请输入你要删除的学生的学号：&quot;);
+        String sid = sc.nextLine();
+
+        //在删除/修改学生操作前，对学号是否存在进行判断
+        //如果不存在，显示提示信息
+        //如果存在，执行删除/修改操作
+
+        int index = -1;
+
+        for (int i = 0; i &lt; array.size(); i++) &#123;
+            Student s = array.get(i);
+            if (s.getSid().equals(sid)) &#123;
+                index = i;
+                break;
+            &#125;
+        &#125;
+
+        if (index == -1) &#123;
+            System.out.println(&quot;该信息不存在，请重新输入&quot;);
+        &#125; else &#123;
+            array.remove(index);
+            //给出删除成功提示
+            System.out.println(&quot;删除学生成功&quot;);
+        &#125;
+    &#125;
+
+    //定义一个方法，用于修改学生信息
+    public static void updateStudent(ArrayList&lt;Student&gt; array) &#123;
+        //键盘录入要修改的学生学号，显示提示信息
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println(&quot;请输入你要修改的学生的学号：&quot;);
+        String sid = sc.nextLine();
+
+        //键盘录入要修改的学生信息
+        System.out.println(&quot;请输入学生新姓名：&quot;);
+        String name = sc.nextLine();
+        System.out.println(&quot;请输入学生新年龄：&quot;);
+        String age = sc.nextLine();
+        System.out.println(&quot;请输入学生新居住地：&quot;);
+        String address = sc.nextLine();
+
+        //创建学生对象
+        Student s = new Student();
+        s.setSid(sid);
+        s.setName(name);
+        s.setAge(age);
+        s.setAddress(address);
+
+        //遍历集合修改对应的学生信息
+        for (int i = 0; i &lt; array.size(); i++) &#123;
+            Student student = array.get(i);
+            if (student.getSid().equals(sid)) &#123;
+                array.set(i, s);
+            &#125;
+        &#125;
+
+        //给出修改成功提示
+        System.out.println(&quot;修改学生成功&quot;);
     &#125;
 &#125;</code></pre>
 ]]></content>
@@ -4888,6 +4888,54 @@ public class StringBuilderTest02 &#123;
       </tags>
   </entry>
   <entry>
+    <title>（转载）使用Picgo+Github+jsdelivr 搭建一个免费图床</title>
+    <url>/2021/10/27/20211027001/</url>
+    <content><![CDATA[<div class="note idea"><p>jsDelivr提供GitHub，npm，WordPress等项目的镜像，且有国内节点，访问速度很不错，这也是我们选择它的原因。jsDelivr 的优点在于其专注于性能，可靠性和安全性，并且每个人均可免费使用，没有带宽限制。</p></div>
+<a id="more"></a>
+
+<p>偶然的一次机会，我接触到了 <strong><code>Markdown</code></strong> 语法，随后便喜欢上了这种标记语言。</p>
+<p>目前，我使用 <strong><code>Typora</code></strong> 编辑器。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703161150.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703161150.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"></p>
+<p><strong>Typora</strong> 里面有个非常好用的功能，就是通过 <strong>Picgo</strong> 将图片上传到图床。</p>
+<p>下面就讲一下如何搭建一个免费的图床。</p>
+<h1 id="Picgo-介绍"><a href="#Picgo-介绍" class="headerlink" title="Picgo 介绍"></a>Picgo 介绍</h1><div class="note "><p>Picgo 是一款开源的图片上传工具，项目地址:<a href="https://github.com/Molunerfinn/PicGo">Picgo</a></p></div>
+
+<p>Picgo 支持<code>七牛图床</code>,<code>腾讯云</code>, <code>又拍云</code>,<code>Github</code> 等。</p>
+<p>在众多的图床中我选择<code>Github</code> , 因为他免费.</p>
+<h1 id="搭建图床"><a href="#搭建图床" class="headerlink" title="搭建图床"></a>搭建图床</h1><h2 id="1-注册-登录-Github"><a href="#1-注册-登录-Github" class="headerlink" title="1. 注册 / 登录 Github"></a>1. 注册 / 登录 Github</h2>   <div class="note "><p>这个就不演示了</p></div>
+
+<h2 id="2-创建-Repo"><a href="#2-创建-Repo" class="headerlink" title="2. 创建 Repo"></a>2. 创建 Repo</h2><p>   <img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703161850.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703161850.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703161942.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703161942.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"></p>
+<p>然后点击 <strong><code>Create Repository</code></strong> 就可以了</p>
+<h2 id="3-生成-Taken"><a href="#3-生成-Taken" class="headerlink" title="3.生成 Taken"></a>3.生成 Taken</h2><p><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703162058.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703162058.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703162152.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703162152.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703162322.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703162322.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703162416.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703162416.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"></p>
+<div class="note "><p>创建之后，会生成一串 token</p></div>
+
+<h2 id="4-配置-Picgo"><a href="#4-配置-Picgo" class="headerlink" title="4.配置 Picgo"></a>4.配置 Picgo</h2><div class="note "><p><code>Picgo </code>请到 <a href="https://github.com/Molunerfinn/PicGo">Picgo</a> 下载</p></div>
+
+<p><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703163011.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703163011.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"></p>
+<ul>
+<li>设定仓库名的时候，是按照 “账户名 / 仓库名的格式填写”</li>
+<li>分支名统一填写 “master”</li>
+<li>将之前的 Token 黏贴在这里</li>
+<li>存储的路径可以按照我这样子写，就会在 repository 下创建一个 “img” 文件夹</li>
+<li>自定义域名的作用是，在上传图片后成功后，PicGo 会将 “自定义域名 + 上传的图片名” 生成的访问链接，放到剪切板上</li>
+<li><code>https://raw.githubusercontent.com/用户名/RepositoryName/分支名</code>，自定义域名需要按照这样去填写</li>
+<li>但是由于 Github 在国内的访问速度太慢，所以我们使用 <a href="https://www.jsdelivr.com/">jsdelivr</a> 加速，只需要把自定义域名修改一下就可以了:<code>https://cdn.jsdelivr.net/gh/</code>用户名/RepositoryName</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>将上面的步骤设置好之后，就可以愉快地写 Markdown 了。上传图片有快捷键，默认的是 <code>Ctrl+Shift+P</code>, 可以将剪切板上的图片快捷上传。</p>
+<p>原文链接：<a href="https://howiehye.top/">https://howiehye.top/</a></p>
+]]></content>
+      <categories>
+        <category>Picgo</category>
+      </categories>
+      <tags>
+        <tag>Picgo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>hexo博客增加书单</title>
     <url>/2021/11/12/20211112001/</url>
     <content><![CDATA[<div class="note idea"><p>想给博客添加书单的想法已经很久了，但是奈何自身能力不足，一直没有实现，百度了很多教程，都不尽如人意。偶然间翻到一位大佬的博客，看到大佬的博客书单，感觉很酷炫，就想自己也弄一个，好在大佬人非常好，二话不说，直接给把教程以及源代码发给我了，废话不多说，上教程！</p></div>
@@ -5310,54 +5358,6 @@ public class StringBuilderTest02 &#123;
       </tags>
   </entry>
   <entry>
-    <title>（转载）使用Picgo+Github+jsdelivr 搭建一个免费图床</title>
-    <url>/2021/10/27/20211027001/</url>
-    <content><![CDATA[<div class="note idea"><p>jsDelivr提供GitHub，npm，WordPress等项目的镜像，且有国内节点，访问速度很不错，这也是我们选择它的原因。jsDelivr 的优点在于其专注于性能，可靠性和安全性，并且每个人均可免费使用，没有带宽限制。</p></div>
-<a id="more"></a>
-
-<p>偶然的一次机会，我接触到了 <strong><code>Markdown</code></strong> 语法，随后便喜欢上了这种标记语言。</p>
-<p>目前，我使用 <strong><code>Typora</code></strong> 编辑器。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703161150.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703161150.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"></p>
-<p><strong>Typora</strong> 里面有个非常好用的功能，就是通过 <strong>Picgo</strong> 将图片上传到图床。</p>
-<p>下面就讲一下如何搭建一个免费的图床。</p>
-<h1 id="Picgo-介绍"><a href="#Picgo-介绍" class="headerlink" title="Picgo 介绍"></a>Picgo 介绍</h1><div class="note "><p>Picgo 是一款开源的图片上传工具，项目地址:<a href="https://github.com/Molunerfinn/PicGo">Picgo</a></p></div>
-
-<p>Picgo 支持<code>七牛图床</code>,<code>腾讯云</code>, <code>又拍云</code>,<code>Github</code> 等。</p>
-<p>在众多的图床中我选择<code>Github</code> , 因为他免费.</p>
-<h1 id="搭建图床"><a href="#搭建图床" class="headerlink" title="搭建图床"></a>搭建图床</h1><h2 id="1-注册-登录-Github"><a href="#1-注册-登录-Github" class="headerlink" title="1. 注册 / 登录 Github"></a>1. 注册 / 登录 Github</h2>   <div class="note "><p>这个就不演示了</p></div>
-
-<h2 id="2-创建-Repo"><a href="#2-创建-Repo" class="headerlink" title="2. 创建 Repo"></a>2. 创建 Repo</h2><p>   <img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703161850.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703161850.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703161942.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703161942.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"></p>
-<p>然后点击 <strong><code>Create Repository</code></strong> 就可以了</p>
-<h2 id="3-生成-Taken"><a href="#3-生成-Taken" class="headerlink" title="3.生成 Taken"></a>3.生成 Taken</h2><p><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703162058.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703162058.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703162152.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703162152.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703162322.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703162322.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703162416.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703162416.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"></p>
-<div class="note "><p>创建之后，会生成一串 token</p></div>
-
-<h2 id="4-配置-Picgo"><a href="#4-配置-Picgo" class="headerlink" title="4.配置 Picgo"></a>4.配置 Picgo</h2><div class="note "><p><code>Picgo </code>请到 <a href="https://github.com/Molunerfinn/PicGo">Picgo</a> 下载</p></div>
-
-<p><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703163011.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/20200703163011.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"></p>
-<ul>
-<li>设定仓库名的时候，是按照 “账户名 / 仓库名的格式填写”</li>
-<li>分支名统一填写 “master”</li>
-<li>将之前的 Token 黏贴在这里</li>
-<li>存储的路径可以按照我这样子写，就会在 repository 下创建一个 “img” 文件夹</li>
-<li>自定义域名的作用是，在上传图片后成功后，PicGo 会将 “自定义域名 + 上传的图片名” 生成的访问链接，放到剪切板上</li>
-<li><code>https://raw.githubusercontent.com/用户名/RepositoryName/分支名</code>，自定义域名需要按照这样去填写</li>
-<li>但是由于 Github 在国内的访问速度太慢，所以我们使用 <a href="https://www.jsdelivr.com/">jsdelivr</a> 加速，只需要把自定义域名修改一下就可以了:<code>https://cdn.jsdelivr.net/gh/</code>用户名/RepositoryName</li>
-</ul>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>将上面的步骤设置好之后，就可以愉快地写 Markdown 了。上传图片有快捷键，默认的是 <code>Ctrl+Shift+P</code>, 可以将剪切板上的图片快捷上传。</p>
-<p>原文链接：<a href="https://howiehye.top/">https://howiehye.top/</a></p>
-]]></content>
-      <categories>
-        <category>Picgo</category>
-      </categories>
-      <tags>
-        <tag>Picgo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Jenkins拉取github仓库代码执行构建并自动发邮件通知</title>
     <url>/2020/08/23/Jenkinsgithub/</url>
     <content><![CDATA[<p>Jenkins 常用的就是项目构建，一般构建都需要从版本控制平台上面拉取项目代码到 Jenkins 服务器上构建。我主要使用的版本控制平台是 GitHub，所以这里就分享一下 Jenkins + GitHub 的基本构建配置过程。</p>
@@ -5394,6 +5394,55 @@ public class StringBuilderTest02 &#123;
       </categories>
       <tags>
         <tag>Django</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Jenkins安装教程</title>
+    <url>/2020/08/23/Jenkinsinstall01/</url>
+    <content><![CDATA[<p>Jenkins安装方法有很多，本文主要介绍通用安装方式（傻瓜式安装）</p>
+<h2 id="一、下载"><a href="#一、下载" class="headerlink" title="一、下载"></a>一、下载</h2><p>进入<a href="https://jenkins.io/download/">https://jenkins.io/download/</a> ，按需下载。如用于生产，建议下载Long-term Support (LTS) 版本，这样能够获得相对长期的维护；如想体验最新的功能，可尝试 Weekly 版本。可以直接下载特定系统专属的版本，也可下载 Generic Java package (.war) 。本文下载的是 Generic Java package (.war) ，这样对所有系统都通用。<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(1).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(1).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"></p>
+<h2 id="二、安装"><a href="#二、安装" class="headerlink" title="二、安装"></a>二、安装</h2><p>本文采用Tomcat安装方式，首先需要安装Tomcat（Tomcat安装方法请自行百度），将下载下来的Jenkins.war包放到Tomcat的webapps目录下，然后启动Tomcat即可<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(2).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(2).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>启动后会在webapps目录下生成一个Jenkins文件夹，然后我们访问<a href="http://localhost:18080/jenkins%EF%BC%8C%E5%8D%B3%E5%8F%AF%E7%9C%8B%E5%88%B0%E5%A6%82%E4%B8%8B%E7%95%8C%E9%9D%A2%EF%BC%9A">http://localhost:18080/jenkins，即可看到如下界面：</a><br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(3).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(3).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>这里需要填写管理员密码，由图中提示可知，Jenkins设置了一个初始的管理员密码，该密码存储在 /Users/itmuch.com/.jenkins/secrets/initialAdminPassword 文件中——只需可找到该文件，将其内容复制到图示的输入框中即可。点击 【继续】 按钮，将会出现类似如下的界面：<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(4).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(4).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>这里我们安装推荐的插件即可<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(5).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(5).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>插件安装有点慢，有些插件有可能安装失败，不要紧，点击继续，然后会进入到如下界面：<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(6).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(6).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>填入账户信息后，进入完成页面：<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(7).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(7).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>安装完成！</p>
+<h2 id="三、配置-Jenkins-构建工具"><a href="#三、配置-Jenkins-构建工具" class="headerlink" title="三、配置 Jenkins 构建工具"></a>三、配置 Jenkins 构建工具</h2><h3 id="3-1-进入-jenkins-主界面"><a href="#3-1-进入-jenkins-主界面" class="headerlink" title="3.1 进入 jenkins 主界面"></a>3.1 进入 jenkins 主界面</h3><p><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(8).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(8).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"></p>
+<h3 id="3-2-进入全局工具配置页面"><a href="#3-2-进入全局工具配置页面" class="headerlink" title="3.2 进入全局工具配置页面"></a>3.2 进入全局工具配置页面</h3><p>点击 “系统管理” -&gt; “全局工具配置”<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(31).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(31).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>进入后配置构建工具<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(12).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(12).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"></p>
+<h3 id="3-3-配置-Maven"><a href="#3-3-配置-Maven" class="headerlink" title="3.3 配置 Maven"></a>3.3 配置 Maven</h3><p>如果机器上已经安装了 Maven，则在 Maven_HOME 输入框中提供具体的安装路径。否则，你可以选择需要的 maven 版本，让 Jenkins 为你自动下载 maven。<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(13).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(13).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"></p>
+<h3 id="3-4-配置-JDK"><a href="#3-4-配置-JDK" class="headerlink" title="3.4 配置 JDK"></a>3.4 配置 JDK</h3><p>同理，如果机器上已经安装了 JDK，则在 JAVA_HOME 输入框中提供具体的安装路径。否则，你可以选择需要的 JDK 版本，让 Jenkins 为你自动下载 JDK。<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(14).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(14).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"></p>
+<h3 id="3-5-配置-Git"><a href="#3-5-配置-Git" class="headerlink" title="3.5 配置 Git"></a>3.5 配置 Git</h3><p>如果之前没有为 Jenkins 安装 Git、Subversion（SVN）或 CVS 插件，可以在 “系统管理” -&gt; “管理插件” 中安装。<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(10).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(10).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"></p>
+<h2 id="四、构建作业"><a href="#四、构建作业" class="headerlink" title="四、构建作业"></a>四、构建作业</h2><p>构建作业是 Jenkins 构建过程的核心。</p>
+<h3 id="4-1-点击创建一个新任务，进入创建项目类型选择页面"><a href="#4-1-点击创建一个新任务，进入创建项目类型选择页面" class="headerlink" title="4.1 点击创建一个新任务，进入创建项目类型选择页面"></a>4.1 点击创建一个新任务，进入创建项目类型选择页面</h3><p><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(11).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(11).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>如果发现没有 “构建一个maven项目” 这一项，则需要安装 Maven Integration 插件，如下：<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(9).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(9).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"></p>
+<h3 id="4-2-进入构建作业的详细页面"><a href="#4-2-进入构建作业的详细页面" class="headerlink" title="4.2 进入构建作业的详细页面"></a>4.2 进入构建作业的详细页面</h3><p><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(15).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(15).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"></p>
+<h3 id="4-3-源码管理"><a href="#4-3-源码管理" class="headerlink" title="4.3 源码管理"></a>4.3 源码管理</h3><p><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(18).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(18).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"></p>
+<h3 id="4-4-构建触发器"><a href="#4-4-构建触发器" class="headerlink" title="4.4 构建触发器"></a>4.4 构建触发器</h3><p><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(16).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(16).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>其中有 5 个参数，分别表示：</p>
+<p><strong>MINUTE</strong>：Minutes within the hour（0-59）</p>
+<p><strong>HOUR</strong>：The hour of the day（0-23）</p>
+<p><strong>DOM</strong>：The day of the month（1-31）</p>
+<p><strong>MONTH</strong>：The month（1-12）</p>
+<p><strong>DOW</strong>：The day of the week（0-7）where 0 and 7 are sunday</p>
+<p>常用配置：</p>
+<p>0 * * * * 为每个小时执行一次</p>
+<p>0 1 * * * 为没天的凌晨1点执行一次，这种配置的设置，适合执行一些冒烟的测试用例</p>
+<p>第一个参数：min，0-59</p>
+<p>第二个参数：hour：0-23</p>
+<p>第三个参数：day：0-31</p>
+<p>第四个参数：month：1-12</p>
+<p>第五个参数：week：0-7（0 和 7 代表 Sunday）</p>
+<p>Jenkins 中 “Poll SCM” 和 “Build periodically”的区别</p>
+<p><strong>Poll SCM</strong>：定时检查源码变更（根据SCM软件的版本号），如果有更新就checkout最新code下来，然后执行构建动作，配置如下：</p>
+<p>*/5 * * * * （每5分钟检查一次源码变化）</p>
+<p>**  Build periodically**：周期进行项目构建（它不care源码是否发生变化），配置如下：</p>
+<p>0 2 * * * （每天2:00 必须build一次源码）</p>
+<h3 id="4-5-构建"><a href="#4-5-构建" class="headerlink" title="4.5 构建"></a>4.5 构建</h3><p><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(17).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(17).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>在 “Build” 中，默认的项目根目录的 Root POM，即 pom.xml。如果 pom.xml 不在根目录下，就填入子目录，例如：cloud/pom.xml。</p>
+<p>如果源码管理中选择 “None”，此处点 “高级…” 可以自定义工作空间中的项目地址，如下：<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(19).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(19).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>保存上面的构建作业：<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(21).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(21).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"></p>
+<h2 id="五、构建"><a href="#五、构建" class="headerlink" title="五、构建"></a>五、构建</h2><p>构建作业之后，就可以执行构建过程了。</p>
+<h3 id="5-1-执行构建的方式"><a href="#5-1-执行构建的方式" class="headerlink" title="5.1 执行构建的方式"></a>5.1 执行构建的方式</h3><p>第一种：点击任务名称的右边的小三角，然后点击 “立即构建”<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(22).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(22).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>第二种：按照 “构建触发器” 中设置的 “日程表”定时自动触发构建</p>
+<h3 id="5-2-构建结果"><a href="#5-2-构建结果" class="headerlink" title="5.2 构建结果"></a>5.2 构建结果</h3><p>第一列是 “上次构建状态显示”，是一个圆形图标，一般分为四种：<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(25).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(25).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>蓝色：构建成功；<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(28).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(28).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>黄色：不确定，可能构建成功，但包含错误；<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(29).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(29).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>红色：构建失败；<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(30).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(30).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>灰色：项目从未构建过，或者被禁用；<br>如上显示蓝色，表示构建成功。<br>注意：手动触发构建的时间与自动定时构建的时间互不影响。</p>
+<h3 id="5-3-查看控制台输出"><a href="#5-3-查看控制台输出" class="headerlink" title="5.3 查看控制台输出"></a>5.3 查看控制台输出</h3><p>可以查看构建成功的控制台输出：<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(26).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(26).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(32).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(32).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(33).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(33).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>控制台信息显示将构建的 jar 包从项目的 target 目录下归档到了 jenkins 指定的目录下了<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(35).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(35).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>此目录显示按照不同的构建编号，构建成功的项目<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(36).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(36).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>这与该工程的构建历史中的编号相对应<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(34).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(34).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>如果构建失败，可以通过查看构建失败的控制台输出，来得到具体的出错信息，便于调试<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(23).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(23).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>点击后查看错误信息，如下：<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(24).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(24).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>第二列是 “编译晴雨表”，如下：<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(27).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(27).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>如果看到你项目变成阴云或者下雨，说明你的项目稳定性不好，需要去查找原因，解决问题。</p>
+<h3 id="5-4-部署"><a href="#5-4-部署" class="headerlink" title="5.4 部署"></a>5.4 部署</h3><p>如果要部署构建好的 war 包，可以在 Post Steps 中填上 shell 命令，直接用脚本部署。<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(20).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(20).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>另一种方式是创建另外一个构建项目，手动触发部署。<br>无论用哪种方式，都是为了确保编译、部署是通过持续集成服务器完成的，而不是某台开发机器。</p>
+]]></content>
+      <categories>
+        <category>Jenkins</category>
+      </categories>
+      <tags>
+        <tag>Jenkins</tag>
       </tags>
   </entry>
   <entry>
@@ -5499,55 +5548,6 @@ title: 我的朋友们 # 可选，这是友链页的标题
       </categories>
       <tags>
         <tag>Mysql</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Jenkins安装教程</title>
-    <url>/2020/08/23/Jenkinsinstall01/</url>
-    <content><![CDATA[<p>Jenkins安装方法有很多，本文主要介绍通用安装方式（傻瓜式安装）</p>
-<h2 id="一、下载"><a href="#一、下载" class="headerlink" title="一、下载"></a>一、下载</h2><p>进入<a href="https://jenkins.io/download/">https://jenkins.io/download/</a> ，按需下载。如用于生产，建议下载Long-term Support (LTS) 版本，这样能够获得相对长期的维护；如想体验最新的功能，可尝试 Weekly 版本。可以直接下载特定系统专属的版本，也可下载 Generic Java package (.war) 。本文下载的是 Generic Java package (.war) ，这样对所有系统都通用。<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(1).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(1).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"></p>
-<h2 id="二、安装"><a href="#二、安装" class="headerlink" title="二、安装"></a>二、安装</h2><p>本文采用Tomcat安装方式，首先需要安装Tomcat（Tomcat安装方法请自行百度），将下载下来的Jenkins.war包放到Tomcat的webapps目录下，然后启动Tomcat即可<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(2).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(2).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>启动后会在webapps目录下生成一个Jenkins文件夹，然后我们访问<a href="http://localhost:18080/jenkins%EF%BC%8C%E5%8D%B3%E5%8F%AF%E7%9C%8B%E5%88%B0%E5%A6%82%E4%B8%8B%E7%95%8C%E9%9D%A2%EF%BC%9A">http://localhost:18080/jenkins，即可看到如下界面：</a><br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(3).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(3).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>这里需要填写管理员密码，由图中提示可知，Jenkins设置了一个初始的管理员密码，该密码存储在 /Users/itmuch.com/.jenkins/secrets/initialAdminPassword 文件中——只需可找到该文件，将其内容复制到图示的输入框中即可。点击 【继续】 按钮，将会出现类似如下的界面：<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(4).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(4).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>这里我们安装推荐的插件即可<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(5).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(5).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>插件安装有点慢，有些插件有可能安装失败，不要紧，点击继续，然后会进入到如下界面：<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(6).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(6).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>填入账户信息后，进入完成页面：<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(7).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(7).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>安装完成！</p>
-<h2 id="三、配置-Jenkins-构建工具"><a href="#三、配置-Jenkins-构建工具" class="headerlink" title="三、配置 Jenkins 构建工具"></a>三、配置 Jenkins 构建工具</h2><h3 id="3-1-进入-jenkins-主界面"><a href="#3-1-进入-jenkins-主界面" class="headerlink" title="3.1 进入 jenkins 主界面"></a>3.1 进入 jenkins 主界面</h3><p><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(8).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(8).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"></p>
-<h3 id="3-2-进入全局工具配置页面"><a href="#3-2-进入全局工具配置页面" class="headerlink" title="3.2 进入全局工具配置页面"></a>3.2 进入全局工具配置页面</h3><p>点击 “系统管理” -&gt; “全局工具配置”<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(31).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(31).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>进入后配置构建工具<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(12).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(12).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"></p>
-<h3 id="3-3-配置-Maven"><a href="#3-3-配置-Maven" class="headerlink" title="3.3 配置 Maven"></a>3.3 配置 Maven</h3><p>如果机器上已经安装了 Maven，则在 Maven_HOME 输入框中提供具体的安装路径。否则，你可以选择需要的 maven 版本，让 Jenkins 为你自动下载 maven。<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(13).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(13).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"></p>
-<h3 id="3-4-配置-JDK"><a href="#3-4-配置-JDK" class="headerlink" title="3.4 配置 JDK"></a>3.4 配置 JDK</h3><p>同理，如果机器上已经安装了 JDK，则在 JAVA_HOME 输入框中提供具体的安装路径。否则，你可以选择需要的 JDK 版本，让 Jenkins 为你自动下载 JDK。<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(14).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(14).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"></p>
-<h3 id="3-5-配置-Git"><a href="#3-5-配置-Git" class="headerlink" title="3.5 配置 Git"></a>3.5 配置 Git</h3><p>如果之前没有为 Jenkins 安装 Git、Subversion（SVN）或 CVS 插件，可以在 “系统管理” -&gt; “管理插件” 中安装。<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(10).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(10).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"></p>
-<h2 id="四、构建作业"><a href="#四、构建作业" class="headerlink" title="四、构建作业"></a>四、构建作业</h2><p>构建作业是 Jenkins 构建过程的核心。</p>
-<h3 id="4-1-点击创建一个新任务，进入创建项目类型选择页面"><a href="#4-1-点击创建一个新任务，进入创建项目类型选择页面" class="headerlink" title="4.1 点击创建一个新任务，进入创建项目类型选择页面"></a>4.1 点击创建一个新任务，进入创建项目类型选择页面</h3><p><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(11).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(11).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>如果发现没有 “构建一个maven项目” 这一项，则需要安装 Maven Integration 插件，如下：<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(9).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(9).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"></p>
-<h3 id="4-2-进入构建作业的详细页面"><a href="#4-2-进入构建作业的详细页面" class="headerlink" title="4.2 进入构建作业的详细页面"></a>4.2 进入构建作业的详细页面</h3><p><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(15).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(15).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"></p>
-<h3 id="4-3-源码管理"><a href="#4-3-源码管理" class="headerlink" title="4.3 源码管理"></a>4.3 源码管理</h3><p><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(18).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(18).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"></p>
-<h3 id="4-4-构建触发器"><a href="#4-4-构建触发器" class="headerlink" title="4.4 构建触发器"></a>4.4 构建触发器</h3><p><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(16).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(16).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>其中有 5 个参数，分别表示：</p>
-<p><strong>MINUTE</strong>：Minutes within the hour（0-59）</p>
-<p><strong>HOUR</strong>：The hour of the day（0-23）</p>
-<p><strong>DOM</strong>：The day of the month（1-31）</p>
-<p><strong>MONTH</strong>：The month（1-12）</p>
-<p><strong>DOW</strong>：The day of the week（0-7）where 0 and 7 are sunday</p>
-<p>常用配置：</p>
-<p>0 * * * * 为每个小时执行一次</p>
-<p>0 1 * * * 为没天的凌晨1点执行一次，这种配置的设置，适合执行一些冒烟的测试用例</p>
-<p>第一个参数：min，0-59</p>
-<p>第二个参数：hour：0-23</p>
-<p>第三个参数：day：0-31</p>
-<p>第四个参数：month：1-12</p>
-<p>第五个参数：week：0-7（0 和 7 代表 Sunday）</p>
-<p>Jenkins 中 “Poll SCM” 和 “Build periodically”的区别</p>
-<p><strong>Poll SCM</strong>：定时检查源码变更（根据SCM软件的版本号），如果有更新就checkout最新code下来，然后执行构建动作，配置如下：</p>
-<p>*/5 * * * * （每5分钟检查一次源码变化）</p>
-<p>**  Build periodically**：周期进行项目构建（它不care源码是否发生变化），配置如下：</p>
-<p>0 2 * * * （每天2:00 必须build一次源码）</p>
-<h3 id="4-5-构建"><a href="#4-5-构建" class="headerlink" title="4.5 构建"></a>4.5 构建</h3><p><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(17).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(17).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>在 “Build” 中，默认的项目根目录的 Root POM，即 pom.xml。如果 pom.xml 不在根目录下，就填入子目录，例如：cloud/pom.xml。</p>
-<p>如果源码管理中选择 “None”，此处点 “高级…” 可以自定义工作空间中的项目地址，如下：<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(19).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(19).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>保存上面的构建作业：<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(21).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(21).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"></p>
-<h2 id="五、构建"><a href="#五、构建" class="headerlink" title="五、构建"></a>五、构建</h2><p>构建作业之后，就可以执行构建过程了。</p>
-<h3 id="5-1-执行构建的方式"><a href="#5-1-执行构建的方式" class="headerlink" title="5.1 执行构建的方式"></a>5.1 执行构建的方式</h3><p>第一种：点击任务名称的右边的小三角，然后点击 “立即构建”<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(22).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(22).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>第二种：按照 “构建触发器” 中设置的 “日程表”定时自动触发构建</p>
-<h3 id="5-2-构建结果"><a href="#5-2-构建结果" class="headerlink" title="5.2 构建结果"></a>5.2 构建结果</h3><p>第一列是 “上次构建状态显示”，是一个圆形图标，一般分为四种：<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(25).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(25).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>蓝色：构建成功；<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(28).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(28).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>黄色：不确定，可能构建成功，但包含错误；<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(29).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(29).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>红色：构建失败；<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(30).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(30).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>灰色：项目从未构建过，或者被禁用；<br>如上显示蓝色，表示构建成功。<br>注意：手动触发构建的时间与自动定时构建的时间互不影响。</p>
-<h3 id="5-3-查看控制台输出"><a href="#5-3-查看控制台输出" class="headerlink" title="5.3 查看控制台输出"></a>5.3 查看控制台输出</h3><p>可以查看构建成功的控制台输出：<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(26).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(26).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(32).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(32).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(33).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(33).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>控制台信息显示将构建的 jar 包从项目的 target 目录下归档到了 jenkins 指定的目录下了<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(35).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(35).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>此目录显示按照不同的构建编号，构建成功的项目<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(36).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(36).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>这与该工程的构建历史中的编号相对应<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(34).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(34).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>如果构建失败，可以通过查看构建失败的控制台输出，来得到具体的出错信息，便于调试<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(23).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(23).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>点击后查看错误信息，如下：<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(24).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(24).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>第二列是 “编译晴雨表”，如下：<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(27).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(27).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>如果看到你项目变成阴云或者下雨，说明你的项目稳定性不好，需要去查找原因，解决问题。</p>
-<h3 id="5-4-部署"><a href="#5-4-部署" class="headerlink" title="5.4 部署"></a>5.4 部署</h3><p>如果要部署构建好的 war 包，可以在 Post Steps 中填上 shell 命令，直接用脚本部署。<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(20).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_02%20(20).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>另一种方式是创建另外一个构建项目，手动触发部署。<br>无论用哪种方式，都是为了确保编译、部署是通过持续集成服务器完成的，而不是某台开发机器。</p>
-]]></content>
-      <categories>
-        <category>Jenkins</category>
-      </categories>
-      <tags>
-        <tag>Jenkins</tag>
       </tags>
   </entry>
   <entry>
@@ -5744,6 +5744,78 @@ export JAVA_HOME JRE_HOME PATH CLASSPATH</code></pre>
       </tags>
   </entry>
   <entry>
+    <title>Python pip下载速度慢? Windows设置国内源，用阿里云国内镜像加速</title>
+    <url>/2020/08/21/pipup/</url>
+    <content><![CDATA[<p>pip 提供了对 Python 包的查找、下载、安装、卸载的功能，是非常方便的 Python 包管理工具。但是，令人苦恼的是 pip 在国内的下载速度非常慢，速度常常只有每秒几十 K，甚至才几 K，小点的包还好，还能等，更多的时候，则是完全要把人逼疯的节奏。</p>
+<p>这里，咪博士就教大家，如何在 Windows 下，为 pip 设置国内源。设置完成之后，速度可以达到每秒好几 M，快到飞起来。这里我们选用阿里云的国内镜像。毕竟有大金主支持，稳定性有保障。</p>
+<h2 id="一、新建-pip-配置文件夹"><a href="#一、新建-pip-配置文件夹" class="headerlink" title="一、新建 pip 配置文件夹"></a>一、新建 pip 配置文件夹</h2><p>先在 windows “文件资源管理器” 地址栏 输入 %APPDATA% 按回车，打开程序自定义设置文件夹</p>
+<p>然后，创建名为 pip  的文件夹，用于存放 pip 配置文件</p>
+<p><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/aHR0cDovL3d3dy5pcGFvbWkuY29tL3dwLWNvbnRlbnQvdXBsb2Fkcy8yMDE3LzExL2NyZWF0ZV9waXBfZm9sZGVyLnBuZw" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/aHR0cDovL3d3dy5pcGFvbWkuY29tL3dwLWNvbnRlbnQvdXBsb2Fkcy8yMDE3LzExL2NyZWF0ZV9waXBfZm9sZGVyLnBuZw" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"></p>
+<h2 id="二、新建-pip-配置文件"><a href="#二、新建-pip-配置文件" class="headerlink" title="二、新建 pip 配置文件"></a>二、新建 pip 配置文件</h2><p>在刚才创建好的 pip 文件夹中，新建 名为 pip.ini 的配置文件<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/N0T_3KZ4U~%5BUIBR$DOS6AD2.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/N0T_3KZ4U~%5BUIBR$DOS6AD2.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"></p>
+<h2 id="三、设置-pip-国内源-使用-阿里云-国内镜像"><a href="#三、设置-pip-国内源-使用-阿里云-国内镜像" class="headerlink" title="三、设置 pip 国内源 (使用 阿里云 国内镜像)"></a>三、设置 pip 国内源 (使用 阿里云 国内镜像)</h2><p>在 pip.ini 文件中输入以下内容，然后保存</p>
+<pre><code>[global]
+
+index-url=http://mirrors.aliyun.com/pypi/simple/
+
+[install]
+
+trusted-host=mirrors.aliyun.com</code></pre>
+<p>如果嫌麻烦，也可以直接下载咪博士准备好的配置文件 <a href="https://pan.baidu.com/s/1o8xEWRK">https://pan.baidu.com/s/1o8xEWRK</a></p>
+<h2 id="四、验证设置"><a href="#四、验证设置" class="headerlink" title="四、验证设置"></a>四、验证设置</h2><p>按 windows 徽标+ R，输入 cmd，按回车，调出 windows 命令行窗口<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/aHR0cDovL3d3dy5pcGFvbWkuY29tL3dwLWNvbnRlbnQvdXBsb2Fkcy8yMDE3LzExL3dpbmRvd3NfY21kLnBuZw" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/aHR0cDovL3d3dy5pcGFvbWkuY29tL3dwLWNvbnRlbnQvdXBsb2Fkcy8yMDE3LzExL3dpbmRvd3NfY21kLnBuZw" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"><br>尝试用 pip 安装一个比较大一点的包，譬如 kivy.deps.gstreamer (约 120 M)</p>
+<pre><code>python -m pip install kivy.deps.gstreamer</code></pre>
+<p>注意到 pip 从阿里云 (aliyun) 下载，速度达到了每秒 7.5 M，快到飞起来<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/NR%7BEF5%60CGRJ4HWDVL1JL7$U.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/NR%7BEF5%60CGRJ4HWDVL1JL7$U.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br>妈妈再也不用担心 pip 下载速度慢啦。</p>
+]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>pip</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>python连接数据库批量插入数据</title>
+    <url>/2020/08/23/pythoninsertdata/</url>
+    <content><![CDATA[<pre><code class="python">思路：连接数据库-获取游标-拼好sql-执行sql-提交数据-关闭游标-关闭链接
+import MySQLdb,time,pprint
+import random
+t = int(time.time())
+#链接数据库
+connection = MySQLdb.connect(host=&quot;127.0.0.1&quot;,
+                     user=&quot;songqin&quot;,
+                     passwd=&#39;songqin&#39;,
+                     db=&#39;plesson&#39;,
+                     charset = &quot;utf8&quot;)
+#获取游标
+c = connection.cursor()
+sql = &quot;select * from sq_course&quot;
+for i in range(1,11):
+    names = random.choice([&#39;语文&#39;,&#39;数学&#39;,&#39;外语&#39;,&#39;物理&#39;,&#39;化学&#39;])+str(i)
+    descs = &quot;课程描述&quot;+str(i)
+    idx = str(i)
+    sql1 = &quot;INSERT INTO sq_course (name,`desc`,display_idx) VALUES(&#39;%s&#39;,&#39;%s&#39;,&#39;%s&#39;);&quot; %(names,descs,idx)
+    #执行SQL
+    raw = c.execute(sql1)
+    #插入数据完后提交数据
+    connection.commit()
+
+raw1 = c.execute(sql)
+pprint.pprint(c.fetchall())
+#关闭游标
+c.close()
+#连接关闭
+connection.close()</code></pre>
+]]></content>
+      <categories>
+        <category>python</category>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>Mysql</tag>
+        <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Python使用openpyxl读写excel文件</title>
     <url>/2020/08/23/openpyxl/</url>
     <content><![CDATA[<p>这是一个第三方库，可以处理xlsx格式的Excel文件。pip install openpyxl安装。如果使用Aanconda，应该自带了。</p>
@@ -5912,97 +5984,6 @@ sheet.merge_cells(&#39;A1:C3&#39;) # 合并一个矩形区域中的单元格</co
       </tags>
   </entry>
   <entry>
-    <title>Python pip下载速度慢? Windows设置国内源，用阿里云国内镜像加速</title>
-    <url>/2020/08/21/pipup/</url>
-    <content><![CDATA[<p>pip 提供了对 Python 包的查找、下载、安装、卸载的功能，是非常方便的 Python 包管理工具。但是，令人苦恼的是 pip 在国内的下载速度非常慢，速度常常只有每秒几十 K，甚至才几 K，小点的包还好，还能等，更多的时候，则是完全要把人逼疯的节奏。</p>
-<p>这里，咪博士就教大家，如何在 Windows 下，为 pip 设置国内源。设置完成之后，速度可以达到每秒好几 M，快到飞起来。这里我们选用阿里云的国内镜像。毕竟有大金主支持，稳定性有保障。</p>
-<h2 id="一、新建-pip-配置文件夹"><a href="#一、新建-pip-配置文件夹" class="headerlink" title="一、新建 pip 配置文件夹"></a>一、新建 pip 配置文件夹</h2><p>先在 windows “文件资源管理器” 地址栏 输入 %APPDATA% 按回车，打开程序自定义设置文件夹</p>
-<p>然后，创建名为 pip  的文件夹，用于存放 pip 配置文件</p>
-<p><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/aHR0cDovL3d3dy5pcGFvbWkuY29tL3dwLWNvbnRlbnQvdXBsb2Fkcy8yMDE3LzExL2NyZWF0ZV9waXBfZm9sZGVyLnBuZw" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/aHR0cDovL3d3dy5pcGFvbWkuY29tL3dwLWNvbnRlbnQvdXBsb2Fkcy8yMDE3LzExL2NyZWF0ZV9waXBfZm9sZGVyLnBuZw" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"></p>
-<h2 id="二、新建-pip-配置文件"><a href="#二、新建-pip-配置文件" class="headerlink" title="二、新建 pip 配置文件"></a>二、新建 pip 配置文件</h2><p>在刚才创建好的 pip 文件夹中，新建 名为 pip.ini 的配置文件<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/N0T_3KZ4U~%5BUIBR$DOS6AD2.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/N0T_3KZ4U~%5BUIBR$DOS6AD2.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"></p>
-<h2 id="三、设置-pip-国内源-使用-阿里云-国内镜像"><a href="#三、设置-pip-国内源-使用-阿里云-国内镜像" class="headerlink" title="三、设置 pip 国内源 (使用 阿里云 国内镜像)"></a>三、设置 pip 国内源 (使用 阿里云 国内镜像)</h2><p>在 pip.ini 文件中输入以下内容，然后保存</p>
-<pre><code>[global]
-
-index-url=http://mirrors.aliyun.com/pypi/simple/
-
-[install]
-
-trusted-host=mirrors.aliyun.com</code></pre>
-<p>如果嫌麻烦，也可以直接下载咪博士准备好的配置文件 <a href="https://pan.baidu.com/s/1o8xEWRK">https://pan.baidu.com/s/1o8xEWRK</a></p>
-<h2 id="四、验证设置"><a href="#四、验证设置" class="headerlink" title="四、验证设置"></a>四、验证设置</h2><p>按 windows 徽标+ R，输入 cmd，按回车，调出 windows 命令行窗口<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/aHR0cDovL3d3dy5pcGFvbWkuY29tL3dwLWNvbnRlbnQvdXBsb2Fkcy8yMDE3LzExL3dpbmRvd3NfY21kLnBuZw" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/aHR0cDovL3d3dy5pcGFvbWkuY29tL3dwLWNvbnRlbnQvdXBsb2Fkcy8yMDE3LzExL3dpbmRvd3NfY21kLnBuZw" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="img"><br>尝试用 pip 安装一个比较大一点的包，譬如 kivy.deps.gstreamer (约 120 M)</p>
-<pre><code>python -m pip install kivy.deps.gstreamer</code></pre>
-<p>注意到 pip 从阿里云 (aliyun) 下载，速度达到了每秒 7.5 M，快到飞起来<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/NR%7BEF5%60CGRJ4HWDVL1JL7$U.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/NR%7BEF5%60CGRJ4HWDVL1JL7$U.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br>妈妈再也不用担心 pip 下载速度慢啦。</p>
-]]></content>
-      <categories>
-        <category>python</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-        <tag>pip</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>python连接数据库批量插入数据</title>
-    <url>/2020/08/23/pythoninsertdata/</url>
-    <content><![CDATA[<pre><code class="python">思路：连接数据库-获取游标-拼好sql-执行sql-提交数据-关闭游标-关闭链接
-import MySQLdb,time,pprint
-import random
-t = int(time.time())
-#链接数据库
-connection = MySQLdb.connect(host=&quot;127.0.0.1&quot;,
-                     user=&quot;songqin&quot;,
-                     passwd=&#39;songqin&#39;,
-                     db=&#39;plesson&#39;,
-                     charset = &quot;utf8&quot;)
-#获取游标
-c = connection.cursor()
-sql = &quot;select * from sq_course&quot;
-for i in range(1,11):
-    names = random.choice([&#39;语文&#39;,&#39;数学&#39;,&#39;外语&#39;,&#39;物理&#39;,&#39;化学&#39;])+str(i)
-    descs = &quot;课程描述&quot;+str(i)
-    idx = str(i)
-    sql1 = &quot;INSERT INTO sq_course (name,`desc`,display_idx) VALUES(&#39;%s&#39;,&#39;%s&#39;,&#39;%s&#39;);&quot; %(names,descs,idx)
-    #执行SQL
-    raw = c.execute(sql1)
-    #插入数据完后提交数据
-    connection.commit()
-
-raw1 = c.execute(sql)
-pprint.pprint(c.fetchall())
-#关闭游标
-c.close()
-#连接关闭
-connection.close()</code></pre>
-]]></content>
-      <categories>
-        <category>python</category>
-        <category>数据库</category>
-      </categories>
-      <tags>
-        <tag>Mysql</tag>
-        <tag>python</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Charles的安装与使用说明</title>
-    <url>/2020/09/07/r6osj6p4/</url>
-    <content><![CDATA[<h2 id="一、安装"><a href="#一、安装" class="headerlink" title="一、安装"></a>一、安装</h2><p>在网上找到的破解安装步骤，直接抄过来<br> <a href="http://charles.iiilab.com/">http://charles.iiilab.com/</a>    #破解注册<br>下载Charles Proxy 4.1.2版本，百度云盘下载 或 去官网下载<br>安装后先打开Charles一次（Windows版可以忽略此步骤）<br>在这个网站(<a href="http://charles.iiilab.com/)%E4%B8%8B%E8%BD%BD%E7%A0%B4%E8%A7%A3%E6%96%87%E4%BB%B6">http://charles.iiilab.com/)下载破解文件</a> charles.jar<br>替换掉原文件夹里的charles.jar<br>Mac: /Applications/Charles.app/Contents/Java/charles.jar<br>Windows: C:\Program Files\Charles\lib\charles.jar<br>      恭喜！破解注册成功！</p>
-<h2 id="二、使用前基本设置"><a href="#二、使用前基本设置" class="headerlink" title="二、使用前基本设置"></a>二、使用前基本设置</h2><h3 id="1-手机设置代理"><a href="#1-手机设置代理" class="headerlink" title="1.手机设置代理"></a>1.手机设置代理</h3><p>注意点：Charles默认端口就是8888，手机连接的wifi必须和电脑连接的wifi是同一个局域网。</p>
-<p>charles设置代理端口号8888：Proxy→ Proxy Settings<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/62-139168698.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/62-139168698.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br>手机设置代理，连接wifi，点开设置http代理，选择手动，服务器填写charles所在本机的ip地址，端口号8888<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/5-1359099946.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/5-1359099946.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"></p>
-<h3 id="2-SSL代理设置，允许抓取https协议"><a href="#2-SSL代理设置，允许抓取https协议" class="headerlink" title="2.SSL代理设置，允许抓取https协议"></a>2.SSL代理设置，允许抓取https协议</h3><p>Proxy→SSL Proxying Settings→勾取Enable SSL Proxying→add→添加想要抓取的域名和端口号，以抓取阿波罗app数据为例<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/21-550942315.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/21-550942315.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"></p>
-<h2 id="三、拦截某个软件的接口数据"><a href="#三、拦截某个软件的接口数据" class="headerlink" title="三、拦截某个软件的接口数据"></a>三、拦截某个软件的接口数据</h2><p>手机代理到电脑，charles会出现弹窗，询问allow还是deny，选择allow，连接成功。<br>通常情况下，我们需要对网络请求进行过滤，只监控向指定目录服务器上发送的请求。<br>在Charles的菜单栏选择”Proxy”-&gt;”Recording Settings”，然后选择Include栏，选择添加一个项目，然后填入需要监控的协议，主机地址，端口号。这样就可以只截取目标网站的封包了。如下图截取阿波罗app数据：<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/7-1981590493.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/7-1981590493.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br>如果只测试一个功能的情况下，可以只截取单个接口，例如测试阿波罗首页广告，只需截取splash接口，添加并勾选。<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/27-590574806.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/27-590574806.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br>勾选Proxy →Start Recording，开启抓取记录，可以在charles界面看到你所过滤的网络请求，以阿波罗app为例：<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/65-334654904.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/65-334654904.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br>Charles主要提供2种查看封包的视图，分别名为“Structure”和”Sequence”。<br>Structure视图将网络请求按访问的域名分类。<br>Sequence视图将网络请求按访问的时间排序。<br>大家可以根据具体的需要在这两种视图之前来回切换。<br>对于某一个具体的网络请求，你可以查看其详细的请求内容和响应内容。如果响应内容是JSON格式的，那么Charles可以自动帮你将JSON内容格式化，方便你查看。</p>
-<h2 id="四、更改返回数据来测试各种情况"><a href="#四、更改返回数据来测试各种情况" class="headerlink" title="四、更改返回数据来测试各种情况"></a>四、更改返回数据来测试各种情况</h2><h3 id="1-强大的mapping功能"><a href="#1-强大的mapping功能" class="headerlink" title="1.强大的mapping功能"></a>1.强大的mapping功能</h3><h4 id="a-Map-Local"><a href="#a-Map-Local" class="headerlink" title="a.Map Local"></a>a.Map Local</h4><p>可以将远程的某个文件代理到本地文件，进行调试。使用方法如下：<br>Tools→Map Local→勾选Enable Map Local→Add→填入需要映射本地文件的协议，主机地址，端口号<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/2-2135000769.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/2-2135000769.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br>本地文件可以是自己造的测试数据，也可以是接口返回的数据保存到本地再进行修改，只需先将接口返回数据进行保存到本地：点击某接口response，右击save response。</p>
-<h4 id="b-Map-Remote"><a href="#b-Map-Remote" class="headerlink" title="b.Map Remote"></a>b.Map Remote</h4><p>Map Remote的功能原理和Map Local的原理相同，都是替换请求，只不过Map Local替换的请求为本地文件，而Map Remote替换的请求为线上请求。<br>使用方法：Tools→Map Remote→勾选Enable Map Remote→Add→填入需要替换请求的协议，主机地址，端口号。<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/9-1993174545.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/9-1993174545.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br>如图，splash接口映射到entry接口，splash接口访问的是entry接口的数据。</p>
-<h3 id="2-断点功能"><a href="#2-断点功能" class="headerlink" title="2.断点功能"></a>2.断点功能</h3><p>我们可以通过使用断点功能来篡改请求的数据或者返回的数据，达到模拟的效果，已测试阿波罗app为例方法如下：<br>类似于mapping，我们可以针对接口右键选择”BreakPoints”,这样这个接口就被加入到断点状态了<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/87-611953958.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/87-611953958.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br>需要进一步修改断点的属性，可以在菜单栏”Proxy”–&gt;”Breakpoints Settings”里进行添加删除或者修改，配置方式和mapping雷同，并且可以选择这个断点是在request还是response，还是两者都要。<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/2-2045830780.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/2-2045830780.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br>这个时候再刷新app界面，会直接跳转到断点模版，这个时候你可以在对应状态情况下修改request或者response,然后点击下方按钮“Execute”。<br>跳转到断点界面，先点击下方执行按钮“Execute”。<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/80-293810778.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/80-293810778.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br>然后点开Edit Response界面，选择JSON格式，格式清晰，方便修改，直接在上面进行数据修改，改成你想要测试的数据，然后点击执行按钮<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/1-1679133438.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/1-1679133438.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br>再次刷新app界面，然后app返回的是新改的数据，根据返回数据测试客户端显示是否正确。</p>
-]]></content>
-      <categories>
-        <category>charles</category>
-      </categories>
-      <tags>
-        <tag>charles</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Python生成双色球号码</title>
     <url>/2020/08/23/pythonssq/</url>
     <content><![CDATA[<pre><code class="python">import random,time
@@ -6040,6 +6021,25 @@ if __name__ ==&#39;__main__&#39;:
       </categories>
       <tags>
         <tag>双色球</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Charles的安装与使用说明</title>
+    <url>/2020/09/07/r6osj6p4/</url>
+    <content><![CDATA[<h2 id="一、安装"><a href="#一、安装" class="headerlink" title="一、安装"></a>一、安装</h2><p>在网上找到的破解安装步骤，直接抄过来<br> <a href="http://charles.iiilab.com/">http://charles.iiilab.com/</a>    #破解注册<br>下载Charles Proxy 4.1.2版本，百度云盘下载 或 去官网下载<br>安装后先打开Charles一次（Windows版可以忽略此步骤）<br>在这个网站(<a href="http://charles.iiilab.com/)%E4%B8%8B%E8%BD%BD%E7%A0%B4%E8%A7%A3%E6%96%87%E4%BB%B6">http://charles.iiilab.com/)下载破解文件</a> charles.jar<br>替换掉原文件夹里的charles.jar<br>Mac: /Applications/Charles.app/Contents/Java/charles.jar<br>Windows: C:\Program Files\Charles\lib\charles.jar<br>      恭喜！破解注册成功！</p>
+<h2 id="二、使用前基本设置"><a href="#二、使用前基本设置" class="headerlink" title="二、使用前基本设置"></a>二、使用前基本设置</h2><h3 id="1-手机设置代理"><a href="#1-手机设置代理" class="headerlink" title="1.手机设置代理"></a>1.手机设置代理</h3><p>注意点：Charles默认端口就是8888，手机连接的wifi必须和电脑连接的wifi是同一个局域网。</p>
+<p>charles设置代理端口号8888：Proxy→ Proxy Settings<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/62-139168698.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/62-139168698.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br>手机设置代理，连接wifi，点开设置http代理，选择手动，服务器填写charles所在本机的ip地址，端口号8888<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/5-1359099946.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/5-1359099946.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"></p>
+<h3 id="2-SSL代理设置，允许抓取https协议"><a href="#2-SSL代理设置，允许抓取https协议" class="headerlink" title="2.SSL代理设置，允许抓取https协议"></a>2.SSL代理设置，允许抓取https协议</h3><p>Proxy→SSL Proxying Settings→勾取Enable SSL Proxying→add→添加想要抓取的域名和端口号，以抓取阿波罗app数据为例<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/21-550942315.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/21-550942315.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"></p>
+<h2 id="三、拦截某个软件的接口数据"><a href="#三、拦截某个软件的接口数据" class="headerlink" title="三、拦截某个软件的接口数据"></a>三、拦截某个软件的接口数据</h2><p>手机代理到电脑，charles会出现弹窗，询问allow还是deny，选择allow，连接成功。<br>通常情况下，我们需要对网络请求进行过滤，只监控向指定目录服务器上发送的请求。<br>在Charles的菜单栏选择”Proxy”-&gt;”Recording Settings”，然后选择Include栏，选择添加一个项目，然后填入需要监控的协议，主机地址，端口号。这样就可以只截取目标网站的封包了。如下图截取阿波罗app数据：<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/7-1981590493.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/7-1981590493.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br>如果只测试一个功能的情况下，可以只截取单个接口，例如测试阿波罗首页广告，只需截取splash接口，添加并勾选。<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/27-590574806.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/27-590574806.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br>勾选Proxy →Start Recording，开启抓取记录，可以在charles界面看到你所过滤的网络请求，以阿波罗app为例：<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/65-334654904.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/65-334654904.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br>Charles主要提供2种查看封包的视图，分别名为“Structure”和”Sequence”。<br>Structure视图将网络请求按访问的域名分类。<br>Sequence视图将网络请求按访问的时间排序。<br>大家可以根据具体的需要在这两种视图之前来回切换。<br>对于某一个具体的网络请求，你可以查看其详细的请求内容和响应内容。如果响应内容是JSON格式的，那么Charles可以自动帮你将JSON内容格式化，方便你查看。</p>
+<h2 id="四、更改返回数据来测试各种情况"><a href="#四、更改返回数据来测试各种情况" class="headerlink" title="四、更改返回数据来测试各种情况"></a>四、更改返回数据来测试各种情况</h2><h3 id="1-强大的mapping功能"><a href="#1-强大的mapping功能" class="headerlink" title="1.强大的mapping功能"></a>1.强大的mapping功能</h3><h4 id="a-Map-Local"><a href="#a-Map-Local" class="headerlink" title="a.Map Local"></a>a.Map Local</h4><p>可以将远程的某个文件代理到本地文件，进行调试。使用方法如下：<br>Tools→Map Local→勾选Enable Map Local→Add→填入需要映射本地文件的协议，主机地址，端口号<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/2-2135000769.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/2-2135000769.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br>本地文件可以是自己造的测试数据，也可以是接口返回的数据保存到本地再进行修改，只需先将接口返回数据进行保存到本地：点击某接口response，右击save response。</p>
+<h4 id="b-Map-Remote"><a href="#b-Map-Remote" class="headerlink" title="b.Map Remote"></a>b.Map Remote</h4><p>Map Remote的功能原理和Map Local的原理相同，都是替换请求，只不过Map Local替换的请求为本地文件，而Map Remote替换的请求为线上请求。<br>使用方法：Tools→Map Remote→勾选Enable Map Remote→Add→填入需要替换请求的协议，主机地址，端口号。<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/9-1993174545.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/9-1993174545.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br>如图，splash接口映射到entry接口，splash接口访问的是entry接口的数据。</p>
+<h3 id="2-断点功能"><a href="#2-断点功能" class="headerlink" title="2.断点功能"></a>2.断点功能</h3><p>我们可以通过使用断点功能来篡改请求的数据或者返回的数据，达到模拟的效果，已测试阿波罗app为例方法如下：<br>类似于mapping，我们可以针对接口右键选择”BreakPoints”,这样这个接口就被加入到断点状态了<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/87-611953958.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/87-611953958.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br>需要进一步修改断点的属性，可以在菜单栏”Proxy”–&gt;”Breakpoints Settings”里进行添加删除或者修改，配置方式和mapping雷同，并且可以选择这个断点是在request还是response，还是两者都要。<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/2-2045830780.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/2-2045830780.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br>这个时候再刷新app界面，会直接跳转到断点模版，这个时候你可以在对应状态情况下修改request或者response,然后点击下方按钮“Execute”。<br>跳转到断点界面，先点击下方执行按钮“Execute”。<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/80-293810778.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/80-293810778.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br>然后点开Edit Response界面，选择JSON格式，格式清晰，方便修改，直接在上面进行数据修改，改成你想要测试的数据，然后点击执行按钮<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/1-1679133438.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/1-1679133438.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br>再次刷新app界面，然后app返回的是新改的数据，根据返回数据测试客户端显示是否正确。</p>
+]]></content>
+      <categories>
+        <category>charles</category>
+      </categories>
+      <tags>
+        <tag>charles</tag>
       </tags>
   </entry>
   <entry>
