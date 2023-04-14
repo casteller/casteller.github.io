@@ -515,14 +515,14 @@
   </url>
   
   <url>
-    <loc>https://www.mz-zone.cn/tags/Jmeter/</loc>
+    <loc>https://www.mz-zone.cn/tags/Java/</loc>
     <lastmod>2023-04-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://www.mz-zone.cn/tags/Java/</loc>
+    <loc>https://www.mz-zone.cn/tags/Jmeter/</loc>
     <lastmod>2023-04-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -536,13 +536,6 @@
   </url>
   
   <url>
-    <loc>https://www.mz-zone.cn/tags/Linux/</loc>
-    <lastmod>2023-04-14</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://www.mz-zone.cn/tags/Picgo/</loc>
     <lastmod>2023-04-14</lastmod>
     <changefreq>daily</changefreq>
@@ -550,7 +543,7 @@
   </url>
   
   <url>
-    <loc>https://www.mz-zone.cn/tags/hexo/</loc>
+    <loc>https://www.mz-zone.cn/tags/Linux/</loc>
     <lastmod>2023-04-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -564,7 +557,7 @@
   </url>
   
   <url>
-    <loc>https://www.mz-zone.cn/tags/Django/</loc>
+    <loc>https://www.mz-zone.cn/tags/hexo/</loc>
     <lastmod>2023-04-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -578,14 +571,14 @@
   </url>
   
   <url>
-    <loc>https://www.mz-zone.cn/tags/volantis/</loc>
+    <loc>https://www.mz-zone.cn/tags/Django/</loc>
     <lastmod>2023-04-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://www.mz-zone.cn/tags/Issues/</loc>
+    <loc>https://www.mz-zone.cn/tags/volantis/</loc>
     <lastmod>2023-04-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -599,7 +592,7 @@
   </url>
   
   <url>
-    <loc>https://www.mz-zone.cn/tags/openpyxl/</loc>
+    <loc>https://www.mz-zone.cn/tags/Issues/</loc>
     <lastmod>2023-04-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -607,6 +600,13 @@
   
   <url>
     <loc>https://www.mz-zone.cn/tags/pip/</loc>
+    <lastmod>2023-04-14</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.mz-zone.cn/tags/openpyxl/</loc>
     <lastmod>2023-04-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -627,14 +627,14 @@
   </url>
   
   <url>
-    <loc>https://www.mz-zone.cn/tags/redis/</loc>
+    <loc>https://www.mz-zone.cn/tags/Selenium/</loc>
     <lastmod>2023-04-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://www.mz-zone.cn/tags/Selenium/</loc>
+    <loc>https://www.mz-zone.cn/tags/redis/</loc>
     <lastmod>2023-04-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -664,14 +664,14 @@
   </url>
   
   <url>
-    <loc>https://www.mz-zone.cn/categories/Jmeter/</loc>
+    <loc>https://www.mz-zone.cn/categories/Java/</loc>
     <lastmod>2023-04-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://www.mz-zone.cn/categories/Java/</loc>
+    <loc>https://www.mz-zone.cn/categories/Jmeter/</loc>
     <lastmod>2023-04-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -685,7 +685,7 @@
   </url>
   
   <url>
-    <loc>https://www.mz-zone.cn/categories/idea/</loc>
+    <loc>https://www.mz-zone.cn/categories/Picgo/</loc>
     <lastmod>2023-04-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -699,7 +699,7 @@
   </url>
   
   <url>
-    <loc>https://www.mz-zone.cn/categories/Picgo/</loc>
+    <loc>https://www.mz-zone.cn/categories/idea/</loc>
     <lastmod>2023-04-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -713,14 +713,14 @@
   </url>
   
   <url>
-    <loc>https://www.mz-zone.cn/categories/Django/</loc>
+    <loc>https://www.mz-zone.cn/categories/python/</loc>
     <lastmod>2023-04-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://www.mz-zone.cn/categories/python/</loc>
+    <loc>https://www.mz-zone.cn/categories/Django/</loc>
     <lastmod>2023-04-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
