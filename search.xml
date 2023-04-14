@@ -18,31 +18,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Jmeter实现分布式并发</title>
-    <url>/2020/11/06/2020110601/</url>
-    <content><![CDATA[<div class="note idea"><p>在性能测试过程中，一旦进行高并发操作时就会出现以下尴尬场景，JMeter客户端卡死、请求错误或是超时等，为了解决这一问题，我们需要将一次大的操作分布在多个服务器上，由多个服务器来承担负载压力。</p></div>
-<a id="more"></a>
-<p><code>接下来我们就来看一下如何实现jmeter的分布式并发：</code><br><strong>一、需要在负载机上配置jdk环境和jmeter环境</strong><br>首先我们需要准备一个负载机，本次演示的负载机是博主在虚拟机上搭建的一个Linux服务器，Linux系统需要安装jdk（不知道如何配置jdk的请自行百度）然后配置Linux环境下的jmeter环境：</p>
-<p>1、官网下载jmeter的版本，<a href="https://mirrors.tuna.tsinghua.edu.cn/apache//jmeter/binaries/%EF%BC%8C%E6%88%91%E4%B8%8B%E8%BD%BD%E7%9A%84%E6%98%AFapache-jmeter-5.1.1.tgz">https://mirrors.tuna.tsinghua.edu.cn/apache//jmeter/binaries/，我下载的是apache-jmeter-5.1.1.tgz</a></p>
-<p>将下载的包放到/usr/local目录下（此目录可自行设置，一般安装包我都安装在这个目录下），进入此目录解压文件<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/9d9562bf1cbb0.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/9d9562bf1cbb0.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br>2、配置环境变量，进入根目录输入命令vim etc/profile,配置一下环境变量<br>export JMETER_HOME=/usr/local/apache-jmeter-5.1.1 (不要照搬，改为你自己的路径）<br>export PATH=$JMETER_HOME/bin:$PATH<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/820ebbd7823e6.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/820ebbd7823e6.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br>3、然后输入jmeter -v验证，如果出现以下界面，那么恭喜你Linux环境下jmeter就配置成功了<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/4844ef37b22a0.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/4844ef37b22a0.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br>4、接着进入jmeter的bin目录启动jmeter，命令：./jmeter.sh，可以看到成功启动<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/2615c0e84225c.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/2615c0e84225c.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br><strong>二、master（主压力机）在jmeter.properties中添加remote_hosts</strong><br>配置路径：…\apache-jmeter-5.0\bin 路径下的jmeter.properties；<br>remote_hosts=127.0.0.1 后面增加远程负载机的ip和端口号，如果需要添加多个，用逗号分隔就可以；<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/e16912e0d6b4b.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/e16912e0d6b4b.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br><strong>三、Slave（远程负载机）在jmeter.properties中添加server_port</strong><br>server_port=1099<br>server.rmi.localport=1099<br>备注：这里的端口号可以自定义，只要与主压力机里面配置的一致即可<br>进入负载机的usr/local/apache-jmeter-5.1.1/bin目录，编辑jmeter.properties文件<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/1ded601e8ade6.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/1ded601e8ade6.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/1b7d25d0ffbd2.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/1b7d25d0ffbd2.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br><strong>四、Slave（远程负载机）启动Jmeter-server</strong><br>命令：./jmeter-server -Djava.rmi.server.hostname=192.168.3.130（启动时必须加上后面的-Djava.rmi.server.hostname=192.168.3.130，ip为负载机ip，不然会报错）启动成功后如下图所示：<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/36d9a6fe47d16.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/36d9a6fe47d16.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br><strong>五、配置完成后重启主压力机，查看远程启动，可查看到配置的远程负载机IP</strong><br>如下图：(主压力机最好，也加上1099端口，启动程序时必须先启动，jmeter.sever文件）<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/54a3a1430ec21.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/54a3a1430ec21.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br><strong>六、添加一个线程组，添加取样器-http请求，以访问百度为例，添加监听器-察看结果树</strong><br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/1b4ddeb0a1b7b.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/1b4ddeb0a1b7b.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/5f65fecee03bd.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/5f65fecee03bd.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br>至此，分布式并发的配置已经完成！<br><strong>七、遇到的问题</strong><br>任何事都不是一帆风顺的，配置过程中也可能遇到这样那样的问题，以下是我在配置过程中遇到的问题以及解决办法<br>1、启动jmeter-server服务时报下图的错误：<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/00933b9a544dc.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/00933b9a544dc.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br>解决办法：进入负载机的usr/local/apache-jmeter-5.1.1/bin目录，编辑vim jmeter.properties文件，有一行是这样的server.rmi.ssl.disable=false这行说明什么呢，就是让我们决定是不是要启动SSL。很明显，我的电脑上并没有这个，所以就不能启动。把这个改成server.rmi.ssl.disable=true，并取消注释就ok了<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/f0612c5f651ea.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/f0612c5f651ea.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br>2、远程启动时一直连接不上负载机<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/9cfc70df27fd4.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/9cfc70df27fd4.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br>解决办法：遇到这种情况时，可能存在多种因素，可以参考以下步骤逐一排查<br>（1）远程负载机的Jmeter-server是否启动成功；<br>（2）远程负载机是否处于联网状态；<br>（3）防火墙是否处于关闭状态：</p>
-<p>centos5/6开启和关闭防火墙命令：</p>
-<p>开启：service iptables start</p>
-<p>关闭：service iptables stop</p>
-<p>centos7开启和关闭防火墙命令：</p>
-<p>开启：systectl start firewalld.service</p>
-<p>关闭：systectl stop firewalld.service</p>
-<p>此方法为临时关闭，即时生效，重启后失效</p>
-<p>（4）主压力机和远程负载机的Jmeter版本是否一致；</p>
-<p>总结：小编也是一个性能测试初学者，在学习的过程中会遇到各种问题，遇到问题的时候不要慌，也不要上来就去问别人，自己要学会使用搜索引擎，实在不行再去问。解决问题的过程也是学习的过程，更能加深自己的印象！</p>
-]]></content>
-      <categories>
-        <category>Jmeter</category>
-      </categories>
-      <tags>
-        <tag>Jmeter</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>selenium通过pywin32库上传文件</title>
     <url>/2020/11/10/2020111001/</url>
     <content><![CDATA[<div class="note idea"><p>文件上传是所有UI自动化测试都要面对的一个头疼问题，今天博主在这里给大家分享下自己处理文件上传的经验</p></div>
@@ -75,6 +50,31 @@ else:
       </categories>
       <tags>
         <tag>pywin32</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Jmeter实现分布式并发</title>
+    <url>/2020/11/06/2020110601/</url>
+    <content><![CDATA[<div class="note idea"><p>在性能测试过程中，一旦进行高并发操作时就会出现以下尴尬场景，JMeter客户端卡死、请求错误或是超时等，为了解决这一问题，我们需要将一次大的操作分布在多个服务器上，由多个服务器来承担负载压力。</p></div>
+<a id="more"></a>
+<p><code>接下来我们就来看一下如何实现jmeter的分布式并发：</code><br><strong>一、需要在负载机上配置jdk环境和jmeter环境</strong><br>首先我们需要准备一个负载机，本次演示的负载机是博主在虚拟机上搭建的一个Linux服务器，Linux系统需要安装jdk（不知道如何配置jdk的请自行百度）然后配置Linux环境下的jmeter环境：</p>
+<p>1、官网下载jmeter的版本，<a href="https://mirrors.tuna.tsinghua.edu.cn/apache//jmeter/binaries/%EF%BC%8C%E6%88%91%E4%B8%8B%E8%BD%BD%E7%9A%84%E6%98%AFapache-jmeter-5.1.1.tgz">https://mirrors.tuna.tsinghua.edu.cn/apache//jmeter/binaries/，我下载的是apache-jmeter-5.1.1.tgz</a></p>
+<p>将下载的包放到/usr/local目录下（此目录可自行设置，一般安装包我都安装在这个目录下），进入此目录解压文件<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/9d9562bf1cbb0.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/9d9562bf1cbb0.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br>2、配置环境变量，进入根目录输入命令vim etc/profile,配置一下环境变量<br>export JMETER_HOME=/usr/local/apache-jmeter-5.1.1 (不要照搬，改为你自己的路径）<br>export PATH=$JMETER_HOME/bin:$PATH<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/820ebbd7823e6.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/820ebbd7823e6.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br>3、然后输入jmeter -v验证，如果出现以下界面，那么恭喜你Linux环境下jmeter就配置成功了<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/4844ef37b22a0.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/4844ef37b22a0.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br>4、接着进入jmeter的bin目录启动jmeter，命令：./jmeter.sh，可以看到成功启动<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/2615c0e84225c.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/2615c0e84225c.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br><strong>二、master（主压力机）在jmeter.properties中添加remote_hosts</strong><br>配置路径：…\apache-jmeter-5.0\bin 路径下的jmeter.properties；<br>remote_hosts=127.0.0.1 后面增加远程负载机的ip和端口号，如果需要添加多个，用逗号分隔就可以；<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/e16912e0d6b4b.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/e16912e0d6b4b.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br><strong>三、Slave（远程负载机）在jmeter.properties中添加server_port</strong><br>server_port=1099<br>server.rmi.localport=1099<br>备注：这里的端口号可以自定义，只要与主压力机里面配置的一致即可<br>进入负载机的usr/local/apache-jmeter-5.1.1/bin目录，编辑jmeter.properties文件<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/1ded601e8ade6.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/1ded601e8ade6.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/1b7d25d0ffbd2.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/1b7d25d0ffbd2.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br><strong>四、Slave（远程负载机）启动Jmeter-server</strong><br>命令：./jmeter-server -Djava.rmi.server.hostname=192.168.3.130（启动时必须加上后面的-Djava.rmi.server.hostname=192.168.3.130，ip为负载机ip，不然会报错）启动成功后如下图所示：<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/36d9a6fe47d16.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/36d9a6fe47d16.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br><strong>五、配置完成后重启主压力机，查看远程启动，可查看到配置的远程负载机IP</strong><br>如下图：(主压力机最好，也加上1099端口，启动程序时必须先启动，jmeter.sever文件）<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/54a3a1430ec21.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/54a3a1430ec21.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br><strong>六、添加一个线程组，添加取样器-http请求，以访问百度为例，添加监听器-察看结果树</strong><br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/1b4ddeb0a1b7b.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/1b4ddeb0a1b7b.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/5f65fecee03bd.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/5f65fecee03bd.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br>至此，分布式并发的配置已经完成！<br><strong>七、遇到的问题</strong><br>任何事都不是一帆风顺的，配置过程中也可能遇到这样那样的问题，以下是我在配置过程中遇到的问题以及解决办法<br>1、启动jmeter-server服务时报下图的错误：<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/00933b9a544dc.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/00933b9a544dc.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br>解决办法：进入负载机的usr/local/apache-jmeter-5.1.1/bin目录，编辑vim jmeter.properties文件，有一行是这样的server.rmi.ssl.disable=false这行说明什么呢，就是让我们决定是不是要启动SSL。很明显，我的电脑上并没有这个，所以就不能启动。把这个改成server.rmi.ssl.disable=true，并取消注释就ok了<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/f0612c5f651ea.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/f0612c5f651ea.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br>2、远程启动时一直连接不上负载机<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/9cfc70df27fd4.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/9cfc70df27fd4.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br>解决办法：遇到这种情况时，可能存在多种因素，可以参考以下步骤逐一排查<br>（1）远程负载机的Jmeter-server是否启动成功；<br>（2）远程负载机是否处于联网状态；<br>（3）防火墙是否处于关闭状态：</p>
+<p>centos5/6开启和关闭防火墙命令：</p>
+<p>开启：service iptables start</p>
+<p>关闭：service iptables stop</p>
+<p>centos7开启和关闭防火墙命令：</p>
+<p>开启：systectl start firewalld.service</p>
+<p>关闭：systectl stop firewalld.service</p>
+<p>此方法为临时关闭，即时生效，重启后失效</p>
+<p>（4）主压力机和远程负载机的Jmeter版本是否一致；</p>
+<p>总结：小编也是一个性能测试初学者，在学习的过程中会遇到各种问题，遇到问题的时候不要慌，也不要上来就去问别人，自己要学会使用搜索引擎，实在不行再去问。解决问题的过程也是学习的过程，更能加深自己的印象！</p>
+]]></content>
+      <categories>
+        <category>Jmeter</category>
+      </categories>
+      <tags>
+        <tag>Jmeter</tag>
       </tags>
   </entry>
   <entry>
@@ -384,6 +384,1249 @@ byte b3 = (byte) (b1 + b2);</code></pre>
 <ol>
 <li>boolean类型不能与其他基本数据类型相互转换。</li>
 </ol>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>java学习-IDEA工具&amp;数组</title>
+    <url>/2021/01/19/20210119004/</url>
+    <content><![CDATA[<h2 id="0-IDEA开发工具"><a href="#0-IDEA开发工具" class="headerlink" title="0.IDEA开发工具"></a>0.IDEA开发工具</h2><p>​    参见：IDEA工具安装详解.pdf</p>
+<h2 id="1-数组"><a href="#1-数组" class="headerlink" title="1.数组"></a>1.数组</h2><h3 id="1-1什么是数组【理解】"><a href="#1-1什么是数组【理解】" class="headerlink" title="1.1什么是数组【理解】"></a>1.1什么是数组【理解】</h3><p>​    数组就是存储数据长度固定的容器，存储多个数据的数据类型要一致。 </p>
+<h3 id="1-2数组定义格式【记忆】"><a href="#1-2数组定义格式【记忆】" class="headerlink" title="1.2数组定义格式【记忆】"></a>1.2数组定义格式【记忆】</h3><h4 id="1-2-1第一种"><a href="#1-2-1第一种" class="headerlink" title="1.2.1第一种"></a>1.2.1第一种</h4><p>​    数据类型[] 数组名</p>
+<p>​    示例：</p>
+<pre><code class="java">int[] arr;        
+double[] arr;      
+char[] arr;</code></pre>
+<h4 id="1-2-2第二种"><a href="#1-2-2第二种" class="headerlink" title="1.2.2第二种"></a>1.2.2第二种</h4><p>​    数据类型 数组名[]</p>
+<p>​    示例：</p>
+<pre><code class="java">int arr[];
+double arr[];
+char arr[];</code></pre>
+<h3 id="1-3数组动态初始化【应用】"><a href="#1-3数组动态初始化【应用】" class="headerlink" title="1.3数组动态初始化【应用】"></a>1.3数组动态初始化【应用】</h3><h4 id="1-3-1什么是动态初始化"><a href="#1-3-1什么是动态初始化" class="headerlink" title="1.3.1什么是动态初始化"></a>1.3.1什么是动态初始化</h4><p>​    数组动态初始化就是只给定数组的长度，由系统给出默认初始化值。</p>
+<h4 id="1-3-2动态初始化格式"><a href="#1-3-2动态初始化格式" class="headerlink" title="1.3.2动态初始化格式"></a>1.3.2动态初始化格式</h4><pre><code class="java">数据类型[] 数组名 = new 数据类型[数组长度];</code></pre>
+<pre><code class="java">int[] arr = new int[3];</code></pre>
+<h4 id="1-3-3动态初始化格式详解"><a href="#1-3-3动态初始化格式详解" class="headerlink" title="1.3.3动态初始化格式详解"></a>1.3.3动态初始化格式详解</h4><ul>
+<li><p>等号左边：</p>
+<ul>
+<li><p>int:数组的数据类型</p>
+</li>
+<li><p>[]:代表这是一个数组</p>
+</li>
+<li><p>arr:代表数组的名称</p>
+</li>
+</ul>
+</li>
+<li><p>等号右边：</p>
+<ul>
+<li><p>new:为数组开辟内存空间</p>
+</li>
+<li><p>int:数组的数据类型</p>
+</li>
+<li><p>[]:代表这是一个数组</p>
+</li>
+<li><p>5:代表数组的长度</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-4数组元素访问【应用】"><a href="#1-4数组元素访问【应用】" class="headerlink" title="1.4数组元素访问【应用】"></a>1.4数组元素访问【应用】</h3><h4 id="1-4-1什么是索引"><a href="#1-4-1什么是索引" class="headerlink" title="1.4.1什么是索引"></a>1.4.1什么是索引</h4><p>​    每一个存储到数组的元素，都会自动的拥有一个编号，从0开始。</p>
+<p>​    这个自动编号称为数组索引(index)，可以通过数组的索引访问到数组中的元素。     </p>
+<h4 id="1-4-2访问数组元素格式"><a href="#1-4-2访问数组元素格式" class="headerlink" title="1.4.2访问数组元素格式"></a>1.4.2访问数组元素格式</h4><pre><code class="java">数组名[索引];</code></pre>
+<h4 id="1-4-3示例代码"><a href="#1-4-3示例代码" class="headerlink" title="1.4.3示例代码"></a>1.4.3示例代码</h4><pre><code class="java">public class ArrayDemo &#123;
+    public static void main(String[] args) &#123;
+        int[] arr = new int[3];
+
+        //输出数组名
+        System.out.println(arr); //[I@880ec60
+
+        //输出数组中的元素
+        System.out.println(arr[0]);
+        System.out.println(arr[1]);
+        System.out.println(arr[2]);
+    &#125;
+&#125;</code></pre>
+<h3 id="1-5内存分配【理解】"><a href="#1-5内存分配【理解】" class="headerlink" title="1.5内存分配【理解】"></a>1.5内存分配【理解】</h3><h4 id="1-5-1内存概述"><a href="#1-5-1内存概述" class="headerlink" title="1.5.1内存概述"></a>1.5.1内存概述</h4><p>​    内存是计算机中的重要原件，临时存储区域，作用是运行程序。</p>
+<p>​    我们编写的程序是存放在硬盘中的，在硬盘中的程序是不会运行的。</p>
+<p>​    必须放进内存中才能运行，运行完毕后会清空内存。 </p>
+<p>​    Java虚拟机要运行程序，必须要对内存进行空间的分配和管理。 </p>
+<h4 id="1-5-2java中的内存分配"><a href="#1-5-2java中的内存分配" class="headerlink" title="1.5.2java中的内存分配"></a>1.5.2java中的内存分配</h4><ul>
+<li>目前我们只需要记住两个内存，分别是：栈内存和堆内存</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>区域名称</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>寄存器</td>
+<td>给CPU使用，和我们开发无关。</td>
+</tr>
+<tr>
+<td>本地方法栈</td>
+<td>JVM在使用操作系统功能的时候使用，和我们开发无关。</td>
+</tr>
+<tr>
+<td>方法区</td>
+<td>存储可以运行的class文件。</td>
+</tr>
+<tr>
+<td>堆内存</td>
+<td>存储对象或者数组，new来创建的，都存储在堆内存。</td>
+</tr>
+<tr>
+<td>方法栈</td>
+<td>方法运行时使用的内存，比如main方法运行，进入方法栈中执行。</td>
+</tr>
+</tbody></table>
+<h3 id="1-6单个数组的内存图【理解】"><a href="#1-6单个数组的内存图【理解】" class="headerlink" title="1.6单个数组的内存图【理解】"></a>1.6单个数组的内存图【理解】</h3><h3 id="1-7多个数组的内存图【理解】"><a href="#1-7多个数组的内存图【理解】" class="headerlink" title="1.7多个数组的内存图【理解】"></a>1.7多个数组的内存图【理解】</h3><h3 id="1-8多个数组指向相同内存图【理解】"><a href="#1-8多个数组指向相同内存图【理解】" class="headerlink" title="1.8多个数组指向相同内存图【理解】"></a>1.8多个数组指向相同内存图【理解】</h3><h3 id="1-9数组静态初始化【应用】"><a href="#1-9数组静态初始化【应用】" class="headerlink" title="1.9数组静态初始化【应用】"></a>1.9数组静态初始化【应用】</h3><h4 id="1-9-1什么是静态初始化"><a href="#1-9-1什么是静态初始化" class="headerlink" title="1.9.1什么是静态初始化"></a>1.9.1什么是静态初始化</h4><p>​    在创建数组时，直接将元素确定    </p>
+<h4 id="1-9-2静态初始化格式"><a href="#1-9-2静态初始化格式" class="headerlink" title="1.9.2静态初始化格式"></a>1.9.2静态初始化格式</h4><ul>
+<li><p>完整版格式</p>
+<pre><code class="java">数据类型[] 数组名 = new 数据类型[]&#123;元素1,元素2,...&#125;;</code></pre>
+</li>
+<li><p>简化版格式</p>
+<pre><code class="java">数据类型[] 数组名 = &#123;元素1,元素2,...&#125;;</code></pre>
+</li>
+</ul>
+<h4 id="1-9-3示例代码"><a href="#1-9-3示例代码" class="headerlink" title="1.9.3示例代码"></a>1.9.3示例代码</h4><pre><code class="java">public class ArrayDemo &#123;
+    public static void main(String[] args) &#123;
+        //定义数组
+        int[] arr = &#123;1, 2, 3&#125;;
+
+        //输出数组名
+        System.out.println(arr);
+
+        //输出数组中的元素
+        System.out.println(arr[0]);
+        System.out.println(arr[1]);
+        System.out.println(arr[2]);
+    &#125;
+&#125;</code></pre>
+<h3 id="1-10数组操作的两个常见小问题【应用】"><a href="#1-10数组操作的两个常见小问题【应用】" class="headerlink" title="1.10数组操作的两个常见小问题【应用】"></a>1.10数组操作的两个常见小问题【应用】</h3><h4 id="1-10-1索引越界异常"><a href="#1-10-1索引越界异常" class="headerlink" title="1.10.1索引越界异常"></a>1.10.1索引越界异常</h4><ul>
+<li><p>出现原因</p>
+<pre><code class="java">public class ArrayDemo &#123;
+    public static void main(String[] args) &#123;
+        int[] arr = new int[3];
+        System.out.println(arr[3]);
+    &#125;
+&#125;</code></pre>
+<p>数组长度为3，索引范围是0~2，但是我们却访问了一个3的索引。</p>
+<p>程序运行后，将会抛出ArrayIndexOutOfBoundsException 数组越界异常。在开发中，数组的越界异常是不能出现的，一旦出现了，就必须要修改我们编写的代码。 </p>
+</li>
+<li><p>解决方案</p>
+<p>将错误的索引修改为正确的索引范围即可！</p>
+</li>
+</ul>
+<h4 id="1-10-2空指针异常"><a href="#1-10-2空指针异常" class="headerlink" title="1.10.2空指针异常"></a>1.10.2空指针异常</h4><ul>
+<li><p>出现原因</p>
+<pre><code class="java">public class ArrayDemo &#123;
+    public static void main(String[] args) &#123;
+        int[] arr = new int[3];
+
+        //把null赋值给数组
+        arr = null;
+        System.out.println(arr[0]);
+    &#125;
+&#125;</code></pre>
+<p>arr = null 这行代码，意味着变量arr将不会再保存数组的内存地址，也就不允许再操作数组了，因此运行的时候会抛出 NullPointerException 空指针异常。在开发中，数组的越界异常是不能出现的，一旦出现了，就必须要修改我们编写的代码。</p>
+</li>
+<li><p>解决方案</p>
+<p>给数组一个真正的堆内存空间引用即可！</p>
+</li>
+</ul>
+<h3 id="1-11数组遍历【应用】"><a href="#1-11数组遍历【应用】" class="headerlink" title="1.11数组遍历【应用】"></a>1.11数组遍历【应用】</h3><ul>
+<li><p>数组遍历：就是将数组中的每个元素分别获取出来，就是遍历。遍历也是数组操作中的基石。</p>
+<pre><code class="java">public class ArrayTest01 &#123;
+    public static void main(String[] args) &#123;
+        int[] arr = &#123; 1, 2, 3, 4, 5 &#125;;
+        System.out.println(arr[0]);
+        System.out.println(arr[1]);
+        System.out.println(arr[2]);
+        System.out.println(arr[3]);
+        System.out.println(arr[4]);
+    &#125;
+&#125;</code></pre>
+<p>以上代码是可以将数组中每个元素全部遍历出来，但是如果数组元素非常多，这种写法肯定不行，因此我们需要改造成循环的写法。数组的索引是 0 到 lenght-1 ，可以作为循环的条件出现。 </p>
+<pre><code class="java">public class ArrayTest01 &#123;
+    public static void main(String[] args) &#123;
+        //定义数组
+        int[] arr = &#123;11, 22, 33, 44, 55&#125;;
+
+        //使用通用的遍历格式
+        for(int x = 0; x &lt; arr.length; x++) &#123;
+            System.out.println(arr[x]);
+        &#125;
+    &#125;
+&#125;</code></pre>
+</li>
+</ul>
+<h3 id="1-12数组最值【应用】"><a href="#1-12数组最值【应用】" class="headerlink" title="1.12数组最值【应用】"></a>1.12数组最值【应用】</h3><ul>
+<li><p>最大值获取：从数组的所有元素中找出最大值。</p>
+</li>
+<li><p>实现思路：</p>
+<ul>
+<li>定义变量，保存数组0索引上的元素</li>
+<li>遍历数组，获取出数组中的每个元素</li>
+<li>将遍历到的元素和保存数组0索引上值的变量进行比较</li>
+<li>如果数组元素的值大于了变量的值，变量记录住新的值</li>
+<li>数组循环遍历结束，变量保存的就是数组中的最大值 </li>
+</ul>
+</li>
+<li><p>代码实现：</p>
+<pre><code class="java">public class ArrayTest02 &#123;
+    public static void main(String[] args) &#123;
+        //定义数组
+        int[] arr = &#123;12, 45, 98, 73, 60&#125;;
+        //定义一个变量，用于保存最大值
+        //取数组中第一个数据作为变量的初始值
+        int max = arr[0];
+        //与数组中剩余的数据逐个比对，每次比对将最大值保存到变量中
+        for(int x=1; x&lt;arr.length; x++) &#123;
+            if(arr[x] &gt; max) &#123;
+                max = arr[x];
+            &#125;
+        &#125;
+        //循环结束后打印变量的值
+        System.out.println(&quot;max:&quot; + max);
+    &#125;
+&#125;</code></pre>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>java学习-switch&amp;循环语句</title>
+    <url>/2021/01/19/20210119003/</url>
+    <content><![CDATA[<h2 id="1-switch语句"><a href="#1-switch语句" class="headerlink" title="1. switch语句"></a>1. switch语句</h2><h3 id="1-1-switch语句结构（掌握）"><a href="#1-1-switch语句结构（掌握）" class="headerlink" title="1.1 switch语句结构（掌握）"></a>1.1 switch语句结构（掌握）</h3><ul>
+<li><p>格式</p>
+<pre><code class="java">switch (表达式) &#123;
+    case 1:
+        语句体1;
+        break;
+    case 2:
+        语句体2;
+        break;
+    ...
+    default:
+        语句体n+1;
+        break;
+&#125;</code></pre>
+</li>
+<li><p>执行流程：</p>
+<ul>
+<li>首先计算出表达式的值 </li>
+<li>其次，和case依次比较，一旦有对应的值，就会执行相应的语句，在执行的过程中，遇到break就会结 束。 </li>
+<li>最后，如果所有的case都和表达式的值不匹配，就会执行default语句体部分，然后程序结束掉。 </li>
+</ul>
+</li>
+</ul>
+<h3 id="1-2-switch语句练习-春夏秋冬（应用）"><a href="#1-2-switch语句练习-春夏秋冬（应用）" class="headerlink" title="1.2 switch语句练习-春夏秋冬（应用）"></a>1.2 switch语句练习-春夏秋冬（应用）</h3><ul>
+<li>需求：一年有12个月，分属于春夏秋冬4个季节，键盘录入一个月份，请用程序实现判断该月份属于哪个季节，并输出。 </li>
+<li>运行结果：</li>
+</ul>
+<pre><code>春：3、4、5
+夏：6、7、8
+秋：9、10、11
+冬：1、2、12</code></pre>
+<ul>
+<li>示例代码：</li>
+</ul>
+<pre><code class="java">public class Demo1 &#123;
+    public static void main(String[] args) &#123;
+        //键盘录入月份数据，使用变量接收
+        Scanner sc = new Scanner(System.in);
+        System.out.println(&quot;请输入一个月份：&quot;);
+        int month = sc.nextInt();
+        //case穿透
+        switch(month) &#123;
+            case 1:
+            case 2:
+            case 12:
+                System.out.println(&quot;冬季&quot;);
+                break;
+            case 3:
+            case 4:
+            case 5:
+                System.out.println(&quot;春季&quot;);
+                break;
+            case 6:
+            case 7:
+            case 8:
+                System.out.println(&quot;夏季&quot;);
+                break;
+            case 9:
+            case 10:
+            case 11:
+                System.out.println(&quot;秋季&quot;);
+                break;
+            default:
+                System.out.println(&quot;你输入的月份有误&quot;);
+        &#125;
+    &#125;
+&#125;</code></pre>
+<ul>
+<li>注意：如果switch中得case，没有对应break的话，则会出现case穿透的现象。</li>
+</ul>
+<h2 id="2-for循环"><a href="#2-for循环" class="headerlink" title="2. for循环"></a>2. for循环</h2><h3 id="2-1-for循环结构（掌握）"><a href="#2-1-for循环结构（掌握）" class="headerlink" title="2.1 for循环结构（掌握）"></a>2.1 for循环结构（掌握）</h3><ul>
+<li><p>循环：</p>
+<p>循环语句可以在满足循环条件的情况下，反复执行某一段代码，这段被重复执行的代码被称为循环体语句，当反复 执行这个循环体时，需要在合适的时候把循环判断条件修改为false，从而结束循环，否则循环将一直执行下去，形 成死循环。 </p>
+</li>
+<li><p>for循环格式：</p>
+</li>
+</ul>
+<pre><code class="java">for (初始化语句;条件判断语句;条件控制语句) &#123;
+    循环体语句;
+&#125;</code></pre>
+<ul>
+<li><p>格式解释：</p>
+<ul>
+<li>初始化语句：  用于表示循环开启时的起始状态，简单说就是循环开始的时候什么样</li>
+<li>条件判断语句：用于表示循环反复执行的条件，简单说就是判断循环是否能一直执行下去</li>
+<li>循环体语句：  用于表示循环反复执行的内容，简单说就是循环反复执行的事情</li>
+<li>条件控制语句：用于表示循环执行中每次变化的内容，简单说就是控制循环是否能执行下去</li>
+</ul>
+</li>
+<li><p>执行流程：</p>
+<p>①执行初始化语句</p>
+<p>②执行条件判断语句，看其结果是true还是false</p>
+<p>​             如果是false，循环结束</p>
+<p>​             如果是true，继续执行</p>
+<p>③执行循环体语句</p>
+<p>④执行条件控制语句</p>
+<p>⑤回到②继续</p>
+</li>
+</ul>
+<h3 id="2-2-for循环练习-输出数据（应用）"><a href="#2-2-for循环练习-输出数据（应用）" class="headerlink" title="2.2 for循环练习-输出数据（应用）"></a>2.2 for循环练习-输出数据（应用）</h3><ul>
+<li>需求：在控制台输出1-5和5-1的数据 </li>
+<li>示例代码：</li>
+</ul>
+<pre><code class="java">public class ForTest01 &#123;
+    public static void main(String[] args) &#123;
+        //需求：输出数据1-5
+        for(int i=1; i&lt;=5; i++) &#123;
+            System.out.println(i);
+        &#125;
+        System.out.println(&quot;--------&quot;);
+        //需求：输出数据5-1
+        for(int i=5; i&gt;=1; i--) &#123;
+            System.out.println(i);
+        &#125;
+    &#125;
+&#125;</code></pre>
+<h3 id="2-3-for循环练习-求和（应用）"><a href="#2-3-for循环练习-求和（应用）" class="headerlink" title="2.3 for循环练习-求和（应用）"></a>2.3 for循环练习-求和（应用）</h3><ul>
+<li>需求：求1-5之间的数据和，并把求和结果在控制台输出 </li>
+<li>示例代码：</li>
+</ul>
+<pre><code class="java">public class ForTest02 &#123;
+    public static void main(String[] args) &#123;
+        //求和的最终结果必须保存起来，需要定义一个变量，用于保存求和的结果，初始值为0
+        int sum = 0;
+        //从1开始到5结束的数据，使用循环结构完成
+        for(int i=1; i&lt;=5; i++) &#123;
+            //将反复进行的事情写入循环结构内部
+             // 此处反复进行的事情是将数据 i 加到用于保存最终求和的变量 sum 中
+            sum += i;
+            /*
+                sum += i;    sum = sum + i;
+                第一次：sum = sum + i = 0 + 1 = 1;
+                第二次：sum = sum + i = 1 + 2 = 3;
+                第三次：sum = sum + i = 3 + 3 = 6;
+                第四次：sum = sum + i = 6 + 4 = 10;
+                第五次：sum = sum + i = 10 + 5 = 15;
+            */
+        &#125;
+        //当循环执行完毕时，将最终数据打印出来
+        System.out.println(&quot;1-5之间的数据和是：&quot; + sum);
+    &#125;
+&#125;</code></pre>
+<ul>
+<li>本题要点：<ul>
+<li>今后遇到的需求中，如果带有求和二字，请立即联想到求和变量</li>
+<li>求和变量的定义位置，必须在循环外部，如果在循环内部则计算出的数据将是错误的</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-4-for循环练习-求偶数和（应用）"><a href="#2-4-for循环练习-求偶数和（应用）" class="headerlink" title="2.4 for循环练习-求偶数和（应用）"></a>2.4 for循环练习-求偶数和（应用）</h3><ul>
+<li>需求：求1-100之间的偶数和，并把求和结果在控制台输出 }</li>
+<li>示例代码：</li>
+</ul>
+<pre><code class="java">public class ForTest03 &#123;
+    public static void main(String[] args) &#123;
+        //求和的最终结果必须保存起来，需要定义一个变量，用于保存求和的结果，初始值为0
+        int sum = 0;
+        //对1-100的数据求和与1-5的数据求和几乎完全一样，仅仅是结束条件不同
+        for(int i=1; i&lt;=100; i++) &#123;
+            //对1-100的偶数求和，需要对求和操作添加限制条件，判断是否是偶数
+            if(i%2 == 0) &#123;
+                sum += i;
+            &#125;
+        &#125;
+        //当循环执行完毕时，将最终数据打印出来
+        System.out.println(&quot;1-100之间的偶数和是：&quot; + sum);
+    &#125;
+&#125;</code></pre>
+<h3 id="2-5-for循环练习-水仙花（应用）"><a href="#2-5-for循环练习-水仙花（应用）" class="headerlink" title="2.5 for循环练习-水仙花（应用）"></a>2.5 for循环练习-水仙花（应用）</h3><ul>
+<li>需求：在控制台输出所有的“水仙花数” </li>
+<li>解释：什么是水仙花数？<ul>
+<li>水仙花数，指的是一个三位数，个位、十位、百位的数字立方和等于原数<ul>
+<li>例如<code>153  3*3*3 + 5*5*5 + 1*1*1 = 153</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>思路：<ol>
+<li>获取所有的三位数，准备进行筛选，最小的三位数为100，最大的三位数为999，使用for循环获取</li>
+<li>获取每一个三位数的个位，十位，百位，做if语句判断是否是水仙花数</li>
+</ol>
+</li>
+<li>示例代码</li>
+</ul>
+<pre><code class="java">public class ForTest04 &#123;
+    public static void main(String[] args) &#123;
+        //输出所有的水仙花数必然要使用到循环，遍历所有的三位数，三位数从100开始，到999结束
+        for(int i=100; i&lt;1000; i++) &#123;
+            //在计算之前获取三位数中每个位上的值
+            int ge = i%10;
+            int shi = i/10%10;
+            int bai = i/10/10%10;
+
+            //判定条件是将三位数中的每个数值取出来，计算立方和后与原始数字比较是否相等
+            if(ge*ge*ge + shi*shi*shi + bai*bai*bai == i) &#123;
+                //输出满足条件的数字就是水仙花数
+                System.out.println(i);
+            &#125;
+        &#125;
+    &#125;
+&#125;</code></pre>
+<h3 id="2-6-for循环练习-统计水仙花数个数（应用）"><a href="#2-6-for循环练习-统计水仙花数个数（应用）" class="headerlink" title="2.6 for循环练习-统计水仙花数个数（应用）"></a>2.6 for循环练习-统计水仙花数个数（应用）</h3><ul>
+<li>需求：统计“水仙花数”一共有多少个，并在控制台输出个数 </li>
+<li>示例代码：</li>
+</ul>
+<pre><code class="java">public class ForTest05 &#123;
+    public static void main(String[] args) &#123;
+        //定义变量count，用于保存“水仙花数”的数量，初始值为0
+        int count = 0;
+        //输出所有的水仙花数必然要使用到循环，遍历所有的三位数，三位数从100开始，到999结束
+        for(int i=100; i&lt;1000; i++) &#123;
+            //在计算之前获取三位数中每个位上的值
+            int ge = i%10;
+            int shi = i/10%10;
+            int bai = i/10/10%10;
+            //在判定水仙花数的过程中，满足条件不再输出，更改为修改count的值，使count+1
+            if(ge*ge*ge + shi*shi*shi + bai*bai*bai == i) &#123;
+                count++;
+            &#125;
+        &#125;
+        //打印输出最终结果
+        System.out.println(&quot;水仙花共有：&quot; + count + &quot;个&quot;);
+    &#125;
+&#125;</code></pre>
+<ul>
+<li>本题要点：<ul>
+<li>今后如果需求带有统计xxx，请先想到计数器变量</li>
+<li>计数器变量定义的位置，必须在循环外部</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-while循环"><a href="#3-while循环" class="headerlink" title="3. while循环"></a>3. while循环</h2><h3 id="3-1-while结构（掌握）"><a href="#3-1-while结构（掌握）" class="headerlink" title="3.1 while结构（掌握）"></a>3.1 while结构（掌握）</h3><ul>
+<li><p>while循环完整格式：</p>
+<pre><code class="java">初始化语句;
+while (条件判断语句) &#123;
+    循环体语句;
+    条件控制语句;
+&#125;</code></pre>
+</li>
+<li><p>while循环执行流程：</p>
+<p>①执行初始化语句</p>
+<p>②执行条件判断语句，看其结果是true还是false</p>
+<p>​             如果是false，循环结束</p>
+<p>​             如果是true，继续执行</p>
+<p>③执行循环体语句</p>
+<p>④执行条件控制语句</p>
+<p>⑤回到②继续</p>
+</li>
+<li><p>示例代码：</p>
+</li>
+</ul>
+<pre><code class="java">public class WhileDemo &#123;
+    public static void main(String[] args) &#123;
+        //需求：在控制台输出5次&quot;HelloWorld&quot;
+        //for循环实现
+        for(int i=1; i&lt;=5; i++) &#123;
+            System.out.println(&quot;HelloWorld&quot;);
+        &#125;
+        System.out.println(&quot;--------&quot;);
+        //while循环实现
+        int j = 1;
+        while(j&lt;=5) &#123;
+            System.out.println(&quot;HelloWorld&quot;);
+            j++;
+        &#125;
+    &#125;
+&#125;</code></pre>
+<h3 id="3-2-while循环练习-珠穆朗玛峰（应用）"><a href="#3-2-while循环练习-珠穆朗玛峰（应用）" class="headerlink" title="3.2 while循环练习-珠穆朗玛峰（应用）"></a>3.2 while循环练习-珠穆朗玛峰（应用）</h3><ul>
+<li>需求：世界最高山峰是珠穆朗玛峰(8844.43米=8844430毫米)，假如我有一张足够大的纸，它的厚度是0.1毫米。请问，我折叠多少次，可以折成珠穆朗玛峰的高度?</li>
+<li>示例代码：</li>
+</ul>
+<pre><code class="java">public class WhileTest &#123;
+    public static void main(String[] args) &#123;
+        //定义一个计数器，初始值为0
+        int count = 0;
+        //定义纸张厚度
+        double paper = 0.1;
+        //定义珠穆朗玛峰的高度
+        int zf = 8844430;
+        //因为要反复折叠，所以要使用循环，但是不知道折叠多少次，这种情况下更适合使用while循环
+        //折叠的过程中当纸张厚度大于珠峰就停止了，因此继续执行的要求是纸张厚度小于珠峰高度
+        while(paper &lt;= zf) &#123;
+            //循环的执行过程中每次纸张折叠，纸张的厚度要加倍
+            paper *= 2;
+            //在循环中执行累加，对应折叠了多少次
+            count++;
+        &#125;
+        //打印计数器的值
+        System.out.println(&quot;需要折叠：&quot; + count + &quot;次&quot;);
+    &#125;
+&#125;</code></pre>
+<h2 id="4-循环细节"><a href="#4-循环细节" class="headerlink" title="4. 循环细节"></a>4. 循环细节</h2><h3 id="4-1-do…while循环结构（掌握）"><a href="#4-1-do…while循环结构（掌握）" class="headerlink" title="4.1 do…while循环结构（掌握）"></a>4.1 do…while循环结构（掌握）</h3><ul>
+<li><p>完整格式：</p>
+<pre><code class="java">初始化语句;
+do &#123;
+    循环体语句;
+    条件控制语句;
+&#125;while(条件判断语句);</code></pre>
+</li>
+<li><p>执行流程：</p>
+<p>① 执行初始化语句</p>
+<p>② 执行循环体语句</p>
+<p>③ 执行条件控制语句</p>
+<p>④ 执行条件判断语句，看其结果是true还是false</p>
+<p>如果是false，循环结束</p>
+<p>如果是true，继续执行</p>
+<p>⑤ 回到②继续</p>
+</li>
+<li><p>示例代码：</p>
+</li>
+</ul>
+<pre><code class="java">public class DoWhileDemo &#123;
+    public static void main(String[] args) &#123;
+        //需求：在控制台输出5次&quot;HelloWorld&quot;
+        //for循环实现
+        for(int i=1; i&lt;=5; i++) &#123;
+            System.out.println(&quot;HelloWorld&quot;);
+        &#125;
+        System.out.println(&quot;--------&quot;);
+        //do...while循环实现
+        int j = 1;
+        do &#123;
+            System.out.println(&quot;HelloWorld&quot;);
+            j++;
+        &#125;while(j&lt;=5);
+    &#125;
+&#125;</code></pre>
+<h3 id="4-2-三种循环的区别（理解）"><a href="#4-2-三种循环的区别（理解）" class="headerlink" title="4.2 三种循环的区别（理解）"></a>4.2 三种循环的区别（理解）</h3><ul>
+<li>三种循环的区别<ul>
+<li>for循环和while循环先判断条件是否成立，然后决定是否执行循环体（先判断后执行）</li>
+<li>do…while循环先执行一次循环体，然后判断条件是否成立，是否继续执行循环体（先执行后判断）</li>
+</ul>
+</li>
+<li>for循环和while的区别<ul>
+<li>条件控制语句所控制的自增变量，因为归属for循环的语法结构中，在for循环结束后，就不能再次被访问到了</li>
+<li>条件控制语句所控制的自增变量，对于while循环来说不归属其语法结构中，在while循环结束后，该变量还可以继续使用</li>
+</ul>
+</li>
+<li>死循环（无限循环）的三种格式<ol>
+<li>for(;;){}</li>
+<li>while(true){}</li>
+<li>do {} while(true);</li>
+</ol>
+</li>
+</ul>
+<h3 id="4-3-跳转控制语句（掌握）"><a href="#4-3-跳转控制语句（掌握）" class="headerlink" title="4.3 跳转控制语句（掌握）"></a>4.3 跳转控制语句（掌握）</h3><ul>
+<li>跳转控制语句（break）<ul>
+<li>跳出循环，结束循环</li>
+</ul>
+</li>
+<li>跳转控制语句（continue）<ul>
+<li>跳过本次循环，继续下次循环</li>
+</ul>
+</li>
+<li>注意： continue只能在循环中进行使用！</li>
+</ul>
+<h3 id="4-4-循环嵌套（理解）"><a href="#4-4-循环嵌套（理解）" class="headerlink" title="4.4 循环嵌套（理解）"></a>4.4 循环嵌套（理解）</h3><ul>
+<li><p>循环嵌套概述：在循环中，继续定义循环</p>
+</li>
+<li><p>示例代码：</p>
+<pre><code class="java">    public static void main(String[] args) &#123;
+        //外循环控制小时的范围，内循环控制分钟的范围
+        for (int hour = 0; hour &lt; 24; hour++) &#123;
+            for (int minute = 0; minute &lt; 60; minute++) &#123;
+                System.out.println(hour + &quot;时&quot; + minute + &quot;分&quot;);
+            &#125;
+            System.out.println(&quot;--------&quot;);
+        &#125;
+    &#125;</code></pre>
+</li>
+<li><p>理解：</p>
+<ul>
+<li>请反复理解这句话（整个内循环，就是外循环的一个循环体，内部循环体没有执行完毕，外循环是不会继续向下执行的）</li>
+</ul>
+</li>
+<li><p>结论：</p>
+<ul>
+<li>外循环执行一次，内循环执行一圈</li>
+</ul>
+</li>
+</ul>
+<h2 id="5-Random"><a href="#5-Random" class="headerlink" title="5. Random"></a>5. Random</h2><h3 id="5-1-Random产生随机数（掌握）"><a href="#5-1-Random产生随机数（掌握）" class="headerlink" title="5.1 Random产生随机数（掌握）"></a>5.1 Random产生随机数（掌握）</h3><ul>
+<li><p>概述：</p>
+<ul>
+<li>Random类似Scanner，也是Java提供好的API，内部提供了产生随机数的功能<ul>
+<li>API后续课程详细讲解，现在可以简单理解为Java已经写好的代码</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>使用步骤：</p>
+<ol>
+<li><p>导入包</p>
+<p>import java.util.Random;</p>
+</li>
+<li><p>创建对象</p>
+<p>Random r = new Random();</p>
+</li>
+<li><p>产生随机数</p>
+<p>int num = r.nextInt(10);</p>
+<p>解释： 10代表的是一个范围，如果括号写10，产生的随机数就是0-9，括号写20，参数的随机数则是0-19</p>
+</li>
+</ol>
+</li>
+<li><p>示例代码：</p>
+</li>
+</ul>
+<pre><code class="java">import java.util.Random;
+public class RandomDemo &#123;
+    public static void main(String[] args) &#123;
+        //创建对象
+        Random r = new Random();
+        //用循环获取10个随机数
+        for(int i=0; i&lt;10; i++) &#123;
+            //获取随机数
+            int number = r.nextInt(10);
+            System.out.println(&quot;number:&quot; + number);
+        &#125;
+        //需求：获取一个1-100之间的随机数
+        int x = r.nextInt(100) + 1;
+        System.out.println(x);
+    &#125;
+&#125;</code></pre>
+<h3 id="5-3-Random练习-猜数字（应用）"><a href="#5-3-Random练习-猜数字（应用）" class="headerlink" title="5.3 Random练习-猜数字（应用）"></a>5.3 Random练习-猜数字（应用）</h3><ul>
+<li><p>需求：</p>
+<p>程序自动生成一个1-100之间的数字，使用程序实现猜出这个数字是多少？</p>
+<p>当猜错的时候根据不同情况给出相应的提示</p>
+<p>A. 如果猜的数字比真实数字大，提示你猜的数据大了</p>
+<p>B. 如果猜的数字比真实数字小，提示你猜的数据小了</p>
+<p>C. 如果猜的数字与真实数字相等，提示恭喜你猜中了</p>
+</li>
+<li><p>示例代码：</p>
+</li>
+</ul>
+<pre><code class="java">import java.util.Random;
+import java.util.Scanner;
+
+public class RandomTest &#123;
+    public static void main(String[] args) &#123;
+        //要完成猜数字的游戏，首先需要有一个要猜的数字，使用随机数生成该数字，范围1到100
+        Random r = new Random();
+        int number = r.nextInt(100) + 1;
+
+        while(true) &#123;
+            //使用程序实现猜数字，每次均要输入猜测的数字值，需要使用键盘录入实现
+            Scanner sc = new Scanner(System.in);
+
+            System.out.println(&quot;请输入你要猜的数字：&quot;);
+            int guessNumber = sc.nextInt();
+
+            //比较输入的数字和系统产生的数据，需要使用分支语句。
+             //这里使用if..else..if..格式，根据不同情况进行猜测结果显示
+            if(guessNumber &gt; number) &#123;
+                System.out.println(&quot;你猜的数字&quot; + guessNumber + &quot;大了&quot;);
+            &#125; else if(guessNumber &lt; number) &#123;
+                System.out.println(&quot;你猜的数字&quot; + guessNumber + &quot;小了&quot;);
+            &#125; else &#123;
+                System.out.println(&quot;恭喜你猜中了&quot;);
+                break;
+            &#125;
+        &#125;
+
+    &#125;
+&#125;</code></pre>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>java学习-方法</title>
+    <url>/2021/01/19/20210119005/</url>
+    <content><![CDATA[<h2 id="1-方法概述"><a href="#1-方法概述" class="headerlink" title="1. 方法概述"></a>1. 方法概述</h2><h3 id="1-1-方法的概念（理解）"><a href="#1-1-方法的概念（理解）" class="headerlink" title="1.1 方法的概念（理解）"></a>1.1 方法的概念（理解）</h3><p>​    方法（method）是将具有独立功能的代码块组织成为一个整体，使其具有特殊功能的代码集</p>
+<ul>
+<li>注意：<ul>
+<li>方法必须先创建才可以使用，该过程成为方法定义</li>
+<li>方法创建后并不是直接可以运行的，需要手动使用后，才执行，该过程成为方法调用</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-方法的定义和调用"><a href="#2-方法的定义和调用" class="headerlink" title="2. 方法的定义和调用"></a>2. 方法的定义和调用</h2><h3 id="2-1-无参数方法定义和调用（掌握）"><a href="#2-1-无参数方法定义和调用（掌握）" class="headerlink" title="2.1 无参数方法定义和调用（掌握）"></a>2.1 无参数方法定义和调用（掌握）</h3><ul>
+<li><p>定义格式：</p>
+<pre><code class="java">public static void 方法名 (   ) &#123;
+    // 方法体;
+&#125;</code></pre>
+</li>
+<li><p>范例：</p>
+<pre><code class="java">public static void method (    ) &#123;
+    // 方法体;
+&#125;</code></pre>
+</li>
+<li><p>调用格式：</p>
+<pre><code class="java">方法名();</code></pre>
+</li>
+<li><p>范例：</p>
+<pre><code class="java">method();</code></pre>
+</li>
+<li><p>注意：</p>
+<p>​    方法必须先定义，后调用，否则程序将报错</p>
+</li>
+</ul>
+<h3 id="2-2-方法调用过程图解（理解）"><a href="#2-2-方法调用过程图解（理解）" class="headerlink" title="2.2 方法调用过程图解（理解）"></a>2.2 方法调用过程图解（理解）</h3><p><img src="C:\TeachRes\Java2019\JavaSe01\day05\4-笔记\笔记图片资源包\无参数方法调用图解.png" class="lazyload placeholder" data-srcset="C:\TeachRes\Java2019\JavaSe01\day05\4-笔记\笔记图片资源包\无参数方法调用图解.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="无参数方法调用图解"></p>
+<ul>
+<li>总结：每个方法在被调用执行的时候，都会进入栈内存，并且拥有自己独立的内存空间，方法内部代码调用完毕之后，会从栈内存中弹栈消失。</li>
+</ul>
+<h3 id="2-3-无参数方法的练习（应用）"><a href="#2-3-无参数方法的练习（应用）" class="headerlink" title="2.3 无参数方法的练习（应用）"></a>2.3 无参数方法的练习（应用）</h3><ul>
+<li>需求：设计一个方法用于打印两个数中的较大数 </li>
+<li>思路：<ul>
+<li>①定义一个方法，用于打印两个数字中的较大数，例如getMax() </li>
+<li>②方法中定义两个变量，用于保存两个数字 </li>
+<li>③使用分支语句分两种情况对两个数字的大小关系进行处理 </li>
+<li>④在main()方法中调用定义好的方法 </li>
+</ul>
+</li>
+<li>代码：</li>
+</ul>
+<pre><code class="java">public class MethodTest &#123;
+    public static void main(String[] args) &#123;
+        //在main()方法中调用定义好的方法
+        getMax();
+    &#125;
+
+    //定义一个方法，用于打印两个数字中的较大数，例如getMax()
+    public static void getMax() &#123;
+        //方法中定义两个变量，用于保存两个数字
+        int a = 10;
+        int b = 20;
+
+        //使用分支语句分两种情况对两个数字的大小关系进行处理
+        if(a &gt; b) &#123;
+            System.out.println(a);
+        &#125; else &#123;
+            System.out.println(b);
+        &#125;
+    &#125;
+&#125;</code></pre>
+<h2 id="3-带参数方法定义和调用"><a href="#3-带参数方法定义和调用" class="headerlink" title="3. 带参数方法定义和调用"></a>3. 带参数方法定义和调用</h2><h3 id="3-1-带参数方法定义和调用（掌握）"><a href="#3-1-带参数方法定义和调用（掌握）" class="headerlink" title="3.1 带参数方法定义和调用（掌握）"></a>3.1 带参数方法定义和调用（掌握）</h3><ul>
+<li><p>定义格式：</p>
+<p>参数：由数据类型和变量名组成 -  数据类型 变量名</p>
+<p>参数范例：int a</p>
+<pre><code class="java">public static void 方法名 (参数1) &#123;
+    方法体;
+&#125;
+
+public static void 方法名 (参数1, 参数2, 参数3...) &#123;
+    方法体;
+&#125;</code></pre>
+</li>
+<li><p>范例：</p>
+<pre><code class="java">public static void isEvenNumber(int number)&#123;
+    ...
+&#125;
+public static void getMax(int num1, int num2)&#123;
+    ...
+&#125;</code></pre>
+<ul>
+<li><p>注意：</p>
+<pre><code>  方法定义时，参数中的数据类型与变量名都不能缺少，缺少任意一个程序将报错
+
+  方法定义时，多个参数之间使用逗号( ，)分隔</code></pre>
+</li>
+</ul>
+</li>
+<li><p>调用格式：</p>
+<pre><code class="java">方法名(参数)；
+
+方法名(参数1,参数2);</code></pre>
+</li>
+<li><p>范例：</p>
+<pre><code class="java">isEvenNumber(10);
+
+getMax(10,20);</code></pre>
+<ul>
+<li>方法调用时，参数的数量与类型必须与方法定义中的设置相匹配，否则程序将报错 </li>
+</ul>
+</li>
+</ul>
+<h3 id="3-2-形参和实参（理解）"><a href="#3-2-形参和实参（理解）" class="headerlink" title="3.2 形参和实参（理解）"></a>3.2 形参和实参（理解）</h3><ol>
+<li>形参：方法定义中的参数</li>
+</ol>
+<p>​          等同于变量定义格式，例如：int number</p>
+<ol start="2">
+<li>实参：方法调用中的参数</li>
+</ol>
+<p>​          等同于使用变量或常量，例如： 10  number</p>
+<h3 id="3-3-带参数方法练习（应用）"><a href="#3-3-带参数方法练习（应用）" class="headerlink" title="3.3 带参数方法练习（应用）"></a>3.3 带参数方法练习（应用）</h3><ul>
+<li>需求：设计一个方法用于打印两个数中的较大数，数据来自于方法参数 }</li>
+<li>思路：<ul>
+<li>①定义一个方法，用于打印两个数字中的较大数，例如getMax() </li>
+<li>②为方法定义两个参数，用于接收两个数字 </li>
+<li>③使用分支语句分两种情况对两个数字的大小关系进行处理 </li>
+<li>④在main()方法中调用定义好的方法（使用常量）</li>
+<li>⑤在main()方法中调用定义好的方法（使用变量） </li>
+</ul>
+</li>
+<li>代码：</li>
+</ul>
+<pre><code class="java">public class MethodTest &#123;
+    public static void main(String[] args) &#123;
+        //在main()方法中调用定义好的方法（使用常量）
+        getMax(10,20);
+        //调用方法的时候，人家要几个，你就给几个，人家要什么类型的，你就给什么类型的
+        //getMax(30);
+        //getMax(10.0,20.0);
+
+        //在main()方法中调用定义好的方法（使用变量）
+        int a = 10;
+        int b = 20;
+        getMax(a, b);
+    &#125;
+
+    //定义一个方法，用于打印两个数字中的较大数，例如getMax()
+    //为方法定义两个参数，用于接收两个数字
+    public static void getMax(int a, int b) &#123;
+        //使用分支语句分两种情况对两个数字的大小关系进行处理
+        if(a &gt; b) &#123;
+            System.out.println(a);
+        &#125; else &#123;
+            System.out.println(b);
+        &#125;
+    &#125;
+&#125;</code></pre>
+<h2 id="4-带返回值方法的定义和调用"><a href="#4-带返回值方法的定义和调用" class="headerlink" title="4. 带返回值方法的定义和调用"></a>4. 带返回值方法的定义和调用</h2><h3 id="4-1-带返回值方法定义和调用（掌握）"><a href="#4-1-带返回值方法定义和调用（掌握）" class="headerlink" title="4.1 带返回值方法定义和调用（掌握）"></a>4.1 带返回值方法定义和调用（掌握）</h3><ul>
+<li><p>定义格式</p>
+<pre><code class="java">public static 数据类型 方法名 ( 参数 ) &#123; 
+    return 数据 ;
+&#125;</code></pre>
+</li>
+<li><p>范例</p>
+<pre><code class="java">public static boolean isEvenNumber( int number ) &#123;           
+    return true ;
+&#125;
+public static int getMax( int a, int b ) &#123;
+    return  100 ;
+&#125;</code></pre>
+<ul>
+<li>注意：<ul>
+<li>方法定义时return后面的返回值与方法定义上的数据类型要匹配，否则程序将报错</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>调用格式</p>
+<pre><code class="java">方法名 ( 参数 ) ;
+数据类型 变量名 = 方法名 ( 参数 ) ;</code></pre>
+</li>
+<li><p>范例</p>
+<pre><code class="java">isEvenNumber ( 5 ) ;
+boolean  flag =  isEvenNumber ( 5 ); </code></pre>
+<ul>
+<li>注意：<ul>
+<li>方法的返回值通常会使用变量接收，否则该返回值将无意义</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-2-带返回值方法练习（应用）"><a href="#4-2-带返回值方法练习（应用）" class="headerlink" title="4.2 带返回值方法练习（应用）"></a>4.2 带返回值方法练习（应用）</h3><ul>
+<li><p>需求：设计一个方法可以获取两个数的较大值，数据来自于参数</p>
+</li>
+<li><p>思路：</p>
+<ul>
+<li>①定义一个方法，用于获取两个数字中的较大数 </li>
+<li>②使用分支语句分两种情况对两个数字的大小关系进行处理 </li>
+<li>③根据题设分别设置两种情况下对应的返回结果 </li>
+<li>④在main()方法中调用定义好的方法并使用变量保存 </li>
+<li>⑤在main()方法中调用定义好的方法并直接打印结果 </li>
+</ul>
+</li>
+<li><p>代码：</p>
+<pre><code class="java">public class MethodTest &#123;
+    public static void main(String[] args) &#123;
+        //在main()方法中调用定义好的方法并使用变量保存
+        int result = getMax(10,20);
+        System.out.println(result);
+
+        //在main()方法中调用定义好的方法并直接打印结果
+        System.out.println(getMax(10,20));
+    &#125;
+
+    //定义一个方法，用于获取两个数字中的较大数
+    public static int getMax(int a, int b) &#123;
+        //使用分支语句分两种情况对两个数字的大小关系进行处理
+        //根据题设分别设置两种情况下对应的返回结果
+        if(a &gt; b) &#123;
+            return a;
+        &#125; else &#123;
+            return b;
+        &#125;
+    &#125;
+&#125;</code></pre>
+</li>
+</ul>
+<h2 id="5-方法的注意事项"><a href="#5-方法的注意事项" class="headerlink" title="5. 方法的注意事项"></a>5. 方法的注意事项</h2><h3 id="5-1-方法的注意事项（掌握）"><a href="#5-1-方法的注意事项（掌握）" class="headerlink" title="5.1 方法的注意事项（掌握）"></a>5.1 方法的注意事项（掌握）</h3><ul>
+<li><p>方法不能嵌套定义</p>
+<ul>
+<li><p>示例代码：</p>
+<pre><code class="java">public class MethodDemo &#123;
+    public static void main(String[] args) &#123;
+
+    &#125;
+
+    public static void methodOne() &#123;
+        public static void methodTwo() &#123;
+               // 这里会引发编译错误!!!
+        &#125;
+    &#125;
+&#125;</code></pre>
+</li>
+</ul>
+</li>
+<li><p>void表示无返回值，可以省略return，也可以单独的书写return，后面不加数据</p>
+<ul>
+<li><p>示例代码：</p>
+<pre><code class="java">public class MethodDemo &#123;
+    public static void main(String[] args) &#123;
+
+    &#125;
+    public static void methodTwo() &#123;
+        //return 100; 编译错误，因为没有具体返回值类型
+        return;    
+        //System.out.println(100); return语句后面不能跟数据或代码
+    &#125;
+&#125;</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="5-2-方法的通用格式（掌握）"><a href="#5-2-方法的通用格式（掌握）" class="headerlink" title="5.2 方法的通用格式（掌握）"></a>5.2 方法的通用格式（掌握）</h3><ul>
+<li><p>格式：</p>
+<pre><code class="java">public static 返回值类型 方法名(参数) &#123;
+   方法体; 
+   return 数据 ;
+&#125;</code></pre>
+</li>
+<li><p>解释：</p>
+<ul>
+<li><p>public static     修饰符，目前先记住这个格式</p>
+<p>   返回值类型    方法操作完毕之后返回的数据的数据类型</p>
+<p>​            如果方法操作完毕，没有数据返回，这里写void，而且方法体中一般不写return</p>
+<p>   方法名        调用方法时候使用的标识</p>
+<p>   参数        由数据类型和变量名组成，多个参数之间用逗号隔开</p>
+<p>   方法体        完成功能的代码块</p>
+<p>   return        如果方法操作完毕，有数据返回，用于把数据返回给调用者</p>
+</li>
+</ul>
+</li>
+<li><p>定义方法时，要做到两个明确</p>
+<ul>
+<li>明确返回值类型：主要是明确方法操作完毕之后是否有数据返回，如果没有，写void；如果有，写对应的数据类型</li>
+<li>明确参数：主要是明确参数的类型和数量</li>
+</ul>
+</li>
+<li><p>调用方法时的注意：</p>
+<ul>
+<li>void类型的方法，直接调用即可</li>
+<li>非void类型的方法，推荐用变量接收调用</li>
+</ul>
+</li>
+</ul>
+<h2 id="6-方法重载"><a href="#6-方法重载" class="headerlink" title="6. 方法重载"></a>6. 方法重载</h2><h3 id="6-1-方法重载（理解）"><a href="#6-1-方法重载（理解）" class="headerlink" title="6.1 方法重载（理解）"></a>6.1 方法重载（理解）</h3><ul>
+<li><p>方法重载概念</p>
+<p>方法重载指同一个类中定义的多个方法之间的关系，满足下列条件的多个方法相互构成重载</p>
+<ul>
+<li>多个方法在同一个类中</li>
+<li>多个方法具有相同的方法名</li>
+<li>多个方法的参数不相同，类型不同或者数量不同</li>
+</ul>
+</li>
+<li><p>注意：</p>
+<ul>
+<li>重载仅对应方法的定义，与方法的调用无关，调用方式参照标准格式</li>
+<li>重载仅针对同一个类中方法的名称与参数进行识别，与返回值无关，换句话说不能通过返回值来判定两个方法是否相互构成重载</li>
+</ul>
+</li>
+<li><p>正确范例：</p>
+<pre><code class="java">public class MethodDemo &#123;
+    public static void fn(int a) &#123;
+        //方法体
+    &#125;
+    public static int fn(double a) &#123;
+        //方法体
+    &#125;
+&#125;
+
+public class MethodDemo &#123;
+    public static float fn(int a) &#123;
+        //方法体
+    &#125;
+    public static int fn(int a , int b) &#123;
+        //方法体
+    &#125;
+&#125;</code></pre>
+</li>
+<li><p>错误范例：</p>
+<pre><code class="java">public class MethodDemo &#123;
+    public static void fn(int a) &#123;
+        //方法体
+    &#125;
+    public static int fn(int a) &#123;     /*错误原因：重载与返回值无关*/
+        //方法体
+    &#125;
+&#125;
+
+public class MethodDemo01 &#123;
+    public static void fn(int a) &#123;
+        //方法体
+    &#125;
+&#125; 
+public class MethodDemo02 &#123;
+    public static int fn(double a) &#123; /*错误原因：这是两个类的两个fn方法*/
+        //方法体
+    &#125;
+&#125;</code></pre>
+</li>
+</ul>
+<h3 id="6-2-方法重载练习（掌握）"><a href="#6-2-方法重载练习（掌握）" class="headerlink" title="6.2 方法重载练习（掌握）"></a>6.2 方法重载练习（掌握）</h3><ul>
+<li><p>需求：使用方法重载的思想，设计比较两个整数是否相同的方法，兼容全整数类型（byte,short,int,long） </p>
+</li>
+<li><p>思路：</p>
+<ul>
+<li>①定义比较两个数字的是否相同的方法compare()方法，参数选择两个int型参数</li>
+<li>②定义对应的重载方法，变更对应的参数类型，参数变更为两个long型参数</li>
+<li>③定义所有的重载方法，两个byte类型与两个short类型参数 </li>
+<li>④完成方法的调用，测试运行结果 </li>
+</ul>
+</li>
+<li><p>代码：</p>
+<pre><code class="java">public class MethodTest &#123;
+    public static void main(String[] args) &#123;
+        //调用方法
+        System.out.println(compare(10, 20));
+        System.out.println(compare((byte) 10, (byte) 20));
+        System.out.println(compare((short) 10, (short) 20));
+        System.out.println(compare(10L, 20L));
+    &#125;
+
+    //int
+    public static boolean compare(int a, int b) &#123;
+        System.out.println(&quot;int&quot;);
+        return a == b;
+    &#125;
+
+    //byte
+    public static boolean compare(byte a, byte b) &#123;
+        System.out.println(&quot;byte&quot;);
+        return a == b;
+    &#125;
+
+    //short
+    public static boolean compare(short a, short b) &#123;
+        System.out.println(&quot;short&quot;);
+        return a == b;
+    &#125;
+
+    //long
+    public static boolean compare(long a, long b) &#123;
+        System.out.println(&quot;long&quot;);
+        return a == b;
+    &#125;
+
+&#125;</code></pre>
+</li>
+</ul>
+<h2 id="7-方法的参数传递"><a href="#7-方法的参数传递" class="headerlink" title="7. 方法的参数传递"></a>7. 方法的参数传递</h2><h3 id="7-1-方法参数传递基本类型（理解）"><a href="#7-1-方法参数传递基本类型（理解）" class="headerlink" title="7.1 方法参数传递基本类型（理解）"></a>7.1 方法参数传递基本类型（理解）</h3><ul>
+<li><p>测试代码：</p>
+<pre><code class="java">public class ArgsDemo01 &#123;
+    public static void main(String[] args) &#123;
+        int number = 100;
+        System.out.println(&quot;调用change方法前：&quot; + number);
+        change(number);
+        System.out.println(&quot;调用change方法后：&quot; + number);
+    &#125;
+
+    public static void change(int number) &#123;
+        number = 200;
+    &#125;
+&#125;
+</code></pre>
+</li>
+<li><p>结论：</p>
+<ul>
+<li>基本数据类型的参数，形式参数的改变，不影响实际参数 </li>
+</ul>
+</li>
+<li><p>结论依据：</p>
+<ul>
+<li><p>每个方法在栈内存中，都会有独立的栈空间，方法运行结束后就会弹栈消失</p>
+<p><img src="C:\TeachRes\Java2019\JavaSe01\day05\4-笔记\笔记图片资源包\方法传参-基本数据类型.png" class="lazyload placeholder" data-srcset="C:\TeachRes\Java2019\JavaSe01\day05\4-笔记\笔记图片资源包\方法传参-基本数据类型.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="方法传参-基本数据类型"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="7-2-方法参数传递引用类型（理解）"><a href="#7-2-方法参数传递引用类型（理解）" class="headerlink" title="7.2 方法参数传递引用类型（理解）"></a>7.2 方法参数传递引用类型（理解）</h3><ul>
+<li><p>测试代码：</p>
+<pre><code class="java">public class ArgsDemo02 &#123;
+    public static void main(String[] args) &#123;
+        int[] arr = &#123;10, 20, 30&#125;;
+        System.out.println(&quot;调用change方法前：&quot; + arr[1]);
+        change(arr);
+        System.out.println(&quot;调用change方法后：&quot; + arr[1]);
+    &#125;
+
+    public static void change(int[] arr) &#123;
+        arr[1] = 200;
+    &#125;
+&#125;
+</code></pre>
+</li>
+<li><p>结论：</p>
+<ul>
+<li>对于引用类型的参数，形式参数的改变，影响实际参数的值 </li>
+</ul>
+</li>
+<li><p>结论依据：</p>
+<ul>
+<li><p>引用数据类型的传参，传入的是地址值，内存中会造成两个引用指向同一个内存的效果，所以即使方法弹栈，堆内存中的数据也已经是改变后的结果 </p>
+<p>  <img src="C:\TeachRes\Java2019\JavaSe01\day05\4-笔记\笔记图片资源包\方法传参-引用数据类型.png" class="lazyload placeholder" data-srcset="C:\TeachRes\Java2019\JavaSe01\day05\4-笔记\笔记图片资源包\方法传参-引用数据类型.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="方法传参-引用数据类型"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="7-3-数组遍历（应用）"><a href="#7-3-数组遍历（应用）" class="headerlink" title="7.3 数组遍历（应用）"></a>7.3 数组遍历（应用）</h3><ul>
+<li><p>需求：设计一个方法用于数组遍历，要求遍历的结果是在一行上的。例如：[11, 22, 33, 44, 55] </p>
+</li>
+<li><p>思路：</p>
+<ul>
+<li><p>①因为要求结果在一行上输出，所以这里需要在学习一个新的输出语句System.out.print(“内容”);</p>
+<p>System.out.println(“内容”); 输出内容并换行</p>
+<p>System.out.print(“内容”); 输出内容不换行</p>
+<p>System.out.println(); 起到换行的作用</p>
+</li>
+<li><p>②定义一个数组，用静态初始化完成数组元素初始化</p>
+</li>
+<li><p>③定义一个方法，用数组遍历通用格式对数组进行遍历</p>
+</li>
+<li><p>④用新的输出语句修改遍历操作</p>
+</li>
+<li><p>⑤调用遍历方法</p>
+</li>
+</ul>
+</li>
+<li><p>代码：</p>
+<pre><code class="java">public class MethodTest01 &#123;
+    public static void main(String[] args) &#123;
+        //定义一个数组，用静态初始化完成数组元素初始化
+        int[] arr = &#123;11, 22, 33, 44, 55&#125;;
+
+        //调用方法
+        printArray(arr);
+    &#125;
+
+    //定义一个方法，用数组遍历通用格式对数组进行遍历
+    /*
+        两个明确：
+            返回值类型：void
+            参数：int[] arr
+     */
+    public static void printArray(int[] arr) &#123;
+        System.out.print(&quot;[&quot;);
+        for(int x=0; x&lt;arr.length; x++) &#123;
+            if(x == arr.length-1) &#123;
+                System.out.print(arr[x]);
+            &#125; else &#123;
+                System.out.print(arr[x]+&quot;, &quot;);
+            &#125;
+        &#125;
+        System.out.println(&quot;]&quot;);
+    &#125;
+&#125;</code></pre>
+</li>
+</ul>
+<h3 id="7-4-数组最大值（应用）"><a href="#7-4-数组最大值（应用）" class="headerlink" title="7.4 数组最大值（应用）"></a>7.4 数组最大值（应用）</h3><ul>
+<li><p>需求：设计一个方法用于获取数组中元素的最大值 </p>
+</li>
+<li><p>思路：</p>
+<ul>
+<li>①定义一个数组，用静态初始化完成数组元素初始化</li>
+<li>②定义一个方法，用来获取数组中的最大值，最值的认知和讲解我们在数组中已经讲解过了</li>
+<li>③调用获取最大值方法，用变量接收返回结果</li>
+<li>④把结果输出在控制台</li>
+</ul>
+</li>
+<li><p>代码：</p>
+<pre><code class="java">public class MethodTest02 &#123;
+    public static void main(String[] args) &#123;
+        //定义一个数组，用静态初始化完成数组元素初始化
+        int[] arr = &#123;12, 45, 98, 73, 60&#125;;
+
+        //调用获取最大值方法，用变量接收返回结果
+        int number = getMax(arr);
+
+        //把结果输出在控制台
+        System.out.println(&quot;number:&quot; + number);
+    &#125;
+
+    //定义一个方法，用来获取数组中的最大值
+    /*
+        两个明确：
+            返回值类型：int
+            参数：int[] arr
+     */
+    public static int getMax(int[] arr) &#123;
+        int max = arr[0];
+
+        for(int x=1; x&lt;arr.length; x++) &#123;
+            if(arr[x] &gt; max) &#123;
+                max = arr[x];
+            &#125;
+        &#125;
+        return max;
+    &#125;
+&#125;</code></pre>
+</li>
+</ul>
 ]]></content>
       <categories>
         <category>Java</category>
@@ -957,1249 +2200,6 @@ public class IfTest02 &#123;
         &#125;
     &#125;
 &#125;</code></pre>
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>java学习-switch&amp;循环语句</title>
-    <url>/2021/01/19/20210119003/</url>
-    <content><![CDATA[<h2 id="1-switch语句"><a href="#1-switch语句" class="headerlink" title="1. switch语句"></a>1. switch语句</h2><h3 id="1-1-switch语句结构（掌握）"><a href="#1-1-switch语句结构（掌握）" class="headerlink" title="1.1 switch语句结构（掌握）"></a>1.1 switch语句结构（掌握）</h3><ul>
-<li><p>格式</p>
-<pre><code class="java">switch (表达式) &#123;
-    case 1:
-        语句体1;
-        break;
-    case 2:
-        语句体2;
-        break;
-    ...
-    default:
-        语句体n+1;
-        break;
-&#125;</code></pre>
-</li>
-<li><p>执行流程：</p>
-<ul>
-<li>首先计算出表达式的值 </li>
-<li>其次，和case依次比较，一旦有对应的值，就会执行相应的语句，在执行的过程中，遇到break就会结 束。 </li>
-<li>最后，如果所有的case都和表达式的值不匹配，就会执行default语句体部分，然后程序结束掉。 </li>
-</ul>
-</li>
-</ul>
-<h3 id="1-2-switch语句练习-春夏秋冬（应用）"><a href="#1-2-switch语句练习-春夏秋冬（应用）" class="headerlink" title="1.2 switch语句练习-春夏秋冬（应用）"></a>1.2 switch语句练习-春夏秋冬（应用）</h3><ul>
-<li>需求：一年有12个月，分属于春夏秋冬4个季节，键盘录入一个月份，请用程序实现判断该月份属于哪个季节，并输出。 </li>
-<li>运行结果：</li>
-</ul>
-<pre><code>春：3、4、5
-夏：6、7、8
-秋：9、10、11
-冬：1、2、12</code></pre>
-<ul>
-<li>示例代码：</li>
-</ul>
-<pre><code class="java">public class Demo1 &#123;
-    public static void main(String[] args) &#123;
-        //键盘录入月份数据，使用变量接收
-        Scanner sc = new Scanner(System.in);
-        System.out.println(&quot;请输入一个月份：&quot;);
-        int month = sc.nextInt();
-        //case穿透
-        switch(month) &#123;
-            case 1:
-            case 2:
-            case 12:
-                System.out.println(&quot;冬季&quot;);
-                break;
-            case 3:
-            case 4:
-            case 5:
-                System.out.println(&quot;春季&quot;);
-                break;
-            case 6:
-            case 7:
-            case 8:
-                System.out.println(&quot;夏季&quot;);
-                break;
-            case 9:
-            case 10:
-            case 11:
-                System.out.println(&quot;秋季&quot;);
-                break;
-            default:
-                System.out.println(&quot;你输入的月份有误&quot;);
-        &#125;
-    &#125;
-&#125;</code></pre>
-<ul>
-<li>注意：如果switch中得case，没有对应break的话，则会出现case穿透的现象。</li>
-</ul>
-<h2 id="2-for循环"><a href="#2-for循环" class="headerlink" title="2. for循环"></a>2. for循环</h2><h3 id="2-1-for循环结构（掌握）"><a href="#2-1-for循环结构（掌握）" class="headerlink" title="2.1 for循环结构（掌握）"></a>2.1 for循环结构（掌握）</h3><ul>
-<li><p>循环：</p>
-<p>循环语句可以在满足循环条件的情况下，反复执行某一段代码，这段被重复执行的代码被称为循环体语句，当反复 执行这个循环体时，需要在合适的时候把循环判断条件修改为false，从而结束循环，否则循环将一直执行下去，形 成死循环。 </p>
-</li>
-<li><p>for循环格式：</p>
-</li>
-</ul>
-<pre><code class="java">for (初始化语句;条件判断语句;条件控制语句) &#123;
-    循环体语句;
-&#125;</code></pre>
-<ul>
-<li><p>格式解释：</p>
-<ul>
-<li>初始化语句：  用于表示循环开启时的起始状态，简单说就是循环开始的时候什么样</li>
-<li>条件判断语句：用于表示循环反复执行的条件，简单说就是判断循环是否能一直执行下去</li>
-<li>循环体语句：  用于表示循环反复执行的内容，简单说就是循环反复执行的事情</li>
-<li>条件控制语句：用于表示循环执行中每次变化的内容，简单说就是控制循环是否能执行下去</li>
-</ul>
-</li>
-<li><p>执行流程：</p>
-<p>①执行初始化语句</p>
-<p>②执行条件判断语句，看其结果是true还是false</p>
-<p>​             如果是false，循环结束</p>
-<p>​             如果是true，继续执行</p>
-<p>③执行循环体语句</p>
-<p>④执行条件控制语句</p>
-<p>⑤回到②继续</p>
-</li>
-</ul>
-<h3 id="2-2-for循环练习-输出数据（应用）"><a href="#2-2-for循环练习-输出数据（应用）" class="headerlink" title="2.2 for循环练习-输出数据（应用）"></a>2.2 for循环练习-输出数据（应用）</h3><ul>
-<li>需求：在控制台输出1-5和5-1的数据 </li>
-<li>示例代码：</li>
-</ul>
-<pre><code class="java">public class ForTest01 &#123;
-    public static void main(String[] args) &#123;
-        //需求：输出数据1-5
-        for(int i=1; i&lt;=5; i++) &#123;
-            System.out.println(i);
-        &#125;
-        System.out.println(&quot;--------&quot;);
-        //需求：输出数据5-1
-        for(int i=5; i&gt;=1; i--) &#123;
-            System.out.println(i);
-        &#125;
-    &#125;
-&#125;</code></pre>
-<h3 id="2-3-for循环练习-求和（应用）"><a href="#2-3-for循环练习-求和（应用）" class="headerlink" title="2.3 for循环练习-求和（应用）"></a>2.3 for循环练习-求和（应用）</h3><ul>
-<li>需求：求1-5之间的数据和，并把求和结果在控制台输出 </li>
-<li>示例代码：</li>
-</ul>
-<pre><code class="java">public class ForTest02 &#123;
-    public static void main(String[] args) &#123;
-        //求和的最终结果必须保存起来，需要定义一个变量，用于保存求和的结果，初始值为0
-        int sum = 0;
-        //从1开始到5结束的数据，使用循环结构完成
-        for(int i=1; i&lt;=5; i++) &#123;
-            //将反复进行的事情写入循环结构内部
-             // 此处反复进行的事情是将数据 i 加到用于保存最终求和的变量 sum 中
-            sum += i;
-            /*
-                sum += i;    sum = sum + i;
-                第一次：sum = sum + i = 0 + 1 = 1;
-                第二次：sum = sum + i = 1 + 2 = 3;
-                第三次：sum = sum + i = 3 + 3 = 6;
-                第四次：sum = sum + i = 6 + 4 = 10;
-                第五次：sum = sum + i = 10 + 5 = 15;
-            */
-        &#125;
-        //当循环执行完毕时，将最终数据打印出来
-        System.out.println(&quot;1-5之间的数据和是：&quot; + sum);
-    &#125;
-&#125;</code></pre>
-<ul>
-<li>本题要点：<ul>
-<li>今后遇到的需求中，如果带有求和二字，请立即联想到求和变量</li>
-<li>求和变量的定义位置，必须在循环外部，如果在循环内部则计算出的数据将是错误的</li>
-</ul>
-</li>
-</ul>
-<h3 id="2-4-for循环练习-求偶数和（应用）"><a href="#2-4-for循环练习-求偶数和（应用）" class="headerlink" title="2.4 for循环练习-求偶数和（应用）"></a>2.4 for循环练习-求偶数和（应用）</h3><ul>
-<li>需求：求1-100之间的偶数和，并把求和结果在控制台输出 }</li>
-<li>示例代码：</li>
-</ul>
-<pre><code class="java">public class ForTest03 &#123;
-    public static void main(String[] args) &#123;
-        //求和的最终结果必须保存起来，需要定义一个变量，用于保存求和的结果，初始值为0
-        int sum = 0;
-        //对1-100的数据求和与1-5的数据求和几乎完全一样，仅仅是结束条件不同
-        for(int i=1; i&lt;=100; i++) &#123;
-            //对1-100的偶数求和，需要对求和操作添加限制条件，判断是否是偶数
-            if(i%2 == 0) &#123;
-                sum += i;
-            &#125;
-        &#125;
-        //当循环执行完毕时，将最终数据打印出来
-        System.out.println(&quot;1-100之间的偶数和是：&quot; + sum);
-    &#125;
-&#125;</code></pre>
-<h3 id="2-5-for循环练习-水仙花（应用）"><a href="#2-5-for循环练习-水仙花（应用）" class="headerlink" title="2.5 for循环练习-水仙花（应用）"></a>2.5 for循环练习-水仙花（应用）</h3><ul>
-<li>需求：在控制台输出所有的“水仙花数” </li>
-<li>解释：什么是水仙花数？<ul>
-<li>水仙花数，指的是一个三位数，个位、十位、百位的数字立方和等于原数<ul>
-<li>例如<code>153  3*3*3 + 5*5*5 + 1*1*1 = 153</code></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>思路：<ol>
-<li>获取所有的三位数，准备进行筛选，最小的三位数为100，最大的三位数为999，使用for循环获取</li>
-<li>获取每一个三位数的个位，十位，百位，做if语句判断是否是水仙花数</li>
-</ol>
-</li>
-<li>示例代码</li>
-</ul>
-<pre><code class="java">public class ForTest04 &#123;
-    public static void main(String[] args) &#123;
-        //输出所有的水仙花数必然要使用到循环，遍历所有的三位数，三位数从100开始，到999结束
-        for(int i=100; i&lt;1000; i++) &#123;
-            //在计算之前获取三位数中每个位上的值
-            int ge = i%10;
-            int shi = i/10%10;
-            int bai = i/10/10%10;
-
-            //判定条件是将三位数中的每个数值取出来，计算立方和后与原始数字比较是否相等
-            if(ge*ge*ge + shi*shi*shi + bai*bai*bai == i) &#123;
-                //输出满足条件的数字就是水仙花数
-                System.out.println(i);
-            &#125;
-        &#125;
-    &#125;
-&#125;</code></pre>
-<h3 id="2-6-for循环练习-统计水仙花数个数（应用）"><a href="#2-6-for循环练习-统计水仙花数个数（应用）" class="headerlink" title="2.6 for循环练习-统计水仙花数个数（应用）"></a>2.6 for循环练习-统计水仙花数个数（应用）</h3><ul>
-<li>需求：统计“水仙花数”一共有多少个，并在控制台输出个数 </li>
-<li>示例代码：</li>
-</ul>
-<pre><code class="java">public class ForTest05 &#123;
-    public static void main(String[] args) &#123;
-        //定义变量count，用于保存“水仙花数”的数量，初始值为0
-        int count = 0;
-        //输出所有的水仙花数必然要使用到循环，遍历所有的三位数，三位数从100开始，到999结束
-        for(int i=100; i&lt;1000; i++) &#123;
-            //在计算之前获取三位数中每个位上的值
-            int ge = i%10;
-            int shi = i/10%10;
-            int bai = i/10/10%10;
-            //在判定水仙花数的过程中，满足条件不再输出，更改为修改count的值，使count+1
-            if(ge*ge*ge + shi*shi*shi + bai*bai*bai == i) &#123;
-                count++;
-            &#125;
-        &#125;
-        //打印输出最终结果
-        System.out.println(&quot;水仙花共有：&quot; + count + &quot;个&quot;);
-    &#125;
-&#125;</code></pre>
-<ul>
-<li>本题要点：<ul>
-<li>今后如果需求带有统计xxx，请先想到计数器变量</li>
-<li>计数器变量定义的位置，必须在循环外部</li>
-</ul>
-</li>
-</ul>
-<h2 id="3-while循环"><a href="#3-while循环" class="headerlink" title="3. while循环"></a>3. while循环</h2><h3 id="3-1-while结构（掌握）"><a href="#3-1-while结构（掌握）" class="headerlink" title="3.1 while结构（掌握）"></a>3.1 while结构（掌握）</h3><ul>
-<li><p>while循环完整格式：</p>
-<pre><code class="java">初始化语句;
-while (条件判断语句) &#123;
-    循环体语句;
-    条件控制语句;
-&#125;</code></pre>
-</li>
-<li><p>while循环执行流程：</p>
-<p>①执行初始化语句</p>
-<p>②执行条件判断语句，看其结果是true还是false</p>
-<p>​             如果是false，循环结束</p>
-<p>​             如果是true，继续执行</p>
-<p>③执行循环体语句</p>
-<p>④执行条件控制语句</p>
-<p>⑤回到②继续</p>
-</li>
-<li><p>示例代码：</p>
-</li>
-</ul>
-<pre><code class="java">public class WhileDemo &#123;
-    public static void main(String[] args) &#123;
-        //需求：在控制台输出5次&quot;HelloWorld&quot;
-        //for循环实现
-        for(int i=1; i&lt;=5; i++) &#123;
-            System.out.println(&quot;HelloWorld&quot;);
-        &#125;
-        System.out.println(&quot;--------&quot;);
-        //while循环实现
-        int j = 1;
-        while(j&lt;=5) &#123;
-            System.out.println(&quot;HelloWorld&quot;);
-            j++;
-        &#125;
-    &#125;
-&#125;</code></pre>
-<h3 id="3-2-while循环练习-珠穆朗玛峰（应用）"><a href="#3-2-while循环练习-珠穆朗玛峰（应用）" class="headerlink" title="3.2 while循环练习-珠穆朗玛峰（应用）"></a>3.2 while循环练习-珠穆朗玛峰（应用）</h3><ul>
-<li>需求：世界最高山峰是珠穆朗玛峰(8844.43米=8844430毫米)，假如我有一张足够大的纸，它的厚度是0.1毫米。请问，我折叠多少次，可以折成珠穆朗玛峰的高度?</li>
-<li>示例代码：</li>
-</ul>
-<pre><code class="java">public class WhileTest &#123;
-    public static void main(String[] args) &#123;
-        //定义一个计数器，初始值为0
-        int count = 0;
-        //定义纸张厚度
-        double paper = 0.1;
-        //定义珠穆朗玛峰的高度
-        int zf = 8844430;
-        //因为要反复折叠，所以要使用循环，但是不知道折叠多少次，这种情况下更适合使用while循环
-        //折叠的过程中当纸张厚度大于珠峰就停止了，因此继续执行的要求是纸张厚度小于珠峰高度
-        while(paper &lt;= zf) &#123;
-            //循环的执行过程中每次纸张折叠，纸张的厚度要加倍
-            paper *= 2;
-            //在循环中执行累加，对应折叠了多少次
-            count++;
-        &#125;
-        //打印计数器的值
-        System.out.println(&quot;需要折叠：&quot; + count + &quot;次&quot;);
-    &#125;
-&#125;</code></pre>
-<h2 id="4-循环细节"><a href="#4-循环细节" class="headerlink" title="4. 循环细节"></a>4. 循环细节</h2><h3 id="4-1-do…while循环结构（掌握）"><a href="#4-1-do…while循环结构（掌握）" class="headerlink" title="4.1 do…while循环结构（掌握）"></a>4.1 do…while循环结构（掌握）</h3><ul>
-<li><p>完整格式：</p>
-<pre><code class="java">初始化语句;
-do &#123;
-    循环体语句;
-    条件控制语句;
-&#125;while(条件判断语句);</code></pre>
-</li>
-<li><p>执行流程：</p>
-<p>① 执行初始化语句</p>
-<p>② 执行循环体语句</p>
-<p>③ 执行条件控制语句</p>
-<p>④ 执行条件判断语句，看其结果是true还是false</p>
-<p>如果是false，循环结束</p>
-<p>如果是true，继续执行</p>
-<p>⑤ 回到②继续</p>
-</li>
-<li><p>示例代码：</p>
-</li>
-</ul>
-<pre><code class="java">public class DoWhileDemo &#123;
-    public static void main(String[] args) &#123;
-        //需求：在控制台输出5次&quot;HelloWorld&quot;
-        //for循环实现
-        for(int i=1; i&lt;=5; i++) &#123;
-            System.out.println(&quot;HelloWorld&quot;);
-        &#125;
-        System.out.println(&quot;--------&quot;);
-        //do...while循环实现
-        int j = 1;
-        do &#123;
-            System.out.println(&quot;HelloWorld&quot;);
-            j++;
-        &#125;while(j&lt;=5);
-    &#125;
-&#125;</code></pre>
-<h3 id="4-2-三种循环的区别（理解）"><a href="#4-2-三种循环的区别（理解）" class="headerlink" title="4.2 三种循环的区别（理解）"></a>4.2 三种循环的区别（理解）</h3><ul>
-<li>三种循环的区别<ul>
-<li>for循环和while循环先判断条件是否成立，然后决定是否执行循环体（先判断后执行）</li>
-<li>do…while循环先执行一次循环体，然后判断条件是否成立，是否继续执行循环体（先执行后判断）</li>
-</ul>
-</li>
-<li>for循环和while的区别<ul>
-<li>条件控制语句所控制的自增变量，因为归属for循环的语法结构中，在for循环结束后，就不能再次被访问到了</li>
-<li>条件控制语句所控制的自增变量，对于while循环来说不归属其语法结构中，在while循环结束后，该变量还可以继续使用</li>
-</ul>
-</li>
-<li>死循环（无限循环）的三种格式<ol>
-<li>for(;;){}</li>
-<li>while(true){}</li>
-<li>do {} while(true);</li>
-</ol>
-</li>
-</ul>
-<h3 id="4-3-跳转控制语句（掌握）"><a href="#4-3-跳转控制语句（掌握）" class="headerlink" title="4.3 跳转控制语句（掌握）"></a>4.3 跳转控制语句（掌握）</h3><ul>
-<li>跳转控制语句（break）<ul>
-<li>跳出循环，结束循环</li>
-</ul>
-</li>
-<li>跳转控制语句（continue）<ul>
-<li>跳过本次循环，继续下次循环</li>
-</ul>
-</li>
-<li>注意： continue只能在循环中进行使用！</li>
-</ul>
-<h3 id="4-4-循环嵌套（理解）"><a href="#4-4-循环嵌套（理解）" class="headerlink" title="4.4 循环嵌套（理解）"></a>4.4 循环嵌套（理解）</h3><ul>
-<li><p>循环嵌套概述：在循环中，继续定义循环</p>
-</li>
-<li><p>示例代码：</p>
-<pre><code class="java">    public static void main(String[] args) &#123;
-        //外循环控制小时的范围，内循环控制分钟的范围
-        for (int hour = 0; hour &lt; 24; hour++) &#123;
-            for (int minute = 0; minute &lt; 60; minute++) &#123;
-                System.out.println(hour + &quot;时&quot; + minute + &quot;分&quot;);
-            &#125;
-            System.out.println(&quot;--------&quot;);
-        &#125;
-    &#125;</code></pre>
-</li>
-<li><p>理解：</p>
-<ul>
-<li>请反复理解这句话（整个内循环，就是外循环的一个循环体，内部循环体没有执行完毕，外循环是不会继续向下执行的）</li>
-</ul>
-</li>
-<li><p>结论：</p>
-<ul>
-<li>外循环执行一次，内循环执行一圈</li>
-</ul>
-</li>
-</ul>
-<h2 id="5-Random"><a href="#5-Random" class="headerlink" title="5. Random"></a>5. Random</h2><h3 id="5-1-Random产生随机数（掌握）"><a href="#5-1-Random产生随机数（掌握）" class="headerlink" title="5.1 Random产生随机数（掌握）"></a>5.1 Random产生随机数（掌握）</h3><ul>
-<li><p>概述：</p>
-<ul>
-<li>Random类似Scanner，也是Java提供好的API，内部提供了产生随机数的功能<ul>
-<li>API后续课程详细讲解，现在可以简单理解为Java已经写好的代码</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>使用步骤：</p>
-<ol>
-<li><p>导入包</p>
-<p>import java.util.Random;</p>
-</li>
-<li><p>创建对象</p>
-<p>Random r = new Random();</p>
-</li>
-<li><p>产生随机数</p>
-<p>int num = r.nextInt(10);</p>
-<p>解释： 10代表的是一个范围，如果括号写10，产生的随机数就是0-9，括号写20，参数的随机数则是0-19</p>
-</li>
-</ol>
-</li>
-<li><p>示例代码：</p>
-</li>
-</ul>
-<pre><code class="java">import java.util.Random;
-public class RandomDemo &#123;
-    public static void main(String[] args) &#123;
-        //创建对象
-        Random r = new Random();
-        //用循环获取10个随机数
-        for(int i=0; i&lt;10; i++) &#123;
-            //获取随机数
-            int number = r.nextInt(10);
-            System.out.println(&quot;number:&quot; + number);
-        &#125;
-        //需求：获取一个1-100之间的随机数
-        int x = r.nextInt(100) + 1;
-        System.out.println(x);
-    &#125;
-&#125;</code></pre>
-<h3 id="5-3-Random练习-猜数字（应用）"><a href="#5-3-Random练习-猜数字（应用）" class="headerlink" title="5.3 Random练习-猜数字（应用）"></a>5.3 Random练习-猜数字（应用）</h3><ul>
-<li><p>需求：</p>
-<p>程序自动生成一个1-100之间的数字，使用程序实现猜出这个数字是多少？</p>
-<p>当猜错的时候根据不同情况给出相应的提示</p>
-<p>A. 如果猜的数字比真实数字大，提示你猜的数据大了</p>
-<p>B. 如果猜的数字比真实数字小，提示你猜的数据小了</p>
-<p>C. 如果猜的数字与真实数字相等，提示恭喜你猜中了</p>
-</li>
-<li><p>示例代码：</p>
-</li>
-</ul>
-<pre><code class="java">import java.util.Random;
-import java.util.Scanner;
-
-public class RandomTest &#123;
-    public static void main(String[] args) &#123;
-        //要完成猜数字的游戏，首先需要有一个要猜的数字，使用随机数生成该数字，范围1到100
-        Random r = new Random();
-        int number = r.nextInt(100) + 1;
-
-        while(true) &#123;
-            //使用程序实现猜数字，每次均要输入猜测的数字值，需要使用键盘录入实现
-            Scanner sc = new Scanner(System.in);
-
-            System.out.println(&quot;请输入你要猜的数字：&quot;);
-            int guessNumber = sc.nextInt();
-
-            //比较输入的数字和系统产生的数据，需要使用分支语句。
-             //这里使用if..else..if..格式，根据不同情况进行猜测结果显示
-            if(guessNumber &gt; number) &#123;
-                System.out.println(&quot;你猜的数字&quot; + guessNumber + &quot;大了&quot;);
-            &#125; else if(guessNumber &lt; number) &#123;
-                System.out.println(&quot;你猜的数字&quot; + guessNumber + &quot;小了&quot;);
-            &#125; else &#123;
-                System.out.println(&quot;恭喜你猜中了&quot;);
-                break;
-            &#125;
-        &#125;
-
-    &#125;
-&#125;</code></pre>
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>java学习-IDEA工具&amp;数组</title>
-    <url>/2021/01/19/20210119004/</url>
-    <content><![CDATA[<h2 id="0-IDEA开发工具"><a href="#0-IDEA开发工具" class="headerlink" title="0.IDEA开发工具"></a>0.IDEA开发工具</h2><p>​    参见：IDEA工具安装详解.pdf</p>
-<h2 id="1-数组"><a href="#1-数组" class="headerlink" title="1.数组"></a>1.数组</h2><h3 id="1-1什么是数组【理解】"><a href="#1-1什么是数组【理解】" class="headerlink" title="1.1什么是数组【理解】"></a>1.1什么是数组【理解】</h3><p>​    数组就是存储数据长度固定的容器，存储多个数据的数据类型要一致。 </p>
-<h3 id="1-2数组定义格式【记忆】"><a href="#1-2数组定义格式【记忆】" class="headerlink" title="1.2数组定义格式【记忆】"></a>1.2数组定义格式【记忆】</h3><h4 id="1-2-1第一种"><a href="#1-2-1第一种" class="headerlink" title="1.2.1第一种"></a>1.2.1第一种</h4><p>​    数据类型[] 数组名</p>
-<p>​    示例：</p>
-<pre><code class="java">int[] arr;        
-double[] arr;      
-char[] arr;</code></pre>
-<h4 id="1-2-2第二种"><a href="#1-2-2第二种" class="headerlink" title="1.2.2第二种"></a>1.2.2第二种</h4><p>​    数据类型 数组名[]</p>
-<p>​    示例：</p>
-<pre><code class="java">int arr[];
-double arr[];
-char arr[];</code></pre>
-<h3 id="1-3数组动态初始化【应用】"><a href="#1-3数组动态初始化【应用】" class="headerlink" title="1.3数组动态初始化【应用】"></a>1.3数组动态初始化【应用】</h3><h4 id="1-3-1什么是动态初始化"><a href="#1-3-1什么是动态初始化" class="headerlink" title="1.3.1什么是动态初始化"></a>1.3.1什么是动态初始化</h4><p>​    数组动态初始化就是只给定数组的长度，由系统给出默认初始化值。</p>
-<h4 id="1-3-2动态初始化格式"><a href="#1-3-2动态初始化格式" class="headerlink" title="1.3.2动态初始化格式"></a>1.3.2动态初始化格式</h4><pre><code class="java">数据类型[] 数组名 = new 数据类型[数组长度];</code></pre>
-<pre><code class="java">int[] arr = new int[3];</code></pre>
-<h4 id="1-3-3动态初始化格式详解"><a href="#1-3-3动态初始化格式详解" class="headerlink" title="1.3.3动态初始化格式详解"></a>1.3.3动态初始化格式详解</h4><ul>
-<li><p>等号左边：</p>
-<ul>
-<li><p>int:数组的数据类型</p>
-</li>
-<li><p>[]:代表这是一个数组</p>
-</li>
-<li><p>arr:代表数组的名称</p>
-</li>
-</ul>
-</li>
-<li><p>等号右边：</p>
-<ul>
-<li><p>new:为数组开辟内存空间</p>
-</li>
-<li><p>int:数组的数据类型</p>
-</li>
-<li><p>[]:代表这是一个数组</p>
-</li>
-<li><p>5:代表数组的长度</p>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="1-4数组元素访问【应用】"><a href="#1-4数组元素访问【应用】" class="headerlink" title="1.4数组元素访问【应用】"></a>1.4数组元素访问【应用】</h3><h4 id="1-4-1什么是索引"><a href="#1-4-1什么是索引" class="headerlink" title="1.4.1什么是索引"></a>1.4.1什么是索引</h4><p>​    每一个存储到数组的元素，都会自动的拥有一个编号，从0开始。</p>
-<p>​    这个自动编号称为数组索引(index)，可以通过数组的索引访问到数组中的元素。     </p>
-<h4 id="1-4-2访问数组元素格式"><a href="#1-4-2访问数组元素格式" class="headerlink" title="1.4.2访问数组元素格式"></a>1.4.2访问数组元素格式</h4><pre><code class="java">数组名[索引];</code></pre>
-<h4 id="1-4-3示例代码"><a href="#1-4-3示例代码" class="headerlink" title="1.4.3示例代码"></a>1.4.3示例代码</h4><pre><code class="java">public class ArrayDemo &#123;
-    public static void main(String[] args) &#123;
-        int[] arr = new int[3];
-
-        //输出数组名
-        System.out.println(arr); //[I@880ec60
-
-        //输出数组中的元素
-        System.out.println(arr[0]);
-        System.out.println(arr[1]);
-        System.out.println(arr[2]);
-    &#125;
-&#125;</code></pre>
-<h3 id="1-5内存分配【理解】"><a href="#1-5内存分配【理解】" class="headerlink" title="1.5内存分配【理解】"></a>1.5内存分配【理解】</h3><h4 id="1-5-1内存概述"><a href="#1-5-1内存概述" class="headerlink" title="1.5.1内存概述"></a>1.5.1内存概述</h4><p>​    内存是计算机中的重要原件，临时存储区域，作用是运行程序。</p>
-<p>​    我们编写的程序是存放在硬盘中的，在硬盘中的程序是不会运行的。</p>
-<p>​    必须放进内存中才能运行，运行完毕后会清空内存。 </p>
-<p>​    Java虚拟机要运行程序，必须要对内存进行空间的分配和管理。 </p>
-<h4 id="1-5-2java中的内存分配"><a href="#1-5-2java中的内存分配" class="headerlink" title="1.5.2java中的内存分配"></a>1.5.2java中的内存分配</h4><ul>
-<li>目前我们只需要记住两个内存，分别是：栈内存和堆内存</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>区域名称</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>寄存器</td>
-<td>给CPU使用，和我们开发无关。</td>
-</tr>
-<tr>
-<td>本地方法栈</td>
-<td>JVM在使用操作系统功能的时候使用，和我们开发无关。</td>
-</tr>
-<tr>
-<td>方法区</td>
-<td>存储可以运行的class文件。</td>
-</tr>
-<tr>
-<td>堆内存</td>
-<td>存储对象或者数组，new来创建的，都存储在堆内存。</td>
-</tr>
-<tr>
-<td>方法栈</td>
-<td>方法运行时使用的内存，比如main方法运行，进入方法栈中执行。</td>
-</tr>
-</tbody></table>
-<h3 id="1-6单个数组的内存图【理解】"><a href="#1-6单个数组的内存图【理解】" class="headerlink" title="1.6单个数组的内存图【理解】"></a>1.6单个数组的内存图【理解】</h3><h3 id="1-7多个数组的内存图【理解】"><a href="#1-7多个数组的内存图【理解】" class="headerlink" title="1.7多个数组的内存图【理解】"></a>1.7多个数组的内存图【理解】</h3><h3 id="1-8多个数组指向相同内存图【理解】"><a href="#1-8多个数组指向相同内存图【理解】" class="headerlink" title="1.8多个数组指向相同内存图【理解】"></a>1.8多个数组指向相同内存图【理解】</h3><h3 id="1-9数组静态初始化【应用】"><a href="#1-9数组静态初始化【应用】" class="headerlink" title="1.9数组静态初始化【应用】"></a>1.9数组静态初始化【应用】</h3><h4 id="1-9-1什么是静态初始化"><a href="#1-9-1什么是静态初始化" class="headerlink" title="1.9.1什么是静态初始化"></a>1.9.1什么是静态初始化</h4><p>​    在创建数组时，直接将元素确定    </p>
-<h4 id="1-9-2静态初始化格式"><a href="#1-9-2静态初始化格式" class="headerlink" title="1.9.2静态初始化格式"></a>1.9.2静态初始化格式</h4><ul>
-<li><p>完整版格式</p>
-<pre><code class="java">数据类型[] 数组名 = new 数据类型[]&#123;元素1,元素2,...&#125;;</code></pre>
-</li>
-<li><p>简化版格式</p>
-<pre><code class="java">数据类型[] 数组名 = &#123;元素1,元素2,...&#125;;</code></pre>
-</li>
-</ul>
-<h4 id="1-9-3示例代码"><a href="#1-9-3示例代码" class="headerlink" title="1.9.3示例代码"></a>1.9.3示例代码</h4><pre><code class="java">public class ArrayDemo &#123;
-    public static void main(String[] args) &#123;
-        //定义数组
-        int[] arr = &#123;1, 2, 3&#125;;
-
-        //输出数组名
-        System.out.println(arr);
-
-        //输出数组中的元素
-        System.out.println(arr[0]);
-        System.out.println(arr[1]);
-        System.out.println(arr[2]);
-    &#125;
-&#125;</code></pre>
-<h3 id="1-10数组操作的两个常见小问题【应用】"><a href="#1-10数组操作的两个常见小问题【应用】" class="headerlink" title="1.10数组操作的两个常见小问题【应用】"></a>1.10数组操作的两个常见小问题【应用】</h3><h4 id="1-10-1索引越界异常"><a href="#1-10-1索引越界异常" class="headerlink" title="1.10.1索引越界异常"></a>1.10.1索引越界异常</h4><ul>
-<li><p>出现原因</p>
-<pre><code class="java">public class ArrayDemo &#123;
-    public static void main(String[] args) &#123;
-        int[] arr = new int[3];
-        System.out.println(arr[3]);
-    &#125;
-&#125;</code></pre>
-<p>数组长度为3，索引范围是0~2，但是我们却访问了一个3的索引。</p>
-<p>程序运行后，将会抛出ArrayIndexOutOfBoundsException 数组越界异常。在开发中，数组的越界异常是不能出现的，一旦出现了，就必须要修改我们编写的代码。 </p>
-</li>
-<li><p>解决方案</p>
-<p>将错误的索引修改为正确的索引范围即可！</p>
-</li>
-</ul>
-<h4 id="1-10-2空指针异常"><a href="#1-10-2空指针异常" class="headerlink" title="1.10.2空指针异常"></a>1.10.2空指针异常</h4><ul>
-<li><p>出现原因</p>
-<pre><code class="java">public class ArrayDemo &#123;
-    public static void main(String[] args) &#123;
-        int[] arr = new int[3];
-
-        //把null赋值给数组
-        arr = null;
-        System.out.println(arr[0]);
-    &#125;
-&#125;</code></pre>
-<p>arr = null 这行代码，意味着变量arr将不会再保存数组的内存地址，也就不允许再操作数组了，因此运行的时候会抛出 NullPointerException 空指针异常。在开发中，数组的越界异常是不能出现的，一旦出现了，就必须要修改我们编写的代码。</p>
-</li>
-<li><p>解决方案</p>
-<p>给数组一个真正的堆内存空间引用即可！</p>
-</li>
-</ul>
-<h3 id="1-11数组遍历【应用】"><a href="#1-11数组遍历【应用】" class="headerlink" title="1.11数组遍历【应用】"></a>1.11数组遍历【应用】</h3><ul>
-<li><p>数组遍历：就是将数组中的每个元素分别获取出来，就是遍历。遍历也是数组操作中的基石。</p>
-<pre><code class="java">public class ArrayTest01 &#123;
-    public static void main(String[] args) &#123;
-        int[] arr = &#123; 1, 2, 3, 4, 5 &#125;;
-        System.out.println(arr[0]);
-        System.out.println(arr[1]);
-        System.out.println(arr[2]);
-        System.out.println(arr[3]);
-        System.out.println(arr[4]);
-    &#125;
-&#125;</code></pre>
-<p>以上代码是可以将数组中每个元素全部遍历出来，但是如果数组元素非常多，这种写法肯定不行，因此我们需要改造成循环的写法。数组的索引是 0 到 lenght-1 ，可以作为循环的条件出现。 </p>
-<pre><code class="java">public class ArrayTest01 &#123;
-    public static void main(String[] args) &#123;
-        //定义数组
-        int[] arr = &#123;11, 22, 33, 44, 55&#125;;
-
-        //使用通用的遍历格式
-        for(int x = 0; x &lt; arr.length; x++) &#123;
-            System.out.println(arr[x]);
-        &#125;
-    &#125;
-&#125;</code></pre>
-</li>
-</ul>
-<h3 id="1-12数组最值【应用】"><a href="#1-12数组最值【应用】" class="headerlink" title="1.12数组最值【应用】"></a>1.12数组最值【应用】</h3><ul>
-<li><p>最大值获取：从数组的所有元素中找出最大值。</p>
-</li>
-<li><p>实现思路：</p>
-<ul>
-<li>定义变量，保存数组0索引上的元素</li>
-<li>遍历数组，获取出数组中的每个元素</li>
-<li>将遍历到的元素和保存数组0索引上值的变量进行比较</li>
-<li>如果数组元素的值大于了变量的值，变量记录住新的值</li>
-<li>数组循环遍历结束，变量保存的就是数组中的最大值 </li>
-</ul>
-</li>
-<li><p>代码实现：</p>
-<pre><code class="java">public class ArrayTest02 &#123;
-    public static void main(String[] args) &#123;
-        //定义数组
-        int[] arr = &#123;12, 45, 98, 73, 60&#125;;
-        //定义一个变量，用于保存最大值
-        //取数组中第一个数据作为变量的初始值
-        int max = arr[0];
-        //与数组中剩余的数据逐个比对，每次比对将最大值保存到变量中
-        for(int x=1; x&lt;arr.length; x++) &#123;
-            if(arr[x] &gt; max) &#123;
-                max = arr[x];
-            &#125;
-        &#125;
-        //循环结束后打印变量的值
-        System.out.println(&quot;max:&quot; + max);
-    &#125;
-&#125;</code></pre>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>java学习-方法</title>
-    <url>/2021/01/19/20210119005/</url>
-    <content><![CDATA[<h2 id="1-方法概述"><a href="#1-方法概述" class="headerlink" title="1. 方法概述"></a>1. 方法概述</h2><h3 id="1-1-方法的概念（理解）"><a href="#1-1-方法的概念（理解）" class="headerlink" title="1.1 方法的概念（理解）"></a>1.1 方法的概念（理解）</h3><p>​    方法（method）是将具有独立功能的代码块组织成为一个整体，使其具有特殊功能的代码集</p>
-<ul>
-<li>注意：<ul>
-<li>方法必须先创建才可以使用，该过程成为方法定义</li>
-<li>方法创建后并不是直接可以运行的，需要手动使用后，才执行，该过程成为方法调用</li>
-</ul>
-</li>
-</ul>
-<h2 id="2-方法的定义和调用"><a href="#2-方法的定义和调用" class="headerlink" title="2. 方法的定义和调用"></a>2. 方法的定义和调用</h2><h3 id="2-1-无参数方法定义和调用（掌握）"><a href="#2-1-无参数方法定义和调用（掌握）" class="headerlink" title="2.1 无参数方法定义和调用（掌握）"></a>2.1 无参数方法定义和调用（掌握）</h3><ul>
-<li><p>定义格式：</p>
-<pre><code class="java">public static void 方法名 (   ) &#123;
-    // 方法体;
-&#125;</code></pre>
-</li>
-<li><p>范例：</p>
-<pre><code class="java">public static void method (    ) &#123;
-    // 方法体;
-&#125;</code></pre>
-</li>
-<li><p>调用格式：</p>
-<pre><code class="java">方法名();</code></pre>
-</li>
-<li><p>范例：</p>
-<pre><code class="java">method();</code></pre>
-</li>
-<li><p>注意：</p>
-<p>​    方法必须先定义，后调用，否则程序将报错</p>
-</li>
-</ul>
-<h3 id="2-2-方法调用过程图解（理解）"><a href="#2-2-方法调用过程图解（理解）" class="headerlink" title="2.2 方法调用过程图解（理解）"></a>2.2 方法调用过程图解（理解）</h3><p><img src="C:\TeachRes\Java2019\JavaSe01\day05\4-笔记\笔记图片资源包\无参数方法调用图解.png" class="lazyload placeholder" data-srcset="C:\TeachRes\Java2019\JavaSe01\day05\4-笔记\笔记图片资源包\无参数方法调用图解.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="无参数方法调用图解"></p>
-<ul>
-<li>总结：每个方法在被调用执行的时候，都会进入栈内存，并且拥有自己独立的内存空间，方法内部代码调用完毕之后，会从栈内存中弹栈消失。</li>
-</ul>
-<h3 id="2-3-无参数方法的练习（应用）"><a href="#2-3-无参数方法的练习（应用）" class="headerlink" title="2.3 无参数方法的练习（应用）"></a>2.3 无参数方法的练习（应用）</h3><ul>
-<li>需求：设计一个方法用于打印两个数中的较大数 </li>
-<li>思路：<ul>
-<li>①定义一个方法，用于打印两个数字中的较大数，例如getMax() </li>
-<li>②方法中定义两个变量，用于保存两个数字 </li>
-<li>③使用分支语句分两种情况对两个数字的大小关系进行处理 </li>
-<li>④在main()方法中调用定义好的方法 </li>
-</ul>
-</li>
-<li>代码：</li>
-</ul>
-<pre><code class="java">public class MethodTest &#123;
-    public static void main(String[] args) &#123;
-        //在main()方法中调用定义好的方法
-        getMax();
-    &#125;
-
-    //定义一个方法，用于打印两个数字中的较大数，例如getMax()
-    public static void getMax() &#123;
-        //方法中定义两个变量，用于保存两个数字
-        int a = 10;
-        int b = 20;
-
-        //使用分支语句分两种情况对两个数字的大小关系进行处理
-        if(a &gt; b) &#123;
-            System.out.println(a);
-        &#125; else &#123;
-            System.out.println(b);
-        &#125;
-    &#125;
-&#125;</code></pre>
-<h2 id="3-带参数方法定义和调用"><a href="#3-带参数方法定义和调用" class="headerlink" title="3. 带参数方法定义和调用"></a>3. 带参数方法定义和调用</h2><h3 id="3-1-带参数方法定义和调用（掌握）"><a href="#3-1-带参数方法定义和调用（掌握）" class="headerlink" title="3.1 带参数方法定义和调用（掌握）"></a>3.1 带参数方法定义和调用（掌握）</h3><ul>
-<li><p>定义格式：</p>
-<p>参数：由数据类型和变量名组成 -  数据类型 变量名</p>
-<p>参数范例：int a</p>
-<pre><code class="java">public static void 方法名 (参数1) &#123;
-    方法体;
-&#125;
-
-public static void 方法名 (参数1, 参数2, 参数3...) &#123;
-    方法体;
-&#125;</code></pre>
-</li>
-<li><p>范例：</p>
-<pre><code class="java">public static void isEvenNumber(int number)&#123;
-    ...
-&#125;
-public static void getMax(int num1, int num2)&#123;
-    ...
-&#125;</code></pre>
-<ul>
-<li><p>注意：</p>
-<pre><code>  方法定义时，参数中的数据类型与变量名都不能缺少，缺少任意一个程序将报错
-
-  方法定义时，多个参数之间使用逗号( ，)分隔</code></pre>
-</li>
-</ul>
-</li>
-<li><p>调用格式：</p>
-<pre><code class="java">方法名(参数)；
-
-方法名(参数1,参数2);</code></pre>
-</li>
-<li><p>范例：</p>
-<pre><code class="java">isEvenNumber(10);
-
-getMax(10,20);</code></pre>
-<ul>
-<li>方法调用时，参数的数量与类型必须与方法定义中的设置相匹配，否则程序将报错 </li>
-</ul>
-</li>
-</ul>
-<h3 id="3-2-形参和实参（理解）"><a href="#3-2-形参和实参（理解）" class="headerlink" title="3.2 形参和实参（理解）"></a>3.2 形参和实参（理解）</h3><ol>
-<li>形参：方法定义中的参数</li>
-</ol>
-<p>​          等同于变量定义格式，例如：int number</p>
-<ol start="2">
-<li>实参：方法调用中的参数</li>
-</ol>
-<p>​          等同于使用变量或常量，例如： 10  number</p>
-<h3 id="3-3-带参数方法练习（应用）"><a href="#3-3-带参数方法练习（应用）" class="headerlink" title="3.3 带参数方法练习（应用）"></a>3.3 带参数方法练习（应用）</h3><ul>
-<li>需求：设计一个方法用于打印两个数中的较大数，数据来自于方法参数 }</li>
-<li>思路：<ul>
-<li>①定义一个方法，用于打印两个数字中的较大数，例如getMax() </li>
-<li>②为方法定义两个参数，用于接收两个数字 </li>
-<li>③使用分支语句分两种情况对两个数字的大小关系进行处理 </li>
-<li>④在main()方法中调用定义好的方法（使用常量）</li>
-<li>⑤在main()方法中调用定义好的方法（使用变量） </li>
-</ul>
-</li>
-<li>代码：</li>
-</ul>
-<pre><code class="java">public class MethodTest &#123;
-    public static void main(String[] args) &#123;
-        //在main()方法中调用定义好的方法（使用常量）
-        getMax(10,20);
-        //调用方法的时候，人家要几个，你就给几个，人家要什么类型的，你就给什么类型的
-        //getMax(30);
-        //getMax(10.0,20.0);
-
-        //在main()方法中调用定义好的方法（使用变量）
-        int a = 10;
-        int b = 20;
-        getMax(a, b);
-    &#125;
-
-    //定义一个方法，用于打印两个数字中的较大数，例如getMax()
-    //为方法定义两个参数，用于接收两个数字
-    public static void getMax(int a, int b) &#123;
-        //使用分支语句分两种情况对两个数字的大小关系进行处理
-        if(a &gt; b) &#123;
-            System.out.println(a);
-        &#125; else &#123;
-            System.out.println(b);
-        &#125;
-    &#125;
-&#125;</code></pre>
-<h2 id="4-带返回值方法的定义和调用"><a href="#4-带返回值方法的定义和调用" class="headerlink" title="4. 带返回值方法的定义和调用"></a>4. 带返回值方法的定义和调用</h2><h3 id="4-1-带返回值方法定义和调用（掌握）"><a href="#4-1-带返回值方法定义和调用（掌握）" class="headerlink" title="4.1 带返回值方法定义和调用（掌握）"></a>4.1 带返回值方法定义和调用（掌握）</h3><ul>
-<li><p>定义格式</p>
-<pre><code class="java">public static 数据类型 方法名 ( 参数 ) &#123; 
-    return 数据 ;
-&#125;</code></pre>
-</li>
-<li><p>范例</p>
-<pre><code class="java">public static boolean isEvenNumber( int number ) &#123;           
-    return true ;
-&#125;
-public static int getMax( int a, int b ) &#123;
-    return  100 ;
-&#125;</code></pre>
-<ul>
-<li>注意：<ul>
-<li>方法定义时return后面的返回值与方法定义上的数据类型要匹配，否则程序将报错</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>调用格式</p>
-<pre><code class="java">方法名 ( 参数 ) ;
-数据类型 变量名 = 方法名 ( 参数 ) ;</code></pre>
-</li>
-<li><p>范例</p>
-<pre><code class="java">isEvenNumber ( 5 ) ;
-boolean  flag =  isEvenNumber ( 5 ); </code></pre>
-<ul>
-<li>注意：<ul>
-<li>方法的返回值通常会使用变量接收，否则该返回值将无意义</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="4-2-带返回值方法练习（应用）"><a href="#4-2-带返回值方法练习（应用）" class="headerlink" title="4.2 带返回值方法练习（应用）"></a>4.2 带返回值方法练习（应用）</h3><ul>
-<li><p>需求：设计一个方法可以获取两个数的较大值，数据来自于参数</p>
-</li>
-<li><p>思路：</p>
-<ul>
-<li>①定义一个方法，用于获取两个数字中的较大数 </li>
-<li>②使用分支语句分两种情况对两个数字的大小关系进行处理 </li>
-<li>③根据题设分别设置两种情况下对应的返回结果 </li>
-<li>④在main()方法中调用定义好的方法并使用变量保存 </li>
-<li>⑤在main()方法中调用定义好的方法并直接打印结果 </li>
-</ul>
-</li>
-<li><p>代码：</p>
-<pre><code class="java">public class MethodTest &#123;
-    public static void main(String[] args) &#123;
-        //在main()方法中调用定义好的方法并使用变量保存
-        int result = getMax(10,20);
-        System.out.println(result);
-
-        //在main()方法中调用定义好的方法并直接打印结果
-        System.out.println(getMax(10,20));
-    &#125;
-
-    //定义一个方法，用于获取两个数字中的较大数
-    public static int getMax(int a, int b) &#123;
-        //使用分支语句分两种情况对两个数字的大小关系进行处理
-        //根据题设分别设置两种情况下对应的返回结果
-        if(a &gt; b) &#123;
-            return a;
-        &#125; else &#123;
-            return b;
-        &#125;
-    &#125;
-&#125;</code></pre>
-</li>
-</ul>
-<h2 id="5-方法的注意事项"><a href="#5-方法的注意事项" class="headerlink" title="5. 方法的注意事项"></a>5. 方法的注意事项</h2><h3 id="5-1-方法的注意事项（掌握）"><a href="#5-1-方法的注意事项（掌握）" class="headerlink" title="5.1 方法的注意事项（掌握）"></a>5.1 方法的注意事项（掌握）</h3><ul>
-<li><p>方法不能嵌套定义</p>
-<ul>
-<li><p>示例代码：</p>
-<pre><code class="java">public class MethodDemo &#123;
-    public static void main(String[] args) &#123;
-
-    &#125;
-
-    public static void methodOne() &#123;
-        public static void methodTwo() &#123;
-               // 这里会引发编译错误!!!
-        &#125;
-    &#125;
-&#125;</code></pre>
-</li>
-</ul>
-</li>
-<li><p>void表示无返回值，可以省略return，也可以单独的书写return，后面不加数据</p>
-<ul>
-<li><p>示例代码：</p>
-<pre><code class="java">public class MethodDemo &#123;
-    public static void main(String[] args) &#123;
-
-    &#125;
-    public static void methodTwo() &#123;
-        //return 100; 编译错误，因为没有具体返回值类型
-        return;    
-        //System.out.println(100); return语句后面不能跟数据或代码
-    &#125;
-&#125;</code></pre>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="5-2-方法的通用格式（掌握）"><a href="#5-2-方法的通用格式（掌握）" class="headerlink" title="5.2 方法的通用格式（掌握）"></a>5.2 方法的通用格式（掌握）</h3><ul>
-<li><p>格式：</p>
-<pre><code class="java">public static 返回值类型 方法名(参数) &#123;
-   方法体; 
-   return 数据 ;
-&#125;</code></pre>
-</li>
-<li><p>解释：</p>
-<ul>
-<li><p>public static     修饰符，目前先记住这个格式</p>
-<p>   返回值类型    方法操作完毕之后返回的数据的数据类型</p>
-<p>​            如果方法操作完毕，没有数据返回，这里写void，而且方法体中一般不写return</p>
-<p>   方法名        调用方法时候使用的标识</p>
-<p>   参数        由数据类型和变量名组成，多个参数之间用逗号隔开</p>
-<p>   方法体        完成功能的代码块</p>
-<p>   return        如果方法操作完毕，有数据返回，用于把数据返回给调用者</p>
-</li>
-</ul>
-</li>
-<li><p>定义方法时，要做到两个明确</p>
-<ul>
-<li>明确返回值类型：主要是明确方法操作完毕之后是否有数据返回，如果没有，写void；如果有，写对应的数据类型</li>
-<li>明确参数：主要是明确参数的类型和数量</li>
-</ul>
-</li>
-<li><p>调用方法时的注意：</p>
-<ul>
-<li>void类型的方法，直接调用即可</li>
-<li>非void类型的方法，推荐用变量接收调用</li>
-</ul>
-</li>
-</ul>
-<h2 id="6-方法重载"><a href="#6-方法重载" class="headerlink" title="6. 方法重载"></a>6. 方法重载</h2><h3 id="6-1-方法重载（理解）"><a href="#6-1-方法重载（理解）" class="headerlink" title="6.1 方法重载（理解）"></a>6.1 方法重载（理解）</h3><ul>
-<li><p>方法重载概念</p>
-<p>方法重载指同一个类中定义的多个方法之间的关系，满足下列条件的多个方法相互构成重载</p>
-<ul>
-<li>多个方法在同一个类中</li>
-<li>多个方法具有相同的方法名</li>
-<li>多个方法的参数不相同，类型不同或者数量不同</li>
-</ul>
-</li>
-<li><p>注意：</p>
-<ul>
-<li>重载仅对应方法的定义，与方法的调用无关，调用方式参照标准格式</li>
-<li>重载仅针对同一个类中方法的名称与参数进行识别，与返回值无关，换句话说不能通过返回值来判定两个方法是否相互构成重载</li>
-</ul>
-</li>
-<li><p>正确范例：</p>
-<pre><code class="java">public class MethodDemo &#123;
-    public static void fn(int a) &#123;
-        //方法体
-    &#125;
-    public static int fn(double a) &#123;
-        //方法体
-    &#125;
-&#125;
-
-public class MethodDemo &#123;
-    public static float fn(int a) &#123;
-        //方法体
-    &#125;
-    public static int fn(int a , int b) &#123;
-        //方法体
-    &#125;
-&#125;</code></pre>
-</li>
-<li><p>错误范例：</p>
-<pre><code class="java">public class MethodDemo &#123;
-    public static void fn(int a) &#123;
-        //方法体
-    &#125;
-    public static int fn(int a) &#123;     /*错误原因：重载与返回值无关*/
-        //方法体
-    &#125;
-&#125;
-
-public class MethodDemo01 &#123;
-    public static void fn(int a) &#123;
-        //方法体
-    &#125;
-&#125; 
-public class MethodDemo02 &#123;
-    public static int fn(double a) &#123; /*错误原因：这是两个类的两个fn方法*/
-        //方法体
-    &#125;
-&#125;</code></pre>
-</li>
-</ul>
-<h3 id="6-2-方法重载练习（掌握）"><a href="#6-2-方法重载练习（掌握）" class="headerlink" title="6.2 方法重载练习（掌握）"></a>6.2 方法重载练习（掌握）</h3><ul>
-<li><p>需求：使用方法重载的思想，设计比较两个整数是否相同的方法，兼容全整数类型（byte,short,int,long） </p>
-</li>
-<li><p>思路：</p>
-<ul>
-<li>①定义比较两个数字的是否相同的方法compare()方法，参数选择两个int型参数</li>
-<li>②定义对应的重载方法，变更对应的参数类型，参数变更为两个long型参数</li>
-<li>③定义所有的重载方法，两个byte类型与两个short类型参数 </li>
-<li>④完成方法的调用，测试运行结果 </li>
-</ul>
-</li>
-<li><p>代码：</p>
-<pre><code class="java">public class MethodTest &#123;
-    public static void main(String[] args) &#123;
-        //调用方法
-        System.out.println(compare(10, 20));
-        System.out.println(compare((byte) 10, (byte) 20));
-        System.out.println(compare((short) 10, (short) 20));
-        System.out.println(compare(10L, 20L));
-    &#125;
-
-    //int
-    public static boolean compare(int a, int b) &#123;
-        System.out.println(&quot;int&quot;);
-        return a == b;
-    &#125;
-
-    //byte
-    public static boolean compare(byte a, byte b) &#123;
-        System.out.println(&quot;byte&quot;);
-        return a == b;
-    &#125;
-
-    //short
-    public static boolean compare(short a, short b) &#123;
-        System.out.println(&quot;short&quot;);
-        return a == b;
-    &#125;
-
-    //long
-    public static boolean compare(long a, long b) &#123;
-        System.out.println(&quot;long&quot;);
-        return a == b;
-    &#125;
-
-&#125;</code></pre>
-</li>
-</ul>
-<h2 id="7-方法的参数传递"><a href="#7-方法的参数传递" class="headerlink" title="7. 方法的参数传递"></a>7. 方法的参数传递</h2><h3 id="7-1-方法参数传递基本类型（理解）"><a href="#7-1-方法参数传递基本类型（理解）" class="headerlink" title="7.1 方法参数传递基本类型（理解）"></a>7.1 方法参数传递基本类型（理解）</h3><ul>
-<li><p>测试代码：</p>
-<pre><code class="java">public class ArgsDemo01 &#123;
-    public static void main(String[] args) &#123;
-        int number = 100;
-        System.out.println(&quot;调用change方法前：&quot; + number);
-        change(number);
-        System.out.println(&quot;调用change方法后：&quot; + number);
-    &#125;
-
-    public static void change(int number) &#123;
-        number = 200;
-    &#125;
-&#125;
-</code></pre>
-</li>
-<li><p>结论：</p>
-<ul>
-<li>基本数据类型的参数，形式参数的改变，不影响实际参数 </li>
-</ul>
-</li>
-<li><p>结论依据：</p>
-<ul>
-<li><p>每个方法在栈内存中，都会有独立的栈空间，方法运行结束后就会弹栈消失</p>
-<p><img src="C:\TeachRes\Java2019\JavaSe01\day05\4-笔记\笔记图片资源包\方法传参-基本数据类型.png" class="lazyload placeholder" data-srcset="C:\TeachRes\Java2019\JavaSe01\day05\4-笔记\笔记图片资源包\方法传参-基本数据类型.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="方法传参-基本数据类型"></p>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="7-2-方法参数传递引用类型（理解）"><a href="#7-2-方法参数传递引用类型（理解）" class="headerlink" title="7.2 方法参数传递引用类型（理解）"></a>7.2 方法参数传递引用类型（理解）</h3><ul>
-<li><p>测试代码：</p>
-<pre><code class="java">public class ArgsDemo02 &#123;
-    public static void main(String[] args) &#123;
-        int[] arr = &#123;10, 20, 30&#125;;
-        System.out.println(&quot;调用change方法前：&quot; + arr[1]);
-        change(arr);
-        System.out.println(&quot;调用change方法后：&quot; + arr[1]);
-    &#125;
-
-    public static void change(int[] arr) &#123;
-        arr[1] = 200;
-    &#125;
-&#125;
-</code></pre>
-</li>
-<li><p>结论：</p>
-<ul>
-<li>对于引用类型的参数，形式参数的改变，影响实际参数的值 </li>
-</ul>
-</li>
-<li><p>结论依据：</p>
-<ul>
-<li><p>引用数据类型的传参，传入的是地址值，内存中会造成两个引用指向同一个内存的效果，所以即使方法弹栈，堆内存中的数据也已经是改变后的结果 </p>
-<p>  <img src="C:\TeachRes\Java2019\JavaSe01\day05\4-笔记\笔记图片资源包\方法传参-引用数据类型.png" class="lazyload placeholder" data-srcset="C:\TeachRes\Java2019\JavaSe01\day05\4-笔记\笔记图片资源包\方法传参-引用数据类型.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="方法传参-引用数据类型"></p>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="7-3-数组遍历（应用）"><a href="#7-3-数组遍历（应用）" class="headerlink" title="7.3 数组遍历（应用）"></a>7.3 数组遍历（应用）</h3><ul>
-<li><p>需求：设计一个方法用于数组遍历，要求遍历的结果是在一行上的。例如：[11, 22, 33, 44, 55] </p>
-</li>
-<li><p>思路：</p>
-<ul>
-<li><p>①因为要求结果在一行上输出，所以这里需要在学习一个新的输出语句System.out.print(“内容”);</p>
-<p>System.out.println(“内容”); 输出内容并换行</p>
-<p>System.out.print(“内容”); 输出内容不换行</p>
-<p>System.out.println(); 起到换行的作用</p>
-</li>
-<li><p>②定义一个数组，用静态初始化完成数组元素初始化</p>
-</li>
-<li><p>③定义一个方法，用数组遍历通用格式对数组进行遍历</p>
-</li>
-<li><p>④用新的输出语句修改遍历操作</p>
-</li>
-<li><p>⑤调用遍历方法</p>
-</li>
-</ul>
-</li>
-<li><p>代码：</p>
-<pre><code class="java">public class MethodTest01 &#123;
-    public static void main(String[] args) &#123;
-        //定义一个数组，用静态初始化完成数组元素初始化
-        int[] arr = &#123;11, 22, 33, 44, 55&#125;;
-
-        //调用方法
-        printArray(arr);
-    &#125;
-
-    //定义一个方法，用数组遍历通用格式对数组进行遍历
-    /*
-        两个明确：
-            返回值类型：void
-            参数：int[] arr
-     */
-    public static void printArray(int[] arr) &#123;
-        System.out.print(&quot;[&quot;);
-        for(int x=0; x&lt;arr.length; x++) &#123;
-            if(x == arr.length-1) &#123;
-                System.out.print(arr[x]);
-            &#125; else &#123;
-                System.out.print(arr[x]+&quot;, &quot;);
-            &#125;
-        &#125;
-        System.out.println(&quot;]&quot;);
-    &#125;
-&#125;</code></pre>
-</li>
-</ul>
-<h3 id="7-4-数组最大值（应用）"><a href="#7-4-数组最大值（应用）" class="headerlink" title="7.4 数组最大值（应用）"></a>7.4 数组最大值（应用）</h3><ul>
-<li><p>需求：设计一个方法用于获取数组中元素的最大值 </p>
-</li>
-<li><p>思路：</p>
-<ul>
-<li>①定义一个数组，用静态初始化完成数组元素初始化</li>
-<li>②定义一个方法，用来获取数组中的最大值，最值的认知和讲解我们在数组中已经讲解过了</li>
-<li>③调用获取最大值方法，用变量接收返回结果</li>
-<li>④把结果输出在控制台</li>
-</ul>
-</li>
-<li><p>代码：</p>
-<pre><code class="java">public class MethodTest02 &#123;
-    public static void main(String[] args) &#123;
-        //定义一个数组，用静态初始化完成数组元素初始化
-        int[] arr = &#123;12, 45, 98, 73, 60&#125;;
-
-        //调用获取最大值方法，用变量接收返回结果
-        int number = getMax(arr);
-
-        //把结果输出在控制台
-        System.out.println(&quot;number:&quot; + number);
-    &#125;
-
-    //定义一个方法，用来获取数组中的最大值
-    /*
-        两个明确：
-            返回值类型：int
-            参数：int[] arr
-     */
-    public static int getMax(int[] arr) &#123;
-        int max = arr[0];
-
-        for(int x=1; x&lt;arr.length; x++) &#123;
-            if(arr[x] &gt; max) &#123;
-                max = arr[x];
-            &#125;
-        &#125;
-        return max;
-    &#125;
-&#125;</code></pre>
-</li>
-</ul>
 ]]></content>
       <categories>
         <category>Java</category>
@@ -3808,6 +3808,235 @@ public class StringBuilderTest02 &#123;
       </tags>
   </entry>
   <entry>
+    <title>hexo博客增加春节灯笼特效，增加喜庆气氛</title>
+    <url>/2021/02/04/20210204001/</url>
+    <content><![CDATA[<div class="note idea"><p>2021春节将至，每天上下班都能看到马路两边的树上都挂满了灯笼，就想是不是也给自己的网站也挂上灯笼，增加一些喜庆的气氛。于是在网上找了找素材，果然大佬还是很多的，直接拿过来用。</p></div>
+<a id="more"></a>
+<span class='p h3 blue'>效果如图:</span>
+<p><img src="https://bu.dusays.com/2021/02/04/305f76d42bb88.png" class="lazyload placeholder" data-srcset="https://bu.dusays.com/2021/02/04/305f76d42bb88.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br><span class="inline-tag green">实现方式：</span></p>
+<ul>
+<li><span class='p red h3'>第一步:</span>找到主题目录下的cover.ejs文件,位置：<span class='p red'>layout/_partial/cover.ejs</span>,将下面html代码添加到如下图位置：
+<img src="https://bu.dusays.com/2021/02/04/23ad733112a75.png" class="lazyload placeholder" data-srcset="https://bu.dusays.com/2021/02/04/23ad733112a75.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><pre><code class="html">&lt;div class=&quot;deng-box&quot;&gt;
+&lt;div class=&quot;deng&quot;&gt;
+    &lt;div class=&quot;xian&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;deng-a&quot;&gt;
+        &lt;div class=&quot;deng-b&quot;&gt;&lt;div class=&quot;deng-t&quot;&gt;新春&lt;/div&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;shui shui-a&quot;&gt;&lt;div class=&quot;shui-c&quot;&gt;&lt;/div&gt;&lt;div class=&quot;shui-b&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;deng-box1&quot;&gt;
+&lt;div class=&quot;deng&quot;&gt;
+    &lt;div class=&quot;xian&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;deng-a&quot;&gt;
+        &lt;div class=&quot;deng-b&quot;&gt;&lt;div class=&quot;deng-t&quot;&gt;快乐&lt;/div&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;shui shui-a&quot;&gt;&lt;div class=&quot;shui-c&quot;&gt;&lt;/div&gt;&lt;div class=&quot;shui-b&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+</li>
+<li><span class='p red h3'>第二步:</span>然后在文件的末尾添加css代码：
+<pre><code class="css">&lt;!--春节灯笼--&gt;
+&lt;style&gt;
+@media only screen and (min-width: 1124px) &#123;
+.nav-menu &#123;
+  padding-right: 96px;
+&#125;
+&#125;
+@media only screen and (max-width: 760px) &#123;
+.deng-box, .deng-box1 &#123;
+  width: 40%;
+&#125;
+.right &#123;
+  float: left!important;
+&#125;
+&#125;
+@media only screen and (min-width: 768px) and (max-width: 1024px) &#123;
+.right &#123;
+  float: left!important;
+&#125;
+&#125;
+.deng-box &#123;
+position: fixed;
+top: -30px;
+left: 20px;
+z-index: 9999;
+&#125;
+.deng-box1 &#123;
+position: fixed;
+top: -30px;
+right: 10px;
+z-index: 9999;
+&#125;
+.deng-box1 .deng &#123;
+position: relative;
+width: 120px;
+height: 90px;
+margin: 50px;
+background: #d8000f;
+background: rgba(216, 0, 15, 0.8);
+border-radius: 50% 50%;
+-webkit-transform-origin: 50% -100px;
+-webkit-animation: swing 5s infinite ease-in-out;
+box-shadow: -5px 5px 30px 4px rgba(252, 144, 61, 1);
+&#125;
+.deng &#123;
+position: relative;
+width: 120px;
+height: 90px;
+margin: 50px;
+background: #d8000f;
+background: rgba(216, 0, 15, 0.8);
+border-radius: 50% 50%;
+-webkit-transform-origin: 50% -100px;
+-webkit-animation: swing 3s infinite ease-in-out;
+box-shadow: -5px 5px 50px 4px rgba(250, 108, 0, 1);
+&#125;
+.deng-a &#123;
+width: 100px;
+height: 90px;
+background: #d8000f;
+background: rgba(216, 0, 15, 0.1);
+margin: 12px 8px 8px 10px;
+border-radius: 50% 50%;
+border: 2px solid #dc8f03;
+&#125;
+.deng-b &#123;
+width: 45px;
+height: 90px;
+background: #d8000f;
+background: rgba(216, 0, 15, 0.1);
+margin: -4px 8px 8px 26px;
+border-radius: 50% 50%;
+border: 2px solid #dc8f03;
+&#125;
+.xian &#123;
+position: absolute;
+top: -20px;
+left: 60px;
+width: 2px;
+height: 20px;
+background: #dc8f03;
+&#125;
+.shui-a &#123;
+position: relative;
+width: 5px;
+height: 20px;
+margin: -5px 0 0 59px;
+-webkit-animation: swing 4s infinite ease-in-out;
+-webkit-transform-origin: 50% -45px;
+background: #ffa500;
+border-radius: 0 0 5px 5px;
+&#125;
+.shui-b &#123;
+position: absolute;
+top: 14px;
+left: -2px;
+width: 10px;
+height: 10px;
+background: #dc8f03;
+border-radius: 50%;
+&#125;
+.shui-c &#123;
+position: absolute;
+top: 18px;
+left: -2px;
+width: 10px;
+height: 35px;
+background: #ffa500;
+border-radius: 0 0 0 5px;
+&#125;
+.deng:before &#123;
+position: absolute;
+top: -7px;
+left: 29px;
+height: 12px;
+width: 60px;
+content: &quot; &quot;;
+display: block;
+z-index: 999;
+border-radius: 5px 5px 0 0;
+border: solid 1px #dc8f03;
+background: #ffa500;
+background: linear-gradient(to right, #dc8f03, #ffa500, #dc8f03, #ffa500, #dc8f03);
+&#125;
+.deng:after &#123;
+position: absolute;
+bottom: -7px;
+left: 10px;
+height: 12px;
+width: 60px;
+content: &quot; &quot;;
+display: block;
+margin-left: 20px;
+border-radius: 0 0 5px 5px;
+border: solid 1px #dc8f03;
+background: #ffa500;
+background: linear-gradient(to right, #dc8f03, #ffa500, #dc8f03, #ffa500, #dc8f03);
+&#125;
+@font-face &#123;
+font-family: &quot;华文行楷&quot;;
+src: url(&#39;/fonts/华文行楷.ttf&#39;);
+&#125;
+.deng-t &#123;
+font-family: 华文行楷;
+font-size: 26px;
+color: #dc8f03;
+font-weight: bold;
+line-height: 44px;
+text-align: center;
+&#125;
+.night .deng-t,
+.night .deng-box,
+.night .deng-box1 &#123;
+background: transparent !important;
+&#125;
+@-moz-keyframes swing &#123;
+0% &#123;
+  -moz-transform: rotate(-10deg)
+&#125;
+50% &#123;
+  -moz-transform: rotate(10deg)
+&#125;
+100% &#123;
+  -moz-transform: rotate(-10deg)
+&#125;
+&#125;
+@-webkit-keyframes swing &#123;
+0% &#123;
+  -webkit-transform: rotate(-10deg)
+&#125;
+50% &#123;
+  -webkit-transform: rotate(10deg)
+&#125;
+100% &#123;
+  -webkit-transform: rotate(-10deg)
+&#125;
+&#125;
+&lt;/style&gt;</code></pre>
+</li>
+<li><span class='p red h3'>第三步:</span>没啦，是不是很简单！其他主题同样适用，只要找准位置将代码复制粘贴上去就行。
+<div class="note info"><p>最近收到博友反馈，加上灯笼后会遮挡顶部按钮，因为我的博客顶部按钮都是在中间，灯笼放两边就没有考虑这个问题，其实很简单，只需要设置样式：pointer-events: none;即可</p></div>
+
+
+
+
+
+
+
+
+
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>春节灯笼</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>java学习-ArrayList集合&amp;学生管理系统</title>
     <url>/2021/01/19/20210119009/</url>
     <content><![CDATA[<h2 id="1-ArrayList"><a href="#1-ArrayList" class="headerlink" title="1.ArrayList"></a>1.ArrayList</h2><h3 id="1-1ArrayList类概述"><a href="#1-1ArrayList类概述" class="headerlink" title="1.1ArrayList类概述"></a>1.1ArrayList类概述</h3><ul>
@@ -4311,235 +4540,6 @@ public class ArrayListTest &#123;
       </tags>
   </entry>
   <entry>
-    <title>hexo博客增加春节灯笼特效，增加喜庆气氛</title>
-    <url>/2021/02/04/20210204001/</url>
-    <content><![CDATA[<div class="note idea"><p>2021春节将至，每天上下班都能看到马路两边的树上都挂满了灯笼，就想是不是也给自己的网站也挂上灯笼，增加一些喜庆的气氛。于是在网上找了找素材，果然大佬还是很多的，直接拿过来用。</p></div>
-<a id="more"></a>
-<span class='p h3 blue'>效果如图:</span>
-<p><img src="https://bu.dusays.com/2021/02/04/305f76d42bb88.png" class="lazyload placeholder" data-srcset="https://bu.dusays.com/2021/02/04/305f76d42bb88.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><br><span class="inline-tag green">实现方式：</span></p>
-<ul>
-<li><span class='p red h3'>第一步:</span>找到主题目录下的cover.ejs文件,位置：<span class='p red'>layout/_partial/cover.ejs</span>,将下面html代码添加到如下图位置：
-<img src="https://bu.dusays.com/2021/02/04/23ad733112a75.png" class="lazyload placeholder" data-srcset="https://bu.dusays.com/2021/02/04/23ad733112a75.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"><pre><code class="html">&lt;div class=&quot;deng-box&quot;&gt;
-&lt;div class=&quot;deng&quot;&gt;
-    &lt;div class=&quot;xian&quot;&gt;&lt;/div&gt;
-    &lt;div class=&quot;deng-a&quot;&gt;
-        &lt;div class=&quot;deng-b&quot;&gt;&lt;div class=&quot;deng-t&quot;&gt;新春&lt;/div&gt;&lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;shui shui-a&quot;&gt;&lt;div class=&quot;shui-c&quot;&gt;&lt;/div&gt;&lt;div class=&quot;shui-b&quot;&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;deng-box1&quot;&gt;
-&lt;div class=&quot;deng&quot;&gt;
-    &lt;div class=&quot;xian&quot;&gt;&lt;/div&gt;
-    &lt;div class=&quot;deng-a&quot;&gt;
-        &lt;div class=&quot;deng-b&quot;&gt;&lt;div class=&quot;deng-t&quot;&gt;快乐&lt;/div&gt;&lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;shui shui-a&quot;&gt;&lt;div class=&quot;shui-c&quot;&gt;&lt;/div&gt;&lt;div class=&quot;shui-b&quot;&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;</code></pre>
-</li>
-<li><span class='p red h3'>第二步:</span>然后在文件的末尾添加css代码：
-<pre><code class="css">&lt;!--春节灯笼--&gt;
-&lt;style&gt;
-@media only screen and (min-width: 1124px) &#123;
-.nav-menu &#123;
-  padding-right: 96px;
-&#125;
-&#125;
-@media only screen and (max-width: 760px) &#123;
-.deng-box, .deng-box1 &#123;
-  width: 40%;
-&#125;
-.right &#123;
-  float: left!important;
-&#125;
-&#125;
-@media only screen and (min-width: 768px) and (max-width: 1024px) &#123;
-.right &#123;
-  float: left!important;
-&#125;
-&#125;
-.deng-box &#123;
-position: fixed;
-top: -30px;
-left: 20px;
-z-index: 9999;
-&#125;
-.deng-box1 &#123;
-position: fixed;
-top: -30px;
-right: 10px;
-z-index: 9999;
-&#125;
-.deng-box1 .deng &#123;
-position: relative;
-width: 120px;
-height: 90px;
-margin: 50px;
-background: #d8000f;
-background: rgba(216, 0, 15, 0.8);
-border-radius: 50% 50%;
--webkit-transform-origin: 50% -100px;
--webkit-animation: swing 5s infinite ease-in-out;
-box-shadow: -5px 5px 30px 4px rgba(252, 144, 61, 1);
-&#125;
-.deng &#123;
-position: relative;
-width: 120px;
-height: 90px;
-margin: 50px;
-background: #d8000f;
-background: rgba(216, 0, 15, 0.8);
-border-radius: 50% 50%;
--webkit-transform-origin: 50% -100px;
--webkit-animation: swing 3s infinite ease-in-out;
-box-shadow: -5px 5px 50px 4px rgba(250, 108, 0, 1);
-&#125;
-.deng-a &#123;
-width: 100px;
-height: 90px;
-background: #d8000f;
-background: rgba(216, 0, 15, 0.1);
-margin: 12px 8px 8px 10px;
-border-radius: 50% 50%;
-border: 2px solid #dc8f03;
-&#125;
-.deng-b &#123;
-width: 45px;
-height: 90px;
-background: #d8000f;
-background: rgba(216, 0, 15, 0.1);
-margin: -4px 8px 8px 26px;
-border-radius: 50% 50%;
-border: 2px solid #dc8f03;
-&#125;
-.xian &#123;
-position: absolute;
-top: -20px;
-left: 60px;
-width: 2px;
-height: 20px;
-background: #dc8f03;
-&#125;
-.shui-a &#123;
-position: relative;
-width: 5px;
-height: 20px;
-margin: -5px 0 0 59px;
--webkit-animation: swing 4s infinite ease-in-out;
--webkit-transform-origin: 50% -45px;
-background: #ffa500;
-border-radius: 0 0 5px 5px;
-&#125;
-.shui-b &#123;
-position: absolute;
-top: 14px;
-left: -2px;
-width: 10px;
-height: 10px;
-background: #dc8f03;
-border-radius: 50%;
-&#125;
-.shui-c &#123;
-position: absolute;
-top: 18px;
-left: -2px;
-width: 10px;
-height: 35px;
-background: #ffa500;
-border-radius: 0 0 0 5px;
-&#125;
-.deng:before &#123;
-position: absolute;
-top: -7px;
-left: 29px;
-height: 12px;
-width: 60px;
-content: &quot; &quot;;
-display: block;
-z-index: 999;
-border-radius: 5px 5px 0 0;
-border: solid 1px #dc8f03;
-background: #ffa500;
-background: linear-gradient(to right, #dc8f03, #ffa500, #dc8f03, #ffa500, #dc8f03);
-&#125;
-.deng:after &#123;
-position: absolute;
-bottom: -7px;
-left: 10px;
-height: 12px;
-width: 60px;
-content: &quot; &quot;;
-display: block;
-margin-left: 20px;
-border-radius: 0 0 5px 5px;
-border: solid 1px #dc8f03;
-background: #ffa500;
-background: linear-gradient(to right, #dc8f03, #ffa500, #dc8f03, #ffa500, #dc8f03);
-&#125;
-@font-face &#123;
-font-family: &quot;华文行楷&quot;;
-src: url(&#39;/fonts/华文行楷.ttf&#39;);
-&#125;
-.deng-t &#123;
-font-family: 华文行楷;
-font-size: 26px;
-color: #dc8f03;
-font-weight: bold;
-line-height: 44px;
-text-align: center;
-&#125;
-.night .deng-t,
-.night .deng-box,
-.night .deng-box1 &#123;
-background: transparent !important;
-&#125;
-@-moz-keyframes swing &#123;
-0% &#123;
-  -moz-transform: rotate(-10deg)
-&#125;
-50% &#123;
-  -moz-transform: rotate(10deg)
-&#125;
-100% &#123;
-  -moz-transform: rotate(-10deg)
-&#125;
-&#125;
-@-webkit-keyframes swing &#123;
-0% &#123;
-  -webkit-transform: rotate(-10deg)
-&#125;
-50% &#123;
-  -webkit-transform: rotate(10deg)
-&#125;
-100% &#123;
-  -webkit-transform: rotate(-10deg)
-&#125;
-&#125;
-&lt;/style&gt;</code></pre>
-</li>
-<li><span class='p red h3'>第三步:</span>没啦，是不是很简单！其他主题同样适用，只要找准位置将代码复制粘贴上去就行。
-<div class="note info"><p>最近收到博友反馈，加上灯笼后会遮挡顶部按钮，因为我的博客顶部按钮都是在中间，灯笼放两边就没有考虑这个问题，其实很简单，只需要设置样式：pointer-events: none;即可</p></div>
-
-
-
-
-
-
-
-
-
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
-      <tags>
-        <tag>春节灯笼</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>IntelliJ IDEA 2021.2.1激活破解图文教程（亲测有效，永久激活）</title>
     <url>/2021/09/16/20210916/</url>
     <content><![CDATA[<div class="note idea"><p>分享一个一劳永逸的破解方法，通过无限重置 30 天试用期的方式，无需再为激活码、安装参数失效担忧，亲测有效，方法简单，下面是详细教程哟~</p></div>
@@ -4933,26 +4933,6 @@ background: transparent !important;
       </categories>
       <tags>
         <tag>Picgo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Jenkins拉取github仓库代码执行构建并自动发邮件通知</title>
-    <url>/2020/08/23/Jenkinsgithub/</url>
-    <content><![CDATA[<p>Jenkins 常用的就是项目构建，一般构建都需要从版本控制平台上面拉取项目代码到 Jenkins 服务器上构建。我主要使用的版本控制平台是 GitHub，所以这里就分享一下 Jenkins + GitHub 的基本构建配置过程。</p>
-<h2 id="一、安装GitHub插件"><a href="#一、安装GitHub插件" class="headerlink" title="一、安装GitHub插件"></a>一、安装GitHub插件</h2><p>进入Jenkins插件管理，搜索GitHub plugin插件进行安装<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(12).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(12).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"></p>
-<h2 id="二、新建项目"><a href="#二、新建项目" class="headerlink" title="二、新建项目"></a>二、新建项目</h2><p>新建一个自由风格的项目，勾选github项目，填写项目的URL<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(3).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(3).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(11).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(11).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"></p>
-<h3 id="源码管理"><a href="#源码管理" class="headerlink" title="源码管理"></a>源码管理</h3><p>其实我们在安装github的时候需要配置公钥（git如何安装和使用自行百度），那么我们拉取远程库代码就需要配置私钥</p>
-<p>Git的私钥文件</p>
-<p>一般安装Git的时候，生成的公钥和秘钥都默认在下面这个目录下</p>
-<p><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(19).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(19).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(6).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(6).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>源码管理我们勾选Git，并点击【添加】<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(14).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(14).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>弹出框中按照标记内容进行添加<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(1).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(1).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(7).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(7).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"></p>
-<h3 id="构建环境"><a href="#构建环境" class="headerlink" title="构建环境"></a>构建环境</h3><p>我们这里选择每次构建之前清空一下Jenkins工作空间，避免拉取的代码有冲突<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(8).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(8).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>选择执行windows批处理命令<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(5).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(5).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"></p>
-<h3 id="构建后操作"><a href="#构建后操作" class="headerlink" title="构建后操作"></a>构建后操作</h3><p><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(16).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(16).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>修改下面的配置如图：<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(13).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(13).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>default content 是<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(10).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(10).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>接下来我们手动构建一次看看是否能成功<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(15).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(15).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>可以看到Jenkins工作空间已经拉取到了GitHub上面的项目代码<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(17).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(17).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>自动打开了浏览器并运行自动化代码<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(18).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(18).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>运行成功之后自动发了邮件，并且自动将测试报告发送到了邮件附件里<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(2).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(2).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(4).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(4).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>来看一下我们的报告<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(9).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(9).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>本次教程参考了<a href="https://www.cnblogs.com/linuxchao/">https://www.cnblogs.com/linuxchao/</a>  感谢大佬</p>
-]]></content>
-      <categories>
-        <category>Jenkins</category>
-      </categories>
-      <tags>
-        <tag>Jenkins</tag>
       </tags>
   </entry>
   <entry>
@@ -5378,6 +5358,26 @@ background: transparent !important;
       </tags>
   </entry>
   <entry>
+    <title>Jenkins拉取github仓库代码执行构建并自动发邮件通知</title>
+    <url>/2020/08/23/Jenkinsgithub/</url>
+    <content><![CDATA[<p>Jenkins 常用的就是项目构建，一般构建都需要从版本控制平台上面拉取项目代码到 Jenkins 服务器上构建。我主要使用的版本控制平台是 GitHub，所以这里就分享一下 Jenkins + GitHub 的基本构建配置过程。</p>
+<h2 id="一、安装GitHub插件"><a href="#一、安装GitHub插件" class="headerlink" title="一、安装GitHub插件"></a>一、安装GitHub插件</h2><p>进入Jenkins插件管理，搜索GitHub plugin插件进行安装<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(12).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(12).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"></p>
+<h2 id="二、新建项目"><a href="#二、新建项目" class="headerlink" title="二、新建项目"></a>二、新建项目</h2><p>新建一个自由风格的项目，勾选github项目，填写项目的URL<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(3).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(3).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(11).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(11).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"></p>
+<h3 id="源码管理"><a href="#源码管理" class="headerlink" title="源码管理"></a>源码管理</h3><p>其实我们在安装github的时候需要配置公钥（git如何安装和使用自行百度），那么我们拉取远程库代码就需要配置私钥</p>
+<p>Git的私钥文件</p>
+<p>一般安装Git的时候，生成的公钥和秘钥都默认在下面这个目录下</p>
+<p><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(19).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(19).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(6).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(6).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>源码管理我们勾选Git，并点击【添加】<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(14).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(14).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>弹出框中按照标记内容进行添加<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(1).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(1).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(7).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(7).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"></p>
+<h3 id="构建环境"><a href="#构建环境" class="headerlink" title="构建环境"></a>构建环境</h3><p>我们这里选择每次构建之前清空一下Jenkins工作空间，避免拉取的代码有冲突<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(8).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(8).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>选择执行windows批处理命令<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(5).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(5).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"></p>
+<h3 id="构建后操作"><a href="#构建后操作" class="headerlink" title="构建后操作"></a>构建后操作</h3><p><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(16).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(16).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>修改下面的配置如图：<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(13).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(13).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>default content 是<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(10).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(10).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>接下来我们手动构建一次看看是否能成功<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(15).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(15).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>可以看到Jenkins工作空间已经拉取到了GitHub上面的项目代码<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(17).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(17).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>自动打开了浏览器并运行自动化代码<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(18).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(18).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>运行成功之后自动发了邮件，并且自动将测试报告发送到了邮件附件里<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(2).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(2).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(4).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(4).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>来看一下我们的报告<br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(9).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/082301%20(9).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>本次教程参考了<a href="https://www.cnblogs.com/linuxchao/">https://www.cnblogs.com/linuxchao/</a>  感谢大佬</p>
+]]></content>
+      <categories>
+        <category>Jenkins</category>
+      </categories>
+      <tags>
+        <tag>Jenkins</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Jenkins安装教程</title>
     <url>/2020/08/23/Jenkinsinstall01/</url>
     <content><![CDATA[<p>Jenkins安装方法有很多，本文主要介绍通用安装方式（傻瓜式安装）</p>
@@ -5531,6 +5531,102 @@ title: 我的朋友们 # 可选，这是友链页的标题
       </tags>
   </entry>
   <entry>
+    <title>Jmeter连接数据库</title>
+    <url>/2020/08/23/jmeterconnectmysql/</url>
+    <content><![CDATA[<p>jmeter要链接mysql数据库，首先得下载mysql jdbc驱动包（注：驱动包的版本一定要与你数据库的版本匹配，驱动版本低于mysql版本有可能会导致连接失败报错）我这里下载的是mysql-connector-java-5.1.23-bin.jar,。</p>
+<p>下载地址：<a href="http://www.java2s.com/Code/Jar/m/Downloadmysqlconnectorjava5123binjar.htm">http://www.java2s.com/Code/Jar/m/Downloadmysqlconnectorjava5123binjar.htm</a></p>
+<p>下载好之后解压将jar包放到\jmeter\apache-jmeter-5.0\lib目录下</p>
+<p>好，接下来进入正题！</p>
+<h2 id="1、添加一个线程组"><a href="#1、添加一个线程组" class="headerlink" title="1、添加一个线程组"></a>1、添加一个线程组</h2><p><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_03%20(2).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_03%20(2).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"></p>
+<h2 id="2、线程组下新建一个JDBC-Connection-Configuration配置元件，详细配置如下图："><a href="#2、线程组下新建一个JDBC-Connection-Configuration配置元件，详细配置如下图：" class="headerlink" title="2、线程组下新建一个JDBC Connection Configuration配置元件，详细配置如下图："></a>2、线程组下新建一个JDBC Connection Configuration配置元件，详细配置如下图：</h2><p><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_03%20(3).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_03%20(3).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"></p>
+<h2 id="3、然后添加一个取样器-JDBC-request"><a href="#3、然后添加一个取样器-JDBC-request" class="headerlink" title="3、然后添加一个取样器 JDBC request"></a>3、然后添加一个取样器 JDBC request</h2><p><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_03%20(4).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_03%20(4).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"></p>
+<h2 id="4、最后添加一个监听器-查看结果树查看响应结果"><a href="#4、最后添加一个监听器-查看结果树查看响应结果" class="headerlink" title="4、最后添加一个监听器 查看结果树查看响应结果"></a>4、最后添加一个监听器 查看结果树查看响应结果</h2><p><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_03%20(1).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_03%20(1).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>好了，以上就是一个最简单的jmeter连接数据库的脚本</p>
+]]></content>
+      <categories>
+        <category>Jmeter</category>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>Mysql</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Linux基础</title>
+    <url>/2020/08/23/linuxfoundation01/</url>
+    <content><![CDATA[<h1 id="linux简介"><a href="#linux简介" class="headerlink" title="linux简介"></a>linux简介</h1><h2 id="1、基础命令"><a href="#1、基础命令" class="headerlink" title="1、基础命令"></a>1、基础命令</h2><h3 id="1-1、系统命令"><a href="#1-1、系统命令" class="headerlink" title="1.1、系统命令"></a>1.1、系统命令</h3><p>init 0  – 关机<br>init 6  – 重启，也可以用reboot命令</p>
+<p>pwd     – 查看当前用户所在的位置（某个路径下），当前的操作路径<br>clear   – 清空当前屏幕的内容<br>cal     – 查看当月日历<br>date    – 查看当前系统时间<br>ifconfig– 查看网络配置信息<br>ping    – 检测网络连通性，如ping 192.168.1.1是检测虚拟机是否与路由器相通<br>service [servername] restart  – 重启xx服务，如network、mysqld、firewall，start启动，stop停用</p>
+<p>cd      – 路径跳转，如cd /usr/local是将操作路径切换到/usr/local下（绝对路径跳转）<br>        – cd local/是将操作路径跳转到当前路径的下级路径（local/）下<br>        – cd ./bin是将操作路径跳转到悠闲匹配到的bin目录（从根目录开始找，相对路径跳转）<br>cd ..   – 返回上一级目录<br>ls      – 查看当前路径下的文件（不含隐藏文件）<br>ls  -a  – 查看当前路径下的所有文件（含隐藏文件）<br>ll      – 查看当前路径下的文件属性（权限、所有者等信息）<br>ll  -a  – 类似于ls -a</p>
+<h3 id="1-2、常用快捷键"><a href="#1-2、常用快捷键" class="headerlink" title="1.2、常用快捷键"></a>1.2、常用快捷键</h3><p>Tab键    – 补齐键，可以补齐命令、目录名。多次敲击此键还可以匹配相关文件或目录名<br>ESC键    – 在vi编辑器中从编辑模式回到命令模式<br>Ctrl+C  – 取消当前输入或中断当前操作<br>Ctrl+R  – 查询最近使用过的命令</p>
+<h3 id="1-3、用户操作"><a href="#1-3、用户操作" class="headerlink" title="1.3、用户操作"></a>1.3、用户操作</h3><p>useradd – 添加普通用户，useradd [username]<br>passwd  – 为指定用户设置密码，password [username]<br>su      – 切换用户。高权限切换到低权限的用户，无需验证密码，反之需要验证密码</p>
+<h3 id="1-4、文件-文件夹操作"><a href="#1-4、文件-文件夹操作" class="headerlink" title="1.4、文件/文件夹操作"></a>1.4、文件/文件夹操作</h3><p>mkdir   – 创建文件夹<br>        – mkdir abc是在当前路径下创建一个叫abc的文件夹<br>        – mkdir aa\ bb 创建一个名为’aa bb’的文件夹（有空格）<br>        – mkdir aa bb 创建名字分别为aa和bb的两个文件夹<br>rmdir   – 删除空文件夹<br>rm      – 删除文件（有提示是否要删除），无法删除目录<br>rm -r   – 删除非空目录（与提示，输入y/n），删除文件<br>rm -rf  – 强制删除指定文件或目录（无提示）<br>cp      – 复制并粘贴<br>cp -r /a/b . – 将/a路径下的文件b复制到当前路径下，cp -r /a/b  /c/d是将/a路径下的b文件复制到/c/d目录下<br>mv      – 剪切（移动）文件或路径，类似于cp的用法<br>mv a b  – 将a文件命名为b（更名）</p>
+<p>touch   – 创建文件（文件要带扩展名），如touch abc.txt<br>vi      – 创建并打开一个文件，进入默认的命令模式</p>
+<h3 id="1-5、vi编辑器"><a href="#1-5、vi编辑器" class="headerlink" title="1.5、vi编辑器"></a>1.5、vi编辑器</h3><p>三大模式：</p>
+<ul>
+<li><p>命令模式：通过命令进行文件内容操作（操作的命令无法显示），</p>
+<ul>
+<li>G     光标跳转到末行首</li>
+<li>gg    光标跳转到首行首</li>
+<li>dd    删除光标所在的行</li>
+<li>u     撤销上一步操作</li>
+<li>yy    复制光标所在的行</li>
+<li>p     粘贴复制的内容</li>
+<li>i     进入编辑模式</li>
+<li>:     进入末行模式</li>
+<li></li>
+</ul>
+</li>
+<li><p>编辑模式：对内容进行编辑，可以通过ESC键返回命令模式</p>
+</li>
+<li><p>末行模式：执行文件的保存和退出等操作，可以通过ESC键返回命令模式</p>
+<ul>
+<li>w     保存当前编辑的内容（write）</li>
+<li>q     在没有修改文件内容的情况下退出（关闭文件）（quit）</li>
+<li>wq    保存后退出（write before quit）</li>
+<li>q!    强制退出（不保存退出）</li>
+<li>set number    显示文件内容的行号</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-6、文件查看"><a href="#1-6、文件查看" class="headerlink" title="1.6、文件查看"></a>1.6、文件查看</h3><p>cat      —— 一次性查看文件的内容（从头到尾）<br>tac      —— 反过来一次性显示文件内容（末行开始到首行）<br>more     —— 分页（按百分比）查看文件内容，查看时q键退出，vi进入编辑器，空格键翻页<br>less     —— 与more类似（没有百分比显示）,可以在查看过程中输入vi启用vi编辑器</p>
+<p>tail a  – 查看文件a最新的10行内容<br>tail -f – 持续输出文件的最新内容（如linux有一些.out格式日志文件的内容是可以持续更新的）<br>tail -100f  – 输出文件的最新100行内容，并持续输出后续更新的内容</p>
+<h3 id="1-7、文件压缩与解压"><a href="#1-7、文件压缩与解压" class="headerlink" title="1.7、文件压缩与解压"></a>1.7、文件压缩与解压</h3><p>tar     – 文件（或文件夹）压缩与解压，通过压缩参数或解压参数实现<br>tar -xvf – 将压缩文件解压（tar/rar/war/zip）<br>tar -zvcf – 对指定文件（或文件夹）进行压缩，如tar -zvcf a.tar a是将a文件（或文件夹）压缩为a.tar</p>
+<h3 id="1-8、件的安装和卸载"><a href="#1-8、件的安装和卸载" class="headerlink" title="1.8、件的安装和卸载"></a>1.8、件的安装和卸载</h3><p>手动安装：（离线安装）<br>wget url            – 下载指定地址的文件，如wget <a href="https://dldir1.qq.com/qqfile/qq/">https://dldir1.qq.com/qqfile/qq/</a><br>                    TIM2.2.5/20871/TIM2.2.5.exe 是下载TIM的安装包，通常wget命令都需<br>                    要先安装才行，只有ubutu是自带的<br>rpm -ivh package    – 安装软件（手动安装），如rpm -ivh jdk1.7-linux-i586.rpm<br>rpm -e –nodeps     – 卸载软件<br>rpm -qa|grep xx     – 查询是否已安装xx软件，如rpm -qa|grep jdk</p>
+<p>自动安装：<br>yum install package     – 自动安装指定程序<br>yum update package      – 更新，升级<br>yum remove package      – 卸载程序</p>
+<h3 id="1-9、进程的查杀"><a href="#1-9、进程的查杀" class="headerlink" title="1.9、进程的查杀"></a>1.9、进程的查杀</h3><p>查进程：<br>ps      – 查询系统主进程<br>ps -ef  –查询系统运行的所有进程<br>ps -ef|grep xx  – 查询与xx相关的进程</p>
+<p>杀进程：就是关闭相关应用程序<br>kill -9 xx  – 强制杀死（终止）xx进程，xx指的是PID（进程编号，是一串数字）</p>
+<h3 id="1-10、shell脚本执行"><a href="#1-10、shell脚本执行" class="headerlink" title="1.10、shell脚本执行"></a>1.10、shell脚本执行</h3><p>shell脚本，指的是linux编写的程序脚本，一般保存下来的文件是.sh格式，如java的文件是.java，python的文件是.py<br>./脚本名.sh        – 执行shell脚本，需要进入文件所在目录<br>sh 脚本名.sh       – 也是执行shell脚本，如sh /usr/tomcat/bin/startup.sh是启动tomcat</p>
+<h3 id="1-11、文件权限管理"><a href="#1-11、文件权限管理" class="headerlink" title="1.11、文件权限管理"></a>1.11、文件权限管理</h3><p>使用ll命令查看文件详情时，前面一段类似于-rw-r–r–这种描述，<br>第一个字符如果是‘d’表示这是一个目录，若是‘-’表示这是一个文件（目录以外的任何东西）<br>之后的字符共9个，每3个一组，格式都遵照rwx进行排列的，<br>第一组表示当前登录用户（u）对该文件所有的权限，<br>第二组表示创建这个文件的用户所在用户组（g）的权限，<br>第三组表示文件所有者（创建者，o）的权限。<br>r   – 读取，只读  read      权限值4<br>w   – 写入，编辑  write     权限值2<br>x   – 执行，运行  excute    权限值1<br>所以一个文件权限值是由这3组rwx的权限组合相加，最小为000，最大777</p>
+<p>chmod 权限值 文件名           – 修改文件/目录的权限<br>chmod -u rwx file           – 将当前登录用户对该文件的权限设置为rwx</p>
+<h2 id="2、Linux服务器搭建（java-web-Server）"><a href="#2、Linux服务器搭建（java-web-Server）" class="headerlink" title="2、Linux服务器搭建（java web Server）"></a>2、Linux服务器搭建（java web Server）</h2><h3 id="2-1、配置java环境"><a href="#2-1、配置java环境" class="headerlink" title="2.1、配置java环境"></a>2.1、配置java环境</h3><h4 id="2-1-1、配置Jdk"><a href="#2-1-1、配置Jdk" class="headerlink" title="2.1.1、配置Jdk"></a>2.1.1、配置Jdk</h4><p>1.使用ftp软件（xftp为例）上传jdk的安装文件（jdk_xxx_xxx.rpm）<br>2.安装jdk文件，如rpm -ivh jdk1.7-linux-i586.rpm<br>3.修改环境变量配置<br>找到/etc目录下的profile文件，进行编辑，即vi /etc/profile，加入环境变量代码</p>
+<pre><code>JAVA_HOME=/usr/java/jdk1.8.0_121
+JRE_HOME=/usr/java/jdk1.8.0_121/jre
+PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin
+CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar:$JRE_HOME/lib
+export JAVA_HOME JRE_HOME PATH CLASSPATH</code></pre>
+<p>这段代码加在倒数第四行的done下方<br>4.返回linux命令行输入java -version检测配置结构和jdk版本</p>
+<h4 id="2-1-2、配置tomcat"><a href="#2-1-2、配置tomcat" class="headerlink" title="2.1.2、配置tomcat"></a>2.1.2、配置tomcat</h4><p>1.同样上传Apache-tomcat的压缩包<br>2.解压<br>3.修改防火墙文件，即vi /etc/sysconfig/iptables<br>4.在文件中的COMMIT前面加入以下代码<br>    -A RH-Firewall-1-INPUT -m state –state NEW -m tcp -p tcp –dport 8080 -j ACCEPT<br>5.重启防火墙相关服务，service iptables restart，使tomcat配置生效</p>
+<p>如何启动tomcat？<br>    进入tomcat的bin目录<br>    执行./startup.sh 或sh startup.sh命令启动tomcat</p>
+<h4 id="2-1-3、安装MySQL"><a href="#2-1-3、安装MySQL" class="headerlink" title="2.1.3、安装MySQL"></a>2.1.3、安装MySQL</h4><p>自动安装<br>使用命令yum install mysql-server</p>
+<p>手动安装<br>1.将mysql的server、client、devel三个安装包上传到linux服务器中<br>2.逐一对server、client、devel三个安装包进行依次安装<br>    如：rpm -ivh MySQL-server-5.5.55-1.el6.i686.rpm –nodeps –force<br>3.启动mysql服务<br>    service mysql start<br>4.修改mysql的root密码<br>    进入mysql（直接在命令行输入mysql，回车即可）<br>    切换到mysql数据库（use mysql;）<br>    修改user表中的root帐户密码（update user set host=’%’,password=’123456’ where user=’root’;）<br>    删除host未修改为%的root帐户（delete from user where not password=’123456’;）<br>5.配置远程访问权限<br>    GRANT ALL PRIVILEGES ON <em>.</em> TO ‘root’@’%’ IDENTIFIED BY ‘123456’ WITH GRANT OPTION;<br>    刷新权限<br>    FLUSH PRIVILEGES;</p>
+<h2 id="3、linux服务器代码部署"><a href="#3、linux服务器代码部署" class="headerlink" title="3、linux服务器代码部署"></a>3、linux服务器代码部署</h2><p>1.查杀tomcat进程<br>2.将代码的war包上传到tomcat下的webapps目录下<br>    如果开发人员没有编译成war包，一般都需要备份原来的代码包，也就是要返回到webapps目录，使用tar命令对原项目代码进行备份<br>3.重新启动tomcat（到bin目录下执行./startup.sh）<br>4.检查新代码中是否有需要修改的配置文件，如jdbc，系统相关位置配置等，若需要改项目内容，在修改后，还需要重启tomcat（即查杀tomcat后再次启动）</p>
+<p><a href="http://192.168.3.130:8080/">http://192.168.3.130:8080/</a><br>安装jdk<br>rpm -ivh jdk1.8u121-linux-i586.rpm<br>卸载jdk<br>rpm -e –nodeps jdk1.8.0_121-1.8.0_121-fcs.i586</p>
+<p>进入tomcat的bin目录下<br>cd /usr/local/apache-tomcat-7.0.70/bin<br>启动Tomcat<br>sh startup.sh<br>关闭Tomcat<br>sh shutdown.sh<br>查看安装的jdk：<br>rpm -qa|grep jdk </p>
+<p>可能看到如下类似的信息： </p>
+<p>jdk-1.6.0_22-fcs </p>
+<p>卸载： </p>
+<p>rpm -e –nodeps jdk-1.6.0_22-fcs </p>
+<p>rpm -e –nodeps java-1.8.0-openjdk-headless-1.8.0.222.b10-0.el6_10.x86_64</p>
+<p>rpm -e –nodeps java-1.8.0-openjdk-devel-1.8.0.222.b10-0.el6_10.x86_64</p>
+<p>rpm -e –nodeps java-1.8.0-openjdk-1.8.0.222.b10-0.el6_10.x86_64</p>
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>hexo博客之volantis主题添加上浮气泡特效</title>
     <url>/2020/10/19/hexo_bubbles/</url>
     <content><![CDATA[<div class="note idea"><p>在群友黑石大佬的主页：<strong><a href="http://www.heson10.com/">www.heson10.com</a></strong>，看到了上升气泡的特效，觉得很赞，于是乎，搬运工又来活了。</p></div>
@@ -5645,102 +5741,6 @@ title: 我的朋友们 # 可选，这是友链页的标题
       <tags>
         <tag>volantis</tag>
         <tag>Hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Jmeter连接数据库</title>
-    <url>/2020/08/23/jmeterconnectmysql/</url>
-    <content><![CDATA[<p>jmeter要链接mysql数据库，首先得下载mysql jdbc驱动包（注：驱动包的版本一定要与你数据库的版本匹配，驱动版本低于mysql版本有可能会导致连接失败报错）我这里下载的是mysql-connector-java-5.1.23-bin.jar,。</p>
-<p>下载地址：<a href="http://www.java2s.com/Code/Jar/m/Downloadmysqlconnectorjava5123binjar.htm">http://www.java2s.com/Code/Jar/m/Downloadmysqlconnectorjava5123binjar.htm</a></p>
-<p>下载好之后解压将jar包放到\jmeter\apache-jmeter-5.0\lib目录下</p>
-<p>好，接下来进入正题！</p>
-<h2 id="1、添加一个线程组"><a href="#1、添加一个线程组" class="headerlink" title="1、添加一个线程组"></a>1、添加一个线程组</h2><p><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_03%20(2).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_03%20(2).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"></p>
-<h2 id="2、线程组下新建一个JDBC-Connection-Configuration配置元件，详细配置如下图："><a href="#2、线程组下新建一个JDBC-Connection-Configuration配置元件，详细配置如下图：" class="headerlink" title="2、线程组下新建一个JDBC Connection Configuration配置元件，详细配置如下图："></a>2、线程组下新建一个JDBC Connection Configuration配置元件，详细配置如下图：</h2><p><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_03%20(3).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_03%20(3).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"></p>
-<h2 id="3、然后添加一个取样器-JDBC-request"><a href="#3、然后添加一个取样器-JDBC-request" class="headerlink" title="3、然后添加一个取样器 JDBC request"></a>3、然后添加一个取样器 JDBC request</h2><p><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_03%20(4).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_03%20(4).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"></p>
-<h2 id="4、最后添加一个监听器-查看结果树查看响应结果"><a href="#4、最后添加一个监听器-查看结果树查看响应结果" class="headerlink" title="4、最后添加一个监听器 查看结果树查看响应结果"></a>4、最后添加一个监听器 查看结果树查看响应结果</h2><p><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_03%20(1).png" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/photos/blogpic/20200823_03%20(1).png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br>好了，以上就是一个最简单的jmeter连接数据库的脚本</p>
-]]></content>
-      <categories>
-        <category>Jmeter</category>
-        <category>数据库</category>
-      </categories>
-      <tags>
-        <tag>Mysql</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Linux基础</title>
-    <url>/2020/08/23/linuxfoundation01/</url>
-    <content><![CDATA[<h1 id="linux简介"><a href="#linux简介" class="headerlink" title="linux简介"></a>linux简介</h1><h2 id="1、基础命令"><a href="#1、基础命令" class="headerlink" title="1、基础命令"></a>1、基础命令</h2><h3 id="1-1、系统命令"><a href="#1-1、系统命令" class="headerlink" title="1.1、系统命令"></a>1.1、系统命令</h3><p>init 0  – 关机<br>init 6  – 重启，也可以用reboot命令</p>
-<p>pwd     – 查看当前用户所在的位置（某个路径下），当前的操作路径<br>clear   – 清空当前屏幕的内容<br>cal     – 查看当月日历<br>date    – 查看当前系统时间<br>ifconfig– 查看网络配置信息<br>ping    – 检测网络连通性，如ping 192.168.1.1是检测虚拟机是否与路由器相通<br>service [servername] restart  – 重启xx服务，如network、mysqld、firewall，start启动，stop停用</p>
-<p>cd      – 路径跳转，如cd /usr/local是将操作路径切换到/usr/local下（绝对路径跳转）<br>        – cd local/是将操作路径跳转到当前路径的下级路径（local/）下<br>        – cd ./bin是将操作路径跳转到悠闲匹配到的bin目录（从根目录开始找，相对路径跳转）<br>cd ..   – 返回上一级目录<br>ls      – 查看当前路径下的文件（不含隐藏文件）<br>ls  -a  – 查看当前路径下的所有文件（含隐藏文件）<br>ll      – 查看当前路径下的文件属性（权限、所有者等信息）<br>ll  -a  – 类似于ls -a</p>
-<h3 id="1-2、常用快捷键"><a href="#1-2、常用快捷键" class="headerlink" title="1.2、常用快捷键"></a>1.2、常用快捷键</h3><p>Tab键    – 补齐键，可以补齐命令、目录名。多次敲击此键还可以匹配相关文件或目录名<br>ESC键    – 在vi编辑器中从编辑模式回到命令模式<br>Ctrl+C  – 取消当前输入或中断当前操作<br>Ctrl+R  – 查询最近使用过的命令</p>
-<h3 id="1-3、用户操作"><a href="#1-3、用户操作" class="headerlink" title="1.3、用户操作"></a>1.3、用户操作</h3><p>useradd – 添加普通用户，useradd [username]<br>passwd  – 为指定用户设置密码，password [username]<br>su      – 切换用户。高权限切换到低权限的用户，无需验证密码，反之需要验证密码</p>
-<h3 id="1-4、文件-文件夹操作"><a href="#1-4、文件-文件夹操作" class="headerlink" title="1.4、文件/文件夹操作"></a>1.4、文件/文件夹操作</h3><p>mkdir   – 创建文件夹<br>        – mkdir abc是在当前路径下创建一个叫abc的文件夹<br>        – mkdir aa\ bb 创建一个名为’aa bb’的文件夹（有空格）<br>        – mkdir aa bb 创建名字分别为aa和bb的两个文件夹<br>rmdir   – 删除空文件夹<br>rm      – 删除文件（有提示是否要删除），无法删除目录<br>rm -r   – 删除非空目录（与提示，输入y/n），删除文件<br>rm -rf  – 强制删除指定文件或目录（无提示）<br>cp      – 复制并粘贴<br>cp -r /a/b . – 将/a路径下的文件b复制到当前路径下，cp -r /a/b  /c/d是将/a路径下的b文件复制到/c/d目录下<br>mv      – 剪切（移动）文件或路径，类似于cp的用法<br>mv a b  – 将a文件命名为b（更名）</p>
-<p>touch   – 创建文件（文件要带扩展名），如touch abc.txt<br>vi      – 创建并打开一个文件，进入默认的命令模式</p>
-<h3 id="1-5、vi编辑器"><a href="#1-5、vi编辑器" class="headerlink" title="1.5、vi编辑器"></a>1.5、vi编辑器</h3><p>三大模式：</p>
-<ul>
-<li><p>命令模式：通过命令进行文件内容操作（操作的命令无法显示），</p>
-<ul>
-<li>G     光标跳转到末行首</li>
-<li>gg    光标跳转到首行首</li>
-<li>dd    删除光标所在的行</li>
-<li>u     撤销上一步操作</li>
-<li>yy    复制光标所在的行</li>
-<li>p     粘贴复制的内容</li>
-<li>i     进入编辑模式</li>
-<li>:     进入末行模式</li>
-<li></li>
-</ul>
-</li>
-<li><p>编辑模式：对内容进行编辑，可以通过ESC键返回命令模式</p>
-</li>
-<li><p>末行模式：执行文件的保存和退出等操作，可以通过ESC键返回命令模式</p>
-<ul>
-<li>w     保存当前编辑的内容（write）</li>
-<li>q     在没有修改文件内容的情况下退出（关闭文件）（quit）</li>
-<li>wq    保存后退出（write before quit）</li>
-<li>q!    强制退出（不保存退出）</li>
-<li>set number    显示文件内容的行号</li>
-</ul>
-</li>
-</ul>
-<h3 id="1-6、文件查看"><a href="#1-6、文件查看" class="headerlink" title="1.6、文件查看"></a>1.6、文件查看</h3><p>cat      —— 一次性查看文件的内容（从头到尾）<br>tac      —— 反过来一次性显示文件内容（末行开始到首行）<br>more     —— 分页（按百分比）查看文件内容，查看时q键退出，vi进入编辑器，空格键翻页<br>less     —— 与more类似（没有百分比显示）,可以在查看过程中输入vi启用vi编辑器</p>
-<p>tail a  – 查看文件a最新的10行内容<br>tail -f – 持续输出文件的最新内容（如linux有一些.out格式日志文件的内容是可以持续更新的）<br>tail -100f  – 输出文件的最新100行内容，并持续输出后续更新的内容</p>
-<h3 id="1-7、文件压缩与解压"><a href="#1-7、文件压缩与解压" class="headerlink" title="1.7、文件压缩与解压"></a>1.7、文件压缩与解压</h3><p>tar     – 文件（或文件夹）压缩与解压，通过压缩参数或解压参数实现<br>tar -xvf – 将压缩文件解压（tar/rar/war/zip）<br>tar -zvcf – 对指定文件（或文件夹）进行压缩，如tar -zvcf a.tar a是将a文件（或文件夹）压缩为a.tar</p>
-<h3 id="1-8、件的安装和卸载"><a href="#1-8、件的安装和卸载" class="headerlink" title="1.8、件的安装和卸载"></a>1.8、件的安装和卸载</h3><p>手动安装：（离线安装）<br>wget url            – 下载指定地址的文件，如wget <a href="https://dldir1.qq.com/qqfile/qq/">https://dldir1.qq.com/qqfile/qq/</a><br>                    TIM2.2.5/20871/TIM2.2.5.exe 是下载TIM的安装包，通常wget命令都需<br>                    要先安装才行，只有ubutu是自带的<br>rpm -ivh package    – 安装软件（手动安装），如rpm -ivh jdk1.7-linux-i586.rpm<br>rpm -e –nodeps     – 卸载软件<br>rpm -qa|grep xx     – 查询是否已安装xx软件，如rpm -qa|grep jdk</p>
-<p>自动安装：<br>yum install package     – 自动安装指定程序<br>yum update package      – 更新，升级<br>yum remove package      – 卸载程序</p>
-<h3 id="1-9、进程的查杀"><a href="#1-9、进程的查杀" class="headerlink" title="1.9、进程的查杀"></a>1.9、进程的查杀</h3><p>查进程：<br>ps      – 查询系统主进程<br>ps -ef  –查询系统运行的所有进程<br>ps -ef|grep xx  – 查询与xx相关的进程</p>
-<p>杀进程：就是关闭相关应用程序<br>kill -9 xx  – 强制杀死（终止）xx进程，xx指的是PID（进程编号，是一串数字）</p>
-<h3 id="1-10、shell脚本执行"><a href="#1-10、shell脚本执行" class="headerlink" title="1.10、shell脚本执行"></a>1.10、shell脚本执行</h3><p>shell脚本，指的是linux编写的程序脚本，一般保存下来的文件是.sh格式，如java的文件是.java，python的文件是.py<br>./脚本名.sh        – 执行shell脚本，需要进入文件所在目录<br>sh 脚本名.sh       – 也是执行shell脚本，如sh /usr/tomcat/bin/startup.sh是启动tomcat</p>
-<h3 id="1-11、文件权限管理"><a href="#1-11、文件权限管理" class="headerlink" title="1.11、文件权限管理"></a>1.11、文件权限管理</h3><p>使用ll命令查看文件详情时，前面一段类似于-rw-r–r–这种描述，<br>第一个字符如果是‘d’表示这是一个目录，若是‘-’表示这是一个文件（目录以外的任何东西）<br>之后的字符共9个，每3个一组，格式都遵照rwx进行排列的，<br>第一组表示当前登录用户（u）对该文件所有的权限，<br>第二组表示创建这个文件的用户所在用户组（g）的权限，<br>第三组表示文件所有者（创建者，o）的权限。<br>r   – 读取，只读  read      权限值4<br>w   – 写入，编辑  write     权限值2<br>x   – 执行，运行  excute    权限值1<br>所以一个文件权限值是由这3组rwx的权限组合相加，最小为000，最大777</p>
-<p>chmod 权限值 文件名           – 修改文件/目录的权限<br>chmod -u rwx file           – 将当前登录用户对该文件的权限设置为rwx</p>
-<h2 id="2、Linux服务器搭建（java-web-Server）"><a href="#2、Linux服务器搭建（java-web-Server）" class="headerlink" title="2、Linux服务器搭建（java web Server）"></a>2、Linux服务器搭建（java web Server）</h2><h3 id="2-1、配置java环境"><a href="#2-1、配置java环境" class="headerlink" title="2.1、配置java环境"></a>2.1、配置java环境</h3><h4 id="2-1-1、配置Jdk"><a href="#2-1-1、配置Jdk" class="headerlink" title="2.1.1、配置Jdk"></a>2.1.1、配置Jdk</h4><p>1.使用ftp软件（xftp为例）上传jdk的安装文件（jdk_xxx_xxx.rpm）<br>2.安装jdk文件，如rpm -ivh jdk1.7-linux-i586.rpm<br>3.修改环境变量配置<br>找到/etc目录下的profile文件，进行编辑，即vi /etc/profile，加入环境变量代码</p>
-<pre><code>JAVA_HOME=/usr/java/jdk1.8.0_121
-JRE_HOME=/usr/java/jdk1.8.0_121/jre
-PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin
-CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar:$JRE_HOME/lib
-export JAVA_HOME JRE_HOME PATH CLASSPATH</code></pre>
-<p>这段代码加在倒数第四行的done下方<br>4.返回linux命令行输入java -version检测配置结构和jdk版本</p>
-<h4 id="2-1-2、配置tomcat"><a href="#2-1-2、配置tomcat" class="headerlink" title="2.1.2、配置tomcat"></a>2.1.2、配置tomcat</h4><p>1.同样上传Apache-tomcat的压缩包<br>2.解压<br>3.修改防火墙文件，即vi /etc/sysconfig/iptables<br>4.在文件中的COMMIT前面加入以下代码<br>    -A RH-Firewall-1-INPUT -m state –state NEW -m tcp -p tcp –dport 8080 -j ACCEPT<br>5.重启防火墙相关服务，service iptables restart，使tomcat配置生效</p>
-<p>如何启动tomcat？<br>    进入tomcat的bin目录<br>    执行./startup.sh 或sh startup.sh命令启动tomcat</p>
-<h4 id="2-1-3、安装MySQL"><a href="#2-1-3、安装MySQL" class="headerlink" title="2.1.3、安装MySQL"></a>2.1.3、安装MySQL</h4><p>自动安装<br>使用命令yum install mysql-server</p>
-<p>手动安装<br>1.将mysql的server、client、devel三个安装包上传到linux服务器中<br>2.逐一对server、client、devel三个安装包进行依次安装<br>    如：rpm -ivh MySQL-server-5.5.55-1.el6.i686.rpm –nodeps –force<br>3.启动mysql服务<br>    service mysql start<br>4.修改mysql的root密码<br>    进入mysql（直接在命令行输入mysql，回车即可）<br>    切换到mysql数据库（use mysql;）<br>    修改user表中的root帐户密码（update user set host=’%’,password=’123456’ where user=’root’;）<br>    删除host未修改为%的root帐户（delete from user where not password=’123456’;）<br>5.配置远程访问权限<br>    GRANT ALL PRIVILEGES ON <em>.</em> TO ‘root’@’%’ IDENTIFIED BY ‘123456’ WITH GRANT OPTION;<br>    刷新权限<br>    FLUSH PRIVILEGES;</p>
-<h2 id="3、linux服务器代码部署"><a href="#3、linux服务器代码部署" class="headerlink" title="3、linux服务器代码部署"></a>3、linux服务器代码部署</h2><p>1.查杀tomcat进程<br>2.将代码的war包上传到tomcat下的webapps目录下<br>    如果开发人员没有编译成war包，一般都需要备份原来的代码包，也就是要返回到webapps目录，使用tar命令对原项目代码进行备份<br>3.重新启动tomcat（到bin目录下执行./startup.sh）<br>4.检查新代码中是否有需要修改的配置文件，如jdbc，系统相关位置配置等，若需要改项目内容，在修改后，还需要重启tomcat（即查杀tomcat后再次启动）</p>
-<p><a href="http://192.168.3.130:8080/">http://192.168.3.130:8080/</a><br>安装jdk<br>rpm -ivh jdk1.8u121-linux-i586.rpm<br>卸载jdk<br>rpm -e –nodeps jdk1.8.0_121-1.8.0_121-fcs.i586</p>
-<p>进入tomcat的bin目录下<br>cd /usr/local/apache-tomcat-7.0.70/bin<br>启动Tomcat<br>sh startup.sh<br>关闭Tomcat<br>sh shutdown.sh<br>查看安装的jdk：<br>rpm -qa|grep jdk </p>
-<p>可能看到如下类似的信息： </p>
-<p>jdk-1.6.0_22-fcs </p>
-<p>卸载： </p>
-<p>rpm -e –nodeps jdk-1.6.0_22-fcs </p>
-<p>rpm -e –nodeps java-1.8.0-openjdk-headless-1.8.0.222.b10-0.el6_10.x86_64</p>
-<p>rpm -e –nodeps java-1.8.0-openjdk-devel-1.8.0.222.b10-0.el6_10.x86_64</p>
-<p>rpm -e –nodeps java-1.8.0-openjdk-1.8.0.222.b10-0.el6_10.x86_64</p>
-]]></content>
-      <categories>
-        <category>Linux</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
       </tags>
   </entry>
   <entry>
@@ -6102,78 +6102,6 @@ d.quit()</code></pre>
       <tags>
         <tag>python</tag>
         <tag>Selenium</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>一键拼出你的微信好友图片墙</title>
-    <url>/2020/08/21/wechatpicture01/</url>
-    <content><![CDATA[<p>核心是利用两个库：</p>
-<p>wxpy 库，用于获取好友头像然后下载</p>
-<p>Pillow 库，用于拼接头像</p>
-<p>直接上代码（源码来自公众号 高级农名工）</p>
-<pre><code class="python"># coding=utf8
-from wxpy import *
-import math
-from PIL import Image
-import os
-# 创建头像存放文件夹
-def creat_filepath():
-    avatar_dir = os.getcwd() + &quot;\\wechat\\&quot;
-    if not os.path.exists(avatar_dir):
-        os.mkdir(avatar_dir)
-    return avatar_dir
-# 保存好友头像
-def save_avatar(avatar_dir):
-    # 初始化机器人，扫码登陆
-    bot = Bot()
-    friends = bot.friends(update=True)
-    num = 0
-    for friend in friends:
-        friend.get_avatar(avatar_dir + &#39;\\&#39; + str(num) + &quot;.jpg&quot;)
-        print(&#39;好友昵称:%s&#39; % friend.nick_name)
-        num = num + 1
-# 拼接头像
-def joint_avatar(path):
-    # 获取文件夹内头像个数
-    length = len(os.listdir(path))
-    # 设置画布大小
-    image_size = 2560
-    # 设置每个头像大小
-    each_size = math.ceil(2560 / math.floor(math.sqrt(length)))
-    # 计算所需各行列的头像数量
-    x_lines = math.ceil(math.sqrt(length))
-    y_lines = math.ceil(math.sqrt(length))
-    image = Image.new(&#39;RGB&#39;, (each_size * x_lines, each_size * y_lines))
-    x = 0
-    y = 0
-    for (root, dirs, files) in os.walk(path):
-        for pic_name in files:
-            # 增加头像读取不出来的异常处理
-                try:
-                    with Image.open(path + pic_name) as img:
-                        img = img.resize((each_size, each_size))
-                        image.paste(img, (x * each_size, y * each_size))
-                        x += 1
-                        if x == x_lines:
-                            x = 0
-                            y += 1
-                except IOError:
-                    print(&quot;头像读取失败&quot;)
-
-    img = image.save(os.getcwd() + &quot;/wechat.png&quot;)
-    print(&#39;微信好友头像拼接完成!&#39;)
-
-if __name__ == &#39;__main__&#39;:
-    avatar_dir = creat_filepath()
-    save_avatar(avatar_dir)
-    joint_avatar(avatar_dir)</code></pre>
-]]></content>
-      <categories>
-        <category>python</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-        <tag>Pillow</tag>
       </tags>
   </entry>
   <entry>
@@ -6698,6 +6626,78 @@ hahaha <span><img src='https://cdn.jsdelivr.net/gh/volantis-x/cdn-emoji/tieba/%E
       <tags>
         <tag>volantis</tag>
         <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>一键拼出你的微信好友图片墙</title>
+    <url>/2020/08/21/wechatpicture01/</url>
+    <content><![CDATA[<p>核心是利用两个库：</p>
+<p>wxpy 库，用于获取好友头像然后下载</p>
+<p>Pillow 库，用于拼接头像</p>
+<p>直接上代码（源码来自公众号 高级农名工）</p>
+<pre><code class="python"># coding=utf8
+from wxpy import *
+import math
+from PIL import Image
+import os
+# 创建头像存放文件夹
+def creat_filepath():
+    avatar_dir = os.getcwd() + &quot;\\wechat\\&quot;
+    if not os.path.exists(avatar_dir):
+        os.mkdir(avatar_dir)
+    return avatar_dir
+# 保存好友头像
+def save_avatar(avatar_dir):
+    # 初始化机器人，扫码登陆
+    bot = Bot()
+    friends = bot.friends(update=True)
+    num = 0
+    for friend in friends:
+        friend.get_avatar(avatar_dir + &#39;\\&#39; + str(num) + &quot;.jpg&quot;)
+        print(&#39;好友昵称:%s&#39; % friend.nick_name)
+        num = num + 1
+# 拼接头像
+def joint_avatar(path):
+    # 获取文件夹内头像个数
+    length = len(os.listdir(path))
+    # 设置画布大小
+    image_size = 2560
+    # 设置每个头像大小
+    each_size = math.ceil(2560 / math.floor(math.sqrt(length)))
+    # 计算所需各行列的头像数量
+    x_lines = math.ceil(math.sqrt(length))
+    y_lines = math.ceil(math.sqrt(length))
+    image = Image.new(&#39;RGB&#39;, (each_size * x_lines, each_size * y_lines))
+    x = 0
+    y = 0
+    for (root, dirs, files) in os.walk(path):
+        for pic_name in files:
+            # 增加头像读取不出来的异常处理
+                try:
+                    with Image.open(path + pic_name) as img:
+                        img = img.resize((each_size, each_size))
+                        image.paste(img, (x * each_size, y * each_size))
+                        x += 1
+                        if x == x_lines:
+                            x = 0
+                            y += 1
+                except IOError:
+                    print(&quot;头像读取失败&quot;)
+
+    img = image.save(os.getcwd() + &quot;/wechat.png&quot;)
+    print(&#39;微信好友头像拼接完成!&#39;)
+
+if __name__ == &#39;__main__&#39;:
+    avatar_dir = creat_filepath()
+    save_avatar(avatar_dir)
+    joint_avatar(avatar_dir)</code></pre>
+]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>Pillow</tag>
       </tags>
   </entry>
 </search>
