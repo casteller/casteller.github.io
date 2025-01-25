@@ -2,7 +2,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://www.mz-zone.cn/2025/01/25/20250125/</loc>
+    <loc>https://www.mz-zone.cn/2025/01/25/20250125002/</loc>
+    
+    <lastmod>2025-01-25</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.mz-zone.cn/2025/01/25/20250125001/</loc>
     
     <lastmod>2025-01-25</lastmod>
     
@@ -515,14 +522,14 @@
   </url>
   
   <url>
-    <loc>https://www.mz-zone.cn/tags/pywin32/</loc>
+    <loc>https://www.mz-zone.cn/tags/Jmeter/</loc>
     <lastmod>2025-01-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://www.mz-zone.cn/tags/Jmeter/</loc>
+    <loc>https://www.mz-zone.cn/tags/pywin32/</loc>
     <lastmod>2025-01-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -543,14 +550,14 @@
   </url>
   
   <url>
-    <loc>https://www.mz-zone.cn/tags/Picgo/</loc>
+    <loc>https://www.mz-zone.cn/tags/Linux/</loc>
     <lastmod>2025-01-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://www.mz-zone.cn/tags/Linux/</loc>
+    <loc>https://www.mz-zone.cn/tags/Picgo/</loc>
     <lastmod>2025-01-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -664,14 +671,14 @@
   </url>
   
   <url>
-    <loc>https://www.mz-zone.cn/categories/Selenium/</loc>
+    <loc>https://www.mz-zone.cn/categories/Jmeter/</loc>
     <lastmod>2025-01-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://www.mz-zone.cn/categories/Jmeter/</loc>
+    <loc>https://www.mz-zone.cn/categories/Selenium/</loc>
     <lastmod>2025-01-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -699,14 +706,14 @@
   </url>
   
   <url>
-    <loc>https://www.mz-zone.cn/categories/Picgo/</loc>
+    <loc>https://www.mz-zone.cn/categories/Linux/</loc>
     <lastmod>2025-01-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://www.mz-zone.cn/categories/Linux/</loc>
+    <loc>https://www.mz-zone.cn/categories/Picgo/</loc>
     <lastmod>2025-01-25</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>

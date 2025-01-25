@@ -20,13 +20,13 @@
 
   <!-- 页面元数据 -->
   
-  <title>利用python制作心形照片墙 - 北辰の小栈 - Hexo博客</title>
+  <title>利用python监控服务器资源并发送邮件提醒 - 北辰の小栈 - Hexo博客</title>
   
     <meta name="keywords" content="python">
   
 
   
-    <meta name="description" content="这篇博客介绍了如何使用Python的Pillow库创建照片墙,包括普通矩形布局和心形布局。">
+    <meta name="description" content="这篇博客介绍了如何使用Python实现监控服务器资源使用情况，并定时发送邮件通知">
   
 
   <!-- feed -->
@@ -1002,7 +1002,7 @@
  
 <div id="pjax-data" style="display: none"> 
   <div id="pjax-ispage">true</div> 
-  <div id="pjax-pageTitle">利用python制作心形照片墙</div> 
+  <div id="pjax-pageTitle">利用python监控服务器资源并发送邮件提醒</div> 
   <div id="pjax-enable-cover">true</div> 
   <div id="pjax-comment-path"></div> 
   <div id="pjax-comment-placeholder"></div> 
@@ -1129,7 +1129,7 @@
 
 
     <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%9A%E5%AE%89%E8%A3%85Pillow%E5%BA%93"><span class="toc-text">第一步：安装Pillow库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%EF%BC%9A%E7%BC%96%E5%86%99%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90%E5%BF%83%E5%BD%A2%E7%85%A7%E7%89%87%E5%A2%99"><span class="toc-text">第二步：编写代码生成心形照片墙</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5%EF%BC%9A%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%95%88%E6%9E%9C%E5%A6%82%E4%B8%8B%E5%9B%BE%EF%BC%8C%E9%80%89%E6%8B%A9%E9%9C%80%E8%A6%81%E7%94%9F%E6%88%90%E7%9A%84%E7%85%A7%E7%89%87%EF%BC%8C%E7%82%B9%E5%87%BB%E7%94%9F%E6%88%90%E7%85%A7%E7%89%87%E5%A2%99%EF%BC%8C%E5%9C%A8%E6%A1%8C%E9%9D%A2%E5%8D%B3%E5%8F%AF%E7%94%9F%E6%88%90%E5%BF%83%E5%BD%A2%E7%85%A7%E7%89%87%E5%A2%99"><span class="toc-text">第三步：代码执行效果如下图，选择需要生成的照片，点击生成照片墙，在桌面即可生成心形照片墙</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E6%AD%A5%EF%BC%9A%E5%BF%83%E5%BD%A2%E7%85%A7%E7%89%87%E5%A2%99%E6%95%88%E6%9E%9C%E5%9B%BE%E5%A6%82%E4%B8%8B%EF%BC%9A"><span class="toc-text">第四步：心形照片墙效果图如下：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%BA%94%E6%AD%A5%EF%BC%9A%E4%B9%9F%E5%8F%AF%E9%80%9A%E8%BF%87%E5%91%BD%E4%BB%A4%EF%BC%9Apyinstaller-F-noconsole-Picture-py-%E6%89%93%E5%8C%85%E6%88%90exe%E6%89%A7%E8%A1%8C"><span class="toc-text">第五步：也可通过命令：pyinstaller -F --noconsole Picture.py  打包成exe执行</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%9A%E7%BC%96%E5%86%99%E4%BB%A3%E7%A0%81"><span class="toc-text">第一步：编写代码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E6%AD%A5%EF%BC%9A%E6%89%A7%E8%A1%8C%E6%95%88%E6%9E%9C%E5%9B%BE%E5%A6%82%E4%B8%8B%EF%BC%9A"><span class="toc-text">第四步：执行效果图如下：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%BA%94%E6%AD%A5%EF%BC%9A%E4%B9%9F%E5%8F%AF%E9%80%9A%E8%BF%87%E5%91%BD%E4%BB%A4%EF%BC%9Apyinstaller-F-noconsole-Picture-py-%E6%89%93%E5%8C%85%E6%88%90exe%E6%89%A7%E8%A1%8C"><span class="toc-text">第五步：也可通过命令：pyinstaller -F --noconsole Picture.py  打包成exe执行</span></a></li></ol>
     </div>
   </section>
 
@@ -1211,7 +1211,7 @@
           <li><a class="flat-box"
             title="/categories/python/" href="/categories/python/"
             id="categoriespython"
-            ><div class='name'>python</div><div class='badge'>(8)</div></a></li>
+            ><div class='name'>python</div><div class='badge'>(9)</div></a></li>
         
           <li><a class="flat-box"
             title="/categories/redis/" href="/categories/redis/"
@@ -1270,7 +1270,7 @@
       
         <div class="webinfo-item">
           <div>文章数目：</div>
-          <div>35 篇</div>
+          <div>36 篇</div>
         </div>
       
 
@@ -1292,7 +1292,7 @@
       
         <div class="webinfo-item">
           <div>本站总字数：</div>
-          <div>62.2k 字</div>
+          <div>63.5k 字</div>
         </div>
       
 
@@ -1318,7 +1318,7 @@
         <div class="webinfo-item">
           <div>最后活动时间：</div>
           
-            <div id="last-update" style="display: none;">Sat Jan 25 2025 15:18:22 GMT+0800 (中国标准时间)</div>
+            <div id="last-update" style="display: none;">Sat Jan 25 2025 15:57:56 GMT+0800 (中国标准时间)</div>
             <div id="last-update-show">2025-01-25 日</div>
           
         </div>
@@ -1393,7 +1393,7 @@
   
     <div class='headimg-div'>
       <a class='headimg-a'>
-        <img class='headimg' src='https://s21.ax1x.com/2025/01/25/pEEJWUP.png'/>
+        <img class='headimg' src='https://s21.ax1x.com/2025/01/25/pEEYMqA.png'/>
       </a>
     </div>
   
@@ -1402,7 +1402,7 @@
     
     
       <h1 class="title">
-        利用python制作心形照片墙
+        利用python监控服务器资源并发送邮件提醒
       </h1>
       <div class='new-meta-box'>
         
@@ -1444,7 +1444,7 @@
   <div class="new-meta-item browse leancloud">
     <a class='notlink'>
       
-      <div id="lc-pv" data-title="利用python制作心形照片墙" data-path="/2025/01/25/20250125/">
+      <div id="lc-pv" data-title="利用python监控服务器资源并发送邮件提醒" data-path="/2025/01/25/20250125002/">
         <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
         <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
         次浏览
@@ -1460,13 +1460,13 @@
   <div class="new-meta-item wordcount">
     <a class='notlink'>
       <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
-      <p>字数：682字</p>
+      <p>字数：1.3k字</p>
     </a>
   </div>
   <div class="new-meta-item readtime">
     <a class='notlink'>
       <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
-      <p>时长：3分钟</p>
+      <p>时长：6分钟</p>
     </a>
   </div>
 
@@ -1477,9 +1477,9 @@
             
 <div class="new-meta-item comments-count">
   
-  <a href="/2025/01/25/20250125/#comments">
+  <a href="/2025/01/25/20250125002/#comments">
     <i class="fas fa-comment-dots fa-fw"></i>
-    <span class="valine-comment-count" data-xid="/2025/01/25/20250125/">0</span>
+    <span class="valine-comment-count" data-xid="/2025/01/25/20250125002/">0</span>
     <span class="leancloud-comments-count">&nbsp;</span>
   </a>
 </div>
@@ -1493,88 +1493,205 @@
 
 
   
-  <div class="note idea"><p>这篇博客介绍了如何使用Python的Pillow库创建照片墙,包括普通矩形布局和心形布局。</p></div>
+  <div class="note idea"><p>这篇博客介绍了如何使用Python实现监控服务器资源使用情况，并定时发送邮件通知</p></div>
 <a id="more"></a>
 
-<h4 id="第一步：安装Pillow库"><a href="#第一步：安装Pillow库" class="headerlink" title="第一步：安装Pillow库"></a>第一步：安装Pillow库</h4><p>如果你还没有安装Pillow库，可以通过pip安装：<code>pip install Pillow</code></p>
-<h4 id="第二步：编写代码生成心形照片墙"><a href="#第二步：编写代码生成心形照片墙" class="headerlink" title="第二步：编写代码生成心形照片墙"></a>第二步：编写代码生成心形照片墙</h4><pre><code>import os
-import random
-import numpy as np
-from tkinter import *
-from tkinter import ttk, filedialog
-from PIL import Image
-import pymsgbox
-from PIL import Image, ImageOps
-FRAME = [[0,1,1,0,0,0,0,1,1,0],
-         [1,1,1,1,0,0,1,1,1,1],
-         [1,1,1,1,1,1,1,1,1,1],
-         [1,1,1,1,1,1,1,1,1,1],
-         [0,1,1,1,1,1,1,1,1,0],
-         [0,0,1,1,1,1,1,1,0,0],
-         [0,0,0,1,1,1,1,0,0,0],
-         [0,0,0,0,1,1,0,0,0,0]]
+<h4 id="第一步：编写代码"><a href="#第一步：编写代码" class="headerlink" title="第一步：编写代码"></a>第一步：编写代码</h4><pre><code>import time
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from apscheduler.schedulers.background import BackgroundScheduler
+import paramiko
+import psutil
+import tkinter as tk
+from tkinter import messagebox
+# 初始化配置信息
+email_config = &#123;
+    &#39;username&#39;: &#39;*********@163.com&#39;,
+    &#39;password&#39;: &#39;SZBLPFYXWYYQPFFT&#39;,
+    &#39;from_addr&#39;: &#39;*********@163.com&#39;,
+    # &#39;to_addr&#39;: [&#39;*********@cwddd.com&#39;],
+    &#39;to_addr&#39;: [&#39;**********@cwddd.com&#39;],
+    &#39;smtp_server&#39;: &#39;smtp.163.com&#39;,
+    &#39;smtp_port&#39;: 25,
+    &#39;station_name&#39;:&#39;服务器监控告警&#39;
+&#125;
+server_config = &#123;
+    &#39;ip_address&#39;: &#39;192.168.2.111&#39;,
+    &#39;ip_username&#39;:&#39;hadoop&#39;,
+    &#39;ip_password&#39;:&#39;hadoop&#39;,
+    &#39;ip_port&#39;:22
+&#125;
+ip_password = server_config[&#39;ip_password&#39;]
+# 发送邮件的函数
+def send_email():
+    # 最大重试次数
+    max_retries = 3
+    retry_count = 0
+    # 使用保存的配置信息
+    sender_email = email_config[&#39;from_addr&#39;]
+    password = email_config[&#39;password&#39;]
+    smtp_server = email_config[&#39;smtp_server&#39;]
+    smtp_port = email_config[&#39;smtp_port&#39;]
+    to_email = email_config[&#39;to_addr&#39;]
+    station_name = email_config[&#39;station_name&#39;]
 
-# 定义相关参数
-SIZE = 50 # 每张图片的尺寸为50*50
-N = 2     # 每个点位上放置2*2张图片
+    # 创建邮件对象
+    msg = MIMEMultipart()
+    msg[&#39;From&#39;] = sender_email
+    msg[&#39;To&#39;] = &#39;,&#39;.join(to_email)
+    msg[&#39;Subject&#39;] = station_name + &#39;邮件&#39;
+    body_template = &quot;&quot;&quot;  
+    以下为服务器状态检查：  
 
-def select_images():
-    global filenames
-    filenames = filedialog.askopenfilenames(title=&quot;选择图片&quot;, filetypes=((&quot;JPEG files&quot;, &quot;*.jpg&quot;), (&quot;PNG files&quot;, &quot;*.png&quot;)))
-    print(&quot;已选择的图片：&quot;, filenames)
-def show_message_box():
-    # 获取桌面路径
-    desktop_path = os.path.join(os.path.expanduser(&#39;~&#39;), &#39;Desktop&#39;)
-    file_path = os.path.join(desktop_path, &#39;love.jpg&#39;)
-    print(file_path)
-    return file_path
+    服务器IP地址：&#123;server_ip&#125;
+    服务器状态：&#123;server_status&#125; 
 
-def create_photo_wall():
-    if not filenames:  # 检查列表是否为空
-        print(&quot;请先选择图片！&quot;)
-        return
-    filenames_list = list(filenames)  # 将元组转换为列表
-    width = np.shape(FRAME)[1] * N * SIZE  # 照片墙宽度
-    height = np.shape(FRAME)[0] * N * SIZE  # 照片墙高度
-    n_img = np.sum(FRAME) * (N ** 2)  # 照片墙需要的照片数
-    img_bg = Image.new(&#39;RGB&#39;, (width, height), &#39;white&#39;)  # 设置照片墙背景
-    img_index = 0  # 图片索引
-    for y in range(np.shape(FRAME)[0]):
-        for x in range(np.shape(FRAME)[1]):
-            if FRAME[y][x] == 1:  # 如果需要填充
-                pos_x = x * N * SIZE  # 填充起始X坐标位置
-                pos_y = y * N * SIZE  # 填充起始Y坐标位置
-                img = Image.open(filenames_list[img_index % len(filenames_list)])
-                img = img.resize((SIZE, SIZE), resample=Image.Resampling.LANCZOS)
-                img_bg.paste(img, (pos_x, pos_y))  # 填充图片
-                img_index += 1
-    img_bg.save(show_message_box())
-    pymsgbox.alert(&#39;照片墙已生成，请在桌面查看，文件名为love.jpg&#39;, &#39;照片墙生成完成&#39;)
-# 创建主界面
-root = Tk()
-root.title(&quot;心形照片墙生成器&quot;)
-# 设置窗口大小
-window_width = 400
-window_height = 200
+    CPU使用率: &#123;server_cpu&#125;%
 
-# 获取屏幕大小
-screen_width = root.winfo_screenwidth()
-screen_height = root.winfo_screenheight()
+    内存使用率: &#123;server_mem&#125;%
 
-# 计算窗口位置
-x = int((screen_width - window_width) / 2)
-y = int((screen_height - window_height) / 2)
+    磁盘使用率: &#123;server_disk&#125;%
 
-# 设置窗口位置
-root.geometry(f&quot;&#123;window_width&#125;x&#123;window_height&#125;+&#123;x&#125;+&#123;y&#125;&quot;)
 
-ttk.Button(root, text=&quot;选择图片&quot;, command=select_images).pack(pady=10)
-ttk.Button(root, text=&quot;生成照片墙&quot;, command=create_photo_wall).pack(pady=10)
+    如需更多帮助，请联系管理员。  
+                &quot;&quot;&quot;
+    connection_success, ssh = check_ssh_connection(server_config[&#39;ip_address&#39;], server_config[&#39;ip_port&#39;],
+                                                   server_config[&#39;ip_username&#39;], server_config[&#39;ip_password&#39;])
+    if connection_success:
+        cpu_usage, mem_usage, disk_usage_percent = monitor_usage(ssh)
+        check_resource_usage(cpu_usage, mem_usage, disk_usage_percent)
+        ssh.close()
+        body = body_template.format(
+            server_ip=server_config[&#39;ip_address&#39;],  # 替换为实际的服务器IP地址
+            server_status=&#39;在线&#39;,  # 替换为实际的服务器状态
+            server_cpu=cpu_usage,  # 替换为实际的服务器详细信息
+            server_mem=mem_usage,
+            server_disk=disk_usage_percent,
 
-root.mainloop()
-</code></pre>
-<h4 id="第三步：代码执行效果如下图，选择需要生成的照片，点击生成照片墙，在桌面即可生成心形照片墙"><a href="#第三步：代码执行效果如下图，选择需要生成的照片，点击生成照片墙，在桌面即可生成心形照片墙" class="headerlink" title="第三步：代码执行效果如下图，选择需要生成的照片，点击生成照片墙，在桌面即可生成心形照片墙"></a>第三步：代码执行效果如下图，选择需要生成的照片，点击生成照片墙，在桌面即可生成心形照片墙</h4><p><a target="_blank" rel="noopener" href="https://imgse.com/i/pEEJPtf"><img src="https://s21.ax1x.com/2025/01/25/pEEJPtf.png" class="lazyload placeholder" data-srcset="https://s21.ax1x.com/2025/01/25/pEEJPtf.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="pEEJPtf.png"></a></p>
-<h4 id="第四步：心形照片墙效果图如下："><a href="#第四步：心形照片墙效果图如下：" class="headerlink" title="第四步：心形照片墙效果图如下："></a>第四步：心形照片墙效果图如下：</h4><p><a target="_blank" rel="noopener" href="https://imgse.com/i/pEEJEcQ"><img src="https://s21.ax1x.com/2025/01/25/pEEJEcQ.md.png" class="lazyload placeholder" data-srcset="https://s21.ax1x.com/2025/01/25/pEEJEcQ.md.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="pEEJEcQ.md.png"></a></p>
+        )
+        msg.attach(MIMEText(body, &#39;plain&#39;))
+    else:
+        body = body_template.format(
+            server_ip=server_config[&#39;ip_address&#39;],  # 替换为实际的服务器IP地址
+            server_status=&#39;离线&#39;,  # 替换为实际的服务器状态
+            server_cpu=&#39;&#39;,  # 替换为实际的服务器详细信息
+            server_mem=&#39;&#39;,
+            server_disk=&#39;&#39;,
+        )
+        msg.attach(MIMEText(body, &#39;plain&#39;))
+    while retry_count &lt; max_retries:
+        try:
+            # 连接到SMTP服务器
+            server = smtplib.SMTP(smtp_server, smtp_port)
+            server.starttls()  # 启动TLS模式
+            server.login(sender_email, password)
+
+            # 发送邮件
+            text = msg.as_string()
+            server.sendmail(sender_email, to_email, text)
+            print(&quot;邮件发送成功！&quot;)
+            break  # 发送成功，跳出循环
+        except smtplib.SMTPException as e:
+            print(f&quot;邮件发送失败: &#123;e&#125;&quot;)
+            retry_count += 1
+            if retry_count &lt; max_retries:
+                print(f&quot;正在重试（&#123;retry_count&#125;/&#123;max_retries&#125;）...&quot;)
+            else:
+                print(&quot;已达到最大重试次数，放弃发送。&quot;)
+        finally:
+            server.quit()  # 确保在发送或发生异常后关闭SMTP连接
+
+def ssh_command(ssh, command):
+    stdin, stdout, stderr = ssh.exec_command(command)
+    return stdout.read().decode()
+
+
+# 检查连接状态
+def check_ssh_connection(host, port, username, password):
+    ssh = paramiko.SSHClient()
+    ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+    try:
+        ssh.connect(host, port=port, username=username, password=password)
+        return True, ssh
+    except paramiko.AuthenticationException:
+        return False, None
+    except paramiko.SSHException as sshException:
+        return False, None
+    except Exception as e:
+        return False, None
+
+
+
+def monitor_usage(ssh):
+    # 监控CPU使用率
+    cpu_usage = psutil.cpu_percent(interval=1)
+    print(f&quot;当前CPU使用率: &#123;cpu_usage&#125;%&quot;)
+    # 监控内存使用率
+    mem = psutil.virtual_memory()
+    mem_usage = mem.percent
+    print(f&quot;当前内存使用率: &#123;mem_usage&#125;%&quot;)
+    # 监控磁盘使用率
+    stdin, stdout, stderr = ssh.exec_command(&quot;df -h /&quot;)
+    disk_usage_output = stdout.readlines()[1].split()[4]
+    disk_usage_percent = int(disk_usage_output[:-1])
+    print(f&quot;当前磁盘使用率: &#123;disk_usage_percent&#125;%&quot;)
+    return cpu_usage, mem_usage, disk_usage_percent
+
+def check_resource_usage(cpu_usage, mem_usage, disk_usage_percent):
+    if cpu_usage &gt; 80 or mem_usage &gt; 80 or disk_usage_percent &gt; 80:
+        # 构建警告消息
+        warning_message = &quot;系统资源使用率超过80%！\n以下是系统资源占用情况：\n&quot;
+        warning_message += f&quot;CPU 使用率: &#123;cpu_usage&#125;%\n&quot;
+        warning_message += f&quot;内存 使用率: &#123;mem_usage&#125;%\n&quot;
+        warning_message += f&quot;磁盘 使用率: &#123;disk_usage_percent&#125;%\n如需帮助，请联系管理员!&quot;
+        # 弹出警告框并隐藏主窗口
+        root = tk.Tk()
+        root.withdraw()
+        messagebox.showwarning(&quot;警告&quot;, warning_message)
+#
+def schedule_task():
+    max_retries = 3
+    retry_count = 0
+
+    while retry_count &lt; max_retries:
+        try:
+            # 创建定时任务
+            scheduler = BackgroundScheduler()
+            # scheduler.add_job(send_email, &#39;interval&#39;, minutes=5)  # 每12小时发送一次邮件
+            scheduler.add_job(send_email, &#39;interval&#39;, seconds=10)  # 每12小时发送一次邮件
+            # scheduler.add_job(send_email, &#39;cron&#39;, hour=9, minute=0,max_instances=10,misfire_grace_time=10)
+            # print(&#39;每日上午九点的定时任务创建成功&#39;)
+            # time.sleep(10)
+            # scheduler.add_job(send_email, &#39;cron&#39;, hour=17, minute=0,max_instances=10,misfire_grace_time=10)
+            # print(&#39;每日下午五点的定时任务创建成功&#39;)
+            scheduler.start()
+            print(&quot;定时任务已启动&quot;)
+            break  # 成功启动定时任务后跳出循环
+        except Exception as e:
+            retry_count += 1
+            print(f&quot;启动定时任务失败: &#123;e&#125;&quot;)
+            if retry_count &lt; max_retries:
+                print(f&quot;正在重试（&#123;retry_count&#125;/&#123;max_retries&#125;）...&quot;)
+            else:
+                print(&quot;已达到最大重试次数，放弃重试。&quot;)
+        time.sleep(10)  # 等待一段时间后重试
+
+    try:
+        # 阻止主程序退出
+        while True:
+            print(&#39;此脚本用于监控加能站安防系统是否正常，请不要关闭此窗口！！！&#39;+ str(time.strftime(&quot;%Y-%m-%d %H:%M:%S&quot;, time.localtime())))
+            time.sleep(60)  # 休眠一段时间，减少CPU占用
+            print(&#39;此脚本用于监控加能站安防系统是否正常，请不要关闭此窗口！！！&#39;+ str(time.strftime(&quot;%Y-%m-%d %H:%M:%S&quot;, time.localtime())))
+    except (KeyboardInterrupt, SystemExit):
+        # 捕获键盘中断（通常是Ctrl+C）和系统退出信号，以便优雅地关闭调度器
+        scheduler.shutdown()
+
+if __name__ ==&#39;__main__&#39;:
+    schedule_task()
+# if __name__ ==&#39;__main__&#39;:
+#     send_email()</code></pre>
+<h4 id="第四步：执行效果图如下："><a href="#第四步：执行效果图如下：" class="headerlink" title="第四步：执行效果图如下："></a>第四步：执行效果图如下：</h4><p><a target="_blank" rel="noopener" href="https://imgse.com/i/pEEYe2D"><img src="https://s21.ax1x.com/2025/01/25/pEEYe2D.png" class="lazyload placeholder" data-srcset="https://s21.ax1x.com/2025/01/25/pEEYe2D.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="pEEYe2D.png"></a></p>
 <h4 id="第五步：也可通过命令：pyinstaller-F-noconsole-Picture-py-打包成exe执行"><a href="#第五步：也可通过命令：pyinstaller-F-noconsole-Picture-py-打包成exe执行" class="headerlink" title="第五步：也可通过命令：pyinstaller -F --noconsole Picture.py  打包成exe执行"></a>第五步：也可通过命令：<code>pyinstaller -F --noconsole Picture.py</code>  打包成exe执行</h4>
   
   
@@ -1593,7 +1710,7 @@ root.mainloop()
               
             
               
-                <p>本文永久链接是：<a href=https://www.mz-zone.cn/2025/01/25/20250125/>https://www.mz-zone.cn/2025/01/25/20250125/</a></p>
+                <p>本文永久链接是：<a href=https://www.mz-zone.cn/2025/01/25/20250125002/>https://www.mz-zone.cn/2025/01/25/20250125002/</a></p>
               
             
           </blockquote>
@@ -1610,7 +1727,7 @@ root.mainloop()
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2025-01-25T15:17:19+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2025-01-25T15:46:13+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
     <p>更新于：2025年1月25日</p>
@@ -1635,7 +1752,7 @@ root.mainloop()
       
         <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer noopener"
           
-          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.mz-zone.cn/2025/01/25/20250125/&title=利用python制作心形照片墙 - 北辰の小栈 - Hexo博客&summary=这篇博客介绍了如何使用Python的Pillow库创建照片墙,包括普通矩形布局和心形布局。"
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.mz-zone.cn/2025/01/25/20250125002/&title=利用python监控服务器资源并发送邮件提醒 - 北辰の小栈 - Hexo博客&summary=这篇博客介绍了如何使用Python实现监控服务器资源使用情况，并定时发送邮件通知"
           
           >
           
@@ -1647,7 +1764,7 @@ root.mainloop()
       
         <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer noopener"
           
-          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://www.mz-zone.cn/2025/01/25/20250125/&title=利用python制作心形照片墙 - 北辰の小栈 - Hexo博客&summary=这篇博客介绍了如何使用Python的Pillow库创建照片墙,包括普通矩形布局和心形布局。"
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://www.mz-zone.cn/2025/01/25/20250125002/&title=利用python监控服务器资源并发送邮件提醒 - 北辰の小栈 - Hexo博客&summary=这篇博客介绍了如何使用Python实现监控服务器资源使用情况，并定时发送邮件通知"
           
           >
           
@@ -1659,7 +1776,7 @@ root.mainloop()
       
         <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer noopener"
           
-          target="_blank" href="http://service.weibo.com/share/share.php?url=https://www.mz-zone.cn/2025/01/25/20250125/&title=利用python制作心形照片墙 - 北辰の小栈 - Hexo博客&summary=这篇博客介绍了如何使用Python的Pillow库创建照片墙,包括普通矩形布局和心形布局。"
+          target="_blank" href="http://service.weibo.com/share/share.php?url=https://www.mz-zone.cn/2025/01/25/20250125002/&title=利用python监控服务器资源并发送邮件提醒 - 北辰の小栈 - Hexo博客&summary=这篇博客介绍了如何使用Python实现监控服务器资源使用情况，并定时发送邮件通知"
           
           >
           
@@ -1690,9 +1807,12 @@ root.mainloop()
     <div class="prev-next">
       
       
-        <a class='next' href='/2021/11/12/20211112001/'>
-          <p class='title'>hexo博客增加书单<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
-          <p class='content'>想给博客添加书单的想法已经很久了，但是奈何自身能力不足，一直没有实现，百度了很多教程，都不尽如人意。偶然间翻到一位大佬的博客，看到大佬的博客书单，感觉很酷炫，就想自己也弄一个，好在大佬人非常好，...</p>
+        <a class='next' href='/2025/01/25/20250125001/'>
+          <p class='title'>利用python制作心形照片墙<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'>这篇博客介绍了如何使用Python的Pillow库创建照片墙,包括普通矩形布局和心形布局。
+
+
+第一步：安装Pillow库如果你还没有安装Pillow库，可以通过pip安装：pip instal...</p>
         </a>
       
     </div>
@@ -1824,7 +1944,7 @@ root.mainloop()
 
 
     <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%9A%E5%AE%89%E8%A3%85Pillow%E5%BA%93"><span class="toc-text">第一步：安装Pillow库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%EF%BC%9A%E7%BC%96%E5%86%99%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90%E5%BF%83%E5%BD%A2%E7%85%A7%E7%89%87%E5%A2%99"><span class="toc-text">第二步：编写代码生成心形照片墙</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5%EF%BC%9A%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%95%88%E6%9E%9C%E5%A6%82%E4%B8%8B%E5%9B%BE%EF%BC%8C%E9%80%89%E6%8B%A9%E9%9C%80%E8%A6%81%E7%94%9F%E6%88%90%E7%9A%84%E7%85%A7%E7%89%87%EF%BC%8C%E7%82%B9%E5%87%BB%E7%94%9F%E6%88%90%E7%85%A7%E7%89%87%E5%A2%99%EF%BC%8C%E5%9C%A8%E6%A1%8C%E9%9D%A2%E5%8D%B3%E5%8F%AF%E7%94%9F%E6%88%90%E5%BF%83%E5%BD%A2%E7%85%A7%E7%89%87%E5%A2%99"><span class="toc-text">第三步：代码执行效果如下图，选择需要生成的照片，点击生成照片墙，在桌面即可生成心形照片墙</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E6%AD%A5%EF%BC%9A%E5%BF%83%E5%BD%A2%E7%85%A7%E7%89%87%E5%A2%99%E6%95%88%E6%9E%9C%E5%9B%BE%E5%A6%82%E4%B8%8B%EF%BC%9A"><span class="toc-text">第四步：心形照片墙效果图如下：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%BA%94%E6%AD%A5%EF%BC%9A%E4%B9%9F%E5%8F%AF%E9%80%9A%E8%BF%87%E5%91%BD%E4%BB%A4%EF%BC%9Apyinstaller-F-noconsole-Picture-py-%E6%89%93%E5%8C%85%E6%88%90exe%E6%89%A7%E8%A1%8C"><span class="toc-text">第五步：也可通过命令：pyinstaller -F --noconsole Picture.py  打包成exe执行</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%9A%E7%BC%96%E5%86%99%E4%BB%A3%E7%A0%81"><span class="toc-text">第一步：编写代码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E6%AD%A5%EF%BC%9A%E6%89%A7%E8%A1%8C%E6%95%88%E6%9E%9C%E5%9B%BE%E5%A6%82%E4%B8%8B%EF%BC%9A"><span class="toc-text">第四步：执行效果图如下：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%BA%94%E6%AD%A5%EF%BC%9A%E4%B9%9F%E5%8F%AF%E9%80%9A%E8%BF%87%E5%91%BD%E4%BB%A4%EF%BC%9Apyinstaller-F-noconsole-Picture-py-%E6%89%93%E5%8C%85%E6%88%90exe%E6%89%A7%E8%A1%8C"><span class="toc-text">第五步：也可通过命令：pyinstaller -F --noconsole Picture.py  打包成exe执行</span></a></li></ol>
     </div>
   </section>
 
@@ -1906,7 +2026,7 @@ root.mainloop()
           <li><a class="flat-box"
             title="/categories/python/" href="/categories/python/"
             id="categoriespython"
-            ><div class='name'>python</div><div class='badge'>(8)</div></a></li>
+            ><div class='name'>python</div><div class='badge'>(9)</div></a></li>
         
           <li><a class="flat-box"
             title="/categories/redis/" href="/categories/redis/"
@@ -1965,7 +2085,7 @@ root.mainloop()
       
         <div class="webinfo-item">
           <div>文章数目：</div>
-          <div>35 篇</div>
+          <div>36 篇</div>
         </div>
       
 
@@ -1987,7 +2107,7 @@ root.mainloop()
       
         <div class="webinfo-item">
           <div>本站总字数：</div>
-          <div>62.2k 字</div>
+          <div>63.5k 字</div>
         </div>
       
 
@@ -2013,7 +2133,7 @@ root.mainloop()
         <div class="webinfo-item">
           <div>最后活动时间：</div>
           
-            <div id="last-update" style="display: none;">Sat Jan 25 2025 15:18:22 GMT+0800 (中国标准时间)</div>
+            <div id="last-update" style="display: none;">Sat Jan 25 2025 15:57:56 GMT+0800 (中国标准时间)</div>
             <div id="last-update-show">2025-01-25 日</div>
           
         </div>
