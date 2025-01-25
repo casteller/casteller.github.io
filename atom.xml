@@ -6,7 +6,7 @@
   <link href="https://www.mz-zone.cn/atom.xml" rel="self"/>
   
   <link href="https://www.mz-zone.cn/"/>
-  <updated>2023-01-17T01:30:11.344Z</updated>
+  <updated>2025-01-25T07:17:19.818Z</updated>
   <id>https://www.mz-zone.cn/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>利用python制作心形照片墙</title>
+    <link href="https://www.mz-zone.cn/2025/01/25/20250125/"/>
+    <id>https://www.mz-zone.cn/2025/01/25/20250125/</id>
+    <published>2025-01-25T05:51:00.000Z</published>
+    <updated>2025-01-25T07:17:19.818Z</updated>
+    
+    <content type="html"><![CDATA[<div class="note idea"><p>这篇博客介绍了如何使用Python的Pillow库创建照片墙,包括普通矩形布局和心形布局。</p></div><a id="more"></a><h4 id="第一步：安装Pillow库"><a href="#第一步：安装Pillow库" class="headerlink" title="第一步：安装Pillow库"></a>第一步：安装Pillow库</h4><p>如果你还没有安装Pillow库，可以通过pip安装：<code>pip install Pillow</code></p><h4 id="第二步：编写代码生成心形照片墙"><a href="#第二步：编写代码生成心形照片墙" class="headerlink" title="第二步：编写代码生成心形照片墙"></a>第二步：编写代码生成心形照片墙</h4><pre><code>import osimport randomimport numpy as npfrom tkinter import *from tkinter import ttk, filedialogfrom PIL import Imageimport pymsgboxfrom PIL import Image, ImageOpsFRAME = [[0,1,1,0,0,0,0,1,1,0],         [1,1,1,1,0,0,1,1,1,1],         [1,1,1,1,1,1,1,1,1,1],         [1,1,1,1,1,1,1,1,1,1],         [0,1,1,1,1,1,1,1,1,0],         [0,0,1,1,1,1,1,1,0,0],         [0,0,0,1,1,1,1,0,0,0],         [0,0,0,0,1,1,0,0,0,0]]# 定义相关参数SIZE = 50 # 每张图片的尺寸为50*50N = 2     # 每个点位上放置2*2张图片def select_images():    global filenames    filenames = filedialog.askopenfilenames(title=&quot;选择图片&quot;, filetypes=((&quot;JPEG files&quot;, &quot;*.jpg&quot;), (&quot;PNG files&quot;, &quot;*.png&quot;)))    print(&quot;已选择的图片：&quot;, filenames)def show_message_box():    # 获取桌面路径    desktop_path = os.path.join(os.path.expanduser(&#39;~&#39;), &#39;Desktop&#39;)    file_path = os.path.join(desktop_path, &#39;love.jpg&#39;)    print(file_path)    return file_pathdef create_photo_wall():    if not filenames:  # 检查列表是否为空        print(&quot;请先选择图片！&quot;)        return    filenames_list = list(filenames)  # 将元组转换为列表    width = np.shape(FRAME)[1] * N * SIZE  # 照片墙宽度    height = np.shape(FRAME)[0] * N * SIZE  # 照片墙高度    n_img = np.sum(FRAME) * (N ** 2)  # 照片墙需要的照片数    img_bg = Image.new(&#39;RGB&#39;, (width, height), &#39;white&#39;)  # 设置照片墙背景    img_index = 0  # 图片索引    for y in range(np.shape(FRAME)[0]):        for x in range(np.shape(FRAME)[1]):            if FRAME[y][x] == 1:  # 如果需要填充                pos_x = x * N * SIZE  # 填充起始X坐标位置                pos_y = y * N * SIZE  # 填充起始Y坐标位置                img = Image.open(filenames_list[img_index % len(filenames_list)])                img = img.resize((SIZE, SIZE), resample=Image.Resampling.LANCZOS)                img_bg.paste(img, (pos_x, pos_y))  # 填充图片                img_index += 1    img_bg.save(show_message_box())    pymsgbox.alert(&#39;照片墙已生成，请在桌面查看，文件名为love.jpg&#39;, &#39;照片墙生成完成&#39;)# 创建主界面root = Tk()root.title(&quot;心形照片墙生成器&quot;)# 设置窗口大小window_width = 400window_height = 200# 获取屏幕大小screen_width = root.winfo_screenwidth()screen_height = root.winfo_screenheight()# 计算窗口位置x = int((screen_width - window_width) / 2)y = int((screen_height - window_height) / 2)# 设置窗口位置root.geometry(f&quot;&#123;window_width&#125;x&#123;window_height&#125;+&#123;x&#125;+&#123;y&#125;&quot;)ttk.Button(root, text=&quot;选择图片&quot;, command=select_images).pack(pady=10)ttk.Button(root, text=&quot;生成照片墙&quot;, command=create_photo_wall).pack(pady=10)root.mainloop()</code></pre><h4 id="第三步：代码执行效果如下图，选择需要生成的照片，点击生成照片墙，在桌面即可生成心形照片墙"><a href="#第三步：代码执行效果如下图，选择需要生成的照片，点击生成照片墙，在桌面即可生成心形照片墙" class="headerlink" title="第三步：代码执行效果如下图，选择需要生成的照片，点击生成照片墙，在桌面即可生成心形照片墙"></a>第三步：代码执行效果如下图，选择需要生成的照片，点击生成照片墙，在桌面即可生成心形照片墙</h4><p><a href="https://imgse.com/i/pEEJPtf"><img src="https://s21.ax1x.com/2025/01/25/pEEJPtf.png" class="lazyload placeholder" data-srcset="https://s21.ax1x.com/2025/01/25/pEEJPtf.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="pEEJPtf.png"></a></p><h4 id="第四步：心形照片墙效果图如下："><a href="#第四步：心形照片墙效果图如下：" class="headerlink" title="第四步：心形照片墙效果图如下："></a>第四步：心形照片墙效果图如下：</h4><p><a href="https://imgse.com/i/pEEJEcQ"><img src="https://s21.ax1x.com/2025/01/25/pEEJEcQ.md.png" class="lazyload placeholder" data-srcset="https://s21.ax1x.com/2025/01/25/pEEJEcQ.md.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="pEEJEcQ.md.png"></a></p><h4 id="第五步：也可通过命令：pyinstaller-F-noconsole-Picture-py-打包成exe执行"><a href="#第五步：也可通过命令：pyinstaller-F-noconsole-Picture-py-打包成exe执行" class="headerlink" title="第五步：也可通过命令：pyinstaller -F --noconsole Picture.py  打包成exe执行"></a>第五步：也可通过命令：<code>pyinstaller -F --noconsole Picture.py</code>  打包成exe执行</h4>]]></content>
+    
+    
+    <summary type="html">&lt;div class=&quot;note idea&quot;&gt;&lt;p&gt;这篇博客介绍了如何使用Python的Pillow库创建照片墙,包括普通矩形布局和心形布局。&lt;/p&gt;&lt;/div&gt;</summary>
+    
+    
+    
+    <category term="python" scheme="https://www.mz-zone.cn/categories/python/"/>
+    
+    
+    <category term="python" scheme="https://www.mz-zone.cn/tags/python/"/>
+    
+  </entry>
   
   <entry>
     <title>hexo博客增加书单</title>
@@ -444,30 +465,7 @@
     
     <category term="volantis" scheme="https://www.mz-zone.cn/tags/volantis/"/>
     
-    <category term="Hexo" scheme="https://www.mz-zone.cn/tags/Hexo/"/>
-    
     <category term="Issues" scheme="https://www.mz-zone.cn/tags/Issues/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>hexo博客之volantis主题添加上浮气泡特效</title>
-    <link href="https://www.mz-zone.cn/2020/10/19/hexo_bubbles/"/>
-    <id>https://www.mz-zone.cn/2020/10/19/hexo_bubbles/</id>
-    <published>2020-10-19T02:02:23.000Z</published>
-    <updated>2023-01-17T01:47:18.680Z</updated>
-    
-    <content type="html"><![CDATA[<div class="note idea"><p>在群友黑石大佬的主页：<strong><a href="http://www.heson10.com/">www.heson10.com</a></strong>，看到了上升气泡的特效，觉得很赞，于是乎，搬运工又来活了。</p></div><a id="more"></a><p><strong>💎先上我搬运之后的效果图：</strong><br><img src="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/archives/canvas%E6%B0%94%E6%B3%A1.gif" class="lazyload placeholder" data-srcset="https://hexo-1301734500.cos.ap-chengdu.myqcloud.com/archives/canvas%E6%B0%94%E6%B3%A1.gif" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif" alt="image"><br><strong>💡下面开始介绍添加方法：</strong></p><ul><li>在<span class='p red'>Blog\themes\hexo-theme-volantis-master\source\js\app.js</span>文件中添加以下代码（其中气泡数量，大小，上升速度等可根据需要自行调整）：</li></ul><pre><code class="java">(function() &#123;    var canvas, ctx, width, height, bubbles, animateHeader = true;    initHeader();    function initHeader() &#123;        canvas = document.getElementById(&#39;header_canvas&#39;);        window_resize();        ctx = canvas.getContext(&#39;2d&#39;);        //建立泡泡        bubbles = [];        var num = width * 0.15;//气泡数量        for (var i = 0; i &lt; num; i++) &#123;            var c = new Bubble();            bubbles.push(c);        &#125;        animate();    &#125;    function animate() &#123;        if (animateHeader) &#123;            ctx.clearRect(0, 0, width, height);            for (var i in bubbles) &#123;                bubbles[i].draw();            &#125;        &#125;        requestAnimationFrame(animate);    &#125;    function window_resize() &#123;        //canvas铺满窗口        width = window.innerWidth;        height = window.innerHeight;        // //如果需要铺满内容可以换下面这个        // var panel = document.getElementById(&#39;header_canvas&#39;);        // width=panel.offsetWidth;        // height=panel.offsetHeight;        canvas.width = width;        canvas.height = height;    &#125;    window.onresize = function()&#123;        window_resize();    &#125;    function Bubble() &#123;        var _this = this;        (function() &#123;            _this.pos = &#123;&#125;;            init();        &#125;)();        function init() &#123;            _this.pos.x = Math.random() * width;            _this.pos.y = height + Math.random() * 100;            _this.alpha = 0.1 + Math.random() * 0.5;//气泡透明度            _this.alpha_change = 0.0002 + Math.random() * 0.0005;//气泡透明度变化速度            _this.scale = 0.2 + Math.random() * 0.1;//气泡大小            _this.scale_change = Math.random() * 0.001;//气泡大小变化速度            _this.speed = 0.1 + Math.random() * 0.9;//气泡上升速度        &#125;        //气泡        this.draw = function() &#123;            if (_this.alpha &lt;= 0) &#123;                init();            &#125;            _this.pos.y -= _this.speed;            _this.alpha -= _this.alpha_change;            _this.scale += _this.scale_change;            ctx.beginPath();            ctx.arc(_this.pos.x, _this.pos.y, _this.scale * 10, 0, 2 * Math.PI, false);            ctx.fillStyle = &#39;rgba(255,255,255,&#39; + _this.alpha + &#39;)&#39;;            ctx.fill();        &#125;;    &#125;&#125;)();</code></pre><ul><li>然后在<span class='p red'>Blog\themes\hexo-theme-volantis-master\layout\_partial\cover.ejs</span>文件中加入以下代码：</li></ul><pre><code class="html">&lt;canvas id=&quot;header_canvas&quot;style=&quot;position:absolute;bottom:0;z-index: 1;width:1366;height:610&quot;&gt;&lt;/canvas&gt;</code></pre><p><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/92a044fb65df3.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/92a044fb65df3.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"></p><ul><li>到这一步在首页其实就可以看到了，但是你会发现底部的气泡会浮于侧边栏和文章头图上方<br><img src="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/f49d399827814.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/casteller/berrychenpic/f49d399827814.png" srcset="https://cdn.jsdelivr.net/gh/XuxuGood/cdn@master/blogImages/site-img/loading3.gif"></li><li>这时我们找到侧边栏css文件<span class='p red'>Blog\themes\hexo-theme-volantis-master\source\css\_layout\sidebar.styl</span>，找到l_side增加z-index属性：</li></ul><pre><code class="css">.l_side  width: $sidebar  float: right  position: relative  display: flex  flex-direction: column  +z-index : 2</code></pre><ul><li>然后找到文章列表的css文件<span class='p red'>Blog\themes\hexo-theme-volantis-master\source\css\_layout\main.styl</span>，找到l_main增加z-index属性：</li></ul><pre><code class="css">.l_main  width: &quot;calc(100% - 1 * %s)&quot; % $sidebar  @media screen and (max-width: $device-tablet)    width: 100%  padding-left: $gap  +z-index: 2;</code></pre><div class="note idea"><p>注：z-index属性值只要比1大就行，因为刚刚canvas标签的z-index我们设置的1。</p></div><p>最后hexo一键三连，快部署上去让大伙儿看看吧</p>]]></content>
-    
-    
-    <summary type="html">&lt;div class=&quot;note idea&quot;&gt;&lt;p&gt;在群友黑石大佬的主页：&lt;strong&gt;&lt;a href=&quot;http://www.heson10.com/&quot;&gt;www.heson10.com&lt;/a&gt;&lt;/strong&gt;，看到了上升气泡的特效，觉得很赞，于是乎，搬运工又来活了。&lt;/p&gt;&lt;/div&gt;</summary>
-    
-    
-    
-    <category term="Hexo" scheme="https://www.mz-zone.cn/categories/Hexo/"/>
-    
-    
-    <category term="volantis" scheme="https://www.mz-zone.cn/tags/volantis/"/>
     
     <category term="Hexo" scheme="https://www.mz-zone.cn/tags/Hexo/"/>
     
